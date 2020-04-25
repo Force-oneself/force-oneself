@@ -17,7 +17,7 @@ public class Send {
      * 入门第一个HelloWorld
      */
     public static void helloWorld() {
-        Connection connection = RabbitMQUtils.getConnecion();
+        Connection connection = RabbitMQUtils.getConnection();
         Channel channel = null;
         try {
             channel = connection.createChannel();

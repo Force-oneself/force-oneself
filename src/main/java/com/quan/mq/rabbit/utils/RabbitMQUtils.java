@@ -35,7 +35,14 @@ public class RabbitMQUtils {
         FACTORY.setPassword(PASSWORD);
     }
 
-    public static Connection getConnecion(){
+    /**
+     * @Decription RabbitMQ 获取连接
+     * @Author Force-Oneself
+     * @Date 2020-04-25
+     * @param
+     * @return com.rabbitmq.client.Connection
+     */
+    public static Connection getConnection(){
         try
         {
             Connection connection = null;
@@ -48,6 +55,14 @@ public class RabbitMQUtils {
         }
     }
 
+    /**
+     * @Decription RabbitMQ关闭连接
+     * @Author Force-Oneself
+     * @Date 2020-04-25
+     * @param connection
+     * @param channel
+     * @return void
+     */
     public static void close(Connection connection, Channel channel) {
         if (channel != null){
             try {

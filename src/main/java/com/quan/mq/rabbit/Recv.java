@@ -11,8 +11,8 @@ public class Recv {
     private final static String QUEUE_NAME = "hello";
 
     public static void firstConsume() {
-        Connection connection = RabbitMQUtils.getConnecion();
-        Channel channel = null;
+        Connection connection = RabbitMQUtils.getConnection();
+        Channel channel;
 
         try {
             channel = connection.createChannel();
