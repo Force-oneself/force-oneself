@@ -1,6 +1,5 @@
 package com.quan.mq.rabbit;
 
-import com.quan.mq.rabbit.utils.RabbitMQUtils;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 
