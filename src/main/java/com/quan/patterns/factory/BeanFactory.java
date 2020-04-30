@@ -12,23 +12,23 @@ import java.util.Properties;
  */
 public class BeanFactory {
 
-    // 定义一个properties对象
-    private static Properties props;
     // 定义一个Map
     private static Map<String, Object> beans;
     // 定义一个bean容器是否初始化完成的标识
     private static int initStatus;
 
+    private static final String BEAN_PROPERTIES_PATH = "bean.properties";
+
     // 使用静态代码块为Properties对象赋值
     static {
         try {
-            // 实例化对象
-            props = new Properties();
+            // 定义一个properties对象
+            Properties props = new Properties();
             // 获取properties文件的流对象
-            InputStream in = BeanFactory.class.getClassLoader().getResourceAsStream("bean.properties");
+            InputStream in = BeanFactory.class.getClassLoader().getResourceAsStream(BEAN_PROPERTIES_PATH);
             props.load(in);
             // 实例化容器
-            beans = new HashMap<String, Object>();
+            beans = new HashMap<>();
             // 取出配置文件中所有的key
             Enumeration keys = props.keys();
             // 遍历枚举
