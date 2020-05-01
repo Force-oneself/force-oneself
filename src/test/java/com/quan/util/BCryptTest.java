@@ -1,4 +1,4 @@
-package com.quan;
+package com.quan.util;
 
 import com.quan.uitl.BCrypt;
 

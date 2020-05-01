@@ -3,7 +3,7 @@ package com.quan.db.mysql;
 import java.sql.*;
 
 /**
- * MySQL base utils
+ * MySQL base util
  * @author Force-Oneself
  * @date 2020-04-30
  */
