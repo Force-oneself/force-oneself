@@ -1,4 +1,4 @@
-package com.quan.patterns.factory;
+package com.quan.design.pattern.factory;
 
 import java.io.InputStream;
 import java.util.Enumeration;
