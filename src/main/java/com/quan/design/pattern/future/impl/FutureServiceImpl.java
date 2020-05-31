@@ -1,5 +1,6 @@
 package com.quan.design.pattern.future.impl;
 
+import com.quan.design.pattern.future.Callback;
 import com.quan.design.pattern.future.Future;
 import com.quan.design.pattern.future.FutureService;
 import com.quan.design.pattern.future.Task;
@@ -39,6 +40,21 @@ public class FutureServiceImpl<IN, OUT> implements FutureService<IN, OUT> {
             OUT result = task.get(input);
             // 任务执行结束之后将result作为结果传给future
             future.finish(result);
+        }, getNextName()).start();
+        return future;
+    }
+
+    @Override
+    public Future<OUT> submit(Task<IN, OUT> task, IN input, Callback<OUT> callback) {
+
+        final FutureTask<OUT> future = new FutureTask<>();
+        new Thread(()->{
+            OUT result = task.get(input);
+            future.finish(result);
+            // 执行接口回调
+            if (null != callback){
+                callback.call(result);
+            }
         }, getNextName()).start();
         return future;
     }
