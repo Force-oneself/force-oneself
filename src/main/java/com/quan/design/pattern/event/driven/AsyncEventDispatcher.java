@@ -18,6 +18,7 @@ public class AsyncEventDispatcher implements DynamicRouter<Event> {
         if (!(channel instanceof AsyncChannel)) {
             throw new IllegalArgumentException("The channel must be AsyncChannelType.");
         }
+        this.routerTable.put(messageType, (AsyncChannel) channel);
     }
 
     @Override
@@ -29,7 +30,7 @@ public class AsyncEventDispatcher implements DynamicRouter<Event> {
         }
     }
 
-    public void shutdown(){
+    public void shutdown() {
         // 关闭所有的Channel以释放资源
         routerTable.values().forEach(AsyncChannel::stop);
     }
