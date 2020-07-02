@@ -1,5 +1,6 @@
 package com.quan.design.pattern.activeObject;
 
+import com.quan.design.pattern.activeObject.general.ActiveMethod;
 import com.quan.design.pattern.future.Future;
 import com.quan.design.pattern.future.FutureService;
 
@@ -7,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class OrderServiceImpl implements OrderService {
 
+    @ActiveMethod
     @Override
     public Future<String> findOrderDetails(long orderId) {
         return FutureService.<Long, String>newService().submit(input -> {
@@ -20,6 +22,7 @@ public class OrderServiceImpl implements OrderService {
         }, orderId, null);
     }
 
+    @ActiveMethod
     @Override
     public void order(String account, long orderId) {
         try {
