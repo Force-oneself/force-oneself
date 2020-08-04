@@ -1,4 +1,4 @@
-package com.quan.divideconquer;
+package com.quan.algorithm.divideconquer;
 
 import java.util.ArrayList;
 import java.util.Comparator;

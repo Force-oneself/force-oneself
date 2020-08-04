@@ -1,4 +1,4 @@
-package com.quan.dynamic.programming;
+package com.quan.algorithm.dynamic.programming;
 
 import java.util.ArrayList;
 import java.util.Arrays;

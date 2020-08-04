@@ -1,4 +1,4 @@
-package com.quan.dynamic.programming;
+package com.quan.algorithm.dynamic.programming;
 
 /**
  * @author Varun Upadhyay (https://github.com/varunu28)

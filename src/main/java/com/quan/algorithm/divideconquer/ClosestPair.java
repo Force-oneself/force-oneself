@@ -1,4 +1,4 @@
-package com.quan.divideconquer;
+package com.quan.algorithm.divideconquer;
 
 /**
  * For a set of points in a coordinates system (10000 maximum),

@@ -1,4 +1,4 @@
-package com.quan.dynamic.programming;
+package com.quan.algorithm.dynamic.programming;
 
 /**
  * A DynamicProgramming solution for Rod cutting problem

@@ -1,4 +1,4 @@
-package com.quan.dynamic.programming;
+package com.quan.algorithm.dynamic.programming;
 
 /**
  * DynamicProgramming solution for the Egg Dropping Puzzle

@@ -1,4 +1,4 @@
-package com.quan.dynamic.programming;
+package com.quan.algorithm.dynamic.programming;
 
 /**
  * A DynamicProgramming based solution for 0-1 Knapsack problem

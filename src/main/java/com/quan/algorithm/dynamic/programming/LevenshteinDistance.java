@@ -1,4 +1,4 @@
-package com.quan.dynamic.programming;
+package com.quan.algorithm.dynamic.programming;
 
 /**
  * @author Kshitij VERMA (github.com/kv19971)
