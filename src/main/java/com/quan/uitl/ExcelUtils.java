@@ -60,7 +60,6 @@ public class ExcelUtils {
         Demo demo = new Demo("zhangsan", "忽略字段", new Date(), true, 23);
         Demo demo1 = new Demo("lisi", "忽略字段", new Date(), false, 26);
         Demo demo2 = new Demo("zha", "忽略字段", new Date(), true, 14);
-
         List<Demo> list = Arrays.asList(new Demo[]{demo, demo1, demo2});
         ExcelUtils.write("E:\\Sendi\\Doc\\test.xlsx", Demo.class, list, "数据");
     }

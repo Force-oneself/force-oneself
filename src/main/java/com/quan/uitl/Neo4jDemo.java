@@ -28,12 +28,12 @@ public class Neo4jDemo implements AutoCloseable {
     public void printGreeting(final String message) {
         try (Session session = driver.session()) {
             String greeting = session.writeTransaction((tx) -> {
-                    Result result = tx.run("CREATE (a:Greeting) " +
-                                    "SET a.message = $message " +
-                                    "RETURN a.message + ', from node ' + id(a)",
-                            parameters("message", message));
-                    return result.single().get(0).asString();
-                }
+                        Result result = tx.run("CREATE (a:Greeting) " +
+                                        "SET a.message = $message " +
+                                        "RETURN a.message + ', from node ' + id(a)",
+                                parameters("message", message));
+                        return result.single().get(0).asString();
+                    }
             );
             System.out.println(greeting);
         }

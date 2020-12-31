@@ -20,15 +20,16 @@ import java.util.Map;
  */
 public class ElasticsearchUtils {
 
-    private static String hostName = "127.0.0.1";
+    private static String hostName = "120.76.175.67";
     private static int port = 9200;
     private static String scheme = "http";
 
     /**
      * 获取高级客户端连接
+     *
      * @return
      */
-    public static RestHighLevelClient getConnection(){
+    public static RestHighLevelClient getConnection() {
         HttpHost httpHost = new HttpHost(hostName, port, scheme);
         RestClientBuilder restClientBuilder = RestClient.builder(httpHost);
         RestHighLevelClient restHighLevelClient = new RestHighLevelClient(restClientBuilder);
@@ -37,10 +38,11 @@ public class ElasticsearchUtils {
 
     /**
      * 关闭elasticsearch 高级客户端的连接
+     *
      * @param restHighLevelClient
      */
-    public static void close(RestHighLevelClient restHighLevelClient){
-        if (restHighLevelClient != null){
+    public static void close(RestHighLevelClient restHighLevelClient) {
+        if (restHighLevelClient != null) {
             try {
                 restHighLevelClient.close();
             } catch (IOException e) {
@@ -51,12 +53,13 @@ public class ElasticsearchUtils {
 
     /**
      * 单数据插入
+     *
      * @param restHighLevelClient
      * @param indexRequest
      * @param map
      * @return
      */
-    public static IndexResponse index(RestHighLevelClient restHighLevelClient, IndexRequest indexRequest, Map map){
+    public static IndexResponse index(RestHighLevelClient restHighLevelClient, IndexRequest indexRequest, Map map) {
         indexRequest.source(map);
         // 获取执行结果
         IndexResponse indexResponse = null;
@@ -70,12 +73,13 @@ public class ElasticsearchUtils {
 
     /**
      * 批量插入数据
+     *
      * @param restHighLevelClient
      * @param indexRequest
      * @param map
      * @return
      */
-    public static BulkResponse bulk(RestHighLevelClient restHighLevelClient, IndexRequest indexRequest, Map map){
+    public static BulkResponse bulk(RestHighLevelClient restHighLevelClient, IndexRequest indexRequest, Map map) {
         indexRequest.source(map);
         BulkRequest bulkRequest = new BulkRequest();
         bulkRequest.add(indexRequest);
@@ -89,7 +93,7 @@ public class ElasticsearchUtils {
     }
 
     public static void main(String[] args) {
-        IndexRequest indexRequest = new IndexRequest("sku", "doc","3");
+        IndexRequest indexRequest = new IndexRequest("sku");
         Map map = new HashMap();
         // 对map进行赋值
         map.put("name", "小米手机");
@@ -105,7 +109,7 @@ public class ElasticsearchUtils {
             e.printStackTrace();
         }
         int status = 0;
-        if (indexResponse != null){
+        if (indexResponse != null) {
             status = indexResponse.status().getStatus();
         }
         System.out.println(status);
