@@ -26,7 +26,7 @@ class Palindrome {
     /**
      * This method ignores all non-alphanumeric characters and case runs in O(n)
      * where n is the length of s
-     * 
+     *
      * @param s String to check
      * @return true if s is palindrome else false
      */

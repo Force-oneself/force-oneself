@@ -1,5 +1,6 @@
 package com.quan.search.elasticsearch;
 
+import org.apache.lucene.search.TotalHits;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -38,11 +39,11 @@ public class ElasticsearchTest {
         // 获取查询结果
         SearchResponse searchResponse = highLevelClient.search(searchRequest, RequestOptions.DEFAULT);
         SearchHits hits = searchResponse.getHits();
-        long totalHits = hits.getTotalHits();
+        TotalHits totalHits = hits.getTotalHits();
         System.out.println("记录数" + totalHits);
 
         SearchHit[] searchHits = hits.getHits();
-        for (SearchHit hit: searchHits){
+        for (SearchHit hit : searchHits) {
             String sourceAsString = hit.getSourceAsString();
             System.out.println(sourceAsString);
         }
@@ -73,11 +74,11 @@ public class ElasticsearchTest {
         // 获取查询结果
         SearchResponse searchResponse = highLevelClient.search(searchRequest, RequestOptions.DEFAULT);
         SearchHits hits = searchResponse.getHits();
-        long totalHits = hits.getTotalHits();
+        TotalHits totalHits = hits.getTotalHits();
         System.out.println("记录数" + totalHits);
 
         SearchHit[] searchHits = hits.getHits();
-        for (SearchHit hit: searchHits){
+        for (SearchHit hit : searchHits) {
             String sourceAsString = hit.getSourceAsString();
             System.out.println(sourceAsString);
         }

@@ -1,6 +1,7 @@
 package com.quan.algorithm.sort;
 
 import static com.quan.algorithm.sort.SortUtils.*;
+
 /**
  * @author Varun Upadhyay (https://github.com/varunu28)
  * @author Podshivalov Nikita (https://github.com/nikitap492)

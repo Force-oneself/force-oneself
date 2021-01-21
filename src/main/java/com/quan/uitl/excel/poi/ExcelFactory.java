@@ -5,7 +5,7 @@ package com.quan.uitl.excel.poi;
  * @Author heyq
  * @Date 2020-11-14
  **/
-public interface ExcelFactory<T> extends Factory<T>{
+public interface ExcelFactory<T> extends Factory<T> {
 
 
 }

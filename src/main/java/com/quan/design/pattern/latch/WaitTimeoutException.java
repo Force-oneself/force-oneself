@@ -8,7 +8,7 @@ package com.quan.design.pattern.latch;
  */
 public class WaitTimeoutException extends Exception {
 
-    public WaitTimeoutException(String message){
+    public WaitTimeoutException(String message) {
         super(message);
     }
 }

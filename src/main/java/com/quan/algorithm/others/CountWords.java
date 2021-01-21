@@ -30,7 +30,7 @@ public class CountWords {
      * counts the number of words in a sentence but ignores all potential
      * non-alphanumeric characters that do not represent a word. runs in O(n) where
      * n is the length of s
-     * 
+     *
      * @param s String: sentence with word(s)
      * @return int: number of words
      */

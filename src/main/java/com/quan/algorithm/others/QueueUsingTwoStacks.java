@@ -4,18 +4,17 @@ import java.util.Stack;
 
 /**
  * This implements Queue using two Stacks.
- *
+ * <p>
  * Big O Runtime:
- *      insert(): O(1)
- *      remove(): O(1) amortized
- *      isEmpty(): O(1)
- *
+ * insert(): O(1)
+ * remove(): O(1) amortized
+ * isEmpty(): O(1)
+ * <p>
  * A queue data structure functions the same as a real world queue.
  * The elements that are added first are the first to be removed.
  * New elements are added to the back/rear of the queue.
  *
  * @author sahilb2 (https://www.github.com/sahilb2)
- *
  */
 class QueueWithStack {
 
@@ -25,8 +24,8 @@ class QueueWithStack {
     private Stack outStack;
 
     /**
-	 * Constructor
-	 */
+     * Constructor
+     */
     public QueueWithStack() {
         this.inStack = new Stack();
         this.outStack = new Stack();
@@ -48,10 +47,10 @@ class QueueWithStack {
      * @return the new front of the queue
      */
     public Object remove() {
-        if(this.outStack.isEmpty()) {
+        if (this.outStack.isEmpty()) {
             // Move all elements from inStack to outStack (preserving the order)
-            while(!this.inStack.isEmpty()) {
-                this.outStack.push( this.inStack.pop() );
+            while (!this.inStack.isEmpty()) {
+                this.outStack.push(this.inStack.pop());
             }
         }
         return this.outStack.pop();
@@ -63,10 +62,10 @@ class QueueWithStack {
      * @return the front element of the queue
      */
     public Object peekFront() {
-        if(this.outStack.isEmpty()) {
+        if (this.outStack.isEmpty()) {
             // Move all elements from inStack to outStack (preserving the order)
-            while(!this.inStack.isEmpty()) {
-                this.outStack.push( this.inStack.pop() );
+            while (!this.inStack.isEmpty()) {
+                this.outStack.push(this.inStack.pop());
             }
         }
         return this.outStack.peek();
@@ -96,7 +95,6 @@ class QueueWithStack {
  * This class is the example for the Queue class
  *
  * @author sahilb2 (https://www.github.com/sahilb2)
- *
  */
 public class QueueUsingTwoStacks {
 
@@ -105,7 +103,7 @@ public class QueueUsingTwoStacks {
      *
      * @param args Command line arguments
      */
-    public static void main(String args[]){
+    public static void main(String args[]) {
         QueueWithStack myQueue = new QueueWithStack();
         myQueue.insert(1);
         System.out.println(myQueue.peekBack()); //Will print 1

@@ -27,7 +27,7 @@ public class FloydWarshall {
                     if (DistanceMatrix[source][intermediate] + DistanceMatrix[intermediate][destination]
                             < DistanceMatrix[source][destination])
                     // if the new distance calculated is less then the earlier shortest
-                        // calculated distance it get replaced as new shortest distance
+                    // calculated distance it get replaced as new shortest distance
                     {
                         DistanceMatrix[source][destination] = DistanceMatrix[source][intermediate]
                                 + DistanceMatrix[intermediate][destination];

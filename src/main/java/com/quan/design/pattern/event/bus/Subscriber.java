@@ -10,7 +10,7 @@ public class Subscriber {
 
     private boolean disable = false;
 
-    public Subscriber(Object subscribeObject, Method subscribeMethod){
+    public Subscriber(Object subscribeObject, Method subscribeMethod) {
         this.subscribeObject = subscribeObject;
         this.subscribeMethod = subscribeMethod;
     }

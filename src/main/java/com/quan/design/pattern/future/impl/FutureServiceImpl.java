@@ -48,11 +48,11 @@ public class FutureServiceImpl<IN, OUT> implements FutureService<IN, OUT> {
     public Future<OUT> submit(Task<IN, OUT> task, IN input, Callback<OUT> callback) {
 
         final FutureTask<OUT> future = new FutureTask<>();
-        new Thread(()->{
+        new Thread(() -> {
             OUT result = task.get(input);
             future.finish(result);
             // 执行接口回调
-            if (null != callback){
+            if (null != callback) {
                 callback.call(result);
             }
         }, getNextName()).start();

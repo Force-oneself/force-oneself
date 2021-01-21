@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class CursorLinkedList<T> {
 
-    
+
     private static class Node<T> {
 
         T element;
@@ -23,7 +23,6 @@ public class CursorLinkedList<T> {
     private final static int CURSOR_SPACE_SIZE = 100;
 
 
-    
     {
         // init at loading time
         cursorSpace = new Node[CURSOR_SPACE_SIZE];

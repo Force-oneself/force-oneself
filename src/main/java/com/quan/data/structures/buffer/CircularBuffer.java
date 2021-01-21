@@ -26,14 +26,14 @@ public class CircularBuffer {
         return i % _buffer_size;
     }
 
-    
+
     public Character readOutChar() {
         Character result = null;
 
-        
+
         //if we have data to read
         if (_readable_data.get() > 0) {
-            
+
             result = Character.valueOf(_buffer[getTrueIndex(_read_index)]);
             _readable_data.decrementAndGet();
             _read_index++;

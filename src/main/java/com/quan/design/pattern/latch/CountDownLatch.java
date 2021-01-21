@@ -45,16 +45,16 @@ public class CountDownLatch extends Latch {
 
     @Override
     public void await(TimeUnit unit, long time) throws InterruptedException, WaitTimeoutException {
-        if (time<=0){
+        if (time <= 0) {
             throw new IllegalArgumentException("the time is invalid.");
         }
         long remainingNanos = unit.toNanos(time);
         // 等待任务将endNanos纳秒后超时
         final long endNanos = System.nanoTime() + remainingNanos;
-        synchronized (this){
-            while (limit >0){
+        synchronized (this) {
+            while (limit > 0) {
                 // 如果超时则抛出WaitTimeException异常
-                if (TimeUnit.NANOSECONDS.toMillis(remainingNanos) <=0){
+                if (TimeUnit.NANOSECONDS.toMillis(remainingNanos) <= 0) {
                     throw new WaitTimeoutException("the wait time over specify time.");
                 }
                 // 等待remianingNanos, 在等待的过程中有可能会被中断，需要重新计算remainingNanos

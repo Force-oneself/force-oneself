@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class BestFit {
     private static final int NO_ALLOCATION = -255; // if a process has been allocated in position -255,
-                                                   // it means that it has not been actually allocated.
+    // it means that it has not been actually allocated.
 
     /**
      * Method to find the maximum valued element of an array filled with positive integers.
@@ -28,7 +28,7 @@ public class BestFit {
     /**
      * Method to find the index of the memory block that is going to fit the given process based on the best fit algorithm.
      *
-     * @param blocks: the array with the available memory blocks.
+     * @param blocks:  the array with the available memory blocks.
      * @param process: the size of the process.
      * @return the index of the block that fits, or -255 if no such block exists.
      */
@@ -36,8 +36,8 @@ public class BestFit {
         // Initialize minDiff with an unreachable value by a difference between a blockSize and the processSize.
         int minDiff = findMaxElement(blockSizes);
         int index = NO_ALLOCATION; // If there is no block that can fit the process, return NO_ALLOCATION as the result.
-        for(int i=0 ; i < blockSizes.length ; i++) { // Find the most fitting memory block for the given process.
-            if(blockSizes[i] - processSize < minDiff && blockSizes[i] - processSize >= 0) {
+        for (int i = 0; i < blockSizes.length; i++) { // Find the most fitting memory block for the given process.
+            if (blockSizes[i] - processSize < minDiff && blockSizes[i] - processSize >= 0) {
                 minDiff = blockSizes[i] - processSize;
                 index = i;
             }
@@ -51,7 +51,7 @@ public class BestFit {
      * index is the process ID (zero-indexed) and the value is the block
      * number (also zero-indexed).
      *
-     * @param sizeOfBlocks: an int array that contains the sizes of the memory blocks available.
+     * @param sizeOfBlocks:    an int array that contains the sizes of the memory blocks available.
      * @param sizeOfProcesses: an int array that contains the sizes of the processes we need memory blocks for.
      * @return the ArrayList filled with Integers repressenting the memory allocation that took place.
      */
@@ -59,10 +59,10 @@ public class BestFit {
         // The array list responsible for saving the memory allocations done by the best-fit algorithm
         ArrayList<Integer> memAlloc = new ArrayList<>();
         // Do this for every process
-        for(int processSize : sizeOfProcesses) {
+        for (int processSize : sizeOfProcesses) {
             int chosenBlockIdx = findBestFit(sizeOfBlocks, processSize); // Find the index of the memory block going to be used
             memAlloc.add(chosenBlockIdx); // Store the chosen block index in the memAlloc array list
-            if(chosenBlockIdx != NO_ALLOCATION) { // Only if a block was chosen to store the process in it,
+            if (chosenBlockIdx != NO_ALLOCATION) { // Only if a block was chosen to store the process in it,
                 sizeOfBlocks[chosenBlockIdx] -= processSize; // resize the block based on the process size
             }
         }

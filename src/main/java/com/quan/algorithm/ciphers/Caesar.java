@@ -3,7 +3,6 @@ package com.quan.algorithm.ciphers;
 import java.util.Scanner;
 
 /**
- *
  * A Java implementation of Caesar Cipher. /It is a type of substitution cipher
  * in which each letter in the plaintext is replaced by a letter some fixed
  * number of positions down the alphabet. /
@@ -24,9 +23,9 @@ public class Caesar {
     public static String encode(String message, int shift) {
         String encoded = "";
 
-        
+
         shift %= 26;
-        
+
 
         final int length = message.length();
         for (int i = 0; i < length; i++) {
@@ -62,9 +61,9 @@ public class Caesar {
     public static String decode(String encryptedMessage, int shift) {
         String decoded = "";
 
-        
+
         shift %= 26;
-        
+
 
         final int length = encryptedMessage.length();
         for (int i = 0; i < length; i++) {
@@ -87,7 +86,6 @@ public class Caesar {
     }
 
     /**
-     *
      * @param c
      * @return true if character is capital Latin letter or false for others
      */
@@ -96,7 +94,6 @@ public class Caesar {
     }
 
     /**
-     *
      * @param c
      * @return true if character is small Latin letter or false for others
      */
@@ -105,7 +102,6 @@ public class Caesar {
     }
 
     /**
-     *
      * @deprecated TODO remove main and make JUnit Testing
      */
     public static void main(String[] args) {

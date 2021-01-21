@@ -30,7 +30,6 @@ public final class RSA {
     private BigInteger modulus, privateKey, publicKey;
 
     /**
-     *
      * @param bits
      */
     public RSA(int bits) {
@@ -38,7 +37,6 @@ public final class RSA {
     }
 
     /**
-     *
      * @param message
      * @return encrypted message
      */
@@ -47,7 +45,6 @@ public final class RSA {
     }
 
     /**
-     *
      * @param message
      * @return encrypted message as big integer
      */
@@ -56,7 +53,6 @@ public final class RSA {
     }
 
     /**
-     *
      * @param encryptedMessage
      * @return plain message
      */
@@ -65,7 +61,6 @@ public final class RSA {
     }
 
     /**
-     *
      * @param encryptedMessage
      * @return plain message as big integer
      */

@@ -10,7 +10,7 @@ class Cycle {
     private int[][] adjacencyMatrix;
     private boolean[] visited;
     ArrayList<ArrayList<Integer>> cycles = new ArrayList<ArrayList<Integer>>();
-    
+
 
     public Cycle() {
         Scanner in = new Scanner(System.in);

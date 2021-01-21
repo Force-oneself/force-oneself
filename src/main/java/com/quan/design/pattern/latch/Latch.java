@@ -28,5 +28,5 @@ public abstract class Latch {
     public abstract int getUnarrived();
 
     // 有超时的等待
-    public abstract void await(TimeUnit unit, long time) throws InterruptedException,WaitTimeoutException;
+    public abstract void await(TimeUnit unit, long time) throws InterruptedException, WaitTimeoutException;
 }

@@ -16,7 +16,7 @@ public class ServerThread {
             浏览器解析服务器回写的html页面,页面中如果有图片,那么浏览器就会单独的开启一个线程,读取服务器的图片
             我们就的让服务器一直处于监听状态,客户端请求一次,服务器就回写一次
          */
-        while(true){
+        while (true) {
             //使用accept方法获取到请求的客户端对象(浏览器)
             Socket socket = server.accept();
 
@@ -57,14 +57,14 @@ public class ServerThread {
                         //一读一写复制文件,把服务读取的html文件回写到客户端
                         int len = 0;
                         byte[] bytes = new byte[1024];
-                        while((len = fis.read(bytes))!=-1){
-                            os.write(bytes,0,len);
+                        while ((len = fis.read(bytes)) != -1) {
+                            os.write(bytes, 0, len);
                         }
 
                         //释放资源
                         fis.close();
                         socket.close();
-                    }catch (IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }

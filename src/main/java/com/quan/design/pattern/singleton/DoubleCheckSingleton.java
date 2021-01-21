@@ -2,6 +2,7 @@ package com.quan.design.pattern.singleton;
 
 /**
  * Double-Check实现单例模式
+ *
  * @author Force-Oneself
  * @date 2020-05-26
  */

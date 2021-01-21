@@ -1,6 +1,7 @@
 package com.quan.algorithm.sort;
 
 import static com.quan.algorithm.sort.SortUtils.print;
+
 /**
  * This method implements the Generic Merge Sort
  *
@@ -19,7 +20,7 @@ class MergeSort implements SortAlgorithm {
      * @return sorted array
      */
     @Override
-    
+
     public <T extends Comparable<T>> T[] sort(T[] unsorted) {
         doSort(unsorted, 0, unsorted.length - 1);
         return unsorted;

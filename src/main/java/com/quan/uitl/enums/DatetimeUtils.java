@@ -85,35 +85,45 @@ public final class DatetimeUtils {
      *
      * @return 当前LocalDateTime
      */
-    public static LocalDateTime getCurrentLocalDateTime() { return LocalDateTime.now(); }
+    public static LocalDateTime getCurrentLocalDateTime() {
+        return LocalDateTime.now();
+    }
 
     /**
      * 获取当前日期LocalDate
      *
      * @return 当前LocalDate
      */
-    public static LocalDate getCurrentLocalDate() { return LocalDate.now(); }
+    public static LocalDate getCurrentLocalDate() {
+        return LocalDate.now();
+    }
 
     /**
      * 获取当前时间LocalTime
      *
      * @return 当前LocalTime
      */
-    public static LocalTime getCurrentLocalTime() { return LocalTime.now(); }
+    public static LocalTime getCurrentLocalTime() {
+        return LocalTime.now();
+    }
 
     /**
      * 获取当前日期时间Instant
      *
      * @return 当前Instant
      */
-    public static Instant getCurrentInstant() { return Instant.now(); }
+    public static Instant getCurrentInstant() {
+        return Instant.now();
+    }
 
     /**
      * 获取当前日期时间Date
      *
      * @return 当前Date
      */
-    public static Date getCurrentDate() { return new Date(); }
+    public static Date getCurrentDate() {
+        return new Date();
+    }
 
     /**
      * 获取到指定时间精度为止的当前日期时间Date
@@ -132,13 +142,27 @@ public final class DatetimeUtils {
         int millisecond = calendar.get(Calendar.MILLISECOND);
         calendar.setTimeInMillis(-62167420800000L);
         switch (DateAccuracy) {
-            case MILLISECOND: {calendar.set(Calendar.MILLISECOND, millisecond);}
-            case SECOND: { calendar.set(Calendar.SECOND, second); }
-            case MINUTE: { calendar.set(Calendar.MINUTE, minute); }
-            case HOUR: { calendar.set(Calendar.HOUR_OF_DAY, hour); }
-            case DAY: { calendar.set(Calendar.DAY_OF_MONTH, day); }
-            case MONTH: { calendar.set(Calendar.MONTH, month); }
-            case YEAR: { calendar.set(Calendar.YEAR, year); }
+            case MILLISECOND: {
+                calendar.set(Calendar.MILLISECOND, millisecond);
+            }
+            case SECOND: {
+                calendar.set(Calendar.SECOND, second);
+            }
+            case MINUTE: {
+                calendar.set(Calendar.MINUTE, minute);
+            }
+            case HOUR: {
+                calendar.set(Calendar.HOUR_OF_DAY, hour);
+            }
+            case DAY: {
+                calendar.set(Calendar.DAY_OF_MONTH, day);
+            }
+            case MONTH: {
+                calendar.set(Calendar.MONTH, month);
+            }
+            case YEAR: {
+                calendar.set(Calendar.YEAR, year);
+            }
         }
         return calendar.getTime();
     }
@@ -148,7 +172,9 @@ public final class DatetimeUtils {
      *
      * @return yyyy-MM-dd HH:mm:ss格式当前时间字符串
      */
-    public static String getCurrentTimeString() { return toString(new Date(), FORMAT_YMDHMS); }
+    public static String getCurrentTimeString() {
+        return toString(new Date(), FORMAT_YMDHMS);
+    }
 
     /**
      * 获取指定格式的当前时间字符串
@@ -156,7 +182,9 @@ public final class DatetimeUtils {
      * @param format 指定时间字符串格式
      * @return 指定格式的当前时间字符串
      */
-    public static String getCurrentTimeString(String format) { return toString(new Date(), format); }
+    public static String getCurrentTimeString(String format) {
+        return toString(new Date(), format);
+    }
 
     /**
      * 转换为LocalDateTime
@@ -164,7 +192,9 @@ public final class DatetimeUtils {
      * @param localDate 指定日期
      * @return 按指定LocalDate和当前Time转换为LocalDateTime
      */
-    public static LocalDateTime toLocalDateTime(LocalDate localDate) { return toLocalDateTime(localDate, LocalTime.now()); }
+    public static LocalDateTime toLocalDateTime(LocalDate localDate) {
+        return toLocalDateTime(localDate, LocalTime.now());
+    }
 
     /**
      * 转换为LocalDateTime
@@ -172,7 +202,9 @@ public final class DatetimeUtils {
      * @param localTime 指定时间
      * @return 按当前Date和指定LocalTime转换为LocalDateTime
      */
-    public static LocalDateTime toLocalDateTime(LocalTime localTime) { return toLocalDateTime(LocalDate.now(), localTime); }
+    public static LocalDateTime toLocalDateTime(LocalTime localTime) {
+        return toLocalDateTime(LocalDate.now(), localTime);
+    }
 
     /**
      * 转换为LocalDateTime
@@ -247,9 +279,13 @@ public final class DatetimeUtils {
      * @return 按指定Date转换为LocalDate
      */
     public static LocalDate toLocalDate(Date date) {
-        if (Objects.isNull(date)) { return null; }
+        if (Objects.isNull(date)) {
+            return null;
+        }
         LocalDateTime localDateTime = toLocalDateTime(date);
-        if (Objects.isNull(localDateTime)) { return null; }
+        if (Objects.isNull(localDateTime)) {
+            return null;
+        }
         return localDateTime.toLocalDate();
     }
 
@@ -294,9 +330,13 @@ public final class DatetimeUtils {
      * @return 按指定Date转换为LocalTime
      */
     public static LocalTime toLocalTime(Date date) {
-        if (Objects.isNull(date)) { return null; }
+        if (Objects.isNull(date)) {
+            return null;
+        }
         LocalDateTime localDateTime = toLocalDateTime(date);
-        if (Objects.isNull(localDateTime)) { return null; }
+        if (Objects.isNull(localDateTime)) {
+            return null;
+        }
         return localDateTime.toLocalTime();
     }
 
@@ -331,7 +371,9 @@ public final class DatetimeUtils {
      * @return 按指定LocalDateTime转换为Date
      */
     public static Date toDate(LocalDateTime localDateTime) {
-        if (Objects.isNull(localDateTime)) { return null; }
+        if (Objects.isNull(localDateTime)) {
+            return null;
+        }
         return Date.from(localDateTime.atZone(SYSTEM_DEFAULT_ZONE_ID).toInstant());
     }
 
@@ -352,7 +394,9 @@ public final class DatetimeUtils {
      * @return 按指定LocalTime转换为Date
      */
     public static Date toDate(LocalTime localTime) {
-        if (Objects.isNull(localTime)) { return null; }
+        if (Objects.isNull(localTime)) {
+            return null;
+        }
         return toDate(LocalDateTime.of(LocalDate.now(), localTime));
     }
 
@@ -362,7 +406,9 @@ public final class DatetimeUtils {
      * @param timeString 指定时间字符串
      * @return 按指定时间字符串及时间字符串格式转换为Date
      */
-    public static Date toDate(String timeString) { return toDate(timeString, FORMAT_YMDHMS); }
+    public static Date toDate(String timeString) {
+        return toDate(timeString, FORMAT_YMDHMS);
+    }
 
     /**
      * 转换为Date
@@ -371,7 +417,9 @@ public final class DatetimeUtils {
      * @param timeZone   指定时区
      * @return 按指定时间字符串及时间字符串格式转换为Date
      */
-    public static Date toDate(String timeString, TimeZone timeZone) { return toDate(timeString, FORMAT_YMDHMS, timeZone); }
+    public static Date toDate(String timeString, TimeZone timeZone) {
+        return toDate(timeString, FORMAT_YMDHMS, timeZone);
+    }
 
     /**
      * 转换为Date
@@ -381,8 +429,14 @@ public final class DatetimeUtils {
      * @return 按指定时间字符串及时间字符串格式化对象转换为Date
      */
     public static Date toDate(String timeString, String format) {
-        if (StringUtils.isBlank(timeString) || StringUtils.isBlank(format)) { return null; }
-        try { return getSimpleDateFormat(format).parse(timeString); } catch (ParseException e) { return null; }
+        if (StringUtils.isBlank(timeString) || StringUtils.isBlank(format)) {
+            return null;
+        }
+        try {
+            return getSimpleDateFormat(format).parse(timeString);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     /**
@@ -394,11 +448,15 @@ public final class DatetimeUtils {
      * @return 按指定时间字符串及时间字符串格式化对象转换为Date
      */
     public static Date toDate(String timeString, String format, TimeZone timeZone) {
-        if (StringUtils.isBlank(timeString) || StringUtils.isBlank(format)) { return null; }
+        if (StringUtils.isBlank(timeString) || StringUtils.isBlank(format)) {
+            return null;
+        }
         try {
             return getSimpleDateFormat(format, ObjectUtils.defaultIfNull(timeZone, TimeZone.getDefault()))
                     .parse(timeString);
-        } catch (ParseException e) { return null; }
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
 
@@ -408,7 +466,9 @@ public final class DatetimeUtils {
      * @param localDateTime 指定日期时间
      * @return 按指定日期时间转换为时间字符串
      */
-    public static String toString(LocalDateTime localDateTime) { return toString(localDateTime, DEFAULT_DATETIME_FORMATTER); }
+    public static String toString(LocalDateTime localDateTime) {
+        return toString(localDateTime, DEFAULT_DATETIME_FORMATTER);
+    }
 
     /**
      * 转换为时间字符串
@@ -440,7 +500,9 @@ public final class DatetimeUtils {
      * @param localDate 指定日期
      * @return 按指定日期转换为指定格式时间字符串
      */
-    public static String toString(LocalDate localDate) { return toString(localDate, DEFAULT_DATE_FORMATTER); }
+    public static String toString(LocalDate localDate) {
+        return toString(localDate, DEFAULT_DATE_FORMATTER);
+    }
 
     /**
      * 转换为时间字符串
@@ -472,7 +534,9 @@ public final class DatetimeUtils {
      * @param localTime 指定时间
      * @return 按指定时间转换为指定格式时间字符串
      */
-    public static String toString(LocalTime localTime) { return toString(localTime, DEFAULT_TIME_FORMATTER); }
+    public static String toString(LocalTime localTime) {
+        return toString(localTime, DEFAULT_TIME_FORMATTER);
+    }
 
     /**
      * 转换为时间字符串
@@ -504,7 +568,9 @@ public final class DatetimeUtils {
      * @param date 指定日期时间
      * @return 按指定日期时间转换为指定格式时间字符串
      */
-    public static String toString(Date date) { return toString(date, FORMAT_YMDHMS); }
+    public static String toString(Date date) {
+        return toString(date, FORMAT_YMDHMS);
+    }
 
     /**
      * 转换为时间字符串
@@ -549,7 +615,9 @@ public final class DatetimeUtils {
      * @param localDateTime 给定日期时间
      * @return 给定时间是否早于当前时间
      */
-    public static boolean isTimeBeforeNow(LocalDateTime localDateTime) { return isTimeBefore(localDateTime, LocalDateTime.now()); }
+    public static boolean isTimeBeforeNow(LocalDateTime localDateTime) {
+        return isTimeBefore(localDateTime, LocalDateTime.now());
+    }
 
     /**
      * 判断给定时间是否为当前时间之前
@@ -557,7 +625,9 @@ public final class DatetimeUtils {
      * @param date 给定日期时间
      * @return 给定时间是否早于当前时间
      */
-    public static boolean isTimeBeforeNow(Date date) { return isTimeBefore(date, new Date()); }
+    public static boolean isTimeBeforeNow(Date date) {
+        return isTimeBefore(date, new Date());
+    }
 
     /**
      * 判断基础时间是否在比较时间之前
@@ -588,7 +658,9 @@ public final class DatetimeUtils {
      * @param localDateTime 给定日期时间
      * @return 给定时间是否晚于当前时间
      */
-    public static boolean isTimeAfterNow(LocalDateTime localDateTime) { return isTimeAfter(localDateTime, LocalDateTime.now()); }
+    public static boolean isTimeAfterNow(LocalDateTime localDateTime) {
+        return isTimeAfter(localDateTime, LocalDateTime.now());
+    }
 
     /**
      * 判断给定时间是否为当前时间之后
@@ -596,7 +668,9 @@ public final class DatetimeUtils {
      * @param date 给定日期时间
      * @return 给定时间是否晚于当前时间
      */
-    public static boolean isTimeAfterNow(Date date) { return isTimeAfter(date, new Date()); }
+    public static boolean isTimeAfterNow(Date date) {
+        return isTimeAfter(date, new Date());
+    }
 
     /**
      * 判断基础时间是否在比较时间之后
@@ -729,10 +803,14 @@ public final class DatetimeUtils {
      * @return 计算后日期时间
      */
     public static Date plus(Date date, DateAccuracy dateAccuracy, int amountToAdd) {
-        if (Objects.isNull(date) || Objects.isNull(dateAccuracy)) { return null; }
+        if (Objects.isNull(date) || Objects.isNull(dateAccuracy)) {
+            return null;
+        }
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        if (amountToAdd == 0) { return calendar.getTime(); }
+        if (amountToAdd == 0) {
+            return calendar.getTime();
+        }
         calendar.add(selectField(dateAccuracy), amountToAdd);
         return calendar.getTime();
     }
@@ -744,7 +822,9 @@ public final class DatetimeUtils {
      * @param amountToAdd 时间加数值
      * @return 计算后日期时间
      */
-    public static Date plusYears(Date date, int amountToAdd) { return plus(date, DateAccuracy.YEAR, amountToAdd); }
+    public static Date plusYears(Date date, int amountToAdd) {
+        return plus(date, DateAccuracy.YEAR, amountToAdd);
+    }
 
     /**
      * 时间加N月
@@ -753,7 +833,9 @@ public final class DatetimeUtils {
      * @param amountToAdd 时间加数值
      * @return 计算后日期时间
      */
-    public static Date plusMonths(Date date, int amountToAdd) { return plus(date, DateAccuracy.MONTH, amountToAdd); }
+    public static Date plusMonths(Date date, int amountToAdd) {
+        return plus(date, DateAccuracy.MONTH, amountToAdd);
+    }
 
     /**
      * 时间加N天
@@ -762,7 +844,9 @@ public final class DatetimeUtils {
      * @param amountToAdd 时间加数值
      * @return 计算后日期时间
      */
-    public static Date plusDays(Date date, int amountToAdd) { return plus(date, DateAccuracy.DAY, amountToAdd); }
+    public static Date plusDays(Date date, int amountToAdd) {
+        return plus(date, DateAccuracy.DAY, amountToAdd);
+    }
 
     /**
      * 时间加N小时
@@ -771,7 +855,9 @@ public final class DatetimeUtils {
      * @param amountToAdd 时间加数值
      * @return 计算后日期时间
      */
-    public static Date plusHours(Date date, int amountToAdd) { return plus(date, DateAccuracy.HOUR, amountToAdd); }
+    public static Date plusHours(Date date, int amountToAdd) {
+        return plus(date, DateAccuracy.HOUR, amountToAdd);
+    }
 
     /**
      * 时间加N分
@@ -780,7 +866,9 @@ public final class DatetimeUtils {
      * @param amountToAdd 时间加数值
      * @return 计算后日期时间
      */
-    public static Date plusMinutes(Date date, int amountToAdd) { return plus(date, DateAccuracy.MINUTE, amountToAdd); }
+    public static Date plusMinutes(Date date, int amountToAdd) {
+        return plus(date, DateAccuracy.MINUTE, amountToAdd);
+    }
 
     /**
      * 时间加N秒
@@ -789,7 +877,9 @@ public final class DatetimeUtils {
      * @param amountToAdd 时间加数值
      * @return 计算后日期时间
      */
-    public static Date plusSeconds(Date date, int amountToAdd) { return plus(date, DateAccuracy.SECOND, amountToAdd); }
+    public static Date plusSeconds(Date date, int amountToAdd) {
+        return plus(date, DateAccuracy.SECOND, amountToAdd);
+    }
 
     /**
      * 时间加N周
@@ -798,7 +888,9 @@ public final class DatetimeUtils {
      * @param amountToAdd 时间加数值
      * @return 计算后日期时间
      */
-    public static Date plusWeeks(Date date, int amountToAdd) { return plus(date, DateAccuracy.DAY, 7 * amountToAdd); }
+    public static Date plusWeeks(Date date, int amountToAdd) {
+        return plus(date, DateAccuracy.DAY, 7 * amountToAdd);
+    }
 
     /**
      * 时间减
@@ -819,7 +911,9 @@ public final class DatetimeUtils {
      * @param amountToSubtract 时间减数值
      * @return 计算后日期时间
      */
-    public static Date minusYears(Date date, int amountToSubtract) { return minus(date, DateAccuracy.YEAR, amountToSubtract); }
+    public static Date minusYears(Date date, int amountToSubtract) {
+        return minus(date, DateAccuracy.YEAR, amountToSubtract);
+    }
 
     /**
      * 时间减N月
@@ -828,7 +922,9 @@ public final class DatetimeUtils {
      * @param amountToSubtract 时间减数值
      * @return 计算后日期时间
      */
-    public static Date minusMonths(Date date, int amountToSubtract) { return minus(date, DateAccuracy.MONTH, amountToSubtract); }
+    public static Date minusMonths(Date date, int amountToSubtract) {
+        return minus(date, DateAccuracy.MONTH, amountToSubtract);
+    }
 
     /**
      * 时间减N日
@@ -837,7 +933,9 @@ public final class DatetimeUtils {
      * @param amountToSubtract 时间减数值
      * @return 计算后日期时间
      */
-    public static Date minusDays(Date date, int amountToSubtract) { return minus(date, DateAccuracy.DAY, amountToSubtract); }
+    public static Date minusDays(Date date, int amountToSubtract) {
+        return minus(date, DateAccuracy.DAY, amountToSubtract);
+    }
 
     /**
      * 时间减N小时
@@ -846,7 +944,9 @@ public final class DatetimeUtils {
      * @param amountToSubtract 时间减数值
      * @return 计算后日期时间
      */
-    public static Date minusHours(Date date, int amountToSubtract) { return minus(date, DateAccuracy.HOUR, amountToSubtract); }
+    public static Date minusHours(Date date, int amountToSubtract) {
+        return minus(date, DateAccuracy.HOUR, amountToSubtract);
+    }
 
     /**
      * 时间减N分
@@ -855,7 +955,9 @@ public final class DatetimeUtils {
      * @param amountToSubtract 时间减数值
      * @return 计算后日期时间
      */
-    public static Date minusMinutes(Date date, int amountToSubtract) { return minus(date, DateAccuracy.MINUTE, amountToSubtract); }
+    public static Date minusMinutes(Date date, int amountToSubtract) {
+        return minus(date, DateAccuracy.MINUTE, amountToSubtract);
+    }
 
     /**
      * 时间减N秒
@@ -864,7 +966,9 @@ public final class DatetimeUtils {
      * @param amountToSubtract 时间减数值
      * @return 计算后日期时间
      */
-    public static Date minusSeconds(Date date, int amountToSubtract) { return minus(date, DateAccuracy.SECOND, amountToSubtract); }
+    public static Date minusSeconds(Date date, int amountToSubtract) {
+        return minus(date, DateAccuracy.SECOND, amountToSubtract);
+    }
 
     /**
      * 时间减N周
@@ -873,18 +977,36 @@ public final class DatetimeUtils {
      * @param amountToSubtract 时间减数值
      * @return 计算后日期时间
      */
-    public static Date minusWeeks(Date date, int amountToSubtract) { return minus(date, DateAccuracy.DAY, 7 * amountToSubtract); }
+    public static Date minusWeeks(Date date, int amountToSubtract) {
+        return minus(date, DateAccuracy.DAY, 7 * amountToSubtract);
+    }
 
     private static int selectField(DateAccuracy dateAccuracy) {
         switch (dateAccuracy) {
-            case YEAR: { return Calendar.YEAR; }
-            case MONTH: { return Calendar.MONTH; }
-            case DAY: { return Calendar.DAY_OF_MONTH; }
-            case HOUR: { return Calendar.HOUR_OF_DAY; }
-            case MINUTE: { return Calendar.MINUTE; }
-            case SECOND: { return Calendar.SECOND; }
-            case MILLISECOND: { return Calendar.MILLISECOND; }
-            default: { throw new IllegalArgumentException("未知时间精度"); }
+            case YEAR: {
+                return Calendar.YEAR;
+            }
+            case MONTH: {
+                return Calendar.MONTH;
+            }
+            case DAY: {
+                return Calendar.DAY_OF_MONTH;
+            }
+            case HOUR: {
+                return Calendar.HOUR_OF_DAY;
+            }
+            case MINUTE: {
+                return Calendar.MINUTE;
+            }
+            case SECOND: {
+                return Calendar.SECOND;
+            }
+            case MILLISECOND: {
+                return Calendar.MILLISECOND;
+            }
+            default: {
+                throw new IllegalArgumentException("未知时间精度");
+            }
         }
     }
 
@@ -935,6 +1057,7 @@ public final class DatetimeUtils {
         });
     }
 
-    private DatetimeUtils() { }
+    private DatetimeUtils() {
+    }
 
 }

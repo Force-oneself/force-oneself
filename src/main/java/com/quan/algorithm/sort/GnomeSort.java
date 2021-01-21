@@ -1,6 +1,7 @@
 package com.quan.algorithm.sort;
 
 import static com.quan.algorithm.sort.SortUtils.*;
+
 /**
  * Implementation of gnome sort
  *

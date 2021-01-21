@@ -18,6 +18,7 @@ public class EventDispatcher implements DynamicRouter<Message> {
 
     /**
      * 在多线程的情况下，会引起数据不一致的的问题
+     *
      * @param messageType
      * @param channel
      */

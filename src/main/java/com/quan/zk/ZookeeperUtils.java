@@ -15,7 +15,7 @@ public class ZookeeperUtils {
 
     private static String connectString = "127.0.0.1:2181";
 
-    public static void getConnection(Watcher watcher){
+    public static void getConnection(Watcher watcher) {
         try {
             ZooKeeper zooKeeper = new ZooKeeper(connectString, sessionTimeout, watcher);
         } catch (IOException e) {

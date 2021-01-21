@@ -6,7 +6,6 @@ package com.quan.data.structures.queue;
  * A queue data structure functions the same as a real world queue.
  * The elements that are added first are the first to be removed.
  * New elements are added to the back/rear of the queue.
- *
  */
 class Queue {
     /**

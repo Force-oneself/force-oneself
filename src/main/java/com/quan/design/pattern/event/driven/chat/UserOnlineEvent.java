@@ -6,7 +6,7 @@ public class UserOnlineEvent extends Event {
 
     private final User user;
 
-    public UserOnlineEvent(User user){
+    public UserOnlineEvent(User user) {
         this.user = user;
     }
 

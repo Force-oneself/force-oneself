@@ -62,7 +62,7 @@ public class StackArray {
     public StackArray() {
         this(DEFAULT_CAPACITY);
     }
-    
+
     /**
      * Constructor
      *

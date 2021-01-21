@@ -6,19 +6,20 @@ public class RomanToInteger {
 
     private static Map<Character, Integer> map = new HashMap<Character, Integer>() {
         /**
-        *
-        */
+         *
+         */
         private static final long serialVersionUID = 87605733047260530L;
 
         {
-        put('I', 1);
-        put('V', 5);
-        put('X', 10);
-        put('L', 50);
-        put('C', 100);
-        put('D', 500);
-        put('M', 1000);
-    }};
+            put('I', 1);
+            put('V', 5);
+            put('X', 10);
+            put('L', 50);
+            put('C', 100);
+            put('D', 500);
+            put('M', 1000);
+        }
+    };
     //Roman Number = Roman Numerals
 
     /**

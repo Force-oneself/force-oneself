@@ -1,6 +1,7 @@
 package com.quan.algorithm.sort;
 
 import static com.quan.algorithm.sort.SortUtils.*;
+
 /**
  * @author Varun Upadhyay (https://github.com/varunu28)
  * @author Podshivalov Nikita (https://github.com/nikitap492)
@@ -40,7 +41,7 @@ class QuickSort implements SortAlgorithm {
 
     /**
      * Ramdomize the array to avoid the basically ordered sequences
-     * 
+     *
      * @param array The array to be sorted
      * @param left  The first index of an array
      * @param right The last index of an array
@@ -48,7 +49,7 @@ class QuickSort implements SortAlgorithm {
      */
 
     private static <T extends Comparable<T>> int randomPartition(T[] array, int left, int right) {
-        int randomIndex = left + (int)(Math.random()*(right - left + 1));
+        int randomIndex = left + (int) (Math.random() * (right - left + 1));
         swap(array, randomIndex, right);
         return partition(array, left, right);
     }

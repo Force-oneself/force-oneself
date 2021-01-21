@@ -4,6 +4,7 @@ import com.quan.uitl.BCrypt;
 
 /**
  * BCrypt 加密算法测试
+ *
  * @author Force-Oneself
  * @date 2020-04-25
  */

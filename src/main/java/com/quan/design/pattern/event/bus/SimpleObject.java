@@ -16,7 +16,7 @@ public class SimpleObject {
     }
 
     @Subscribe
-    public void defaultTopic(String message){
+    public void defaultTopic(String message) {
         System.out.println("default-topic: " + message);
     }
 }

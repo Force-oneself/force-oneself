@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.quan.algorithm.sort.SortUtils.*;
+
 /**
  * Heap Sort Algorithm
  * Implements MinHeap

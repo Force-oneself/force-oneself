@@ -45,8 +45,8 @@ public class Server {
         //一读一写复制文件,把服务读取的html文件回写到客户端
         int len = 0;
         byte[] bytes = new byte[1024];
-        while((len = fis.read(bytes))!=-1){
-            os.write(bytes,0,len);
+        while ((len = fis.read(bytes)) != -1) {
+            os.write(bytes, 0, len);
         }
 
         //释放资源

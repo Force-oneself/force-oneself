@@ -36,35 +36,32 @@ public class RabbitMQUtils {
     }
 
     /**
+     * @param
+     * @return com.rabbitmq.client.Connection
      * @Decription RabbitMQ 获取连接
      * @Author Force-Oneself
      * @Date 2020-04-25
-     * @param
-     * @return com.rabbitmq.client.Connection
      */
-    public static Connection getConnection(){
-        try
-        {
+    public static Connection getConnection() {
+        try {
             Connection connection = null;
             connection = FACTORY.newConnection();
             return connection;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
     }
 
     /**
-     * @Decription RabbitMQ关闭连接
-     * @Author Force-Oneself
-     * @Date 2020-04-25
      * @param connection
      * @param channel
      * @return void
+     * @Decription RabbitMQ关闭连接
+     * @Author Force-Oneself
+     * @Date 2020-04-25
      */
     public static void close(Connection connection, Channel channel) {
-        if (channel != null){
+        if (channel != null) {
             try {
                 channel.close();
             } catch (IOException e) {

@@ -21,9 +21,9 @@ public class StackArrayList {
      * @param args Command line arguments
      */
     public static void main(String[] args) {
-        
+
         StackArrayList myStackArrayList = new StackArrayList();
-        
+
         myStackArrayList.push(5);
         myStackArrayList.push(8);
         myStackArrayList.push(2);

@@ -15,7 +15,7 @@ public class DecimalToAnyUsingStack {
      * Convert decimal number to another radix
      *
      * @param number the number to be converted
-     * @param radix the radix
+     * @param radix  the radix
      * @return another radix
      * @throws ArithmeticException if <tt>number</tt> or <tt>radius</tt> is invalid
      */

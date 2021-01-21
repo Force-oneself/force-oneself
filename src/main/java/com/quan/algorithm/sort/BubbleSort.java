@@ -21,9 +21,9 @@ class BubbleSort implements SortAlgorithm {
         for (int i = 0, size = array.length; i < size - 1; ++i) {
             boolean swapped = false;
             for (int j = 0; j < size - 1 - i; ++j) {
-            	if (less(array[j], array[j + 1])) {
-            		swap(array, j, j + 1);
-            		swapped = true;
+                if (less(array[j], array[j + 1])) {
+                    swap(array, j, j + 1);
+                    swapped = true;
                 }
             }
             if (!swapped) {

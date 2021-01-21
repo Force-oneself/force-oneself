@@ -13,7 +13,6 @@ package com.quan.data.structures.tree;
  * bigger.
  *
  * @author Unknown
- *
  */
 public class BinaryTree {
 
@@ -23,16 +22,23 @@ public class BinaryTree {
      * to the right, and the parent from which they came from.
      *
      * @author Unknown
-     *
      */
     class Node {
-        /** Data for the node */
+        /**
+         * Data for the node
+         */
         public int data;
-        /** The Node to the left of this one */
+        /**
+         * The Node to the left of this one
+         */
         public Node left;
-        /** The Node to the right of this one */
+        /**
+         * The Node to the right of this one
+         */
         public Node right;
-        /** The parent of this node */
+        /**
+         * The parent of this node
+         */
         public Node parent;
 
         /**
@@ -49,7 +55,9 @@ public class BinaryTree {
     }
 
 
-    /** The root of the Binary Tree */
+    /**
+     * The root of the Binary Tree
+     */
     private Node root;
 
     /**
@@ -145,16 +153,16 @@ public class BinaryTree {
             successor.left.parent = successor;
 
             //If the successor has a right child, the child's grandparent is it's new parent
-            if(successor.parent!=temp){
-                if(successor.right!=null){
+            if (successor.parent != temp) {
+                if (successor.right != null) {
                     successor.right.parent = successor.parent;
                     successor.parent.left = successor.right;
                     successor.right = temp.right;
                     successor.right.parent = successor;
-                }else{
-                    successor.parent.left=null;
-                    successor.right=temp.right;
-                    successor.right.parent=successor;
+                } else {
+                    successor.parent.left = null;
+                    successor.right = temp.right;
+                    successor.right.parent = successor;
                 }
             }
 

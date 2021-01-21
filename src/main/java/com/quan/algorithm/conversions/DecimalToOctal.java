@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 /**
  * This class converts Decimal numbers to Octal Numbers
- *
- *
  */
 public class DecimalToOctal {
     /**
