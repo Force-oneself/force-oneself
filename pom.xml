@@ -82,6 +82,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
+        <!-- 配置隐秘信息加密 -->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>3.0.1</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
         <dependency>
             <groupId>org.apache.zookeeper</groupId>

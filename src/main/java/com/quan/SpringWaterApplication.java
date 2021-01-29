@@ -1,5 +1,6 @@
 package com.quan;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration;
@@ -21,6 +22,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
         Neo4jDataAutoConfiguration.class,
         DataSourceAutoConfiguration.class
 })
+@EnableEncryptableProperties
 public class SpringWaterApplication {
 
     public static void main(String[] args) {
