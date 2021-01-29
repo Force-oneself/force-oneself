@@ -1,0 +1,95 @@
+server:
+  port: 8080
+
+debug: false
+################### Mybatis config ###################
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.quan.entity
+
+################### Spring config begin ###################
+spring:
+  application:
+    name: spring-water-application
+  ################### Datasource config ###################
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/cas?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  ################### Jackson config ###################
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  ################# Redis config #################
+  redis:
+    host: 120.76.175.67
+    port: 6379
+    database: 0
+    #    password: he970628
+    timeout: 1000
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 10
+        min-idle: 0
+        max-wait: -1
+
+  ################# kafka config #################
+  kafka:     # 指定kafka 代理地址，可以多个
+    bootstrap-servers: 120.76.175.67:9092
+    template:    # 指定默认topic id
+      default-topic: producer
+    listener:   # 指定listener 容器中的线程数，用于提高并发量
+      missing-topics-fatal: false
+      concurrency: 100
+    consumer:
+      group-id: myGroup # 指定默认消费者group id
+      client-id: 200
+      max-poll-records: 80
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+      bootstrap-servers: 120.76.175.67:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        session:
+          timeout:
+            ms: 20000
+        max:
+          poll:
+            interval:
+              ms: 10000
+    producer:
+      batch-size: 1000 # 每次批量发送消息的数量
+      retries: 3
+      client-id: 200
+
+  ################# RabbitMQ config #################
+  rabbitmq:
+    host: 120.76.175.67
+    port: 5672
+    username: guest
+    password: guest
+    virtualHost: /
+  ################# Spring Data config begin #################
+  data:
+    ################### MongoDB config ###################
+    mongodb:
+      host: 120.76.175.67
+      port: 27017
+      password: he970628
+      username: admin
+      database: admin
+      uri: mongodb://${spring.data.mongodb.username}:${spring.data.mongodb.password}@${spring.data.mongodb.host}:${spring.data.mongodb.port}/${spring.data.mongodb.database}?maxpoolsize=10&minpoolsize=1&maxidletimems=600000&maxlifetimems=1800000
+
+    ################### Neo4j config ###################
+    neo4j:
+      uri: bolt://120.76.175.67:7687
+      username: neo4j
+      password: neo4j
+  ################# Spring Data config end #################
+
+################### Spring config end ###################
