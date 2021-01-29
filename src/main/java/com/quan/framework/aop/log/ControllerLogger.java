@@ -63,9 +63,9 @@ public class ControllerLogger {
      * @param e
      * @return 统一bean
      */
-    private ResultBean<?> handlerException(ProceedingJoinPoint pjp, Throwable e) {
+    private ResultBean handlerException(ProceedingJoinPoint pjp, Throwable e) {
         log.error(pjp.getSignature() + " error ", e);
-        List<ResultBean<?>> resultBeans = handlers.stream()
+        List<ResultBean> resultBeans = handlers.stream()
                 .filter(handler -> handler.getExceptionClass() == e.getClass())
                 .map(handler -> handler.handle(e))
                 .filter(Objects::nonNull)
