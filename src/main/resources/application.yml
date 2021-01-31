@@ -90,7 +90,7 @@ spring:
     neo4j:
       uri: bolt://120.76.175.67:7687
       username: neo4j
-      password: ENC(SHhLyWedBBnzXLj/1bfUyQ==)
+      password: ENC(WQ7khH1e17tw3wivLfCqNw==)
   ################# Spring Data config end #################
 
 ################### Spring config end ###################

@@ -20,6 +20,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
         RestClientAutoConfiguration.class,
         Neo4jRepositoriesAutoConfiguration.class,
         Neo4jDataAutoConfiguration.class,
+//        RedisAutoConfiguration.class,
+//        RedissonAutoConfiguration.class
         DataSourceAutoConfiguration.class
 })
 @EnableEncryptableProperties
