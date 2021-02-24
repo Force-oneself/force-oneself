@@ -1,4 +1,4 @@
-package pers.quan.boot.framework;
+package com.quan.demo;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

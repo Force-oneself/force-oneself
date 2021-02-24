@@ -1,21 +1,22 @@
-package ${packageFullName?lower_case};
+package ${bean.packageFullName?lower_case};
 
-import java.util.Date;
+<#list bean.imports as import>
+import ${import};
+</#list>
 
-public class ${entityName} {
+public class ${bean.entityName?cap_first} {
 
-<#list params as param>
-    // ${param.fieldNote}
-    private ${param.fieldType} ${param.fieldName};
+<#list bean.fields as field>
+    private ${field.type} ${field.name};
 
 </#list>
-<#list params as param>
-    public void set${param.fieldName?cap_first}(${param.fieldType} ${param.fieldName}){
-    this.${param.fieldName} = ${param.fieldName};
+<#list bean.fields as field>
+    public void set${field.name?cap_first}(${field.type} ${field.name}){
+        this.${field.name} = ${field.name};
     }
 
-    public ${param.fieldType} get${param.fieldName?cap_first}(){
-    return this.${param.fieldName};
+    public ${field.type} get${field.name?cap_first}(){
+        return this.${field.name};
     }
 
 </#list>
