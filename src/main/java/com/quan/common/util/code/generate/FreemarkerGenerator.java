@@ -13,6 +13,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Description: Freemarker生成器
@@ -24,31 +25,34 @@ public class FreemarkerGenerator implements Generator {
 
     private static final Logger logger = LoggerFactory.getLogger(FreemarkerGenerator.class);
 
-    private Initializer initializer;
-
     private Map<String, Object> paramMap = new HashMap<>();
+
+    public static final String DEFAULT_ENCODING_FORMAT = "UTF-8";
 
     private String templateFilePath;
 
     private String codeFilePath;
 
-    private String encodingFormat = "UTF-8";
-
-    public FreemarkerGenerator(Initializer initializer) {
-        this.initializer = initializer;
-    }
+    private String encodingFormat;
 
     @Override
     public void generate() {
-        initializer.init(this);
+        doGenerator(templateFilePath, codeFilePath, encodingFormat, paramMap);
+    }
+
+    public void doGenerator(String templateFilePath, String codeFilePath,
+                            String encodingFormat, Map<String, Object> paramMap) {
         Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
         config.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
-        try (Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(codeFilePath), encodingFormat))) {
-            Template template = config.getTemplate(templateFilePath, encodingFormat);
+        try (Writer out = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(codeFilePath),
+                        Objects.isNull(encodingFormat) ? DEFAULT_ENCODING_FORMAT : encodingFormat))) {
+            Template template = config.getTemplate(templateFilePath,
+                    Objects.isNull(encodingFormat) ? DEFAULT_ENCODING_FORMAT : encodingFormat);
             template.process(paramMap, out);
             out.flush();
         } catch (Exception e) {
-            logger.error("生成异常!", e);
+            logger.error("模板生成失败!", e);
         }
     }
 }

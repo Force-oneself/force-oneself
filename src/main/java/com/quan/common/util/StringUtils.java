@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -28,6 +30,8 @@ public final class StringUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(StringUtils.class);
     private static final StringMapperFunction STRING_MAPPER_FUNCTION = new StringMapperFunction();
+    private static Pattern linePattern = Pattern.compile("_(\\w)");
+    private static Pattern humpPattern = Pattern.compile("[A-Z]");
 
     /**
      * 字符串是否为null
@@ -200,6 +204,39 @@ public final class StringUtils {
      */
     public static boolean notAllDigit(String str) {
         return !isAllDigit(str);
+    }
+
+    /**
+     * 下划线转驼峰
+     *
+     * @param underscore 下划线字符
+     * @return
+     */
+    public static String lineToHump(String underscore) {
+        underscore = underscore.toLowerCase();
+        Matcher matcher = linePattern.matcher(underscore);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
+    /**
+     * 驼峰转下划线
+     *
+     * @param hump 驼峰字符串
+     * @return
+     */
+    public static String humpToLine(String hump) {
+        Matcher matcher = humpPattern.matcher(hump);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, "_" + matcher.group(0).toLowerCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 
     /**

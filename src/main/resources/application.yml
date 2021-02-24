@@ -1,5 +1,6 @@
 server:
-  port: 8080
+  # 随机端口
+  port: ${random.int[2000, 8000]}
 
 debug: false
 

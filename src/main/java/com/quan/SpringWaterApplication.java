@@ -1,5 +1,6 @@
 package com.quan;
 
+import com.quan.demo.config.command.StartCommand;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,6 +29,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class SpringWaterApplication {
 
     public static void main(String[] args) {
+        // 启动参数设置,比如自动生成端口
+        new StartCommand(args);
         // es版本对应报错问题
         System.setProperty("es.set.netty.runtime.available.processors", "false");
         SpringApplication.run(SpringWaterApplication.class, args);
