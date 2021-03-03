@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
     <!--日志文件主目录：这里${user.home}为当前服务器用户主目录-->
-    <property name="LOG_HOME" value="logs"/>
+<!--    <property name="LOG_HOME" value="logs"/>-->
+    <property name="LOG_FILE" value="/Users/quan/Downloads/spring-water.log"/>
     <!--日志文件名称：这里spring.application.name表示工程名称-->
     <springProperty scope="context" name="APP_NAME" source="Website may be available for web development ideas"/>
 
