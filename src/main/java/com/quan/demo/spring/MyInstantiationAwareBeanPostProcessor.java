@@ -1,6 +1,5 @@
 package com.quan.demo.spring;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
@@ -27,7 +26,7 @@ public class MyInstantiationAwareBeanPostProcessor implements InstantiationAware
     @Override
     public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
         System.err.println("InstantiationAwareBeanPostProcessor ==> postProcessProperties");
-        return null;
+        return pvs;
     }
 
     @Override

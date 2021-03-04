@@ -1,7 +1,10 @@
 package com.quan.demo.spring;
 
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,7 +31,22 @@ public class BeanConfig {
     }
 
     @Bean
-    public BeanDefinitionRegistryPostProcessor beanDefinitionRegistryPostProcessor() {
+    public static BeanDefinitionRegistryPostProcessor beanDefinitionRegistryPostProcessor() {
         return new MyBeanDefinitionRegistryPostProcessor();
+    }
+
+    @Bean
+    public BeanPostProcessor postProcessor() {
+        return new MyBeanPostProcessor();
+    }
+
+    @Bean
+    public SmartInstantiationAwareBeanPostProcessor smartInstantiationAwareBeanPostProcessor() {
+        return new MySmartInstantiationAwareBeanPostProcessor();
+    }
+
+    @Bean
+    public MergedBeanDefinitionPostProcessor mergedBeanDefinitionPostProcessor() {
+        return new MyMergedBeanDefinitionPostProcessor();
     }
 }
