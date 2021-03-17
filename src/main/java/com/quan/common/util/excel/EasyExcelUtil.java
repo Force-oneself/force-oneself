@@ -2,6 +2,7 @@ package com.quan.common.util.excel;
 
 import com.alibaba.excel.EasyExcel;
 import com.quan.common.util.excel.constant.DefaultExcelCell;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import java.util.Map;
  * @author hyq
  * @date 2020/9/23
  */
+@Slf4j
 public class EasyExcelUtil {
 
     /**
@@ -122,7 +124,7 @@ public class EasyExcelUtil {
         try {
             response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            log.error("编码异常!", e);
         }
     }
 }

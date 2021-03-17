@@ -1,6 +1,9 @@
 ##ignore this file##
 .idea
 /target/
+*.log
+*.logs
+/logs/
 
 .classpath
 .project

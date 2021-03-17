@@ -1,8 +1,8 @@
 server:
-  # 随机端口
-  port: ${random.int[2000, 8000]}
-
-debug: false
+  port: 8080
+# 随机端口
+#  port: ${random.int[2000, 8000]}
+#debug: true
 
 ################### Mybatis config ###################
 mybatis:
@@ -46,6 +46,7 @@ spring:
     listener:   # 指定listener 容器中的线程数，用于提高并发量
       missing-topics-fatal: false
       concurrency: 100
+    #=============== consumer =======================
     consumer:
       group-id: myGroup # 指定默认消费者group id
       client-id: 200
@@ -54,6 +55,7 @@ spring:
       enable-auto-commit: true
       auto-commit-interval: 1000
       bootstrap-servers: 120.76.175.67:9092
+      # 指定消息key和消息体的编解码方式
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
@@ -64,10 +66,15 @@ spring:
           poll:
             interval:
               ms: 10000
+    #=============== producer =======================
     producer:
-      batch-size: 1000 # 每次批量发送消息的数量
+      batch-size: 16384 # 每次批量发送消息的数量
+      buffer-memory: 33554432
       retries: 3
       client-id: 200
+      # 指定消息key和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
   ################# RabbitMQ config #################
   rabbitmq:
