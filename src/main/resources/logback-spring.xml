@@ -1,52 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="true">
+<!--
+scan: 当此属性设置为 true 时,配置文件如果发生改变,将会被重新加载,默认值为 true.
+scanPeriod: 设置监测配置文件是否有修改的时间间隔,如果没有给出时间单位,默认单位是毫秒.
+当 scan 为 true 时,此属性生效.默认的时间间隔为 1 分钟.
+debug: 当此属性设置为 true 时,将console上打印出 logback 内部日志信息,实时查看 logback 运行状态,
+但这些logback内部日志不会记录到log文件中. 默认值为 false.
+-->
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+
+    <!--
+    spring boot 关于logback的默认配置
+    在spring-boot-x.x.x.RELEASE.jar中的org.springframework.boot.logging.logback包下，
+    有四个文件base.xml,defaults.xml,console-appender.xml,file-appender.xml
+    当前配置文件logback-spring.xml配置成xxxx-spring.xml的方式放到classpath中，
+    springboot就会读取并覆盖默认的四个文件的配置
+    -->
     <!--日志文件主目录：这里${user.home}为当前服务器用户主目录-->
     <property name="LOG_HOME" value="logs"/>
-<!--    <property name="LOG_FILE" value="/Users/quan/Downloads/spring-water.log"/>-->
+
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <contextName>logback</contextName>
     <!--日志文件名称：这里spring.application.name表示工程名称-->
-    <springProperty scope="context" name="APP_NAME" source="Website may be available for web development ideas"/>
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
 
-    <!--默认配置-->
-    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-    <!--配置控制台(Console)-->
-    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <!-- kafka -->
+    <logger name="org.apache.kafka.clients.consumer.ConsumerConfig" level="off" />
+    <logger name="org.apache.kafka.clients.admin.AdminClientConfig" level="off" />
 
-    <!--按照每天生成日志文件-->
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--设置策略-->
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!--日志文件路径：这里%d{yyyyMMdd}表示按天分类日志-->
-            <FileNamePattern>${LOG_HOME}/${APP_NAME}-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
-            <!--日志保留天数-->
-            <MaxHistory>15</MaxHistory>
-            <MaxFileSize>200MB</MaxFileSize>
-        </rollingPolicy>
-        <!--设置格式-->
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
-            <!-- 或者使用默认配置 -->
-            <!--<pattern>${FILE_LOG_PATTERN}</pattern>-->
-            <charset>utf8</charset>
+            <!--
+            注意<pattern>不能换行编写，否则打印的内容也会换行，
+            格式化输出：%d表示日期，%t表示线程名，%-5p：级别从左显示5个字符宽度 %m：日志消息，%n是换行符
+            -->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <!-- 多环境配置 按照active profile选择分支 -->
-    <springProfile name="dev">
-        <!-- kafka -->
-        <logger name="org.apache.kafka.clients.consumer.ConsumerConfig" level="off" />
-        <!--root节点 全局日志级别，用来指定最基础的日志输出级别-->
-        <root level="INFO">
-            <appender-ref ref="FILE"/>
-            <appender-ref ref="CONSOLE"/>
-        </root>
+    <!-- 按照每天生成日志文件且超过指定大小则再按序号生成日志文件 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"></rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"></triggeringPolicy>
+        如果上面这两个同时使用会造成TimeBasedRollingPolicy和SizeBasedTriggeringPolicy冲突，
+        导致不能定期定大小来生成日志文件，所以要改成使用SizeAndTimeBasedRollingPolicy（当然还有其他办法解决冲突）
+        （使用SizeAndTimeBasedRollingPolicy必需配置%d和%i表达式）
+        -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名，对应%d表达式-->
+            <!--如/usr/local/project-home/logs/project-name.%d{yyyy-MM-dd}.%i.log-->
+            <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+            <FileNamePattern>${LOG_HOME}/${APP_NAME}-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!-- 日志文件最大的大小，对应%i表达式 -->
+            <MaxFileSize>300MB</MaxFileSize>
+            <!--
+            日志文件保留数*分割时间周期
+            如：
+            FileNamePattern中指定了日志文件在时间维度上按天分割，那分割周期就是天，
+            然后这里配置MaxHistory的值是30，那就是保留30天内的日志文件
+            -->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%-5level：级别从左显示5个字符宽度，%thread表示线程名， %msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
-        <!-- 子节点向上级传递 局部日志级别-->
-        <logger level="WARN" name="org.springframework"/>
-        <logger level="WARN" name="com.netflix"/>
-        <logger level="DEBUG" name="org.hibernate.SQL"/>
-    </springProfile>
-    <springProfile name="prod">
+    <!-- 默认日志输出级别 -->
+    <!-- 其他针对某个包的级别可以在bootstrap.properties中配置或增加不使用additivity="false"属性的logger来配置 -->
+    <!-- 如bootstrap.properties中增加: logging.level.org.springframework.jdbc.core.StatementCreatorUtils=TRACE -->
+    <!-- 或在本文件中增加: <logger name="org.springframework.jdbc.core.StatementCreatorUtils" level="TRACE"/> -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
 
-    </springProfile>
+    <!-- 这里的logger都没有配置additivity="false"属性，表示root也会根据这些logger来配置对应包的日志输出级别 -->
+    <logger name="org.springframework.jdbc.core.JdbcTemplate" level="DEBUG"/>
+    <!-- 查看源码可知StatementCreatorUtils要打印sql占位符的参数要把日志输出等级设置成trace -->
+    <logger name="org.springframework.jdbc.core.StatementCreatorUtils" level="TRACE"/>
+
+    <!--
+    精简后发现，
+    以上精简的配置，因为和org.springframework.boot.logging.logback包里面的
+    四个文件base.xml,defaults.xml,console-appender.xml,file-appender.xml有大部分相同的地方，
+    所以完全可以只在bootstrap.properties中配置，但测试发现一些问题：
+    纯bootstrap.properties配置的话，logging.file中使用%d和%i是有问题的，
+    （查看file-appender.xml得知：里面有一段<fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>）
+    如果logging.file不带%d和%i，那日志文件名就是死的，如/usr/local/project-name/test.log，
+    那生成的文件是具体的单个log文件（test.log）和按规则压缩备份的.gz文件（多个test.log.yyyy-MM-dd.i.gz），
+    但压缩文件里面的log文件都是同名的（test.log）（因为都是压缩test.log）
+    如果上面说的这些都不是问题，那就完全用bootstrap.properties来配置好了
+
+    当然，
+    鉴于完全在bootstrap.properties配置的logback只有两个appender（CONSOLE和FILE）
+    如果要隔离输出不同级别的日志到不同的日志文件（多个appender），或需要自定义一些其他参数，
+    那完全在bootstrap.properties配置就不能满足需求了
+
+    最后，
+    如果以后做新项目，如果没特殊日志输出的要求，可以先看一下org.springframework.boot.logging.logback包，
+    确认能满足需求，直接在bootstrap.properties里配置就OK了
+    -->
+
 </configuration>

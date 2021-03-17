@@ -24,6 +24,7 @@
         <easyexcel.version>2.2.5</easyexcel.version>
         <fastjson.version>1.2.62</fastjson.version>
         <jasypt-boot.version>3.0.1</jasypt-boot.version>
+        <druid-boot.version>1.2.5</druid-boot.version>
     </properties>
 
     <dependencies>
@@ -64,14 +65,17 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid-boot.version}</version>
+        </dependency>
         <!-- 配置隐秘信息加密 -->
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot-starter</artifactId>
             <version>${jasypt-boot.version}</version>
         </dependency>
-
-        <!-- 以下版本依赖均有Spring内部管理 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
