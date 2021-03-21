@@ -28,6 +28,7 @@ public class ControllerLogger {
     /**
      * 日志异常处理类集合
      */
+    @Autowired
     private List<LoggerExceptionHandler> handlers;
 
     /**
@@ -46,7 +47,7 @@ public class ControllerLogger {
     @Around("controllerLog()")
     public Object handlerControllerMethod(ProceedingJoinPoint pjp) {
         long startTime = System.currentTimeMillis();
-        ResultBean result;
+        ResultBean<?> result;
         try {
             result = (ResultBean) pjp.proceed();
             log.info("{} cost time: {}", pjp.getSignature(), (System.currentTimeMillis() - startTime));
@@ -63,7 +64,7 @@ public class ControllerLogger {
      * @param e
      * @return 统一bean
      */
-    private ResultBean handlerException(ProceedingJoinPoint pjp, Throwable e) {
+    private ResultBean<?> handlerException(ProceedingJoinPoint pjp, Throwable e) {
         log.error(pjp.getSignature() + " error ", e);
         List<ResultBean> resultBeans = handlers.stream()
                 .filter(handler -> handler.getExceptionClass() == e.getClass())

@@ -1,8 +1,12 @@
 server:
-  # 随机端口
-  port: ${random.int[2000, 8000]}
+  port: 8080
+# 随机端口
+#  port: ${random.int[2000, 8000]}
+#debug: true
 
-debug: false
+logging:
+  file:
+    path: ./logs
 
 ################### Mybatis config ###################
 mybatis:
@@ -46,14 +50,22 @@ spring:
     listener:   # 指定listener 容器中的线程数，用于提高并发量
       missing-topics-fatal: false
       concurrency: 100
+    #=============== consumer =======================
     consumer:
-      group-id: myGroup # 指定默认消费者group id
+      # 默认消费者组
+      group-id: myGroup
       client-id: 200
+      # 批量一次最大拉取数据量
       max-poll-records: 80
+      # 最早未被消费的offset
+      # 当没有初始偏移量或当前偏移量不存在时设置消费的起始点(earliest、latest、none三个值可选择)
       auto-offset-reset: earliest
+      # 是否后台自动提交偏移量
       enable-auto-commit: true
+      # 后台自动提交消费偏移量(后台定时提交)的间隔时间
       auto-commit-interval: 1000
       bootstrap-servers: 120.76.175.67:9092
+      # 指定消息key和消息体的编解码方式
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
@@ -64,10 +76,20 @@ spring:
           poll:
             interval:
               ms: 10000
+    #=============== producer =======================
     producer:
-      batch-size: 1000 # 每次批量发送消息的数量
+      # 批量发送的消息数量
+      batch-size: 16384
+      # 32MB的批处理缓冲区
+      buffer-memory: 33554432
+      # 重试次数
       retries: 3
       client-id: 200
+      # 指定消息key和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # 生产者要求领导者在考虑完成请求之前收到的确认数量
+      acks: 1
 
   ################# RabbitMQ config #################
   rabbitmq:

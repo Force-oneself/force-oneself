@@ -48,8 +48,8 @@ public class JasyptUtils {
     }
 
     public static void main(String[] args){
-        System.out.println(encyptPwd("jasypt","加密"));
-        System.out.println(decyptPwd("jasypt","解密"));
+        System.out.println(encyptPwd("jasypt","xxx"));
+        System.out.println(decyptPwd("quan.qq.mail","xxx="));
     }
 }
 
