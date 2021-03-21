@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class KafkaController {
 
-    @Autowired
+    @Autowired(required = false)
     private KafkaTemplate kafkaTemplate;
 
     @RequestMapping("sendMsgWithTopic")

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Product {
 
-    @Autowired
+    @Autowired(required = false)
     private KafkaTemplate kafkaTemplate;
 
     public void send(String name) {

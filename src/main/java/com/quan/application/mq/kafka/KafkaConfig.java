@@ -10,7 +10,7 @@ import org.springframework.kafka.listener.ConsumerAwareListenerErrorHandler;
  * @Author heyq
  * @Date 2021-03-17
  **/
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class KafkaConfig {
 
     @Bean

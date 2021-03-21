@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.elasticsearch.rest.RestClientAutoConfiguration;
 import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
@@ -31,11 +32,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
         FreeMarkerAutoConfiguration.class,
         RabbitAutoConfiguration.class,
         MongoAutoConfiguration.class,
+        KafkaAutoConfiguration.class,
         DataSourceAutoConfiguration.class
 })
 @EnableEncryptableProperties
 @EnableAspectJAutoProxy
-//@EnableKafka
 public class SpringWaterApplication {
 
     public static void main(String[] args) {
