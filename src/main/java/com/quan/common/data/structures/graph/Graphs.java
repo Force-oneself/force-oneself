@@ -22,6 +22,7 @@ class AdjacencyListGraph<E extends Comparable<E>> {
 
         public boolean addAdjacentVertex(Vertex to) {
             for (Vertex v : adjacentVerticies) {
+                // 已经存在节点
                 if (v.data.compareTo(to.data) == 0) {
                     return false; // the edge already exists
                 }
@@ -119,14 +120,14 @@ public class Graphs {
 
     public static void main(String args[]) {
         AdjacencyListGraph<Integer> graph = new AdjacencyListGraph<>();
-        assert graph.addEdge(1, 2);
-        assert graph.addEdge(1, 5);
-        assert graph.addEdge(2, 5);
-        assert !graph.addEdge(1, 2);
-        assert graph.addEdge(2, 3);
-        assert graph.addEdge(3, 4);
-        assert graph.addEdge(4, 1);
-        assert !graph.addEdge(2, 3);
+        graph.addEdge(1, 2);
+        graph.addEdge(1, 5);
+        graph.addEdge(2, 5);
+//        assert !graph.addEdge(1, 2);
+        graph.addEdge(2, 3);
+        graph.addEdge(3, 4);
+        graph.addEdge(4, 1);
+//        assert !graph.addEdge(2, 3);
         System.out.println(graph);
     }
 

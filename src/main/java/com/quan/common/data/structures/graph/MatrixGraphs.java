@@ -1,5 +1,7 @@
 package com.quan.common.data.structures.graph;
 
+import java.util.Arrays;
+
 public class MatrixGraphs {
 
     public static void main(String args[]) {
@@ -18,9 +20,9 @@ public class MatrixGraphs {
 }
 
 class AdjacencyMatrixGraph {
-    private int _numberOfVertices;
-    private int _numberOfEdges;
-    private int[][] _adjacency;
+    private int numberOfVertices;
+    private int numberOfEdges;
+    private int[][] adjacency;
 
     static final int EDGE_EXIST = 1;
     static final int EDGE_NONE = 0;
@@ -30,75 +32,83 @@ class AdjacencyMatrixGraph {
         this.setNumberOfEdges(0);
         this.setAdjacency(new int[givenNumberOfVertices][givenNumberOfVertices]);
         for (int i = 0; i < givenNumberOfVertices; i++) {
-            for (int j = 0; j < givenNumberOfVertices; j++) {
-                this.adjacency()[i][j] = AdjacencyMatrixGraph.EDGE_NONE;
-            }
+//            for (int j = 0; j < givenNumberOfVertices; j++) {
+//                this.adjacency()[i][j] = AdjacencyMatrixGraph.EDGE_NONE;
+//            }
+            Arrays.fill(adjacency[i], EDGE_NONE);
         }
     }
 
     private void setNumberOfVertices(int newNumberOfVertices) {
-        this._numberOfVertices = newNumberOfVertices;
+        this.numberOfVertices = newNumberOfVertices;
     }
 
     public int numberOfVertices() {
-        return this._numberOfVertices;
+        return this.numberOfVertices;
     }
 
     private void setNumberOfEdges(int newNumberOfEdges) {
-        this._numberOfEdges = newNumberOfEdges;
+        this.numberOfEdges = newNumberOfEdges;
     }
 
     public int numberOfEdges() {
-        return this._numberOfEdges;
+        return this.numberOfEdges;
     }
 
     private void setAdjacency(int[][] newAdjacency) {
-        this._adjacency = newAdjacency;
+        this.adjacency = newAdjacency;
     }
 
     private int[][] adjacency() {
-        return this._adjacency;
+        return this.adjacency;
     }
 
     private boolean adjacencyOfEdgeDoesExist(int from, int to) {
-        return (this.adjacency()[from][to] != AdjacencyMatrixGraph.EDGE_NONE);
+        return this.adjacency()[from][to] != AdjacencyMatrixGraph.EDGE_NONE;
     }
 
     public boolean vertexDoesExist(int aVertex) {
-        if (aVertex >= 0 && aVertex < this.numberOfVertices()) {
-            return true;
-        } else {
-            return false;
-        }
+        return aVertex >= 0 && aVertex < this.numberOfVertices();
     }
 
     public boolean edgeDoesExist(int from, int to) {
-        if (this.vertexDoesExist(from) && this.vertexDoesExist(to)) {
-            return (this.adjacencyOfEdgeDoesExist(from, to));
-        }
-
-        return false;
+        return (this.vertexDoesExist(from) && this.vertexDoesExist(to))
+                ? this.adjacencyOfEdgeDoesExist(from, to)
+                : false;
     }
 
     /**
      * This method adds an edge to the graph between two specified
      * vertices
      *
-     * @param from the data of the vertex the edge is from
-     * @param to   the data of the vertex the edge is going to
+     * @param from     the data of the vertex the edge is from
+     * @param to       the data of the vertex the edge is going to
+     * @param directed 是否有向
      * @return returns true if the edge did not exist, return false if it already did
      */
-    public boolean addEdge(int from, int to) {
+    public boolean addEdge(int from, int to, boolean directed) {
         if (this.vertexDoesExist(from) && this.vertexDoesExist(to)) {
             if (!this.adjacencyOfEdgeDoesExist(from, to)) {
                 this.adjacency()[from][to] = AdjacencyMatrixGraph.EDGE_EXIST;
-                this.adjacency()[to][from] = AdjacencyMatrixGraph.EDGE_EXIST;
+                if (!directed) {
+                    this.adjacency()[to][from] = AdjacencyMatrixGraph.EDGE_EXIST;
+                }
                 this.setNumberOfEdges(this.numberOfEdges() + 1);
                 return true;
             }
         }
-
         return false;
+    }
+
+    /**
+     * 默认为无向图
+     *
+     * @param from
+     * @param to
+     * @return
+     */
+    public boolean addEdge(int from, int to) {
+        return this.addEdge(from, to, false);
     }
 
     /**
@@ -109,16 +119,29 @@ class AdjacencyMatrixGraph {
      * @param to   the data of the vertex the edge is going to
      * @return returns false if the edge doesn't exist, returns true if the edge exists and is removed
      */
-    public boolean removeEdge(int from, int to) {
+    public boolean removeEdge(int from, int to, boolean directed) {
         if (!this.vertexDoesExist(from) || !this.vertexDoesExist(to)) {
             if (this.adjacencyOfEdgeDoesExist(from, to)) {
                 this.adjacency()[from][to] = AdjacencyMatrixGraph.EDGE_NONE;
-                this.adjacency()[to][from] = AdjacencyMatrixGraph.EDGE_NONE;
+                if (!directed) {
+                    this.adjacency()[to][from] = AdjacencyMatrixGraph.EDGE_NONE;
+                }
                 this.setNumberOfEdges(this.numberOfEdges() - 1);
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * 默认为无向图删除
+     *
+     * @param from
+     * @param to
+     * @return
+     */
+    public boolean removeEdge(int from, int to) {
+        return this.removeEdge(from, to, false);
     }
 
     /**
@@ -137,7 +160,7 @@ class AdjacencyMatrixGraph {
         for (int i = 0; i < this.numberOfVertices(); i++) {
             s = s + String.valueOf(i) + " : ";
             for (int j = 0; j < this.numberOfVertices(); j++) {
-                s = s + String.valueOf(this._adjacency[i][j]) + " ";
+                s = s + String.valueOf(this.adjacency[i][j]) + " ";
             }
             s = s + "\n";
         }

@@ -2,9 +2,10 @@ package com.quan.common.data.structures.graph;
 
 import java.util.*;
 
-class BellmanFord
-/*Implementation of Bellman ford to detect negative cycles. Graph accepts inputs in form of edges which have 
-start vertex, end vertes and weights. Vertices should be labelled with a number between 0 and total number of vertices-1,both inclusive*/ {
+/**
+ * 实施Bellman ford以检测负循环。 Graph接受具有起点，终点和权重的边线形式的输入。顶点应标记为0到顶点总数1之间的数字（包括两端值）
+ */
+class BellmanFord {
     int vertex, edge;
     private Edge edges[];
     private int index = 0;

@@ -15,7 +15,7 @@ import java.util.Map;
  * TreeNode(int x) { val = x; }
  * }
  */
-public class Solution {
+public class Node {
 
     public  TreeNode reConstructBinaryTree(int[] pre, int[] in) {
         if (pre.length == 0 || in.length == 0) {

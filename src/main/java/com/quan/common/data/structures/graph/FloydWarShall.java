@@ -3,27 +3,30 @@ package com.quan.common.data.structures.graph;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class FloydWarshall {
+public class FloydWarShall {
+
     private int DistanceMatrix[][];
-    private int numberofvertices;//number of vertices in the graph
+    private int numberOfVertices;//number of vertices in the graph
     public static final int INFINITY = 999;
 
-    public FloydWarshall(int numberofvertices) {
-        DistanceMatrix = new int[numberofvertices + 1][numberofvertices + 1];//stores the value of distance from all the possible path form the source vertex to destination vertex
+    public FloydWarShall(int numberOfVertices) {
+        //存储从源顶点到目标顶点的所有可能路径的距离值
+        DistanceMatrix = new int[numberOfVertices + 1][numberOfVertices + 1];
         Arrays.fill(DistanceMatrix, 0);
-        this.numberofvertices = numberofvertices;
+        this.numberOfVertices = numberOfVertices;
     }
 
-    public void floydwarshall(int AdjacencyMatrix[][])//calculates all the distances from source to destination vertex
-    {
-        for (int source = 1; source <= numberofvertices; source++) {
-            for (int destination = 1; destination <= numberofvertices; destination++) {
+    // 计算从源顶点到目标顶点的所有距离
+
+    public void floydWarShall(int AdjacencyMatrix[][]) {
+        for (int source = 1; source <= numberOfVertices; source++) {
+            for (int destination = 1; destination <= numberOfVertices; destination++) {
                 DistanceMatrix[source][destination] = AdjacencyMatrix[source][destination];
             }
         }
-        for (int intermediate = 1; intermediate <= numberofvertices; intermediate++) {
-            for (int source = 1; source <= numberofvertices; source++) {
-                for (int destination = 1; destination <= numberofvertices; destination++) {
+        for (int intermediate = 1; intermediate <= numberOfVertices; intermediate++) {
+            for (int source = 1; source <= numberOfVertices; source++) {
+                for (int destination = 1; destination <= numberOfVertices; destination++) {
                     if (DistanceMatrix[source][intermediate] + DistanceMatrix[intermediate][destination]
                             < DistanceMatrix[source][destination])
                     // if the new distance calculated is less then the earlier shortest
@@ -35,12 +38,12 @@ public class FloydWarshall {
                 }
             }
         }
-        for (int source = 1; source <= numberofvertices; source++)
+        for (int source = 1; source <= numberOfVertices; source++)
             System.out.print("\t" + source);
         System.out.println();
-        for (int source = 1; source <= numberofvertices; source++) {
+        for (int source = 1; source <= numberOfVertices; source++) {
             System.out.print(source + "\t");
-            for (int destination = 1; destination <= numberofvertices; destination++) {
+            for (int destination = 1; destination <= numberOfVertices; destination++) {
                 System.out.print(DistanceMatrix[source][destination] + "\t");
             }
             System.out.println();
@@ -66,8 +69,8 @@ public class FloydWarshall {
             }
         }
         System.out.println("The Transitive Closure of the Graph");
-        FloydWarshall floydwarshall = new FloydWarshall(numberOfVertices);
-        floydwarshall.floydwarshall(adjacencyMatrix);
+        FloydWarShall floydwarshall = new FloydWarShall(numberOfVertices);
+        floydwarshall.floydWarShall(adjacencyMatrix);
         scan.close();
     }
 }
