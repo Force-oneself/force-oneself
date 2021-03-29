@@ -1,5 +1,6 @@
 package com.quan;
 
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.redisson.spring.starter.RedissonAutoConfiguration;
 import org.springframework.boot.SpringApplication;
@@ -33,6 +34,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
         RabbitAutoConfiguration.class,
         MongoAutoConfiguration.class,
         KafkaAutoConfiguration.class,
+        DruidDataSourceAutoConfigure.class,
         DataSourceAutoConfiguration.class
 })
 @EnableEncryptableProperties

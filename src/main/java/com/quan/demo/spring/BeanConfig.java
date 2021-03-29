@@ -30,7 +30,7 @@ public class BeanConfig {
         return new MyInstantiationAwareBeanPostProcessor();
     }
 
-    @Bean
+//    @Bean
     public static BeanDefinitionRegistryPostProcessor beanDefinitionRegistryPostProcessor() {
         return new MyBeanDefinitionRegistryPostProcessor();
     }
@@ -40,7 +40,7 @@ public class BeanConfig {
         return new MyBeanPostProcessor();
     }
 
-//    @Bean
+    @Bean
     public SmartInstantiationAwareBeanPostProcessor smartInstantiationAwareBeanPostProcessor() {
         return new MySmartInstantiationAwareBeanPostProcessor();
     }

@@ -49,7 +49,9 @@ public class Node {
                 max = temp;
             }
         }
-        System.out.println(max);
+        System.out.println(Math.round(-15.61));
+
+
     }
 
     class LRU {

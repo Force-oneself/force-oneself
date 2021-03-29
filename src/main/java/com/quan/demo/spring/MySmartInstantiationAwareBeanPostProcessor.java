@@ -13,13 +13,13 @@ import java.lang.reflect.Constructor;
 public class MySmartInstantiationAwareBeanPostProcessor implements SmartInstantiationAwareBeanPostProcessor {
     @Override
     public Constructor<?>[] determineCandidateConstructors(Class<?> beanClass, String beanName) throws BeansException {
-        System.err.println("SmartInstantiationAwareBeanPostProcessor ==> determineCandidateConstructors");
-        return new Constructor[0];
+        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> SmartInstantiationAwareBeanPostProcessor ==> determineCandidateConstructors可以改变Bean实例化的构造方法");
+        return null;
     }
 
     @Override
     public Object getEarlyBeanReference(Object bean, String beanName) throws BeansException {
-        System.err.println("SmartInstantiationAwareBeanPostProcessor ==> getEarlyBeanReference");
+        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> SmartInstantiationAwareBeanPostProcessor ==> getEarlyBeanReference");
         return bean;
     }
 }
