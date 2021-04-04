@@ -40,7 +40,7 @@ public class CustomerDBConfig {
     private String password;
 
     /**
-     * 根据配置的属性初始化zabbix库的数据源
+     * 根据配置的属性初始库的数据源
      *
      * @return DataSource
      */
@@ -56,7 +56,7 @@ public class CustomerDBConfig {
     }
 
     /**
-     * 根据zabbix库的数据源初始化事务管理器
+     * 根据数据源初始化事务管理器
      *
      * @return DataSource
      */
@@ -68,7 +68,7 @@ public class CustomerDBConfig {
     }
 
     /**
-     * 根据zabbix库的数据源初始化Mybatis的SqlSessionFactory
+     * 根据数据源初始化Mybatis的SqlSessionFactory
      *
      * @return DataSource
      */

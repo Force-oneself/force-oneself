@@ -1,4 +1,4 @@
-package com.quan.demo.spring;
+package com.quan.demo.spring.xml;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanClassLoaderAware;

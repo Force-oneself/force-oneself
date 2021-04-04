@@ -1,4 +1,4 @@
-package com.quan.demo.spring;
+package com.quan.demo.spring.xml;
 
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
@@ -6,14 +6,13 @@ import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostP
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @Description:
  * @Author heyq
  * @Date 2021-03-03
  **/
-@Configuration
+//@Configuration
 public class BeanConfig {
 
     public BeanConfig() {

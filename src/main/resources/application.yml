@@ -1,7 +1,7 @@
 server:
-  port: 8080
+#  port: 8080
 # 随机端口
-#  port: ${random.int[2000, 8000]}
+  port: ${random.int[2000,8000]}
 #debug: true
 
 logging:
@@ -27,6 +27,7 @@ spring:
   ################### Jackson config ###################
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
 
   ################# Redis config #################
   redis:

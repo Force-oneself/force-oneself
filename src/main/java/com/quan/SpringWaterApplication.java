@@ -12,7 +12,6 @@ import org.springframework.boot.autoconfigure.data.neo4j.Neo4jRepositoriesAutoCo
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.elasticsearch.rest.RestClientAutoConfiguration;
 import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -30,12 +29,12 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
         Neo4jDataAutoConfiguration.class,
         RedisAutoConfiguration.class,
         RedissonAutoConfiguration.class,
-        FreeMarkerAutoConfiguration.class,
         RabbitAutoConfiguration.class,
         MongoAutoConfiguration.class,
         KafkaAutoConfiguration.class,
         DruidDataSourceAutoConfigure.class,
-        DataSourceAutoConfiguration.class
+//        DataSourceAutoConfiguration.class,
+        FreeMarkerAutoConfiguration.class
 })
 @EnableEncryptableProperties
 @EnableAspectJAutoProxy
@@ -49,3 +48,5 @@ public class SpringWaterApplication {
         SpringApplication.run(SpringWaterApplication.class, args);
     }
 }
+
+

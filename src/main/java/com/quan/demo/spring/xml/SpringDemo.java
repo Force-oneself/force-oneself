@@ -1,4 +1,4 @@
-package com.quan.demo.spring;
+package com.quan.demo.spring.xml;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
