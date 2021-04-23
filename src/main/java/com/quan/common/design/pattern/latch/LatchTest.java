@@ -20,7 +20,7 @@ public class LatchTest {
         // 当前（main线程会进入阻塞，直到四个程序员全部都到达目的地）
 //        latch.await();
         try {
-            latch.await(TimeUnit.SECONDS, 5);
+            latch.await(TimeUnit.SECONDS, 50);
             System.out.println("== all of programmer arrived ==");
         } catch (WaitTimeoutException e) {
             e.printStackTrace();

@@ -17,6 +17,12 @@ mybatis:
 spring:
   application:
     name: spring-water-application
+  ################### Security config ###################
+  security:
+    user:
+      name: root
+      password: root
+      roles: admin
   ################### Datasource config ###################
   datasource:
     username: root

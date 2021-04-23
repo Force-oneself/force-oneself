@@ -1,7 +1,9 @@
 package com.quan.demo;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Description:
@@ -29,6 +31,14 @@ public class ThreadPoolDemo {
      * @param args
      */
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(10,
+                10,
+                0L,
+                TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(200),
+                Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.AbortPolicy());
+
+
     }
 }
