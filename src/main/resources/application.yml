@@ -29,12 +29,10 @@ spring:
     password: ENC(h0FuKCIDDxtJDagwvCWZPg==)
     url: jdbc:mysql://127.0.0.1:3306/cas?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   ################### Jackson config ###################
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
-
   ################# Redis config #################
   redis:
     host: 120.76.175.67
@@ -48,13 +46,15 @@ spring:
         max-idle: 10
         min-idle: 0
         max-wait: -1
-
   ################# kafka config #################
-  kafka:     # 指定kafka 代理地址，可以多个
+  kafka:
+    # 指定kafka 代理地址，可以多个
     bootstrap-servers: 120.76.175.67:9092
-    template:    # 指定默认topic id
+    template:
+      # 指定默认topic id
       default-topic: producer
-    listener:   # 指定listener 容器中的线程数，用于提高并发量
+    listener:
+      # 指定listener 容器中的线程数，用于提高并发量
       missing-topics-fatal: false
       concurrency: 100
     #=============== consumer =======================
@@ -97,7 +97,6 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
       # 生产者要求领导者在考虑完成请求之前收到的确认数量
       acks: 1
-
   ################# RabbitMQ config #################
   rabbitmq:
     host: 120.76.175.67
@@ -105,6 +104,44 @@ spring:
     username: guest
     password: ENC(uLi03Ellq+ON+mXDJajfcQ====)
     virtualHost: /
+  ################# Flyway config #################
+  flyway:
+    # 是否开启flywary，默认true.
+    enabled: true
+    # 对执行迁移时基准版本的描述
+    baseline-description: << Flyway Baseline >>
+    # 当迁移时发现目标schema非空，而且带有没有元数据的表时，是否自动执行基准迁移，默认false.
+    baseline-on-migrate: false
+    # 开始执行基准迁移时对现有的schema的版本打标签，默认值为1.
+    baseline-version: 1
+    # 检查迁移脚本的位置是否存在，默认false.
+    check-location: false
+    # 当发现校验错误时是否自动调用clean，默认false.
+    clean-on-validation-error: false
+    # 设置迁移时的编码，默认UTF-8.
+    encoding: UTF-8
+    # 迁移脚本的位置，默认db/migration.
+    locations: db/migration
+    # 是否允许无序的迁移，默认false.
+    out-of-order: false
+    # 设置每个placeholder的前缀，默认${.
+    placeholder-prefix: ${
+    # 设置每个placeholder的后缀，默认}.
+    placeholder-suffix: "}"
+    # 迁移文件的前缀，默认为V.
+    sql-migration-prefix: V
+    # 迁移脚本的文件名分隔符，默认__
+    sql-migration-separator: __
+    # 设定需要flywary迁移的schema，大小写敏感，默认为连接默认的schema.
+    schemas: flyway
+    # 迁移时使用的目标版本，默认为latest version
+    #    target: latest version
+    # 迁移时使用的JDBC URL，如果没有指定的话，将使用配置的主数据源
+    url: jdbc:mysql://127.0.0.1:3306/flyway?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    # 迁移数据库的用户名
+    user: root
+    # 目标数据库的密码.
+    password: ENC(h0FuKCIDDxtJDagwvCWZPg==)
   ################# Spring Data config begin #################
   data:
     ################### MongoDB config ###################
