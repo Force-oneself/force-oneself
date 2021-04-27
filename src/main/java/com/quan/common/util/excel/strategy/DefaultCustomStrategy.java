@@ -22,22 +22,19 @@ public class DefaultCustomStrategy extends AbstractColumnWidthStyleStrategy {
     private Map<Integer, Map<Integer, Integer>> CACHE = new HashMap<>();
 
     @Override
-    protected void setColumnWidth(WriteSheetHolder writeSheetHolder, List<CellData> cellDataList, Cell cell, Head head, Integer relativeRowIndex, Boolean isHead) {
+    protected void setColumnWidth(WriteSheetHolder writeSheetHolder, List<CellData> cellDataList, Cell cell, Head head,
+                                  Integer relativeRowIndex, Boolean isHead) {
         boolean needSetWidth = isHead || !CollectionUtils.isEmpty(cellDataList);
         if (needSetWidth) {
-            Map<Integer, Integer> maxColumnWidthMap = (Map) CACHE.get(writeSheetHolder.getSheetNo());
-            if (maxColumnWidthMap == null) {
-                maxColumnWidthMap = new HashMap(16);
-                CACHE.put(writeSheetHolder.getSheetNo(), maxColumnWidthMap);
-            }
+            Map<Integer, Integer> maxColumnWidthMap = CACHE.computeIfAbsent(writeSheetHolder.getSheetNo(), k -> new HashMap(16));
             Integer columnWidth = this.dataLength(cellDataList, cell, isHead);
             if (columnWidth >= 0) {
                 if (columnWidth > 255) {
                     columnWidth = 255;
                 }
-                Integer maxColumnWidth = (Integer) ((Map) maxColumnWidthMap).get(cell.getColumnIndex());
+                Integer maxColumnWidth = maxColumnWidthMap.get(cell.getColumnIndex());
                 if (maxColumnWidth == null || columnWidth > maxColumnWidth) {
-                    ((Map) maxColumnWidthMap).put(cell.getColumnIndex(), columnWidth);
+                    maxColumnWidthMap.put(cell.getColumnIndex(), columnWidth);
                     writeSheetHolder.getSheet().setColumnWidth(cell.getColumnIndex(), columnWidth * 256);
                 }
             }

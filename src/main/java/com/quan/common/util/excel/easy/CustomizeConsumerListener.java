@@ -3,6 +3,7 @@ package com.quan.common.util.excel.easy;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -14,7 +15,7 @@ import java.util.function.Consumer;
 public class CustomizeConsumerListener<T> extends AnalysisEventListener<T> {
 
     private Integer pageSize;
-    private List<T> dataList;
+    private List<T> dataList = new ArrayList<>();
     private Consumer<List<T>> consumer;
 
     public CustomizeConsumerListener(Integer pageSize, Consumer<List<T>> consumer) {

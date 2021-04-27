@@ -1,6 +1,5 @@
 package com.quan.application.db.redis;
 
-import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.DefaultTypedTuple;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -15,10 +14,14 @@ import java.util.Set;
  * @Date 2021-04-10
  **/
 //@Component
-@AllArgsConstructor
+//@ConditionalOnClass(RedisTemplate.class)
 public class RedisDemo {
 
-    private RedisTemplate<String, RedisSortSetBean> redisTemplate;
+    private final RedisTemplate<String, RedisSortSetBean> redisTemplate;
+
+    public RedisDemo(RedisTemplate<String, RedisSortSetBean> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
 
     public void redisForString() {

@@ -15,7 +15,8 @@ import java.util.function.Consumer;
 public class ExcelUtils extends EasyExcel {
 
 
-    public static <T> ExcelReaderBuilder read(InputStream inputStream, Class<T> head, Integer pageSize, Consumer<List<T>> consumer) {
+    public static <T> ExcelReaderBuilder read(InputStream inputStream, Class<T> head, Integer pageSize,
+                                              Consumer<List<T>> consumer) {
         return read(inputStream, head, new CustomizeConsumerListener<T>(pageSize, consumer));
     }
 }

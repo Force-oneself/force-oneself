@@ -27,7 +27,7 @@ import java.util.function.Supplier;
  */
 public class RedisUtils {
 
-    private RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     private final ValueOperations<String, Object> valueOps;
     private final HashOperations<String, Object, Object> hashOps;
