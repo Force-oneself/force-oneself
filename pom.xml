@@ -20,7 +20,7 @@
         <redission.version>3.13.3</redission.version>
         <mybatis-boot.version>2.1.4</mybatis-boot.version>
         <zookeeper.version>3.4.14</zookeeper.version>
-        <elasticsearch.version>7.6.2</elasticsearch.version>
+        <elasticsearch.version>7.12.1</elasticsearch.version>
         <easyexcel.version>2.2.5</easyexcel.version>
         <fastjson.version>1.2.62</fastjson.version>
         <jasypt-boot.version>3.0.1</jasypt-boot.version>
