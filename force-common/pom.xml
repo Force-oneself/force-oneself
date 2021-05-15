@@ -8,10 +8,12 @@
         <version>2.2.9.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.quan</groupId>
     <artifactId>force-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>common</name>
+
+    <name>force-common</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
