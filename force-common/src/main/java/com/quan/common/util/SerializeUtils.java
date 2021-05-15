@@ -1,11 +1,17 @@
 package com.quan.common.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class SerializeUtils {
+/**
+ * @author Force-oneself
+ */
+@Slf4j
+public final class SerializeUtils {
 
     /**
      * @param object
@@ -13,17 +19,13 @@ public class SerializeUtils {
      * @Description 序列化
      */
     public static byte[] serialize(Object object) {
-        ObjectOutputStream oos = null;
-        ByteArrayOutputStream baos = null;
-        try {
+        try (ByteArrayOutputStream bas = new ByteArrayOutputStream();
+             ObjectOutputStream oos = new ObjectOutputStream(bas)) {
             // 序列化
-            baos = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(baos);
             oos.writeObject(object);
-            byte[] bytes = baos.toByteArray();
-            return bytes;
+            return bas.toByteArray();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("序列化失败", e);
         }
         return null;
     }
@@ -33,14 +35,13 @@ public class SerializeUtils {
      * @return
      * @Description 反序列化
      */
-    public static Object unserialize(byte[] bytes) {
-        ByteArrayInputStream bais = null;
-        try {
+    public static Object universalize(byte[] bytes) {
+
+        try(ByteArrayInputStream bas = new ByteArrayInputStream(bytes)) {
             // 反序列化
-            bais = new ByteArrayInputStream(bytes);
-            ObjectInputStream ois = new ObjectInputStream(bais);
-            return ois.readObject();
+            return new ObjectInputStream(bas).readObject();
         } catch (Exception e) {
+            log.error("反序列化失败", e);
         }
         return null;
     }

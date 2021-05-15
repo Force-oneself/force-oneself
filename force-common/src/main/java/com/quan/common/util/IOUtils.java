@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ public final class IOUtils {
      * @return 符合条件的文件集合
      */
     public static List<File> matchFiles(File file, Predicate<File> filter) {
-        return Arrays.stream(file.listFiles(File::isFile)).filter(filter).collect(Collectors.toList());
+        return Arrays.stream(Objects.requireNonNull(file.listFiles(File::isFile))).filter(filter).collect(Collectors.toList());
     }
 
     /**

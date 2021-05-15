@@ -62,10 +62,12 @@ import java.security.SecureRandom;
  */
 public class BCrypt {
     // BCrypt parameters
-    private static final int GENSALT_DEFAULT_LOG2_ROUNDS = 10;
+    private static final int GESTALT_DEFAULT_LOG2_ROUNDS = 10;
     private static final int BCRYPT_SALT_LEN = 16;
 
-    // Blowfish parameters
+    /**
+     * Blowfish parameters
+     */
     private static final int BLOWFISH_NUM_ROUNDS = 16;
 
     // Initial contents of key schedule
@@ -758,7 +760,7 @@ public class BCrypt {
      * @return an encoded salt value
      */
     public static String gensalt() {
-        return gensalt(GENSALT_DEFAULT_LOG2_ROUNDS);
+        return gensalt(GESTALT_DEFAULT_LOG2_ROUNDS);
     }
 
     /**

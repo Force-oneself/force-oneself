@@ -28,10 +28,7 @@ public final class StreamUtils {
      * @return 包含给定对象并指定长度的流
      */
     public static <T> Stream<T> create(T object, int length) {
-        if (length <= 0) {
-            return Stream.empty();
-        }
-        return Stream.iterate(object, t -> t).limit(length);
+        return length <= 0 ? Stream.empty() : Stream.iterate(object, t -> t).limit(length);
     }
 
     /**
@@ -42,10 +39,7 @@ public final class StreamUtils {
      * @return 从开始整数到结束整理的数字序列流
      */
     public static Stream<Integer> createIntSequence(int start, int end) {
-        if (start > end) {
-            return Stream.empty();
-        }
-        return Stream.iterate(start, t -> t + 1).limit(end - start + 1L);
+        return start > end ? Stream.empty() : Stream.iterate(start, t -> t + 1).limit(end - start + 1L);
     }
 
     /**
@@ -55,10 +49,7 @@ public final class StreamUtils {
      * @return 从0开始指定长度的数字序列流
      */
     public static Stream<Integer> createNatureIntSequence(int length) {
-        if (length <= 0) {
-            return Stream.empty();
-        }
-        return Stream.iterate(0, t -> t + 1).limit(length);
+        return length <= 0 ? Stream.empty() : Stream.iterate(0, t -> t + 1).limit(length);
     }
 
     /**
@@ -68,10 +59,7 @@ public final class StreamUtils {
      * @return 从1开始指定长度的数字序列流
      */
     public static Stream<Integer> createPositiveIntSequence(int length) {
-        if (length <= 0) {
-            return Stream.empty();
-        }
-        return Stream.iterate(1, t -> t + 1).limit(length);
+        return length <= 0 ? Stream.empty() : Stream.iterate(1, t -> t + 1).limit(length);
     }
 
     private StreamUtils() {

@@ -15,9 +15,9 @@ public class JasyptUtils {
      * @param value 加密值
      * @return
      */
-    public static String encyptPwd(String password,String value){
+    public static String encryptPwd(String password, String value){
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
-        encryptor.setConfig(cryptor(password));
+        encryptor.setConfig(cryptos(password));
         String result = encryptor.encrypt(value);
         return result;
     }
@@ -28,14 +28,14 @@ public class JasyptUtils {
      * @param value 解密密文
      * @return
      */
-    public static String decyptPwd(String password,String value){
+    public static String decryptPwd(String password, String value){
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
-        encryptor.setConfig(cryptor(password));
+        encryptor.setConfig(cryptos(password));
         String result = encryptor.decrypt(value);
         return result;
     }
 
-    public static SimpleStringPBEConfig cryptor(String password){
+    public static SimpleStringPBEConfig cryptos(String password){
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
         config.setPassword(password);
         config.setAlgorithm("PBEWithMD5AndDES");
@@ -48,8 +48,8 @@ public class JasyptUtils {
     }
 
     public static void main(String[] args){
-        System.out.println(encyptPwd("jasypt","xxx"));
-        System.out.println(decyptPwd("quan.qq.mail","xxx="));
+        System.out.println(encryptPwd("jasypt","xxx"));
+        System.out.println(decryptPwd("quan.qq.mail","xxx="));
     }
 }
 
