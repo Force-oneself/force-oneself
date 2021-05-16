@@ -3,6 +3,9 @@ package com.quan.common.data.structures.buffer;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * @author Force-oneself
+ */
 public class CircularBuffer {
     private char[] _buffer;
     public final int _buffer_size;
@@ -70,6 +73,7 @@ public class CircularBuffer {
             return _alphabet.charAt(_random.nextInt(_alphabet.length()));
         }
 
+        @Override
         public void run() {
             while (!Thread.interrupted()) {
                 if (!_buffer.writeToCharBuffer(getRandomChar())) {
