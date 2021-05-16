@@ -1,6 +1,6 @@
 package com.quan.pattern.multi.thread.future;
 
-import com.quan.common.design.pattern.future.impl.FutureServiceImpl;
+import com.quan.pattern.multi.thread.future.impl.FutureServiceImpl;
 
 /**
  * @author Force-Oneself

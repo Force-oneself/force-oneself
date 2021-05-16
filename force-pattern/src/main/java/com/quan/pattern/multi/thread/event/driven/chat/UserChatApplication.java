@@ -1,6 +1,7 @@
 package com.quan.pattern.multi.thread.event.driven.chat;
 
-import com.quan.common.design.pattern.event.driven.AsyncEventDispatcher;
+
+import com.quan.pattern.multi.thread.event.driven.AsyncEventDispatcher;
 
 public class UserChatApplication {
 

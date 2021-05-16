@@ -1,6 +1,7 @@
 package com.quan.pattern.multi.thread.event.bus.monitor;
 
-import com.quan.common.design.pattern.event.bus.Subscribe;
+
+import com.quan.pattern.multi.thread.event.bus.Subscribe;
 
 public class FileChangeListener {
 

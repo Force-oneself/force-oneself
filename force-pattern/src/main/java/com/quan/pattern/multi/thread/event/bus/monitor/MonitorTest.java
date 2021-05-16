@@ -1,7 +1,7 @@
 package com.quan.pattern.multi.thread.event.bus.monitor;
 
-import com.quan.common.design.pattern.event.bus.AsyncEventBus;
-import com.quan.common.design.pattern.event.bus.EventBus;
+import com.quan.pattern.multi.thread.event.bus.AsyncEventBus;
+import com.quan.pattern.multi.thread.event.bus.EventBus;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;

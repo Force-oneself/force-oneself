@@ -1,7 +1,7 @@
 package com.quan.pattern.multi.thread.event.driven.chat;
 
-import com.quan.common.design.pattern.event.driven.AsyncChannel;
-import com.quan.common.design.pattern.event.driven.Event;
+import com.quan.pattern.multi.thread.event.driven.AsyncChannel;
+import com.quan.pattern.multi.thread.event.driven.Event;
 
 /**
  * 用户上线的Event，简单输出用户上线即可

@@ -1,6 +1,7 @@
 package com.quan.pattern.multi.thread.event.driven.chat;
 
-import com.quan.common.design.pattern.event.driven.Event;
+
+import com.quan.pattern.multi.thread.event.driven.Event;
 
 public class UserOnlineEvent extends Event {
 

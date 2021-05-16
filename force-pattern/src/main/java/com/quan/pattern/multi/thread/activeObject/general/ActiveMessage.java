@@ -1,6 +1,7 @@
 package com.quan.pattern.multi.thread.activeObject.general;
 
-import com.quan.common.design.pattern.future.Future;
+
+import com.quan.pattern.multi.thread.future.Future;
 
 import java.lang.reflect.Method;
 

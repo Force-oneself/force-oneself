@@ -1,9 +1,9 @@
 package com.quan.pattern.multi.thread.future.impl;
 
-import com.quan.common.design.pattern.future.Callback;
-import com.quan.common.design.pattern.future.Future;
-import com.quan.common.design.pattern.future.FutureService;
-import com.quan.common.design.pattern.future.Task;
+import com.quan.pattern.multi.thread.future.Callback;
+import com.quan.pattern.multi.thread.future.Future;
+import com.quan.pattern.multi.thread.future.FutureService;
+import com.quan.pattern.multi.thread.future.Task;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
