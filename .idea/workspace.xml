@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e48b6d78-6698-4a22-b552-1124fa9e83f4" name="Default Changelist" comment="结构调整">
-      <change afterPath="$PROJECT_DIR$/force-common/src/main/java/com/quan/common/CommonApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/force-common/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-water.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-water.iml" afterDir="false" />
+    <list default="true" id="e48b6d78-6698-4a22-b552-1124fa9e83f4" name="Default Changelist" comment="genxin">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +72,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="GitIgnore" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/force-demo/src/main/java/com/quan/demo" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -84,7 +83,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.39425287" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
     <property name="show.run.dashboard.notification" value="false" />
   </component>
   <component name="ReactorSettings">
@@ -271,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621665214914</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="genxin">
+      <created>1621667322678</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1621667322678</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -339,7 +345,8 @@
     <MESSAGE value="整合demo模块" />
     <MESSAGE value="升级第一版" />
     <MESSAGE value="结构调整" />
-    <option name="LAST_COMMIT_MESSAGE" value="结构调整" />
+    <MESSAGE value="genxin" />
+    <option name="LAST_COMMIT_MESSAGE" value="genxin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
