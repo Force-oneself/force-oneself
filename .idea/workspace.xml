@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e48b6d78-6698-4a22-b552-1124fa9e83f4" name="Default Changelist" comment="结构调整" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="eee30cc1-c14a-4547-a161-d1b054c04f19" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\Development\ForceOneself\Tool\apache-maven-3.6.1\repository" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../Tool/apache-maven-3.6.1" />
+        <option name="userSettingsFile" value="D:\Development\ForceOneself\Tool\apache-maven-3.6.1\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="1.8-291" />
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="ProjectId" id="1rv062l4s9vz7nwkOmPOORd3fRw" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="jdk.selected.JAVA_MODULE" value="1.8" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/force-demo/src/main/java/com/quan/demo" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.39425287" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Development\ForceOneself\Github\spring-water\force-demo\src\main\java\com\quan\demo" />
+      <recent name="D:\Development\ForceOneself\Github\spring-water\force-algorithm\src\main\java\com\quan\algorithm" />
+      <recent name="D:\Development\ForceOneself\Github\spring-water\force-pattern\src\main\java\com\quan\pattern\multi\thread" />
+      <recent name="D:\Development\ForceOneself\Github\spring-water\common\src\main\java\com\quan\common" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.quan.common.bean" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="force-demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.quan.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.quan.demo.DemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.DemoApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringBootOptions">
+    <option name="showAdditionalConfigNotification" value="false" />
+  </component>
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+    <option name="myConnectionType" value="NONE" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e48b6d78-6698-4a22-b552-1124fa9e83f4" name="Default Changelist" comment="" />
+      <created>1619841077544</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619841077544</updated>
+      <workItem from="1619841078966" duration="325000" />
+      <workItem from="1619841416483" duration="78000" />
+      <workItem from="1619842322706" duration="169000" />
+      <workItem from="1619876107609" duration="5323000" />
+      <workItem from="1619908331587" duration="22633000" />
+      <workItem from="1620004190112" duration="37297000" />
+      <workItem from="1620269808191" duration="6255000" />
+      <workItem from="1620287705148" duration="73000" />
+      <workItem from="1620288230509" duration="321000" />
+      <workItem from="1620289430619" duration="6972000" />
+      <workItem from="1620488478412" duration="531000" />
+      <workItem from="1620527070695" duration="570000" />
+      <workItem from="1620527843828" duration="658000" />
+      <workItem from="1620528689932" duration="20366000" />
+      <workItem from="1620607634264" duration="1790000" />
+      <workItem from="1620719193021" duration="2786000" />
+      <workItem from="1620884688830" duration="1073000" />
+      <workItem from="1620898026153" duration="7027000" />
+      <workItem from="1620975514954" duration="6431000" />
+      <workItem from="1620996014903" duration="122000" />
+      <workItem from="1620996163992" duration="615000" />
+      <workItem from="1621064489647" duration="4358000" />
+      <workItem from="1621074221655" duration="5483000" />
+      <workItem from="1621093000283" duration="964000" />
+      <workItem from="1621132746046" duration="928000" />
+      <workItem from="1621151667599" duration="5634000" />
+      <workItem from="1621299131302" duration="676000" />
+      <workItem from="1621299858850" duration="1206000" />
+      <workItem from="1621301088709" duration="23000" />
+      <workItem from="1621301184705" duration="949000" />
+      <workItem from="1621612290988" duration="1365000" />
+      <workItem from="1621614430765" duration="980000" />
+      <workItem from="1621615521551" duration="14000" />
+      <workItem from="1621652351852" duration="2134000" />
+      <workItem from="1621656025855" duration="3011000" />
+      <workItem from="1621664893892" duration="767000" />
+    </task>
+    <task id="LOCAL-00001" summary="添加 StreamDemo.java">
+      <created>1620561519602</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1620561519602</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add module demo common pattern">
+      <created>1621073058923</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1621073058923</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add module pattern multi thread cod">
+      <created>1621080240569</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1621080240569</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update gitignore">
+      <created>1621080524738</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1621080524738</updated>
+    </task>
+    <task id="LOCAL-00005" summary="更新gitignore的文件">
+      <created>1621081182652</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1621081182652</updated>
+    </task>
+    <task id="LOCAL-00006" summary="调整工具类格式">
+      <created>1621093966412</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1621093966412</updated>
+    </task>
+    <task id="LOCAL-00007" summary="调整设计模式类格式">
+      <created>1621133598192</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1621133598192</updated>
+    </task>
+    <task id="LOCAL-00008" summary="添加算法模块">
+      <created>1621153979189</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1621153979189</updated>
+    </task>
+    <task id="LOCAL-00009" summary="整合demo模块">
+      <created>1621155506068</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1621155506068</updated>
+    </task>
+    <task id="LOCAL-00010" summary="升级第一版">
+      <created>1621615385876</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1621615385876</updated>
+    </task>
+    <task id="LOCAL-00011" summary="结构调整">
+      <created>1621665214914</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1621665214914</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="multi_module_upgrade" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="multi_module_upgrade" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/boot" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="添加 StreamDemo.java" />
+    <MESSAGE value="add module demo common pattern" />
+    <MESSAGE value="add module pattern multi thread cod" />
+    <MESSAGE value="update gitignore" />
+    <MESSAGE value="更新gitignore的文件" />
+    <MESSAGE value="调整工具类格式" />
+    <MESSAGE value="调整设计模式类格式" />
+    <MESSAGE value="添加算法模块" />
+    <MESSAGE value="整合demo模块" />
+    <MESSAGE value="升级第一版" />
+    <MESSAGE value="结构调整" />
+    <option name="LAST_COMMIT_MESSAGE" value="结构调整" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/quan/demo/stream/StreamDemo.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../Tool/apache-maven-3.6.1/repository/org/springframework/spring-core/5.2.12.RELEASE/spring-core-5.2.12.RELEASE-sources.jar!/org/springframework/core/io/support/SpringFactoriesLoader.java</url>
+          <line>139</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../Tool/apache-maven-3.6.1/repository/org/springframework/boot/spring-boot/2.2.13.RELEASE/spring-boot-2.2.13.RELEASE-sources.jar!/org/springframework/boot/SpringApplication.java</url>
+          <line>313</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.springframework.boot.diagnostics.FailureAnalyzers" memberName="classLoader" />
+        <PinnedItemInfo parentTag="org.springframework.context.event.SimpleApplicationEventMulticaster" memberName="retrieverCache" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
