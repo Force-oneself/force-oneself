@@ -1,3 +1,56 @@
+server:
+  port: 8080
+#   随机端口
+#  port: ${random.int[2000,8000]}
+#debug: true
+
+logging:
+  file:
+    path: ./logs
+
+################### Mybatis config ###################
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.quan.*.entity
+
+################### Spring config begin ###################
 spring:
   application:
     name: force-demo
+  ################### Security config ###################
+  security:
+    user:
+      name: root
+      password: root
+      roles: admin
+  ################### Datasource config ###################
+  datasource:
+    username: root
+    password: ENC(h0FuKCIDDxtJDagwvCWZPg==)
+    url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  ################### Jackson config ###################
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+  ################# Redis config #################
+  redis:
+    host: 120.76.175.67
+    port: 6379
+    database: 0
+    #    password: ENC(rif+QPIsBzSVxyXJWRoCohI5cQpZE+a9)
+    timeout: 1000
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 10
+        min-idle: 0
+        max-wait: -1
+
+################### Spring config end ###################
+jasypt:
+  encryptor:
+    password: jasypt
+    # 加密算法设置 3.0.0 以后
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
