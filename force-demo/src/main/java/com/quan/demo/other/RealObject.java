@@ -1,4 +1,4 @@
-package com.quan.demo;
+package com.quan.demo.other;
 
 /**
  * @Description:

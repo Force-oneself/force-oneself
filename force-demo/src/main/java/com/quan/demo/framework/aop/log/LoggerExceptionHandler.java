@@ -1,6 +1,6 @@
 package com.quan.demo.framework.aop.log;
 
-import com.quan.demo.framework.common.bean.ResultBean;
+import com.quan.common.bean.R;
 import org.springframework.lang.Nullable;
 
 /**
@@ -23,5 +23,5 @@ public interface LoggerExceptionHandler<T> {
      * @return web统一返回的Bean对象
      */
     @Nullable
-    ResultBean<?> handle(Throwable e);
+    R<?> handle(Throwable e);
 }

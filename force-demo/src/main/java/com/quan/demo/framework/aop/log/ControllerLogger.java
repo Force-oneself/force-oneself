@@ -1,6 +1,6 @@
 package com.quan.demo.framework.aop.log;
 
-import com.quan.demo.framework.common.bean.ResultBean;
+import com.quan.common.bean.R;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -47,9 +47,9 @@ public class ControllerLogger {
     @Around("controllerLog()")
     public Object handlerControllerMethod(ProceedingJoinPoint pjp) {
         long startTime = System.currentTimeMillis();
-        ResultBean<?> result;
+        R<?> result;
         try {
-            result = (ResultBean) pjp.proceed();
+            result = (R) pjp.proceed();
             log.info("{} cost time: {}", pjp.getSignature(), (System.currentTimeMillis() - startTime));
         } catch (Throwable e) {
             result = handlerException(pjp, e);
@@ -64,16 +64,16 @@ public class ControllerLogger {
      * @param e
      * @return 统一bean
      */
-    private ResultBean<?> handlerException(ProceedingJoinPoint pjp, Throwable e) {
+    private R<?> handlerException(ProceedingJoinPoint pjp, Throwable e) {
         log.error(pjp.getSignature() + " error ", e);
-        List<ResultBean> resultBeans = handlers.stream()
+        List<R> resultBeans = handlers.stream()
                 .filter(handler -> handler.getExceptionClass() == e.getClass())
                 .map(handler -> handler.handle(e))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         if (resultBeans.isEmpty()) {
             //TODO 未知的异常，应该格外注意，可以发送邮件通知等
-            return new ResultBean(e);
+            return new R(e);
         }
         return resultBeans.get(0);
     }

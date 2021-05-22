@@ -1,6 +1,6 @@
 package com.quan.demo.framework.aop.log;
 
-import com.quan.demo.framework.common.bean.ResultBean;
+import com.quan.common.bean.R;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class DefaultLoggerExceptionHandler implements LoggerExceptionHandler<NullPointerException>{
 
     @Override
-    public ResultBean<?> handle(Throwable e) {
+    public R<?> handle(Throwable e) {
 
         return null;
     }

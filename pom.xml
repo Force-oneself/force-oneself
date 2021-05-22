@@ -13,7 +13,7 @@
 
     <groupId>com.quan</groupId>
     <artifactId>spring-water</artifactId>
-    <version>${force.version}</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -22,10 +22,5 @@
         <module>force-algorithm</module>
         <module>force-pattern</module>
     </modules>
-
-    <properties>
-        <force.version>1.0-SNAPSHOT</force.version>
-    </properties>
-
 
 </project>
