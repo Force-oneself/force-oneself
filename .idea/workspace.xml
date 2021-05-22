@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e48b6d78-6698-4a22-b552-1124fa9e83f4" name="Default Changelist" comment="结构调整" />
+    <list default="true" id="e48b6d78-6698-4a22-b552-1124fa9e83f4" name="Default Changelist" comment="结构调整">
+      <change afterPath="$PROJECT_DIR$/force-common/src/main/java/com/quan/common/CommonApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/force-common/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-water.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-water.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,6 +85,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.39425287" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+    <property name="show.run.dashboard.notification" value="false" />
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
