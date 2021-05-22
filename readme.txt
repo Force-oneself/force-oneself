@@ -1,0 +1,1 @@
+This is a small piece of code I usually write.
