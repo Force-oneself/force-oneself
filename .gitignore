@@ -1,1 +1,1 @@
-# maven #/target/.mvnlogs# windows #Thumbs.db# Mac #.DS_Store# eclipse #.settings.project.classpath*.log*.class# idea #*/.idea/*/*.iml# Package Files #*.jar*.war*.ear/target
+##ignore this file##.idea/target/*.log*.logs/logs/*.iml.classpath.project.settings ##filter databfile、sln file##*.mdb*.ldb*.sln##class file##*.com*.class*.dll*.exe*.o*.so# compression file*.7z*.dmg*.gz*.iso*.jar*.rar*.tar*.zip*.via*.tmp*.err# OS generated files #.DS_Store.DS_Store?._*.Spotlight-V100.TrashesIcon?ehthumbs.dbThumbs.db
