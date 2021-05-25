@@ -1,5 +1,6 @@
-package com.quan.demo.framework.spring.xml;
+package com.quan.demo.framework.spring;
 
+import com.quan.demo.framework.spring.xml.BeanConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -11,7 +12,6 @@ public class SpringDemo {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext acac = new AnnotationConfigApplicationContext(BeanConfig.class);
-        SpringBeanExpandLifecycle bean = acac.getBean("springBeanExpandLifecycle", SpringBeanExpandLifecycle.class);
-        System.err.println(bean);
+        acac.getBeanFactory().getBeanNamesIterator().forEachRemaining(System.out::println);
     }
 }
