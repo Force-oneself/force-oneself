@@ -1,0 +1,26 @@
+[
+  {
+    "role": 0,
+    "beanClass": "com.quan.demo.framework.spring.xml.SpringBeanExpandLifecycle",
+    "dependencyCheck": 0,
+    "autowireMode": 0,
+    "qualifiers": [],
+    "methodOverrides": {
+      "overrides": []
+    },
+    "lenientConstructorResolution": true,
+    "nonPublicAccessAllowed": true,
+    "synthetic": false,
+    "lazyInit": false,
+    "enforceInitMethod": true,
+    "scope": "",
+    "autowireCandidate": true,
+    "constructorArgumentValues": {
+      "indexedArgumentValues": {},
+      "genericArgumentValues": []
+    },
+    "propertyValues": [],
+    "primary": false,
+    "enforceDestroyMethod": true
+  }
+]
