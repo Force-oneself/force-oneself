@@ -1,4 +1,4 @@
-package com.quan.demo.framework.spring;
+package com.quan.demo.framework.spring.config;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
@@ -15,13 +15,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * @Date 2021-05-27
  **/
 @Configuration(proxyBeanMethods = false)
-@EnableTransactionManagement
-@EnableAspectJAutoProxy
-@EnableWebSecurity
-@EnableScheduling
-@EnableCaching
-@EnableWebMvc
-@EnableAsync
+//@EnableTransactionManagement
+//@EnableAspectJAutoProxy
+//@EnableWebSecurity
+//@EnableScheduling
+//@EnableCaching
+//@EnableWebMvc
+//@EnableAsync
 public class EnableConfig {
 
 }

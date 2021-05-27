@@ -26,7 +26,7 @@ public class RedissonLogBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (bean instanceof RedissonClient) {
             ProxyFactory proxyFactory = new ProxyFactory(bean);
-            proxyFactory.setProxyTargetClass(false);
+            proxyFactory.setProxyTargetClass(true);
             proxyFactory.addAdvice(new MethodBeforeAdviceInterceptor(
                     (method, args, target) -> log.info("redisson exec method: {}, args: {}", method.getName(),
                             JSON.toJSONString(args, SerializerFeature.PrettyFormat))));

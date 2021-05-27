@@ -17,6 +17,7 @@
         <mybatis-boot.version>2.1.4</mybatis-boot.version>
         <druid-boot.version>1.2.5</druid-boot.version>
         <fastjson.version>1.2.75</fastjson.version>
+        <redisson-boot.version>3.13.3</redisson-boot.version>
     </properties>
     <dependencies>
         <dependency>
@@ -38,6 +39,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>${redisson-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
