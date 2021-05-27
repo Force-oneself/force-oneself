@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Force-oneself
  */
 @SpringBootApplication
-@EnableAspectJAutoProxy
 public class DemoApplication {
 
     public static void main(String[] args) {
