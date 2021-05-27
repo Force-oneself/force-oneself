@@ -1,7 +1,8 @@
 package com.quan.demo.framework.spring.reader;
 
 
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.support.AbstractBeanDefinitionReader;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.beans.factory.support.MethodOverrides;
 import org.springframework.context.annotation.AnnotationBeanNameGenerator;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.core.io.Resource;
@@ -21,9 +23,11 @@ import org.springframework.util.StreamUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -49,7 +53,7 @@ public class JsonBeanDefinitionReader extends AbstractBeanDefinitionReader {
         // 以下照抄xmlbeanDefintionReader开始
         Set<EncodedResource> currentResources = this.resourcesCurrentlyBeingLoaded.get();
         if (currentResources == null) {
-            currentResources = new HashSet<EncodedResource>(4);
+            currentResources = new HashSet<>(4);
             this.resourcesCurrentlyBeingLoaded.set(currentResources);
         }
 
@@ -64,7 +68,7 @@ public class JsonBeanDefinitionReader extends AbstractBeanDefinitionReader {
         //这里的encodedResource.getResource()就是我们的json文件，这里通过spring core里面的一个工具类读取为InputStream
         String json = null;
         try (InputStream inputStream = encodedResource.getResource().getInputStream()) {
-            json = StreamUtils.copyToString(inputStream, Charset.forName("UTF-8"));
+            json = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
         } catch (IOException e) {
             log.error("{}", e);
             return 0;
@@ -76,13 +80,14 @@ public class JsonBeanDefinitionReader extends AbstractBeanDefinitionReader {
         }
 
         //熟悉的fastjson，熟悉的味道
-        List<GenericBeanDefinition> list = JSON.parseArray(json, GenericBeanDefinition.class);
+        List<GenericBeanDefinition> list = JSONUtil.toList(json, GenericBeanDefinition.class);
         if (CollectionUtils.isEmpty(list)) {
             return 0;
         }
 
         /**
-         * 1：因为GenericBeanDefinition，只有setBeanClassName，所以bean反序列化时，只序列化了这个字		* 段；实际我们知道，beanClass很重要，所以我们只能自己处理一下了
+         * 1：因为GenericBeanDefinition，只有setBeanClassName，所以bean反序列化时，只序列化了这个字
+         * 段；实际我们知道，beanClass很重要，所以我们只能自己处理一下了
          * 2：第二个问题，我们在下面解释
          **/
         for (GenericBeanDefinition genericBeanDefinition : list) {
@@ -93,10 +98,11 @@ public class JsonBeanDefinitionReader extends AbstractBeanDefinitionReader {
             try {
                 clazz = Thread.currentThread().getContextClassLoader().loadClass(genericBeanDefinition.getBeanClassName());
             } catch (ClassNotFoundException e) {
-                log.error("bean class cant be load for beandefinition: {}", genericBeanDefinition);
+                log.error("bean class cant be load for beanDefinition: {}", genericBeanDefinition);
                 throw new RuntimeException();
             }
-
+            genericBeanDefinition.setMethodOverrides(Objects.isNull(genericBeanDefinition.getMethodOverrides())
+                    ? new MethodOverrides() : genericBeanDefinition.getMethodOverrides());
             genericBeanDefinition.setBeanClass(clazz);
 
             /**
@@ -135,4 +141,6 @@ public class JsonBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
         return list.size();
     }
+
+
 }
