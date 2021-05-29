@@ -1,7 +1,6 @@
 package com.quan.demo.framework.spring.processor.log;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.quan.demo.framework.spring.utils.Objs;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.aop.framework.ProxyFactory;
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Component;
 @ConditionalOnClass(RedissonClient.class)
 @Slf4j
 public class RedissonLogBeanPostProcessor implements BeanPostProcessor {
-    
+
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (bean instanceof RedissonClient) {
@@ -29,10 +28,9 @@ public class RedissonLogBeanPostProcessor implements BeanPostProcessor {
             proxyFactory.setProxyTargetClass(true);
             proxyFactory.addAdvice(new MethodBeforeAdviceInterceptor(
                     (method, args, target) -> log.info("redisson exec method: {}, args: {}", method.getName(),
-                            JSON.toJSONString(args, SerializerFeature.PrettyFormat))));
+                            Objs.prettyPrint(args))));
             proxyFactory.addAdvice(new AfterReturningAdviceInterceptor(
-                    (retval, method, args, invo) -> log.info("redisson return : {}",
-                            JSON.toJSONString(retval, SerializerFeature.PrettyFormat))));
+                    (retval, method, args, invo) -> log.info("redisson return : {}", Objs.prettyPrint(retval))));
             return proxyFactory.getProxy();
         }
         return bean;

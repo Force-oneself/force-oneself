@@ -46,7 +46,6 @@ spring:
         max-idle: 10
         min-idle: 0
         max-wait: -1
-
 ################### Spring config end ###################
 jasypt:
   encryptor:

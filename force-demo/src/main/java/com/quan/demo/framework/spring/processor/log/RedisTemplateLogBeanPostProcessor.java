@@ -1,11 +1,11 @@
 package com.quan.demo.framework.spring.processor.log;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.quan.demo.framework.spring.utils.Objs;
 import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.aop.framework.adapter.AfterReturningAdviceInterceptor;
 import org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -56,7 +56,9 @@ public class RedisTemplateLogBeanPostProcessor implements BeanPostProcessor {
         adviceProxy.setProxyTargetClass(false);
         adviceProxy.addAdvice(new MethodBeforeAdviceInterceptor(
                 (method, args, target) -> log.info("redisTemplate exec method: {}, args: {}", method.getName(),
-                        JSON.toJSONString(args, SerializerFeature.PrettyFormat))));
+                        Objs.prettyPrint(args))));
+        adviceProxy.addAdvice(new AfterReturningAdviceInterceptor(
+                (retval, method, args, invo) -> log.info("redisson return : {}", Objs.prettyPrint(args))));
         return adviceProxy.getProxy();
     }
 

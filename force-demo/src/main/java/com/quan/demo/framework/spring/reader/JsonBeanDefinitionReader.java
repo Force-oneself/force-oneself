@@ -1,13 +1,10 @@
 package com.quan.demo.framework.spring.reader;
 
 
-import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
-import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinitionReader;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -22,7 +19,6 @@ import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.List;
@@ -120,11 +116,11 @@ public class JsonBeanDefinitionReader extends AbstractBeanDefinitionReader {
             }
             for (ConstructorArgumentValues.ValueHolder valueHolder : map.values()) {
                 Object value = valueHolder.getValue();
-                if (value instanceof JSONObject) {
-                    JSONObject jsonObject = (JSONObject) value;
-                    RuntimeBeanReference runtimeBeanReference = jsonObject.toJavaObject(RuntimeBeanReference.class);
-                    valueHolder.setValue(runtimeBeanReference);
-                }
+//                if (value instanceof JSONObject) {
+//                    JSONObject jsonObject = (JSONObject) value;
+//                    RuntimeBeanReference runtimeBeanReference = jsonObject.toJavaObject(RuntimeBeanReference.class);
+//                    valueHolder.setValue(runtimeBeanReference);
+//                }
             }
         }
 
