@@ -3,8 +3,6 @@ package com.quan.demo.framework.spring;
 import cn.hutool.json.JSONUtil;
 import com.quan.demo.framework.spring.context.ClassPathJsonApplicationContext;
 import com.quan.demo.framework.spring.xml.BeanConfig;
-import com.quan.demo.framework.spring.xml.SpringBeanExpandLifecycle;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
@@ -53,4 +51,5 @@ public class SpringDemo {
                 .map(JSONUtil::toJsonStr)
                 .forEach(System.out::println);
     }
+
 }
