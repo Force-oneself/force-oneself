@@ -14,7 +14,7 @@
     <properties>
         <java.version>1.8</java.version>
         <es.version>7.4.2</es.version>
-        <shardingsphere-boot.version>4.1.1</shardingsphere-boot.version>
+        <shardingsphere-boot.version>5.0.0-alpha</shardingsphere-boot.version>
     </properties>
     <dependencies>
         <dependency>
@@ -22,13 +22,11 @@
             <artifactId>force-common</artifactId>
             <version>${parent.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.shardingsphere/sharding-jdbc-spring-boot-starter -->
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+            <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
             <version>${shardingsphere-boot.version}</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-high-level-client -->
         <dependency>
             <groupId>org.elasticsearch.client</groupId>

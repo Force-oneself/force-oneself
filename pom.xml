@@ -19,6 +19,7 @@
     <modules>
         <module>force-common</module>
         <module>force-demo</module>
+        <module>force-framework</module>
         <module>force-algorithm</module>
         <module>force-pattern</module>
     </modules>
