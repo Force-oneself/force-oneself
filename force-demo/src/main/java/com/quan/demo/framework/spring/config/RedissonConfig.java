@@ -20,7 +20,7 @@ import java.util.Objects;
  * @Author Force丶Oneself
  * @Date 2021-05-27
  **/
-@Configuration
+//@Configuration
 @ConditionalOnMissingBean(RedissonClient.class)
 @EnableConfigurationProperties(RedissonProperties.class)
 public class RedissonConfig {
