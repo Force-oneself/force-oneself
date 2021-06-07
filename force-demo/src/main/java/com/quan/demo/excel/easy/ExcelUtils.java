@@ -18,6 +18,6 @@ public class ExcelUtils extends EasyExcel {
 
     public static <T> ExcelReaderBuilder read(InputStream inputStream, Class<T> head,
                                               BiConsumer<List<T>, AnalysisContext> consumer) {
-        return read(inputStream, head, new BatchableListener<T>(() -> consumer));
+        return read(inputStream, head, new BatchableListener<>(new BatchableBuilder<T>().batch(consumer)));
     }
 }
