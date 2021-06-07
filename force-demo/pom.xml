@@ -24,6 +24,11 @@
             <artifactId>netty-all</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.2.6</version>
+        </dependency>
+        <dependency>
             <groupId>com.quan</groupId>
             <artifactId>force-common</artifactId>
             <version>${parent.version}</version>
