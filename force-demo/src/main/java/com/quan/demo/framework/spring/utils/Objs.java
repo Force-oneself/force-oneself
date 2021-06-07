@@ -43,9 +43,9 @@ public final class Objs {
         try {
             return MAPPER.writeValueAsString(value);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.error("对象打印失败", e);
+            throw new RuntimeException("对象打印失败", e);
         }
-        return null;
 //        return JSON.toJSONString(value, SerializerFeature.PrettyFormat);
     }
 
