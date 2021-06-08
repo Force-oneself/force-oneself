@@ -3,7 +3,7 @@ package com.quan.demo.excel.constant;
 import com.alibaba.excel.write.metadata.style.WriteCellStyle;
 import com.alibaba.excel.write.metadata.style.WriteFont;
 import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
-import com.quan.demo.excel.strategy.DefaultCustomStrategy;
+import com.quan.demo.excel.strategy.AutoColumnWidthStrategy;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
@@ -32,7 +32,7 @@ public final class DefaultExcelCell {
     /**
      * 默认实现自动列宽策略
      */
-    public static final DefaultCustomStrategy DEFAULT_CUSTOM_STRATEGY = new DefaultCustomStrategy();
+    public static final AutoColumnWidthStrategy DEFAULT_CUSTOM_STRATEGY = new AutoColumnWidthStrategy();
 
     static {
         // 头的策略

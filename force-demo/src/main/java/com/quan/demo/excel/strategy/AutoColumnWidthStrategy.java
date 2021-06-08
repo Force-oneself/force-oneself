@@ -17,7 +17,7 @@ import java.util.Map;
  * @Author heyq
  * @Date 2020-09-25
  **/
-public class DefaultCustomStrategy extends AbstractColumnWidthStyleStrategy {
+public class AutoColumnWidthStrategy extends AbstractColumnWidthStyleStrategy {
 
     private Map<Integer, Map<Integer, Integer>> widthCache = new HashMap<>();
 
@@ -26,11 +26,7 @@ public class DefaultCustomStrategy extends AbstractColumnWidthStyleStrategy {
                                   Integer relativeRowIndex, Boolean isHead) {
         boolean needSetWidth = isHead || !CollectionUtils.isEmpty(cellDataList);
         if (needSetWidth) {
-            Map<Integer, Integer> maxColumnWidthMap = widthCache.get(writeSheetHolder.getSheetNo());
-            if (maxColumnWidthMap == null) {
-                maxColumnWidthMap = new HashMap(16);
-                widthCache.put(writeSheetHolder.getSheetNo(), maxColumnWidthMap);
-            }
+            Map<Integer, Integer> maxColumnWidthMap = widthCache.computeIfAbsent(writeSheetHolder.getSheetNo(), k -> new HashMap(16));
             Integer columnWidth = this.dataLength(cellDataList, cell, isHead);
             if (columnWidth >= 0) {
                 columnWidth = columnWidth <= 255 ? columnWidth : 255;
