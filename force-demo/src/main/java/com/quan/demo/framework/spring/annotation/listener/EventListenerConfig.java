@@ -1,6 +1,5 @@
 package com.quan.demo.framework.spring.annotation.listener;
 
-import com.sun.applet2.preloader.event.ApplicationExitEvent;
 import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.boot.context.event.ApplicationFailedEvent;
@@ -51,11 +50,6 @@ public class EventListenerConfig {
     @EventListener(ApplicationPreparedEvent.class)
     public void prepare() {
         System.err.println("ApplicationPreparedEvent执行");
-    }
-
-    @EventListener(ApplicationExitEvent.class)
-    public void exit() {
-        System.err.println("ApplicationExitEvent执行");
     }
 
     @EventListener(ApplicationContextInitializedEvent.class)
