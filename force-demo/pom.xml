@@ -12,12 +12,14 @@
 
     <name>force-demo</name>
     <description>Demo project for Spring Boot</description>
+
     <properties>
         <java.version>1.8</java.version>
         <mybatis-boot.version>2.1.4</mybatis-boot.version>
         <druid-boot.version>1.2.5</druid-boot.version>
         <redisson-boot.version>3.13.3</redisson-boot.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>io.netty</groupId>

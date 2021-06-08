@@ -42,8 +42,7 @@ spring:
           actual-data-nodes: m$->{1..2}.course_$->{1..2}
           database-strategy:
             inline:
-              ? ''
-                : sharding-column: user_id
+              sharding-column: user_id
               algorithm-expression: m$->{user_id % 2 + 1}
           key-generator:
             column: cid

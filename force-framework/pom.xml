@@ -17,11 +17,7 @@
         <shardingsphere-boot.version>5.0.0-alpha</shardingsphere-boot.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>com.quan</groupId>
-            <artifactId>force-common</artifactId>
-            <version>${parent.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
