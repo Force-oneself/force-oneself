@@ -10,11 +10,11 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
       # 数据源配置
       m1:
-        url: jdbc:mysql://127.0.0.1:3306/sharding_sphere_a?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+        url: jdbc:mysql://120.76.175.67:3306/sharding_1?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
         password: root
         username: root
       m2:
-        url: jdbc:mysql://127.0.0.1:3306/sharding_sphere_b?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+        url: jdbc:mysql://120.76.175.67:3306/sharding_2?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
         password: root
         username: root
     props:
