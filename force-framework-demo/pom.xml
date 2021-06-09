@@ -10,6 +10,7 @@
 
     <modules>
         <module>force-sharding</module>
+        <module>force-elasticsearch</module>
     </modules>
 
     <artifactId>force-framework-demo</artifactId>

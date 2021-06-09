@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: sharding
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver

@@ -1,8 +1,13 @@
-package com.quan.elasticsearch;
+package com.quan.sharding;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+　* @Description ForceShardingApplication.java
+　* @author Force-oneself
+　* @date 2021-06-09 16:03
+　**/
 @SpringBootApplication
 public class ForceShardingApplication {
 

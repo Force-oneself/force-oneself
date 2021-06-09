@@ -3,64 +3,20 @@ spring:
     allow-bean-definition-overriding: true
   shardingsphere:
     datasource:
-      m0:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        password: root
+      names: m1,m2
+      # 数据源通用配置
+      common:
         type: com.alibaba.druid.pool.DruidDataSource
-        url: jdbc:mysql://localhost:3306/user_db?serverTimezone=GMT%2B8
-        username: root
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      # 数据源配置
       m1:
-        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/sharding_sphere_a?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
         password: root
-        type: com.alibaba.druid.pool.DruidDataSource
-        url: jdbc:mysql://localhost:3306/edu_db_1?serverTimezone=GMT%2B8
         username: root
       m2:
-        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/sharding_sphere_b?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
         password: root
-        type: com.alibaba.druid.pool.DruidDataSource
-        url: jdbc:mysql://localhost:3306/edu_db_2?serverTimezone=GMT%2B8
-        username: root
-      names: m1,m2,m0,s0
-      s0:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        password: root
-        type: com.alibaba.druid.pool.DruidDataSource
-        url: jdbc:mysql://localhost:3307/user_db?serverTimezone=GMT%2B8
         username: root
     props:
       sql:
         show: true
-    sharding:
-      broadcast-tables: t_udict
-      master-slave-rules:
-        ds0:
-          master-data-source-name: m0
-          slave-data-source-names: s0
-      tables:
-        course:
-          actual-data-nodes: m$->{1..2}.course_$->{1..2}
-          database-strategy:
-            inline:
-              sharding-column: user_id
-              algorithm-expression: m$->{user_id % 2 + 1}
-          key-generator:
-            column: cid
-            type: SNOWFLAKE
-          table-strategy:
-            inline:
-              algorithm-expression: course_$->{cid % 2 + 1}
-              sharding-column: cid
-        t_udict:
-          key-generator:
-            column: dictid
-            type: SNOWFLAKE
-        t_user:
-          actual-data-nodes: ds0.t_user
-          key-generator:
-            column: user_id
-            type: SNOWFLAKE
-          table-strategy:
-            inline:
-              algorithm-expression: t_user
-              sharding-column: user_id
