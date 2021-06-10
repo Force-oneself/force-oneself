@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://admin:root@120.76.175.67:27017/admin
+      auto-index-creation: true
