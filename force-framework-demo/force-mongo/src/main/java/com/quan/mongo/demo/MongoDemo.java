@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,7 +26,13 @@ public class MongoDemo {
 
     public void test() {
         IdWorker idWorker = new IdWorker();
-        mongoTemplate.insert(new MongoTest(idWorker.nextId(), "Peter" + idWorker.nextId(), 34));
+        mongoTemplate.insert(new MongoTest(idWorker.nextId(), "Peter" + idWorker.nextId(), 34, "篮球", "null"));
+    }
+
+
+    public void find() {
+        Query query = new Query();
+        mongoTemplate.find(query, MongoTest.class);
     }
 
     @Data
@@ -41,5 +48,11 @@ public class MongoDemo {
 
         @Field("age")
         private Integer age;
+
+        @Field("hobby")
+        private String hobby;
+
+        @Field("_class")
+        private String _class;
     }
 }
