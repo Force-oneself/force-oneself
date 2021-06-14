@@ -5,6 +5,7 @@ package com.quan.common.data.structures.graph.cus;
  * @Description AdjacencyListGraph.java
  * @date 2021-06-10
  */
-public interface AdjacencyListGraph<E extends Comparable<E>> extends Graph<E> {
+public interface AdjacencyListGraph<V, E extends Comparable<E>> extends Graph<V, E> {
+
 
 }
