@@ -66,12 +66,27 @@ public class AdjacencyList<T extends Comparable<T>> {
         return vertices.stream().filter(v -> from.compareTo(v.getData()) == 0).findAny().orElse(null);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Vertex v : vertices) {
+            sb.append(v.getData());
+            sb.append("->");
+            for (Vertex v2 : v.adjacentVertices) {
+                sb.append(v2.getData());
+                sb.append("->");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     /**
      * @Description 顶点
      * @Author Force-oneself
      * @Date 2021-06-10 21:14
      **/
-    private class Vertex {
+    public class Vertex {
         private final T data;
         private final List<Vertex> adjacentVertices;
 
@@ -104,6 +119,9 @@ public class AdjacencyList<T extends Comparable<T>> {
             return data;
         }
 
+        public List<Vertex> getAdjacentVertices() {
+            return adjacentVertices;
+        }
     }
 
 }

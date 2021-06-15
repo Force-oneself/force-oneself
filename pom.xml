@@ -15,7 +15,6 @@
         <module>force-framework</module>
         <module>force-algorithm</module>
         <module>force-pattern</module>
-        <module>force-framework-demo</module>
     </modules>
 
     <properties>
@@ -28,6 +27,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
         <!-- 配置隐秘信息加密 -->
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>

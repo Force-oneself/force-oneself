@@ -3,36 +3,32 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>force-to-live</artifactId>
+        <artifactId>force-framework</artifactId>
         <groupId>com.quan</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <modules>
-        <module>force-sharding</module>
-        <module>force-elasticsearch</module>
-        <module>force-mongo</module>
-        <module>force-redis</module>
-    </modules>
-
-    <artifactId>force-framework</artifactId>
-    <name>force-framework-demo</name>
-    <description>框架代码演示模块的内容放入此工程中</description>
-    <packaging>pom</packaging>
+    <artifactId>force-redis</artifactId>
+    <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
+        <redisson-boot.version>3.13.3</redisson-boot.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>${redisson-boot.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.quan</groupId>
-            <artifactId>force-common</artifactId>
-            <version>${version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
         </dependency>
     </dependencies>
 

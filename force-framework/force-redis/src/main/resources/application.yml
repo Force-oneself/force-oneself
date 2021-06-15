@@ -1,0 +1,9 @@
+
+spring:
+  application:
+    name: force-redis
+  redis:
+    host: 120.76.175.67
+    port: 6379
+    database: 0
+    #    password: ENC(rif+QPIsBzSVxyXJWRoCohI5cQpZE+a9)

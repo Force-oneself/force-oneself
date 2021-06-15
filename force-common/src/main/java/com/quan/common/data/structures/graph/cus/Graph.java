@@ -1,5 +1,7 @@
 package com.quan.common.data.structures.graph.cus;
 
+import java.util.Collection;
+
 /**
  * @author Force-oneself
  * @Description Graph.java
@@ -10,20 +12,18 @@ public interface Graph<V, E> {
     /**
      * 添加一条边
      *
-     * @param from 出度顶点
-     * @param to 入度顶点
+     * @param edge 新增的边
      * @return 成功结果
      */
-    boolean addEdge(V from, V to);
+    boolean addEdge(E edge);
 
     /**
      * 删除一条边
      *
-     * @param from 出度顶点
-     * @param to 入度顶点
+     * @param edge 需要删除的边
      * @return 成功结果
      */
-    boolean removeEdge(V from, V to);
+    boolean removeEdge(E edge);
 
     /**
      * 添加顶点
@@ -41,4 +41,31 @@ public interface Graph<V, E> {
      */
     boolean removeVertex(V v);
 
+    /**
+     * 顶点数量
+     *
+     * @return 顶点数
+     */
+    int vertexSize();
+
+    /**
+     * 边的数量
+     *
+     * @return 边数量
+     */
+    int edgeSize();
+
+    /**
+     * 获取顶点集合
+     *
+     * @return 全部顶点
+     */
+    Collection<V> getVertexes();
+
+    /**
+     * 获取边集合
+     *
+     * @return 全部边
+     */
+    Collection<E> getEdges();
 }
