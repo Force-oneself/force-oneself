@@ -1,4 +1,4 @@
-package com.quan.redis.redisson.graph;
+package com.quan.framework.redis.redisson.graph;
 
 import com.quan.common.data.structures.graph.AdjacencyList;
 import org.redisson.api.RedissonClient;

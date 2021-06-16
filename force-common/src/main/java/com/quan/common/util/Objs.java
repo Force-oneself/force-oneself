@@ -1,13 +1,10 @@
-package com.quan.demo.framework.spring.utils;
+package com.quan.common.util;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import lombok.extern.slf4j.Slf4j;
 
 import java.text.SimpleDateFormat;
 
@@ -16,13 +13,15 @@ import java.text.SimpleDateFormat;
  * @Author Force丶Oneself
  * @Date 2021-05-28
  **/
-@Slf4j
-public final class Objs {
+public class Objs {
 
-    public final static ObjectMapper MAPPER;
+    public final static ObjectMapper MAPPER = new ObjectMapper();
 
     static {
-        MAPPER = new ObjectMapper();
+        initMapper();
+    }
+
+    private static void initMapper() {
         // 忽略大小写
         MAPPER.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
         // 取消默认转换timestamps
@@ -39,14 +38,20 @@ public final class Objs {
         MAPPER.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
     }
 
+    /**
+     * 格式化打印对象,主要用作代码日志
+     * 注意：jackson中存在bug, 打印循环依赖的对象时会StackOverflowError
+     * 解决方案：自己百度加注解解决，打印框架里的对象时，无解需要自己排除
+     *
+     * @param value 格式化对象
+     * @return 格式化后json字符
+     */
     public static String prettyPrint(Object value) {
         try {
             return MAPPER.writeValueAsString(value);
         } catch (JsonProcessingException e) {
-            log.error("对象打印失败", e);
+            return "{ \"error\": \"JsonProcessingException\" }";
         }
-        return "null";
-//        return JSON.toJSONString(value, SerializerFeature.PrettyFormat);
     }
 
     private Objs() {

@@ -1,4 +1,4 @@
-package com.quan.mongo.demo;
+package com.quan.framework.mongo.demo;
 
 import com.quan.common.util.IdWorker;
 import lombok.AllArgsConstructor;

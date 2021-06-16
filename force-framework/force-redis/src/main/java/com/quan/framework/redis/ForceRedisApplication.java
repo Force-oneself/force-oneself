@@ -1,18 +1,18 @@
-package com.quan.sharding;
+package com.quan.framework.redis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
-　* @Description ForceShardingApplication.java
+　* @Description ForceRedisApplication.java
 　* @author Force-oneself
-　* @date 2021-06-09 16:03
+　* @date 2021-06-09 9:46
 　**/
 @SpringBootApplication
-public class ForceShardingApplication {
+public class ForceRedisApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ForceShardingApplication.class, args);
+        SpringApplication.run(ForceRedisApplication.class, args);
     }
 
 }

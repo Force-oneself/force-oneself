@@ -1,6 +1,6 @@
-package com.quan.demo.framework.spring.processor.log;
+package com.quan.framework.redis.log.processor;
 
-import com.quan.demo.framework.spring.utils.Objs;
+import com.quan.common.util.Objs;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.aop.framework.ProxyFactory;

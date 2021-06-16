@@ -1,4 +1,4 @@
-package com.quan.mongo;
+package com.quan.framework.mongo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

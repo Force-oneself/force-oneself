@@ -1,7 +1,5 @@
 package com.quan.common.util;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +12,6 @@ import java.util.stream.Collectors;
  * @Author heyq
  * @Date 2021-01-03
  **/
-@Slf4j
 public final class IOUtils {
 
     /**

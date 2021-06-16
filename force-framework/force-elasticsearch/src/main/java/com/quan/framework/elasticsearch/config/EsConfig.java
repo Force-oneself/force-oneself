@@ -1,4 +1,4 @@
-package com.quan.redis.config;
+package com.quan.framework.elasticsearch.config;
 
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;

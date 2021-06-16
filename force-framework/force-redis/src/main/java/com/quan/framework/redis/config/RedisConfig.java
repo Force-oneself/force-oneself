@@ -1,4 +1,4 @@
-package com.quan.redis.config;
+package com.quan.framework.redis.config;
 
 import org.springframework.context.annotation.Configuration;
 

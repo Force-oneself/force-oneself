@@ -1,7 +1,5 @@
 package com.quan.common.util;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -10,7 +8,6 @@ import java.io.ObjectOutputStream;
 /**
  * @author Force-oneself
  */
-@Slf4j
 public final class SerializeUtils {
 
     /**
@@ -25,7 +22,6 @@ public final class SerializeUtils {
             oos.writeObject(object);
             return bas.toByteArray();
         } catch (Exception e) {
-            log.error("序列化失败", e);
         }
         return null;
     }
@@ -41,7 +37,6 @@ public final class SerializeUtils {
             // 反序列化
             return new ObjectInputStream(bas).readObject();
         } catch (Exception e) {
-            log.error("反序列化失败", e);
         }
         return null;
     }
