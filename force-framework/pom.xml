@@ -13,10 +13,11 @@
         <module>force-elasticsearch</module>
         <module>force-mongo</module>
         <module>force-redis</module>
+        <module>force-spring</module>
     </modules>
 
     <artifactId>force-framework</artifactId>
-    <name>force-framework-demo</name>
+    <name>force-framework</name>
     <description>框架代码演示模块的内容放入此工程中</description>
     <packaging>pom</packaging>
 
