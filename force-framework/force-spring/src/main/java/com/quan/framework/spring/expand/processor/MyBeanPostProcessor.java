@@ -1,4 +1,4 @@
-package com.quan.framework.spring.xml;
+package com.quan.framework.spring.expand.processor;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

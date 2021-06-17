@@ -1,4 +1,4 @@
-package com.quan.framework.spring.xml;
+package com.quan.framework.spring.expand.processor;
 
 import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
 import org.springframework.beans.factory.support.RootBeanDefinition;

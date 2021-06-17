@@ -1,8 +1,8 @@
-package com.quan.framework.spring.demo;
+package com.quan.framework.spring.expand.json.demo;
 
 import cn.hutool.json.JSONUtil;
-import com.quan.framework.spring.context.ClassPathJsonApplicationContext;
-import com.quan.framework.spring.xml.BeanConfig;
+import com.quan.framework.spring.expand.json.context.ClassPathJsonApplicationContext;
+import com.quan.framework.spring.expand.processor.BeanConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;

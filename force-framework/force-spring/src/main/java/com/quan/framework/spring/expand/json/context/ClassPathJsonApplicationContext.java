@@ -1,6 +1,6 @@
-package com.quan.framework.spring.context;
+package com.quan.framework.spring.expand.json.context;
 
-import com.quan.framework.spring.reader.JsonBeanDefinitionReader;
+import com.quan.framework.spring.expand.json.reader.JsonBeanDefinitionReader;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;

@@ -1,4 +1,4 @@
-package com.quan.framework.spring.listener;
+package com.quan.framework.spring.expand.listener;
 
 import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
