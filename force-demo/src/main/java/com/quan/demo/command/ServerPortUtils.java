@@ -18,7 +18,7 @@ public class ServerPortUtils {
         Random random = new Random();
 
         int port = random.nextInt(max) % (max - min + 1) + min;
-        return NetUtils.isLoclePortUsing(port) ? getAvailablePort() : port;
+        return NetUtils.isLocalePortUsing(port) ? getAvailablePort() : port;
     }
 
 }

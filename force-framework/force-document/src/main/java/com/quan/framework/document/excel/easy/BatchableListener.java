@@ -1,4 +1,4 @@
-package com.quan.demo.excel.easy;
+package com.quan.framework.document.excel.easy;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
@@ -9,8 +9,6 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.BiConsumer;
-import java.util.function.BinaryOperator;
 
 /**
  * @Description: 可实现批量处理的监听器

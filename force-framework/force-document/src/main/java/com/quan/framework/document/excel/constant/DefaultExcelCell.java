@@ -1,9 +1,9 @@
-package com.quan.demo.excel.constant;
+package com.quan.framework.document.excel.constant;
 
 import com.alibaba.excel.write.metadata.style.WriteCellStyle;
 import com.alibaba.excel.write.metadata.style.WriteFont;
 import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
-import com.quan.demo.excel.strategy.AutoColumnWidthStrategy;
+import com.quan.framework.document.excel.strategy.AutoColumnWidthStrategy;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;

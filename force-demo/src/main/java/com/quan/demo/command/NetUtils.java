@@ -15,7 +15,7 @@ import java.net.UnknownHostException;
 @Slf4j
 public class NetUtils {
 
-    public static boolean isLoclePortUsing(int port) {
+    public static boolean isLocalePortUsing(int port) {
         boolean flag = true;
         try {
             flag = isPortUsing("127.0.0.1", port);

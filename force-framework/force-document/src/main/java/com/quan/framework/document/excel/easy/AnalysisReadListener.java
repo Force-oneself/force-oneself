@@ -1,4 +1,4 @@
-package com.quan.demo.excel.easy;
+package com.quan.framework.document.excel.easy;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.metadata.CellData;

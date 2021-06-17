@@ -1,7 +1,7 @@
-package com.quan.demo.excel;
+package com.quan.framework.document.excel;
 
 import com.alibaba.excel.EasyExcel;
-import com.quan.demo.excel.constant.DefaultExcelCell;
+import com.quan.framework.document.excel.constant.DefaultExcelCell;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletOutputStream;

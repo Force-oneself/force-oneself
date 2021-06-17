@@ -1,4 +1,4 @@
-package com.quan.demo.excel;
+package com.quan.framework.document.excel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;

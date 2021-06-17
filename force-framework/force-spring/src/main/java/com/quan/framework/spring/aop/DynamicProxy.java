@@ -1,4 +1,4 @@
-package com.quan.demo.proxy;
+package com.quan.framework.spring.aop;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
