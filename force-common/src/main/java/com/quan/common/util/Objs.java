@@ -6,7 +6,18 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Constructor;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * @Description: class Objs
@@ -16,6 +27,9 @@ import java.text.SimpleDateFormat;
 public class Objs {
 
     public final static ObjectMapper MAPPER = new ObjectMapper();
+
+    private Objs() {
+    }
 
     static {
         initMapper();
@@ -50,11 +64,135 @@ public class Objs {
         try {
             return MAPPER.writeValueAsString(value);
         } catch (JsonProcessingException e) {
-            return "{ \"error\": \"JsonProcessingException\" }";
+            return "{ \"error\": \"" + e.getMessage() + "\" }";
         }
     }
 
-    private Objs() {
+    /**
+     * 序列化
+     *
+     * @param object 对象
+     * @return 字节数组
+     */
+    public static byte[] serialize(Object object) {
+        try (ByteArrayOutputStream bas = new ByteArrayOutputStream();
+             ObjectOutputStream oos = new ObjectOutputStream(bas)) {
+            // 序列化
+            oos.writeObject(object);
+            return bas.toByteArray();
+        } catch (Exception e) {
+            throw new RuntimeException("序列化失败", e);
+        }
     }
 
+    /**
+     * 反序列化
+     *
+     * @param bytes 字节数组
+     * @return 对象
+     */
+    public static Object universalize(byte[] bytes) {
+        try (ByteArrayInputStream bas = new ByteArrayInputStream(bytes)) {
+            // 反序列化
+            return new ObjectInputStream(bas).readObject();
+        } catch (Exception e) {
+            throw new RuntimeException("反序列化失败", e);
+        }
+    }
+
+    /**
+     * 获取目录下符合条件的文件
+     *
+     * @param file   目录路径
+     * @param filter 过滤条件
+     * @return 符合条件的文件集合
+     */
+    public static List<File> matchFiles(File file, Predicate<File> filter) {
+        return Arrays.stream(Objects.requireNonNull(file.listFiles(File::isFile)))
+                .filter(filter)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 获取目录下符合后缀式的文件
+     *
+     * @param file     目录路径
+     * @param endsWith 后缀式字符
+     * @return 符合后缀式的文件集合
+     */
+    public static List<File> endsWithFiles(File file, String endsWith) {
+        return matchFiles(file, endFile -> endFile.getName().endsWith(endsWith));
+    }
+
+    /**
+     * 获取目录下符合前缀式的文件
+     *
+     * @param file      目录路径
+     * @param startWith 前缀式字符
+     * @return 符合前缀式的文件集合
+     */
+    public static List<File> startWithFiles(File file, String startWith) {
+        return matchFiles(file, startFile -> startFile.getName().startsWith(startWith));
+    }
+
+    /**
+     * 根据类名获取类型对象
+     *
+     * @param className 类限定名
+     * @param <T>       类名
+     * @return 目标类名称
+     */
+    public static <T> Class<T> forName(String className) {
+        try {
+            return (Class<T>) Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            throw new IllegalArgumentException("找不到指定的class,请确定类限定名正确", e);
+        }
+    }
+
+    /**
+     * 获取对象类型
+     *
+     * @param object 给定对象
+     * @param <T>    对象类型
+     * @return 给定对象的所属类型
+     */
+    public static <T> Class<T> classOf(T object) {
+        Objects.requireNonNull(object, "判断类型的对象为空,无法获取对象类型");
+        return (Class<T>) object.getClass();
+    }
+
+    /**
+     * 获取指定类型的对象实例
+     *
+     * @param clazz 指定类型
+     * @param <T>   对象类型
+     * @return 给定对象类型实例
+     */
+    public static <T> T newInstance(Class<T> clazz) {
+        if (Objects.isNull(clazz)) {
+            return null;
+        }
+        Constructor<?>[] constructors = clazz.getDeclaredConstructors();
+        Throwable throwable = null;
+        T result = null;
+        for (Constructor<?> constructor : constructors) {
+            int paramNum = constructor.getParameterCount();
+            constructor.setAccessible(true);
+            try {
+                if (paramNum == 0) {
+                    result = (T) constructor.newInstance();
+                } else {
+                    result = (T) constructor.newInstance(new Object[paramNum]);
+                }
+            } catch (Exception e) {
+                throwable = e;
+            }
+            constructor.setAccessible(false);
+            if (Objects.nonNull(result)) {
+                return result;
+            }
+        }
+        throw new IllegalArgumentException("创建对象类型未找到可用构造函数", throwable);
+    }
 }

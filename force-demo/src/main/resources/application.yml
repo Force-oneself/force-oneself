@@ -28,6 +28,7 @@ spring:
     username: root
     password: ENC(h0FuKCIDDxtJDagwvCWZPg==)
     url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+#    url: jdbc:mysql://106.53.49.229:19035/winkey_bladex?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   ################### Jackson config ###################
   jackson:
