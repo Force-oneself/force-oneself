@@ -13,9 +13,15 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <easyexcel.veresion>2.2.6</easyexcel.veresion>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>${easyexcel.veresion}</version>
+        </dependency>
     </dependencies>
 
 </project>

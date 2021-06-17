@@ -15,9 +15,30 @@ import java.util.function.BiConsumer;
  **/
 public class ExcelUtils extends EasyExcel {
 
-
-    public static <T> ExcelReaderBuilder read(InputStream inputStream, Class<T> head,
-                                              BiConsumer<List<T>, AnalysisContext> consumer) {
+    /**
+     * 批量获取Excel数据
+     *
+     * @param inputStream 输入流
+     * @param head        标题
+     * @param consumer    消费分批数据的
+     * @param <T>         消费的数据类型
+     * @return Excel的构造器
+     */
+    public static <T> ExcelReaderBuilder batchRead(InputStream inputStream, Class<T> head,
+                                                   BiConsumer<List<T>, AnalysisContext> consumer) {
         return read(inputStream, head, new BatchableListener<>(new BatchableBuilder<T>().batch(consumer)));
+    }
+
+    /**
+     * 批量获取Excel数据
+     *
+     * @param inputStream 输入流
+     * @param head        标题
+     * @param builder     消费的条件构造器
+     * @param <T>         消费的数据类型
+     * @return Excel的构造器
+     */
+    public static <T> ExcelReaderBuilder batchRead(InputStream inputStream, Class<T> head, BatchableBuilder<T> builder) {
+        return read(inputStream, head, new BatchableListener<>(builder));
     }
 }
