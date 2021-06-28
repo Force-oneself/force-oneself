@@ -1,4 +1,4 @@
-package com.quan.framework.spring.config;
+package com.quan.framework.redis.redisson;
 
 import lombok.Getter;
 import lombok.Setter;

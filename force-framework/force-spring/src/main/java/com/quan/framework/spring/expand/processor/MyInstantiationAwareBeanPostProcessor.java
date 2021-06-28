@@ -13,32 +13,32 @@ public class MyInstantiationAwareBeanPostProcessor implements InstantiationAware
 
     @Override
     public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> InstantiationAwareBeanPostProcessor ==> postProcessBeforeInstantiation");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> InstantiationAwareBeanPostProcessor ==> postProcessBeforeInstantiation");
         // 这里返回Object不为null，则不会走spring的创建过程直接返回对象
         return null;
     }
 
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> InstantiationAwareBeanPostProcessor ==> postProcessAfterInstantiation");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> InstantiationAwareBeanPostProcessor ==> postProcessAfterInstantiation");
         return true;
     }
 
     @Override
     public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> InstantiationAwareBeanPostProcessor ==> postProcessProperties");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> InstantiationAwareBeanPostProcessor ==> postProcessProperties");
         return pvs;
     }
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> InstantiationAwareBeanPostProcessor ==> postProcessBeforeInitialization");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> InstantiationAwareBeanPostProcessor ==> postProcessBeforeInitialization");
         return bean;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> InstantiationAwareBeanPostProcessor ==> postProcessAfterInitialization");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> InstantiationAwareBeanPostProcessor ==> postProcessAfterInitialization");
         return bean;
     }
 }

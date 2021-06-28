@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @Author heyq
  * @Date 2021-03-29
  **/
-public class AtomicIntegerUtils {
+public class AtomicUtils {
 
     public static AtomicInteger atomic = new AtomicInteger(1);
 }

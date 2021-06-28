@@ -2,7 +2,7 @@ package com.quan.framework.spring.expand.json.demo;
 
 import cn.hutool.json.JSONUtil;
 import com.quan.framework.spring.expand.json.context.ClassPathJsonApplicationContext;
-import com.quan.framework.spring.expand.processor.BeanConfig;
+import com.quan.framework.spring.config.BeanConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
@@ -19,8 +19,7 @@ import java.util.stream.Collectors;
 public class SpringReaderDemo {
 
     public static void main(String[] args) {
-
-
+        xmlReader();
     }
 
     public static void xmlReader() {

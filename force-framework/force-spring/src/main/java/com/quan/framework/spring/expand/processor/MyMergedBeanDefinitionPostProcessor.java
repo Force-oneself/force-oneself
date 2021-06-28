@@ -11,6 +11,6 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 public class MyMergedBeanDefinitionPostProcessor implements MergedBeanDefinitionPostProcessor {
     @Override
     public void postProcessMergedBeanDefinition(RootBeanDefinition beanDefinition, Class<?> beanType, String beanName) {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> MergedBeanDefinitionPostProcessor ==> postProcessMergedBeanDefinition");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> MergedBeanDefinitionPostProcessor ==> postProcessMergedBeanDefinition");
     }
 }

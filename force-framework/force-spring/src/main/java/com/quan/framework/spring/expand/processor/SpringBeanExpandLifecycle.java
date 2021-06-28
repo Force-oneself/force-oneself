@@ -27,27 +27,27 @@ public class SpringBeanExpandLifecycle implements BeanNameAware, BeanClassLoader
     }
 
     public SpringBeanExpandLifecycle() {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> SpringBeanExpandLifecycle 构造函数执行");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> SpringBeanExpandLifecycle 构造函数执行");
     }
 
     @Override
     public void setBeanName(String name) {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> BeanNameWare ==> setBeanName");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> BeanNameWare ==> setBeanName");
     }
 
     @Override
     public void setBeanClassLoader(ClassLoader classLoader) {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> BeanClassLoaderWare ==> setBeanClassLoader");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> BeanClassLoaderWare ==> setBeanClassLoader");
     }
 
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> BeanFactoryWare ==> setBeanFactory");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> BeanFactoryWare ==> setBeanFactory");
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> InitializingBean ==> afterPropertiesSet");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> InitializingBean ==> afterPropertiesSet");
     }
 
     @Override

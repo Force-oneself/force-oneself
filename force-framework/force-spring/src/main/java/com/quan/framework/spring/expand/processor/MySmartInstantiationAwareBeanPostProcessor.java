@@ -15,14 +15,14 @@ public class MySmartInstantiationAwareBeanPostProcessor implements SmartInstanti
     @Override
     public Constructor<?>[] determineCandidateConstructors(@NotNull Class<?> beanClass,
                                                            @NotNull String beanName) throws BeansException {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> SmartInstantiationAwareBeanPostProcessor ==> determineCandidateConstructors可以改变Bean实例化的构造方法");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> SmartInstantiationAwareBeanPostProcessor ==> determineCandidateConstructors可以改变Bean实例化的构造方法");
         return null;
     }
 
     @Override
     public Object getEarlyBeanReference(@NotNull Object bean,
                                         @NotNull String beanName) throws BeansException {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> SmartInstantiationAwareBeanPostProcessor ==> getEarlyBeanReference");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> SmartInstantiationAwareBeanPostProcessor ==> getEarlyBeanReference");
         return bean;
     }
 }

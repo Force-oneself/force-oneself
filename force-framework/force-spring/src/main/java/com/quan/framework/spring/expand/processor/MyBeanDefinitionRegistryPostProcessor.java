@@ -16,11 +16,11 @@ public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegi
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry beanDefinitionRegistry) throws BeansException {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> BeanDefinitionRegistryPostProcessor ==> postProcessBeanDefinitionRegistry,在这里可以增加修改删除bean的定义");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> BeanDefinitionRegistryPostProcessor ==> postProcessBeanDefinitionRegistry,在这里可以增加修改删除bean的定义");
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
-        System.err.println(AtomicIntegerUtils.atomic.getAndIncrement() + " ==> BeanFactoryPostProcessor ==> postProcessBeanFactory,在这里可以对beanFactory做一些操作");
+        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> BeanFactoryPostProcessor ==> postProcessBeanFactory,在这里可以对beanFactory做一些操作");
     }
 }

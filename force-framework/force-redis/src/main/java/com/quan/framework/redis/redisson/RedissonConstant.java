@@ -1,4 +1,4 @@
-package com.quan.framework.spring.config;
+package com.quan.framework.redis.redisson;
 
 /**
  * @Description: interface RedissonConstant
