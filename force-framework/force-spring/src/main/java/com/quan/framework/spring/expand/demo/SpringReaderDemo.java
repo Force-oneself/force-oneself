@@ -1,4 +1,4 @@
-package com.quan.framework.spring.expand.json.demo;
+package com.quan.framework.spring.expand.demo;
 
 import cn.hutool.json.JSONUtil;
 import com.quan.framework.spring.expand.json.context.ClassPathJsonApplicationContext;
