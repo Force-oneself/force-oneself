@@ -1,5 +1,6 @@
 package com.quan.framework.spring.expand.processor;
 
+import com.quan.common.util.AtomicUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanFactory;
@@ -27,31 +28,31 @@ public class SpringBeanExpandLifecycle implements BeanNameAware, BeanClassLoader
     }
 
     public SpringBeanExpandLifecycle() {
-        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> SpringBeanExpandLifecycle 构造函数执行");
+        AtomicUtils.print("SpringBeanExpandLifecycle 构造函数执行");
     }
 
     @Override
     public void setBeanName(String name) {
-        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> BeanNameWare ==> setBeanName");
+        AtomicUtils.print("BeanNameWare ==> setBeanName");
     }
 
     @Override
     public void setBeanClassLoader(ClassLoader classLoader) {
-        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> BeanClassLoaderWare ==> setBeanClassLoader");
+        AtomicUtils.print("BeanClassLoaderWare ==> setBeanClassLoader");
     }
 
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> BeanFactoryWare ==> setBeanFactory");
+        AtomicUtils.print("BeanFactoryWare ==> setBeanFactory");
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> InitializingBean ==> afterPropertiesSet");
+        AtomicUtils.print("InitializingBean ==> afterPropertiesSet");
     }
 
     @Override
     public void destroy() throws Exception {
-        System.err.println(" ==> DisposableBean ==> destroy");
+        AtomicUtils.print("DisposableBean ==> destroy");
     }
 }

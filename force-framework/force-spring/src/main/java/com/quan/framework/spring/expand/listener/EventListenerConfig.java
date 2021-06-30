@@ -1,5 +1,6 @@
 package com.quan.framework.spring.expand.listener;
 
+import com.quan.common.util.AtomicUtils;
 import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.boot.context.event.ApplicationFailedEvent;
@@ -22,37 +23,37 @@ public class EventListenerConfig {
 
     @EventListener(ApplicationStartedEvent.class)
     public void start() {
-        System.err.println("ApplicationStartedEvent执行");
+        AtomicUtils.print("ApplicationStartedEvent执行");
     }
 
     @EventListener(ApplicationReadyEvent.class)
     public void ready() {
-        System.err.println("ApplicationReadyEvent执行");
+        AtomicUtils.print("ApplicationReadyEvent执行");
     }
 
     @EventListener(ApplicationStartingEvent.class)
     public void starting() {
-        System.err.println("ApplicationStartingEvent执行");
+        AtomicUtils.print("ApplicationStartingEvent执行");
     }
 
     @EventListener(ApplicationFailedEvent.class)
     public void failed() {
-        System.err.println("ApplicationFailedEvent执行");
+        AtomicUtils.print("ApplicationFailedEvent执行");
     }
 
     @EventListener(ApplicationPreparedEvent.class)
     public void prepare() {
-        System.err.println("ApplicationPreparedEvent执行");
+        AtomicUtils.print("ApplicationPreparedEvent执行");
     }
 
     @EventListener(ApplicationContextInitializedEvent.class)
     public void contextInitialized() {
-        System.err.println("ApplicationContextInitializedEvent执行");
+        AtomicUtils.print("ApplicationContextInitializedEvent执行");
     }
 
     @EventListener(ApplicationEnvironmentPreparedEvent.class)
     public void environmentPrepared() {
-        System.err.println("ApplicationEnvironmentPreparedEvent执行");
+        AtomicUtils.print("ApplicationEnvironmentPreparedEvent执行");
     }
 
 }

@@ -1,4 +1,4 @@
-package com.quan.framework.spring.expand.processor;
+package com.quan.common.util;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -10,4 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AtomicUtils {
 
     public static AtomicInteger atomic = new AtomicInteger(1);
+
+    public static void print(String message) {
+        System.err.println(atomic.getAndIncrement() + " ===> " + message);
+    }
 }

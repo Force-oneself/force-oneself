@@ -1,5 +1,6 @@
 package com.quan.framework.spring.expand.processor;
 
+import com.quan.common.util.AtomicUtils;
 import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 
@@ -11,6 +12,6 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 public class MyMergedBeanDefinitionPostProcessor implements MergedBeanDefinitionPostProcessor {
     @Override
     public void postProcessMergedBeanDefinition(RootBeanDefinition beanDefinition, Class<?> beanType, String beanName) {
-        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> MergedBeanDefinitionPostProcessor ==> postProcessMergedBeanDefinition");
+        AtomicUtils.print("MergedBeanDefinitionPostProcessor ==> postProcessMergedBeanDefinition");
     }
 }

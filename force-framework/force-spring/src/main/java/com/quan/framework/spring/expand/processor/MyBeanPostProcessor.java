@@ -1,5 +1,6 @@
 package com.quan.framework.spring.expand.processor;
 
+import com.quan.common.util.AtomicUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
@@ -11,13 +12,13 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 public class MyBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> BeanPostProcessor ==> postProcessBeforeInitialization");
+        AtomicUtils.print("BeanPostProcessor ==> postProcessBeforeInitialization");
         return bean;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.err.println(AtomicUtils.atomic.getAndIncrement() + " ==> BeanPostProcessor ==> postProcessAfterInitialization");
+        AtomicUtils.print("BeanPostProcessor ==> postProcessAfterInitialization");
         return bean;
     }
 }
