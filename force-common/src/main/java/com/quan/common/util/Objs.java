@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.Constructor;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -194,5 +195,10 @@ public class Objs {
             }
         }
         throw new IllegalArgumentException("创建对象类型未找到可用构造函数", throwable);
+    }
+
+
+    public static <T> List<T> emptyList() {
+        return Collections.emptyList();
     }
 }

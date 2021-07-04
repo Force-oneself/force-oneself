@@ -1,6 +1,7 @@
 package com.quan.framework.spring.expand.demo;
 
 import cn.hutool.json.JSONUtil;
+import com.quan.framework.spring.config.MyApplicationContext;
 import com.quan.framework.spring.expand.json.context.ClassPathJsonApplicationContext;
 import com.quan.framework.spring.config.BeanConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -19,7 +20,8 @@ import java.util.stream.Collectors;
 public class SpringReaderDemo {
 
     public static void main(String[] args) {
-        xmlReader();
+//        xmlReader();
+        annotationReader();
     }
 
     public static void xmlReader() {
@@ -37,10 +39,8 @@ public class SpringReaderDemo {
     }
 
     public static void annotationReader() {
-        GenericApplicationContext context = new AnnotationConfigApplicationContext(BeanConfig.class);
-        print(Arrays.stream(context.getBeanDefinitionNames())
-                .map(context::getBeanDefinition)
-                .collect(Collectors.toList()));
+        MyApplicationContext context = new MyApplicationContext(BeanConfig.class);
+
     }
 
 

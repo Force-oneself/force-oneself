@@ -5,7 +5,9 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -14,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * @Date 2021-03-03
  **/
 @Configuration
+@ComponentScan("com.quan.framework.spring")
 public class BeanConfig {
 
     public BeanConfig() {
@@ -21,6 +24,7 @@ public class BeanConfig {
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public SpringBeanExpandLifecycle springBeanExpandLifecycle() {
         return new SpringBeanExpandLifecycle();
     }
