@@ -1,4 +1,4 @@
-package com.quan.framework.spring.expand.processor;
+package com.quan.framework.spring.expand.bean;
 
 import com.quan.common.util.AtomicUtils;
 import org.springframework.beans.BeansException;

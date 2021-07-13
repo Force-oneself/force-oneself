@@ -39,8 +39,11 @@ public class SpringReaderDemo {
     }
 
     public static void annotationReader() {
-        MyApplicationContext context = new MyApplicationContext(BeanConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeanConfig.class);
+    }
 
+    public static void myApplicationContext() {
+        MyApplicationContext context = new MyApplicationContext(BeanConfig.class);
     }
 
 

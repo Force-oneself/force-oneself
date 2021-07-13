@@ -1,7 +1,11 @@
 package com.quan.framework.spring.config;
 
+import com.quan.common.util.AtomicUtils;
+import com.quan.framework.spring.expand.bean.SpringBeanExpandLifecycle;
 import com.quan.framework.spring.expand.processor.*;
+import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcessor;
@@ -20,7 +24,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     public BeanConfig() {
-        System.err.println("BeanConfig 执行构造器");
+        AtomicUtils.print("BeanConfig 执行构造器");
     }
 
     @Bean
@@ -47,5 +51,15 @@ public class BeanConfig {
     @Bean
     public MergedBeanDefinitionPostProcessor mergedBeanDefinitionPostProcessor() {
         return new MyMergedBeanDefinitionPostProcessor();
+    }
+
+    @Bean
+    public DestructionAwareBeanPostProcessor destructionAwareBeanPostProcessor() {
+        return new MyDestructionAwareBeanPostProcessor();
+    }
+
+    @Bean
+    public SmartInitializingSingleton smartInitializingSingleton() {
+        return new MySmartInitializingSingleton();
     }
 }
