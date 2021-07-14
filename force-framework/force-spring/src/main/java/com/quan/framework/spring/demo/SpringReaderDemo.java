@@ -1,4 +1,4 @@
-package com.quan.framework.spring.expand.demo;
+package com.quan.framework.spring.demo;
 
 import cn.hutool.json.JSONUtil;
 import com.quan.framework.spring.config.MyApplicationContext;
@@ -6,7 +6,6 @@ import com.quan.framework.spring.expand.json.context.ClassPathJsonApplicationCon
 import com.quan.framework.spring.config.BeanConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
 
 import java.util.Arrays;
 import java.util.List;
