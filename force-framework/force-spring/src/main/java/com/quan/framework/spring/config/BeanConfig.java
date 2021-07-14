@@ -1,6 +1,7 @@
 package com.quan.framework.spring.config;
 
 import com.quan.common.util.AtomicUtils;
+import com.quan.framework.spring.expand.bean.MyFactoryBean;
 import com.quan.framework.spring.expand.bean.SpringBeanExpandLifecycle;
 import com.quan.framework.spring.expand.processor.*;
 import org.springframework.beans.factory.SmartInitializingSingleton;
@@ -20,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
  * @Date 2021-03-03
  **/
 @Configuration
-@ComponentScan("com.quan.framework.spring")
+@ComponentScan("com.quan.framework.spring.expand")
 public class BeanConfig {
 
     public BeanConfig() {
@@ -61,5 +62,10 @@ public class BeanConfig {
     @Bean
     public SmartInitializingSingleton smartInitializingSingleton() {
         return new MySmartInitializingSingleton();
+    }
+
+    @Bean
+    public MyFactoryBean myFactoryBean() {
+        return new MyFactoryBean();
     }
 }

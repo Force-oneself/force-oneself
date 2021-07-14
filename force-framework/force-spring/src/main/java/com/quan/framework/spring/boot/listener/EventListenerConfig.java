@@ -1,4 +1,4 @@
-package com.quan.framework.spring.expand.listener;
+package com.quan.framework.spring.boot.listener;
 
 import com.quan.common.util.AtomicUtils;
 import org.springframework.boot.context.event.ApplicationContextInitializedEvent;

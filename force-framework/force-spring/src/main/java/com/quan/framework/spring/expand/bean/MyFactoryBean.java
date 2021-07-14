@@ -7,16 +7,16 @@ import org.springframework.beans.factory.FactoryBean;
  * @Description MyFactoryBean.java
  * @date 2021-07-12
  */
-public class MyFactoryBean implements FactoryBean<MyFactoryBean> {
+public class MyFactoryBean implements FactoryBean<TestFactoryBean> {
 
     @Override
-    public MyFactoryBean getObject() throws Exception {
-        return new MyFactoryBean();
+    public TestFactoryBean getObject() throws Exception {
+        return new TestFactoryBean();
     }
 
     @Override
     public Class<?> getObjectType() {
-        return MyFactoryBean.class;
+        return TestFactoryBean.class;
     }
 
     @Override
