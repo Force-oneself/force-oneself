@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @Description:
@@ -21,7 +22,8 @@ import org.springframework.context.annotation.Configuration;
  * @Date 2021-03-03
  **/
 @Configuration
-@ComponentScan("com.quan.framework.spring.expand")
+@EnableAspectJAutoProxy
+@ComponentScan("com.quan.framework.spring.aop")
 public class BeanConfig {
 
     public BeanConfig() {

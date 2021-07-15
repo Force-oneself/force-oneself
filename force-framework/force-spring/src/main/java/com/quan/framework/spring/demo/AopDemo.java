@@ -1,4 +1,4 @@
-package com.quan.framework.spring.aop;
+package com.quan.framework.spring.demo;
 
 import com.quan.framework.spring.aop.bean.AopBean;
 import com.quan.framework.spring.config.BeanConfig;
