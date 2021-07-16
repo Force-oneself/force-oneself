@@ -15,13 +15,11 @@
     <properties>
         <java.version>1.8</java.version>
         <shardingsphere-boot.version>5.0.0-alpha</shardingsphere-boot.version>
-        <druid-boot.version>1.2.5</druid-boot.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

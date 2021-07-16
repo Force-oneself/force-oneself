@@ -1,6 +1,7 @@
 package com.quan.algorithm.sort;
 
 import static com.quan.algorithm.sort.SortUtils.print;
+
 /**
  * This method implements the Generic Merge Sort
  *
@@ -18,7 +19,6 @@ class MergeSort implements SortAlgorithm {
      * @return sorted array
      */
     @Override
-
     public <T extends Comparable<T>> T[] sort(T[] unsorted) {
         doSort(unsorted, 0, unsorted.length - 1);
         return unsorted;
@@ -49,7 +49,6 @@ class MergeSort implements SortAlgorithm {
      * @param right The last index of the array
      *              merges two parts of an array in increasing order
      **/
-
     private static <T extends Comparable<T>> void merge(T[] arr, int left, int mid, int right) {
         int length = right - left + 1;
         T[] temp = (T[]) new Comparable[length];
@@ -86,7 +85,7 @@ class MergeSort implements SortAlgorithm {
         // Output => 1	   4  	 6	9	12	23	54	78	231
         print(arr);
 
-        // String Inpu
+        // String Input
         String[] stringArray = {"c", "a", "e", "b", "d"};
         mergeSort.sort(stringArray);
         //Output => a	b	c	d	e
