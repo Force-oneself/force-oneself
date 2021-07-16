@@ -63,11 +63,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -91,7 +86,7 @@
                 <artifactId>jasypt-maven-plugin</artifactId>
                 <version>${jasypt-boot.version}</version>
             </plugin>
-            <!-- lombok plugin -->
+            <!-- spring boot plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

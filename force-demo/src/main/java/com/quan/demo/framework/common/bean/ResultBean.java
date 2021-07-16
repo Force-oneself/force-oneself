@@ -1,6 +1,5 @@
 package com.quan.demo.framework.common.bean;
 
-import lombok.Data;
 
 import java.io.Serializable;
 
@@ -9,7 +8,6 @@ import java.io.Serializable;
  * @Author heyq
  * @Date 2021-01-09
  **/
-@Data
 public class ResultBean<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,5 +35,29 @@ public class ResultBean<T> implements Serializable {
         super();
         this.code = ERROR;
         this.msg = e.toString();
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

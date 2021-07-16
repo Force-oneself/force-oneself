@@ -1,6 +1,8 @@
 package com.quan.demo.command;
 
-import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -12,8 +14,9 @@ import java.net.UnknownHostException;
  * @Author heyq
  * @Date 2021-02-23
  **/
-@Slf4j
 public class NetUtils {
+
+    private final static Logger log = LoggerFactory.getLogger(NetUtils.class);
 
     public static boolean isLocalePortUsing(int port) {
         boolean flag = true;

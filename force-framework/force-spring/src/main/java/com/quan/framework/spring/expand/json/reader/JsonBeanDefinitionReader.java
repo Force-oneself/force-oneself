@@ -3,7 +3,8 @@ package com.quan.framework.spring.expand.json.reader;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
@@ -36,8 +37,10 @@ import java.util.Set;
  * @Author Force丶Oneself
  * @Date 2021-05-23
  **/
-@Slf4j
 public class JsonBeanDefinitionReader extends AbstractBeanDefinitionReader {
+
+    private final Logger log = LoggerFactory.getLogger(JsonBeanDefinitionReader.class);
+
     private final ThreadLocal<Set<EncodedResource>> resourcesCurrentlyBeingLoaded =
             new NamedThreadLocal<>("json bean definition resources currently being loaded");
 

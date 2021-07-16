@@ -1,12 +1,8 @@
 package com.quan.framework.mongo.demo;
 
 import com.quan.common.util.IdWorker;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -35,11 +31,19 @@ public class MongoDemo {
         mongoTemplate.find(query, MongoTest.class);
     }
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
     @Document("mongo")
     public static class MongoTest {
+
+        public MongoTest(Long id, String name, Integer age, String hobby, String _class) {
+            this.id = id;
+            this.name = name;
+            this.age = age;
+            this.hobby = hobby;
+            this._class = _class;
+        }
+
+        public MongoTest() {}
+
         @Id
         private Long id;
 
@@ -54,5 +58,45 @@ public class MongoDemo {
 
         @Field("_class")
         private String _class;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Integer getAge() {
+            return age;
+        }
+
+        public void setAge(Integer age) {
+            this.age = age;
+        }
+
+        public String getHobby() {
+            return hobby;
+        }
+
+        public void setHobby(String hobby) {
+            this.hobby = hobby;
+        }
+
+        public String get_class() {
+            return _class;
+        }
+
+        public void set_class(String _class) {
+            this._class = _class;
+        }
     }
 }

@@ -2,7 +2,8 @@ package com.quan.framework.document.excel;
 
 import com.alibaba.excel.EasyExcel;
 import com.quan.framework.document.excel.constant.DefaultExcelCell;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +21,9 @@ import java.util.Map;
  * @author hyq
  * @date 2020/9/23
  */
-@Slf4j
 public class EasyExcelUtil {
+
+    private final static Logger log = LoggerFactory.getLogger(EasyExcelUtil.class);
 
     /**
      * 兼容原有替换掉老版本中PoiUtil中的方法

@@ -76,7 +76,6 @@ class MergeSort implements SortAlgorithm {
         System.arraycopy(temp, 0, arr, left, length);
     }
 
-    // Driver program
     public static void main(String[] args) {
 
         // Integer Input

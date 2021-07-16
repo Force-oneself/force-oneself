@@ -10,7 +10,7 @@ public class MapWrapperFactory implements ObjectWrapperFactory {
 
     @Override
     public boolean hasWrapperFor(Object object) {
-        return object != null && object instanceof Map;
+        return object instanceof Map;
     }
 
     @Override

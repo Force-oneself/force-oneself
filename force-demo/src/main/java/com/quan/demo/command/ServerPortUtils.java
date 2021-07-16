@@ -1,6 +1,7 @@
 package com.quan.demo.command;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Random;
 
@@ -9,8 +10,9 @@ import java.util.Random;
  * @Author heyq
  * @Date 2021-02-23
  **/
-@Slf4j
 public class ServerPortUtils {
+
+    private final static Logger log = LoggerFactory.getLogger(ServerPortUtils.class);
 
     public static int getAvailablePort() {
         int max = 65535;

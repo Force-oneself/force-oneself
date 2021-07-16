@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
  * @Author heyq
  * @Date 2021-01-30
  **/
-public class JavaClassExecuter {
+public class JavaClassExecutor {
     /**
      * 执行外部传过来的代表一个Java类的byte数组
      * 将输入类的byte数组中代表java.lang.System的CONSTANT_Utf8_info常量修改为劫持后个HackSystem
@@ -21,10 +21,10 @@ public class JavaClassExecuter {
         ClassModifier cm = new ClassModifier(classByte);
         byte[] modiBytes = cm.modifyUTF8Constant("java/lang/System", "org/fenixsoft/classloading/execute/HackSystem");
         HotSwapClassLoader loader = new HotSwapClassLoader();
-        Class clazz = loader.loadByte(modiBytes);
+        Class<?> clazz = loader.loadByte(modiBytes);
         try {
-            Method method = clazz.getMethod("main", new Class[]{String[].class});
-            method.invoke(null, new String[]{null});
+            Method method = clazz.getMethod("main", String[].class);
+            method.invoke(null, (Object) new String[]{});
         } catch (Throwable e) {
             e.printStackTrace(HackSystem.out);
         }

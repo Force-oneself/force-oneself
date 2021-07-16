@@ -1,6 +1,7 @@
 package com.quan.demo.command;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 /**
@@ -8,9 +9,9 @@ import org.springframework.util.StringUtils;
  * @Author heyq
  * @Date 2021-02-23
  **/
-@Slf4j
 public class StartCommand {
 
+    private final static Logger log = LoggerFactory.getLogger(StartCommand.class);
 
     public StartCommand(String[] args) {
         Boolean isServerPort = false;
