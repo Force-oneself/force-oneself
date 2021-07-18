@@ -51,6 +51,10 @@ public class Objs {
         MAPPER.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
         // 单个对象值处理成集合
         MAPPER.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        // 配置枚举转为String
+        MAPPER.configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true);
+        // 配置String转为枚举
+        MAPPER.configure(DeserializationFeature.READ_ENUMS_USING_TO_STRING, true);
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.quan.framework.spring.demo;
 
+import com.quan.framework.spring.aop.aspect.AopBeanAspect;
 import com.quan.framework.spring.aop.bean.AopBean;
-import com.quan.framework.spring.config.BeanConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class AopDemo {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeanConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AopBeanAspect.class);
         AopBean bean = context.getBean(AopBean.class);
         bean.aop();
     }
