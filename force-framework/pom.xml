@@ -16,6 +16,7 @@
         <module>force-spring</module>
         <module>force-document</module>
         <module>force-demo</module>
+        <module>force-security</module>
     </modules>
 
     <artifactId>force-framework</artifactId>
@@ -50,10 +51,12 @@
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot-starter</artifactId>
         </dependency>
+        <!-- Aop支持 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+        <!-- 配置文件提示 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
