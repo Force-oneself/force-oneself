@@ -60,7 +60,7 @@ public class Objs {
     /**
      * 格式化打印对象,主要用作代码日志
      * 注意：jackson中存在bug, 打印循环依赖的对象时会StackOverflowError
-     * 解决方案：自己百度加注解解决，打印框架里的对象时，无解需要自己排除
+     * 解决方案：自己百度加注解解决，打印框架里的对象时无解，需要自己排除
      *
      * @param value 格式化对象
      * @return 格式化后json字符
