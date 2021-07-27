@@ -15,6 +15,7 @@ public class TestController {
 
     @GetMapping("/test")
     public String test(@RequestParam("p") String p) {
-        return "Hello : " + p;
+        throw new RuntimeException();
+//        return "Hello : " + p;
     }
 }

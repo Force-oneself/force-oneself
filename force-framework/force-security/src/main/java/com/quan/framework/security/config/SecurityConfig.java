@@ -4,6 +4,7 @@ import com.quan.framework.security.encoder.MyPasswordEncoder;
 import com.quan.framework.security.handler.MyAuthenticationFailureHandler;
 import com.quan.framework.security.handler.MyAuthenticationSuccessHandler;
 import com.quan.framework.security.handler.MyLogoutSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,6 +15,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.sql.DataSource;
+
 
 /**
  * @Description:
@@ -31,8 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+    protected void configure(AuthenticationManagerBuilder builder) throws Exception {
+        builder.userDetailsService(userDetailsService);
     }
 
     @Override
@@ -63,6 +67,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .passwordParameter("password")
 //                .usernameParameter("username")
         ;
+    }
+
+    @Autowired
+    public void initialize(AuthenticationManagerBuilder builder, DataSource dataSource) throws Exception {
+        builder.jdbcAuthentication().dataSource(dataSource).withUser("dave")
+                .password("secret").roles("USER");
     }
 
     @Bean
