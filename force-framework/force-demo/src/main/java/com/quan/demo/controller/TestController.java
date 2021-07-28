@@ -14,8 +14,32 @@ public class TestController {
 
 
     @GetMapping("/test")
-    public String test(@RequestParam("p") String p) {
-        throw new RuntimeException();
-//        return "Hello : " + p;
+    public User test(@RequestParam("p") String p) {
+        User user = new User();
+        user.setLike(p);
+        user.setUsername(p);
+        return user;
+    }
+
+    public static class User {
+        private String username;
+
+        private String like;
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getLike() {
+            return like;
+        }
+
+        public void setLike(String like) {
+            this.like = like;
+        }
     }
 }

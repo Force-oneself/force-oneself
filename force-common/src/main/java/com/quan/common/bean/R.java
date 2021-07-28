@@ -13,7 +13,9 @@ public class R<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int code;
+    private Boolean success = true;
+
+    private Integer code;
 
     private T data;
 
@@ -32,6 +34,7 @@ public class R<T> implements Serializable {
     }
 
     public R(Throwable e) {
+        this.success = false;
         this.code = Code.ERROR.getCode();
         this.msg = e.getMessage();
     }
@@ -44,11 +47,11 @@ public class R<T> implements Serializable {
         return new R<T>(data);
     }
 
-    public static <T> R<T> fail() {
+    public static R<?> fail() {
         return fail(null, Code.ERROR.getCode(), Code.ERROR.getMsg());
     }
 
-    public static <T> R<T> fail(int code, String msg) {
+    public static R<?> fail(int code, String msg) {
         return fail(null, code, msg);
     }
 
@@ -60,12 +63,17 @@ public class R<T> implements Serializable {
         return fail(data, failCode.getCode(), failCode.getMsg());
     }
 
-    public static <T> R<T> fail(Code failCode) {
+    public static R<?> fail(Code failCode) {
         return fail(null, failCode);
     }
 
     public static <T> R<T> fail(T data, int code, String msg) {
-        return new R<T>().code(code).msg(msg).data(data);
+        return new R<T>().code(code).msg(msg).data(data).success(false);
+    }
+
+    public R<T> success(boolean success) {
+        this.success = success;
+        return this;
     }
 
     public R<T> code(int code) {
@@ -113,5 +121,13 @@ public class R<T> implements Serializable {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 }

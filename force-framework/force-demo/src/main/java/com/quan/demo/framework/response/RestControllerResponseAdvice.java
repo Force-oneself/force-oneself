@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @Description RestControllerResponseAdvice.java
  * @date 2021-07-27
  */
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = "com.quan.demo.controller")
 public class RestControllerResponseAdvice implements ResponseBodyAdvice<Object> {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -41,12 +41,14 @@ public class RestControllerResponseAdvice implements ResponseBodyAdvice<Object> 
                                   @NonNull MediaType selectedContentType,
                                   @NonNull Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   @NonNull ServerHttpRequest request, @NonNull ServerHttpResponse response) {
+        // String必须这样处理
         if (body instanceof String) {
             try {
-                return R.ok(objectMapper.writeValueAsString(body));
+                return objectMapper.writeValueAsString(R.ok(body));
             } catch (JsonProcessingException e) {
                 log.error("格式转换错误，请检查【{}】", body);
-                return R.fail("格式转换错误，请检查" + body);
+                return "{\"success\":false,\"code\":500,\"data\": null,\"msg\":\"格式转换错误，请检查 "
+                        + body + "\",\"timestamp\": null}";
             }
         }
         if (body instanceof R) {

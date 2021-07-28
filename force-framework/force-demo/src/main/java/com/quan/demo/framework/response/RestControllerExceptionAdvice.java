@@ -22,28 +22,29 @@ public class RestControllerExceptionAdvice {
     @ExceptionHandler(NullPointerException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public R<String> exception(NullPointerException e) {
-        log.error("空指针异常", e);
-        return R.fail(e.getMessage());
+        return fail(e);
     }
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public R<String> exception(RuntimeException e) {
-        log.error("系统运行期异常", e);
-        return R.fail(e.getMessage());
+        return fail(e);
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public R<String> exception(Exception e) {
-        log.error("系统未知异常", e);
-        return R.fail(e.getMessage());
+        return fail(e);
     }
 
     @ExceptionHandler(Error.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public R<String> exception(Error e) {
-        log.error("系统未知错误", e);
-        return R.fail(e.getMessage());
+        return fail(e);
+    }
+
+    private R<String> fail(Throwable e) {
+        log.error("系统异常", e);
+        return R.fail((String)null).msg(e.getMessage());
     }
 }
