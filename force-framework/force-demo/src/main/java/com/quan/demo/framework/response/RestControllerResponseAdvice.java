@@ -47,8 +47,8 @@ public class RestControllerResponseAdvice implements ResponseBodyAdvice<Object> 
                 return objectMapper.writeValueAsString(R.ok(body));
             } catch (JsonProcessingException e) {
                 log.error("格式转换错误，请检查【{}】", body);
-                return "{\"success\":false,\"code\":500,\"data\": null,\"msg\":\"格式转换错误，请检查 "
-                        + body + "\",\"timestamp\": null}";
+                return "{\"success\":false,\"code\":500,\"data\": null,\"msg\":\"格式转换错误，请检查【"
+                        + body + "】\",\"timestamp\": null}";
             }
         }
         if (body instanceof R) {
