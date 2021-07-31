@@ -57,12 +57,10 @@ public class RedisTemplateLogBeanPostProcessor implements BeanPostProcessor {
         //拦截opsFor
         ProxyFactory adviceProxy = new ProxyFactory(invocation.proceed());
         adviceProxy.setProxyTargetClass(false);
-        adviceProxy.addAdvice(new MethodBeforeAdviceInterceptor(
-                (method, args, target) -> log.info("redisTemplate exec method: {}, args: {}", method.getName(),
-                        Objs.prettyPrint(args))));
-        adviceProxy.addAdvice(new AfterReturningAdviceInterceptor(
-                (retval, method, args, invo) -> log.info("redisTemplate return : {}",
-                        Objs.prettyPrint(retval))));
+        adviceProxy.addAdvice(new MethodBeforeAdviceInterceptor((method, args, target) ->
+                log.info("redisTemplate exec method: {}, args: {}", method.getName(), Objs.prettyPrint(args))));
+        adviceProxy.addAdvice(new AfterReturningAdviceInterceptor((retval, method, args, invo) ->
+                log.info("redisTemplate return : {}", Objs.prettyPrint(retval))));
         return adviceProxy.getProxy();
     }
 

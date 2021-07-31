@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -26,6 +28,8 @@ import java.util.stream.Collectors;
  * @Date 2021-05-28
  **/
 public class Objs {
+
+    private static final Logger log = LoggerFactory.getLogger(Objs.class);
 
     public final static ObjectMapper MAPPER = new ObjectMapper();
 
@@ -69,6 +73,7 @@ public class Objs {
         try {
             return MAPPER.writeValueAsString(value);
         } catch (JsonProcessingException e) {
+            log.error("格式转换异常", e);
             return "{ \"error\": \"" + e.getMessage() + "\" }";
         }
     }
@@ -86,6 +91,7 @@ public class Objs {
             oos.writeObject(object);
             return bas.toByteArray();
         } catch (Exception e) {
+            log.error("序列化失败", e);
             throw new RuntimeException("序列化失败", e);
         }
     }
@@ -101,6 +107,7 @@ public class Objs {
             // 反序列化
             return new ObjectInputStream(bas).readObject();
         } catch (Exception e) {
+            log.error("反序列失败", e);
             throw new RuntimeException("反序列化失败", e);
         }
     }

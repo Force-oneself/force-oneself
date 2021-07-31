@@ -39,11 +39,10 @@ public class RedissonLogBeanPostProcessor implements BeanPostProcessor {
         if (bean instanceof RedissonClient) {
             ProxyFactory proxyFactory = new ProxyFactory(bean);
             proxyFactory.setProxyTargetClass(false);
-            proxyFactory.addAdvice(new MethodBeforeAdviceInterceptor(
-                    (method, args, target) -> log.info("redisson exec method: {}, args: {}", method.getName(),
-                            Objs.prettyPrint(args))));
-            proxyFactory.addAdvice(new AfterReturningAdviceInterceptor(
-                    (retval, method, args, invo) -> log.info("redisson return : {}",
+            proxyFactory.addAdvice(new MethodBeforeAdviceInterceptor((method, args, target) ->
+                    log.info("redisson exec method: {}, args: {}", method.getName(), Objs.prettyPrint(args))));
+            proxyFactory.addAdvice(new AfterReturningAdviceInterceptor((retval, method, args, invo) ->
+                    log.info("redisson return : {}",
                             EXCLUDE_METHOD_LIST.contains(method.getName()) ? "null" : Objs.prettyPrint(retval))));
             return proxyFactory.getProxy();
         }
