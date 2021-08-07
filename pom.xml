@@ -13,6 +13,7 @@
         <module>force-common</module>
         <module>force-framework</module>
         <module>force-ordinary</module>
+        <module>force-wx</module>
     </modules>
 
     <properties>

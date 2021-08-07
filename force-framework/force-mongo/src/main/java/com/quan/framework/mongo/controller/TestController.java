@@ -1,8 +1,8 @@
 package com.quan.framework.mongo.controller;
 
-import com.quan.framework.mongo.demo.MongoDemo;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.quan.framework.mongo.spring.MongoDemo;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,11 +13,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @Autowired
-    private MongoDemo mongoDemo;
+    private final MongoDemo mongoDemo;
 
-    @GetMapping("/test")
+    public TestController(MongoDemo mongoDemo) {
+        this.mongoDemo = mongoDemo;
+    }
+
+    @PostMapping
     public void test() {
-        mongoDemo.test();
+        mongoDemo.insert();
+    }
+
+    @GetMapping("/find")
+    public void find(Integer type) {
+        switch (type) {
+            case 1:
+                mongoDemo.find();
+                break;
+            case 2:
+                mongoDemo.aggregation();
+                break;
+            default:
+                break;
+        }
     }
 }

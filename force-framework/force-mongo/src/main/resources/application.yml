@@ -3,3 +3,8 @@ spring:
     mongodb:
       uri: mongodb://admin:root@120.76.175.67:27017/admin
       auto-index-creation: true
+
+
+logging:
+  level:
+    org.springframework.data.mongodb.core: debug
