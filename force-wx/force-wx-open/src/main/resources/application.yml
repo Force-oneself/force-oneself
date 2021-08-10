@@ -4,6 +4,7 @@ wx:
     app-id: 4324
     secret: 343
     name: 3423
+    token: ll
     multiple:
       - aes-key: 324
         app-id: 324
