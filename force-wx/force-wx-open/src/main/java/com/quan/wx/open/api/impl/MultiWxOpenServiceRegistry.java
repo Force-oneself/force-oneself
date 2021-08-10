@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author Force-oneself
+ * @author Force-oneself 多平台配置注册中心
  * @Description MultiWxOpenServiceRegistry.java
  * @date 2021-08-05
  */
@@ -21,7 +21,7 @@ public class MultiWxOpenServiceRegistry implements WxOpenServiceRegistry {
     @Override
     public void register(String name, WxOpenService service) {
         if (serviceCache.containsKey(name)) {
-            log.warn("存在重复名称的service：{}", name);
+            log.warn("{} service 已存在", name);
         }
         serviceCache.put(name, service);
     }

@@ -5,7 +5,7 @@ import org.springframework.util.Assert;
 import java.io.Serializable;
 
 /**
-* @Description WxProperties.java
+* @Description WxProperties.java 配置公共基类
 * @Author Force-oneself
 * @Date 2021-08-05 22:45
 */
