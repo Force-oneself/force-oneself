@@ -1,6 +1,9 @@
 package com.quan.common.util;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,10 +18,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Constructor;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.time.ZoneId;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -47,8 +48,6 @@ public class Objs {
         MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         // 忽略空Bean转json的错误
         MAPPER.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        // 同意日期格式为："yyyy-MM-dd HH:mm:ss"
-        MAPPER.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         // 忽略 在json字符串中存在，但是java对象中不存在对应属性的情况，防止错误
         MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         // 空字符作为空对象处理
@@ -59,6 +58,24 @@ public class Objs {
         MAPPER.configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true);
         // 配置String转为枚举
         MAPPER.configure(DeserializationFeature.READ_ENUMS_USING_TO_STRING, true);
+        // 去掉默认的时间格式戳格式
+        MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        // 单引号
+        MAPPER.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+        // 允许JSON字符串包含引号控制符（值小于32的ASCII字符，包含制表符和换行符）
+        MAPPER.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true);
+        MAPPER.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(), true);
+        // 单引号处理
+        MAPPER.configure(JsonReadFeature.ALLOW_SINGLE_QUOTES.mappedFeature(), true);
+
+        // 统一日期格式为："yyyy-MM-dd HH:mm:ss"
+        MAPPER.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA));
+        // 设置null字段去除序列化
+        MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        // 设置地点为中国
+        MAPPER.setLocale(Locale.CHINA);
+        // 设置上海的时区
+        MAPPER.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
     }
 
     /**

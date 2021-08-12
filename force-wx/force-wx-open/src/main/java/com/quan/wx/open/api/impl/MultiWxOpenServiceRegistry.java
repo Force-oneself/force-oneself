@@ -5,7 +5,9 @@ import me.chanjar.weixin.open.api.WxOpenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -32,6 +34,11 @@ public class MultiWxOpenServiceRegistry implements WxOpenServiceRegistry {
             throw new RuntimeException("不存在该WxOpenService请检查:" + name);
         }
         return serviceCache.get(name);
+    }
+
+    @Override
+    public Set<WxOpenService> getAll() {
+        return new HashSet<>(serviceCache.values());
     }
 
     @Override

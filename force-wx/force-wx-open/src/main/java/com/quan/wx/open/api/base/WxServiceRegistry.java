@@ -1,5 +1,7 @@
 package com.quan.wx.open.api.base;
 
+import java.util.Set;
+
 /**
  * @author Force-oneself 服务注册中心
  * @Description WxServiceRegistry.java
@@ -22,6 +24,13 @@ public interface WxServiceRegistry<T> {
      * @return 所需服务
      */
     T get(String name);
+
+    /**
+     * 全部服务
+     *
+     * @return 获取全部服务
+     */
+    Set<T> getAll();
 
     /**
      * 清除所有服务
