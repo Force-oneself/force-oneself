@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://admin:root@120.76.175.67:27017/admin
+      uri: mongodb+srv://root:root@force-oneself.rshao.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
       auto-index-creation: true
 
 

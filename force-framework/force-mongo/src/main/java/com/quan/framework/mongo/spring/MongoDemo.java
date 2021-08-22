@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,14 +26,27 @@ public class MongoDemo {
 
     public void insert() {
         IdWorker idWorker = new IdWorker();
-        mongoTemplate.insert(new MongoEntity(idWorker.nextId(), "Peter" + idWorker.nextId(), 34, "篮球"));
+//        mongoTemplate.insert(new MongoEntity(idWorker.nextId(), "Peter" + idWorker.nextId(), 34, "篮球"));
+
+        List<MongoEntity> list = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+
+            list.add(new MongoEntity(idWorker.nextId(), "Peter" + idWorker.nextId(), 34, "篮球"));
+        }
+
+
+        MongoInlineEntity inlineEntity = new MongoInlineEntity();
+        inlineEntity.setName("内嵌数组" + Math.random());
+        inlineEntity.setInline(list);
+        mongoTemplate.insert(inlineEntity);
     }
 
 
     public void find() {
         Query query = new Query();
-        mongoTemplate.find(query, MongoEntity.class);
-        mongoTemplate.query(MongoEntity.class).distinct("name").all();
+        List<MongoEntity> entities = mongoTemplate.find(query, MongoEntity.class);
+        System.out.println(entities);
     }
 
     public void aggregation() {
@@ -41,6 +55,7 @@ public class MongoDemo {
         MatchOperation matchOperation = Aggregation.match(Criteria.where("age").is(34));
         // 分组
         GroupOperation groupOperation = Aggregation.group("hobby").sum("age").as("count");
+
 
         Aggregation aggregation = Aggregation.newAggregation(matchOperation, groupOperation);
         AggregationResults<MongoEntityAggregation> results = mongoTemplate.aggregate(aggregation, "mongo", MongoEntityAggregation.class);
