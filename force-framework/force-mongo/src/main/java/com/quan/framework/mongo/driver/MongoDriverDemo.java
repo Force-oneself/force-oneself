@@ -26,8 +26,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 public class MongoDriverDemo {
 
 
-    public static String uri = "mongodb+srv://root:root@force-oneself.rshao.mongodb.net/myFirstDatabase?" +
-            "retryWrites=true&w=majority";
+    public static String uri = "";
 
     public static void main(String[] args) {
         try (MongoClient mongoClient = MongoClients.create(uri)) {

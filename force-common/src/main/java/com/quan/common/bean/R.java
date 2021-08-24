@@ -13,9 +13,9 @@ public class R<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Boolean success = true;
+    private boolean success = true;
 
-    private Integer code;
+    private int code;
 
     private T data;
 
@@ -123,11 +123,11 @@ public class R<T> implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public Boolean getSuccess() {
+    public boolean getSuccess() {
         return success;
     }
 
-    public void setSuccess(Boolean success) {
+    public void setSuccess(boolean success) {
         this.success = success;
     }
 }

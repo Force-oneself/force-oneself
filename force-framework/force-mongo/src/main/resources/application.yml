@@ -1,10 +1,16 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://root:root@force-oneself.rshao.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+      uri: ENC(pqvg3E3LBTqxqnEfZioIN3KEV9RKYqJhoEpKxW414ET4x9W/smKdBqXmTeAF4mR2JT7ybU71dXzyGIpMPK0OmmAEstbOOoIX55cclZJyiQhZgu403hcQKQnlI3IrqTTrERLdefxswSqSmMBTHOZhkg==)
       auto-index-creation: true
 
 
 logging:
   level:
     org.springframework.data.mongodb.core: debug
+
+jasypt:
+  encryptor:
+    # 指定加密方式
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

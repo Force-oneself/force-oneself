@@ -8,19 +8,17 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.quan.common.bean.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.lang.reflect.Constructor;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -228,5 +226,22 @@ public class Objs {
 
     public static <T> List<T> emptyList() {
         return Collections.emptyList();
+    }
+
+    public static <T> T safeData(Supplier<T> dataProvider, String msg) {
+        try {
+            return dataProvider.get();
+        } catch (Throwable throwable) {
+            log.error(msg, throwable);
+            throw new RuntimeException(msg);
+        }
+    }
+
+    public static <T> T safeRData(Supplier<? extends R<T>> supplier, String msg) {
+        R<T> result = safeData(supplier, msg);
+        if (result.getSuccess()) {
+            return result.getData();
+        }
+        throw new RuntimeException(msg);
     }
 }
