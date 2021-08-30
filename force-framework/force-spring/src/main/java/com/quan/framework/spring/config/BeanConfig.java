@@ -13,7 +13,6 @@ import org.springframework.beans.factory.support.MergedBeanDefinitionPostProcess
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
@@ -21,7 +20,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @Author heyq
  * @Date 2021-03-03
  **/
-@Configuration
+//@Configuration
 @EnableAspectJAutoProxy
 @ComponentScan("com.quan.framework.spring.aop")
 public class BeanConfig {

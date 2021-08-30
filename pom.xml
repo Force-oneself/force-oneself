@@ -14,6 +14,7 @@
         <module>force-framework</module>
         <module>force-ordinary</module>
         <module>force-wx</module>
+        <module>force-reactive</module>
     </modules>
 
     <properties>

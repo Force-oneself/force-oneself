@@ -3,6 +3,8 @@ package com.quan.common.util;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 
+import java.util.Map;
+
 /**
  * @author Force-oneself
  * @Description JasyptUtil
@@ -50,10 +52,14 @@ public class JasyptUtil {
 
 
     public static void main(String[] args) {
+
+        Map<String, String> getenv = System.getenv();
+
+        String password = System.getProperties().getProperty("jasypt.encryptor.password");
         // 加密
-        String encPwd = encyptPwd("demo", "123456");
+        String encPwd = encyptPwd(password, "123456");
         // 解密
-        String decPwd = decyptPwd("demo", encPwd);
+        String decPwd = decyptPwd(password, encPwd);
         System.out.println(encPwd);
         System.out.println(decPwd);
     }

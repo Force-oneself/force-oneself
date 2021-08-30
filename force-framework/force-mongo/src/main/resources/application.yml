@@ -14,3 +14,4 @@ jasypt:
     # 指定加密方式
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}

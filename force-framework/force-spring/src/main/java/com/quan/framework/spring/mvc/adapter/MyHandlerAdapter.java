@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc;
+package com.quan.framework.spring.mvc.adapter;
 
 import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.ModelAndView;

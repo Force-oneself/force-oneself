@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc;
+package com.quan.framework.spring.mvc.mapping;
 
 import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.HandlerMapping;

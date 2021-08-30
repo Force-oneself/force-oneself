@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc;
+package com.quan.framework.spring.mvc.resolver;
 
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;

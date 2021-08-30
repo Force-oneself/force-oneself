@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc;
+package com.quan.framework.spring.mvc.converter;
 
 import org.springframework.core.convert.converter.Converter;
 

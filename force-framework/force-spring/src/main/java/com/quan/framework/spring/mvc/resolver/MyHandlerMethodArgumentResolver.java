@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc;
+package com.quan.framework.spring.mvc.resolver;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
