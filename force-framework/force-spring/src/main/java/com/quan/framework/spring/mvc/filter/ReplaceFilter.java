@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * @author Force-oneself
- * @Description ReplaceFilter
+ * @Description ReplaceFilter 将servlet替换为可以支持重复读取body字节流的实现
  * @date 2021-08-24
  */
 @Component

@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: force-amqp
+
+
+server:
+  port: 8080

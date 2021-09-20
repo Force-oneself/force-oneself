@@ -3,7 +3,11 @@ package com.quan.framework.mongo.controller;
 import com.quan.framework.mongo.spring.MongoDemo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 /**
  * @author Force-oneself
@@ -36,5 +40,22 @@ public class TestController {
             default:
                 break;
         }
+    }
+
+    @GetMapping("/mapParam")
+    public Map<Double, Object> mapParam(@RequestParam Map<Double, Object> param) {
+        param.get(33.0);
+        return param;
+    }
+
+    @GetMapping("/defaultValue")
+    public String defaultValue(@RequestParam(defaultValue = "dss") String param) {
+        return param;
+    }
+
+
+    @PostMapping("/file")
+    public String file(MultipartFile filename) {
+        return filename.getName();
     }
 }

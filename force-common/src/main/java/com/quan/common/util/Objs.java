@@ -169,6 +169,7 @@ public class Objs {
      * @param <T>       类名
      * @return 目标类名称
      */
+    @SuppressWarnings("unchecked")
     public static <T> Class<T> forName(String className) {
         try {
             return (Class<T>) Class.forName(className);
@@ -184,6 +185,7 @@ public class Objs {
      * @param <T>    对象类型
      * @return 给定对象的所属类型
      */
+    @SuppressWarnings("unchecked")
     public static <T> Class<T> classOf(T object) {
         Objects.requireNonNull(object, "判断类型的对象为空,无法获取对象类型");
         return (Class<T>) object.getClass();
@@ -196,6 +198,7 @@ public class Objs {
      * @param <T>   对象类型
      * @return 给定对象类型实例
      */
+    @SuppressWarnings("unchecked")
     public static <T> T newInstance(Class<T> clazz) {
         if (Objects.isNull(clazz)) {
             return null;

@@ -17,6 +17,7 @@
         <module>force-document</module>
         <module>force-demo</module>
         <module>force-security</module>
+        <module>force-amqp</module>
     </modules>
 
     <artifactId>force-framework</artifactId>
