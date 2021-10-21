@@ -25,7 +25,7 @@ public abstract class Latch {
     public abstract void countDown();
 
     // 获取当前还有多少个线程没有完成任务
-    public abstract int getUnarrived();
+    public abstract int getNotArrived();
 
     // 有超时的等待
     public abstract void await(TimeUnit unit, long time) throws InterruptedException, WaitTimeoutException;

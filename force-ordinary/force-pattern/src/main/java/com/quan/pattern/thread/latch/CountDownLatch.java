@@ -38,7 +38,7 @@ public class CountDownLatch extends Latch {
     }
 
     @Override
-    public int getUnarrived() {
+    public int getNotArrived() {
         // 返回有多少线程还未完成任务
         return limit;
     }
@@ -57,7 +57,7 @@ public class CountDownLatch extends Latch {
                 if (TimeUnit.NANOSECONDS.toMillis(remainingNanos) <= 0) {
                     throw new WaitTimeoutException("the wait time over specify time.");
                 }
-                // 等待remianingNanos, 在等待的过程中有可能会被中断，需要重新计算remainingNanos
+                // 等待remainingNanos, 在等待的过程中有可能会被中断，需要重新计算remainingNanos
                 this.wait(TimeUnit.NANOSECONDS.toMillis(remainingNanos));
                 remainingNanos = endNanos - System.nanoTime();
             }

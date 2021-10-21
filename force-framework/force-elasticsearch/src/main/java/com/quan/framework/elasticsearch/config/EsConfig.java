@@ -1,15 +1,10 @@
 package com.quan.framework.elasticsearch.config;
 
+import com.quan.common.util.Masks;
 import org.apache.http.HttpHost;
-import org.apache.http.client.config.RequestConfig;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.Node;
-import org.elasticsearch.client.NodeSelector;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestClient;
-import org.elasticsearch.client.RestClientBuilder;
-import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.*;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -42,19 +37,13 @@ public class EsConfig {
         // 定义节点选择器 这个是跳过data=false，ingest为false的节点
         restClient.setNodeSelector(NodeSelector.SKIP_DEDICATED_MASTERS);
         // 定义默认请求配置回调
-        restClient.setRequestConfigCallback(new RestClientBuilder.RequestConfigCallback() {
-            @Override
-            public RequestConfig.Builder customizeRequestConfig(RequestConfig.Builder requestConfigBuilder) {
-                return requestConfigBuilder
-                        // 连接超时（默认为1秒）
-                        .setConnectTimeout(90000)
-                        // 套接字超时（默认为30秒）
-                        .setSocketTimeout(30000);
-            }
-        });
+        restClient.setRequestConfigCallback(requestConfigBuilder -> requestConfigBuilder
+                // 连接超时（默认为1秒）
+                .setConnectTimeout(90000)
+                // 套接字超时（默认为30秒）
+                .setSocketTimeout(30000));
 
-        RestHighLevelClient client = new RestHighLevelClient(restClient);
-        return client;
+        return new RestHighLevelClient(restClient);
     }
 
 
@@ -65,7 +54,7 @@ public class EsConfig {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
         BoolQueryBuilder queryBuilder =
-        //一定要转成小写 toLowerCase() 否则搜索不到，加上以后大小写都可搜索到
+                //一定要转成小写 toLowerCase() 否则搜索不到，加上以后大小写都可搜索到
                 QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("case_number", ("*201910*").toLowerCase()));
         // 注意 searchSourceBuilder 默认返回10 条数据，如果需要返回实级条数需要设置
         // 可以使用分页查找 比如设置 searchSourceBuilder.from(1);就是从第二页进行查找，类似于MySQL中的limit
@@ -88,6 +77,10 @@ public class EsConfig {
             System.out.println(searchHit.toString());
             System.out.println("=============1");
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Masks.eqMulti(6, 1, 3));
     }
 
 }
