@@ -33,7 +33,7 @@ public class DefaultQuery<T> implements PageableQuery<T>{
     }
 
     public static <T> DefaultQuery<T> of(Query query, Class<T> entityClass) {
-        return new DefaultQuery<T>(query, entityClass);
+        return new DefaultQuery<>(query, entityClass);
     }
 
     public DefaultQuery<T> size(int size) {

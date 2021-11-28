@@ -1,10 +1,6 @@
 package com.quan.demo.stream;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -31,28 +27,46 @@ public class StreamDemo {
 
     public static void main(String[] args) {
         List<User> users = StreamDemo.initData();
-//        // 按照性别分组
-//        Map<Integer, List<User>> userMap = users.stream().collect(Collectors.groupingBy(User::getSex));
-//        // 按年龄分区
-//        Map<Boolean, List<User>> partitioningBy = users.stream().collect(Collectors.partitioningBy(obj -> obj.getAge() > 20));
-//
-//        Integer minAgeUser = users.stream().map(User::getAge).min(Integer::compareTo).orElse(null);
-//        Integer maxAgeUser = users.stream().map(User::getAge).max(Integer::compareTo).orElse(null);
-//
-//        long countAge = users.stream().map(User::getAge).count();
-//        List<User> girls = users.stream().filter(obj -> obj.getSex() == 1).collect(Collectors.toList());
+        // 按照性别分组
+        Map<Integer, List<User>> userMap = users.stream()
+                .collect(Collectors.groupingBy(User::getSex));
+        // 按年龄分区
+        Map<Boolean, List<User>> partitioningBy = users.stream()
+                .collect(Collectors.partitioningBy(obj -> obj.getAge() > 20));
+
+        Integer minAgeUser = users.stream()
+                .map(User::getAge)
+                .min(Integer::compareTo)
+                .orElse(null);
+
+        Integer maxAgeUser = users.stream()
+                .map(User::getAge)
+                .max(Integer::compareTo)
+                .orElse(null);
+
+        long countAge = users.stream().map(User::getAge).count();
+        List<User> girls = users.stream()
+                .filter(obj -> obj.getSex() == 1)
+                .collect(Collectors.toList());
 //
 //        // 获取到性别分组后的名字集合
-//        Map<Integer, List<String>> nameGroupBySex = users.stream().collect(Collectors.groupingBy(User::getSex, Collectors.mapping(User::getName, Collectors.toList())));
+        Map<Integer, List<String>> nameGroupBySex = users.stream()
+                .collect(Collectors.groupingBy(User::getSex, Collectors.mapping(User::getName, Collectors.toList())));
 //
-        String hobbyString = users.stream().map(User::getHobbies).flatMap(Collection::stream).map(Hobby::getName).distinct().collect(Collectors.joining(",", "[", "]"));
+        String hobbyString = users.stream()
+                .map(User::getHobbies)
+                .flatMap(Collection::stream)
+                .map(Hobby::getName)
+                .distinct()
+                .collect(Collectors.joining(",", "[", "]"));
+
 //        System.out.println(hobbyString);
         Stream<User> userStream = users.stream();
         Stream<String> mapStream = userStream.map(User::getName);
         Stream<String> filterStream = mapStream.filter(Objects::nonNull);
-        List<String> collect = filterStream.collect(Collectors.toList());
+//        List<String> collect = filterStream.collect(Collectors.toList());
 //        Stream<User> filterStream = userStream.filter(Objects::nonNull);
-//        Stream<User> peekStream = userStream.peek(System.out::println);
+        Stream<User> peekStream = userStream.peek(System.out::println);
 //        Stream<Hobby> flatMap = userStream.map(User::getHobbies).flatMap(Collection::stream);
 
         System.out.println("debug .....");

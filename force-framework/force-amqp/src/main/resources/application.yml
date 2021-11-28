@@ -5,9 +5,6 @@ spring:
   application:
     name: force-amqp
   rabbitmq:
-    host: 127.0.0.1
+    host: 101.43.20.134
     username: guest
-    password: he970628
-
-
-
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}
