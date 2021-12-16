@@ -2,7 +2,6 @@ package com.quan.framework.amqp.work;
 
 import com.quan.framework.amqp.util.RabbitMQUtils;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.DeliverCallback;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +28,9 @@ public class Work {
     public void consumer() throws IOException {
 
         Channel channel = RabbitMQUtils.getChannel(rabbitTemplate);
-        DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+        // acknowledgment is covered below
+        boolean autoAck = true;
+        channel.basicConsume(TASK_QUEUE_NAME, autoAck, (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
             System.out.println(" [x] Received '" + message + "'");
@@ -40,15 +41,13 @@ public class Work {
             } finally {
                 System.out.println(" [x] Done");
             }
-        };
-        // acknowledgment is covered below
-        boolean autoAck = true;
-        channel.basicConsume(TASK_QUEUE_NAME, autoAck, deliverCallback, consumerTag -> { });
+        }, consumerTag -> {
+        });
 
     }
 
     private static void doWork(String task) throws InterruptedException {
-        for (char ch: task.toCharArray()) {
+        for (char ch : task.toCharArray()) {
             if (ch == '.') Thread.sleep(1000);
         }
     }
