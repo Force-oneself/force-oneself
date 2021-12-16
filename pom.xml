@@ -15,6 +15,7 @@
         <module>force-ordinary</module>
         <module>force-wx</module>
         <module>force-reactive</module>
+        <module>force-jdk</module>
     </modules>
 
     <properties>
