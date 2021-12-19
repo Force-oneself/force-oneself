@@ -51,4 +51,8 @@ public final class RabbitMQUtils {
         return factory.newConnection();
     }
 
+    public static Channel getChannel() throws IOException, TimeoutException {
+        return getConnection().createChannel();
+    }
+
 }
