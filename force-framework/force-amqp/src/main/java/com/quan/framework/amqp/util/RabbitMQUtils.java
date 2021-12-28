@@ -41,9 +41,9 @@ public final class RabbitMQUtils {
     public static Connection getConnection() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername("guest");
-        factory.setPassword("guest");
+        factory.setPassword("qu@n");
         factory.setVirtualHost("/");
-        factory.setHost("localhost");
+        factory.setHost("101.43.20.134");
         factory.setPort(5672);
         // 可以使用uri替代
 //        factory.setUri( "amqp://userName:password@hostName:portNumber/virtualHost" );

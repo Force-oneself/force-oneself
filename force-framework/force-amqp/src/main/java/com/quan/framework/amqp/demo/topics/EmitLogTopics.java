@@ -41,7 +41,6 @@ public class EmitLogTopics {
     private static String joinStrings(String[] strings) {
         int length = strings.length;
         if (length == 0) return "";
-        if (length < 1) return "";
         StringBuilder words = new StringBuilder(strings[1]);
         for (int i = 1 + 1; i < length; i++) {
             words.append(" ").append(strings[i]);

@@ -33,7 +33,6 @@ public class EasyExcelUtil {
      * @param heads    表格头部名为：List<List> 类型的集合
      * @param fields   数据内容字段集合
      * @param filename 文件名
-     * @throws IOException
      */
     public static void download(HttpServletResponse response, List<? extends Map<String, Object>> dataList,
                                 List<List<String>> heads, List<String> fields, String filename) throws IOException {
@@ -52,9 +51,9 @@ public class EasyExcelUtil {
     /**
      * 将原来PoiUtil中的Map类型的集合与实体字段相对应装换成EasyExcel中的List类型的集合
      *
-     * @param fields
-     * @param dataList
-     * @return
+     * @param fields 字段
+     * @param dataList 数据
+     * @return 转换后的数据
      */
     private static List<List<Object>> restructureData(List<String> fields, List<? extends Map<String, Object>> dataList) {
         // 所有行的集合
@@ -82,8 +81,8 @@ public class EasyExcelUtil {
      * @param sheetName sheet表的名称
      * @param data      需要写入的数据
      */
-    public static void write(@NotNull HttpServletResponse response, @NotNull Class clazz, @NotNull String fileName,
-                             @NotNull String sheetName, List data) {
+    public static void write(@NotNull HttpServletResponse response, @NotNull Class<?> clazz, @NotNull String fileName,
+                             @NotNull String sheetName, List<?> data) {
         doGarbled(response, fileName);
         try (ServletOutputStream outputStream = response.getOutputStream()) {
             EasyExcel.write(outputStream, clazz)
@@ -104,7 +103,7 @@ public class EasyExcelUtil {
      * @param sheetName sheet名称
      * @param data 写入数据
      */
-    public static void write(@NotNull String fileName, @NotNull Class clazz, @NotNull String sheetName, List data) {
+    public static void write(@NotNull String fileName, @NotNull Class<?> clazz, @NotNull String sheetName, List<?> data) {
         EasyExcel.write(fileName, clazz)
                 .sheet(sheetName)
                 .registerWriteHandler(DefaultExcelCell.DEFAULT_CELL_STYLE_STRATEGY)

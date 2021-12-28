@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Force-oneself
- * @Description AmqpApplicaion
+ * @Description AmqpApplication
  * @date 2021-09-20
  */
 @SpringBootApplication
