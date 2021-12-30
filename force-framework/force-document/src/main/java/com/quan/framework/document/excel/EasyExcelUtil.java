@@ -1,7 +1,7 @@
 package com.quan.framework.document.excel;
 
 import com.alibaba.excel.EasyExcel;
-import com.quan.framework.document.excel.constant.DefaultExcelCell;
+import com.quan.framework.document.excel.constant.DefaultExcel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,8 +42,8 @@ public class EasyExcelUtil {
 
         EasyExcel.write(response.getOutputStream())
                 .head(heads)
-                .registerWriteHandler(DefaultExcelCell.DEFAULT_CELL_STYLE_STRATEGY)
-                .registerWriteHandler(DefaultExcelCell.DEFAULT_CUSTOM_STRATEGY)
+                .registerWriteHandler(DefaultExcel.DEFAULT_CELL_STYLE_STRATEGY)
+                .registerWriteHandler(DefaultExcel.DEFAULT_CUSTOM_STRATEGY)
                 .sheet("数据")
                 .doWrite(resultData);
     }
@@ -51,7 +51,7 @@ public class EasyExcelUtil {
     /**
      * 将原来PoiUtil中的Map类型的集合与实体字段相对应装换成EasyExcel中的List类型的集合
      *
-     * @param fields 字段
+     * @param fields   字段
      * @param dataList 数据
      * @return 转换后的数据
      */
@@ -59,12 +59,11 @@ public class EasyExcelUtil {
         // 所有行的集合
         List<List<Object>> list = new ArrayList<>();
 
-        for (int i = 0; i < dataList.size(); i++) {
+        for (Map<String, Object> stringObjectMap : dataList) {
             // 第 n 行的数据
             List<Object> row = new ArrayList<>();
             for (String field : fields) {
-                Map<String, Object> mapData = dataList.get(i);
-                row.add(mapData.get(field));
+                row.add(stringObjectMap.get(field));
             }
             list.add(row);
         }
@@ -87,8 +86,8 @@ public class EasyExcelUtil {
         try (ServletOutputStream outputStream = response.getOutputStream()) {
             EasyExcel.write(outputStream, clazz)
                     .sheet(sheetName)
-                    .registerWriteHandler(DefaultExcelCell.DEFAULT_CELL_STYLE_STRATEGY)
-                    .registerWriteHandler(DefaultExcelCell.DEFAULT_CUSTOM_STRATEGY)
+                    .registerWriteHandler(DefaultExcel.DEFAULT_CELL_STYLE_STRATEGY)
+                    .registerWriteHandler(DefaultExcel.DEFAULT_CUSTOM_STRATEGY)
                     .doWrite(data);
         } catch (IOException e) {
             e.printStackTrace();
@@ -98,16 +97,16 @@ public class EasyExcelUtil {
     /**
      * 本地写入数据
      *
-     * @param fileName 文件路劲名（路劲+文件名）
-     * @param clazz 带注解的实体
+     * @param fileName  文件路劲名（路劲+文件名）
+     * @param clazz     带注解的实体
      * @param sheetName sheet名称
-     * @param data 写入数据
+     * @param data      写入数据
      */
     public static void write(@NotNull String fileName, @NotNull Class<?> clazz, @NotNull String sheetName, List<?> data) {
         EasyExcel.write(fileName, clazz)
                 .sheet(sheetName)
-                .registerWriteHandler(DefaultExcelCell.DEFAULT_CELL_STYLE_STRATEGY)
-                .registerWriteHandler(DefaultExcelCell.DEFAULT_CUSTOM_STRATEGY)
+                .registerWriteHandler(DefaultExcel.DEFAULT_CELL_STYLE_STRATEGY)
+                .registerWriteHandler(DefaultExcel.DEFAULT_CUSTOM_STRATEGY)
                 .doWrite(data);
     }
 
@@ -121,7 +120,7 @@ public class EasyExcelUtil {
         // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
-        // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+        // 这里URLEncoder.encode可以防止中文乱码 当然和EasyExcel没有关系
         try {
             response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
         } catch (UnsupportedEncodingException e) {

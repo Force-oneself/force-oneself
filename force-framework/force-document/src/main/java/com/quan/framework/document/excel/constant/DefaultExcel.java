@@ -15,7 +15,7 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
  * @Author heyq
  * @Date 2020-09-24
  **/
-public final class DefaultExcelCell {
+public final class DefaultExcel {
 
     /**
      * 默认的Excel中头部样式
