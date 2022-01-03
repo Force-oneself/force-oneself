@@ -1,5 +1,7 @@
 package com.quan.demo.freemarker;
 
+import com.quan.demo.freemarker.meta.ColumnMeta;
+import com.quan.demo.freemarker.meta.DefaultColumnMeta;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,8 +22,6 @@ public class DatabaseUtils {
     private static final String URL = "jdbc:mysql://localhost:3306/javaweb?useUnicode=true&characterEncoding=utf8";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "mysql";
-
-    private static final String SQL = "SELECT * FROM ";// 数据库操作
 
     static {
         try {
@@ -47,157 +47,40 @@ public class DatabaseUtils {
     }
 
     /**
-     * 关闭数据库连接
-     * @param conn
-     */
-    public static void closeConnection(Connection conn) {
-        if(conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                LOGGER.error("close connection failure", e);
-            }
-        }
-    }
-
-    /**
      * 获取数据库下的所有表名
      */
     public static List<String> getTableNames() {
         List<String> tableNames = new ArrayList<>();
-        Connection conn = getConnection();
-        ResultSet rs = null;
-        try {
-            //获取数据库的元数据
-            DatabaseMetaData db = conn.getMetaData();
-            //从元数据中获取到所有的表名
-            rs = db.getTables(null, null, null, new String[] { "TABLE" });
-            while(rs.next()) {
+        try (Connection conn = getConnection();
+             ResultSet rs = conn.getMetaData().getTables(null, null, null, new String[]{"TABLE"})) {
+            while (rs.next()) {
                 tableNames.add(rs.getString(3));
             }
         } catch (SQLException e) {
             LOGGER.error("getTableNames failure", e);
-        } finally {
-            try {
-                rs.close();
-                closeConnection(conn);
-            } catch (SQLException e) {
-                LOGGER.error("close ResultSet failure", e);
-            }
         }
         return tableNames;
     }
 
-    /**
-     * 获取表中所有字段名称
-     * @param tableName 表名
-     * @return
-     */
-    public static List<String> getColumnNames(String tableName) {
-        List<String> columnNames = new ArrayList<>();
-        //与数据库的连接
-        Connection conn = getConnection();
-        PreparedStatement pStemt = null;
-        String tableSql = SQL + tableName;
-        try {
-            pStemt = conn.prepareStatement(tableSql);
-            //结果集元数据
-            ResultSetMetaData rsmd = pStemt.getMetaData();
-            //表列数
-            int size = rsmd.getColumnCount();
-            for (int i = 0; i < size; i++) {
-                columnNames.add(rsmd.getColumnName(i + 1));
-            }
-        } catch (SQLException e) {
-            LOGGER.error("getColumnNames failure", e);
-        } finally {
-            if (pStemt != null) {
-                try {
-                    pStemt.close();
-                    closeConnection(conn);
-                } catch (SQLException e) {
-                    LOGGER.error("getColumnNames close pstem and connection failure", e);
-                }
-            }
-        }
-        return columnNames;
-    }
-
-    /**
-     * 获取表中所有字段类型
-     * @param tableName
-     * @return
-     */
-    public static List<String> getColumnTypes(String tableName) {
-        List<String> columnTypes = new ArrayList<>();
-        //与数据库的连接
-        Connection conn = getConnection();
-        PreparedStatement pStemt = null;
-        String tableSql = SQL + tableName;
-        try {
-            pStemt = conn.prepareStatement(tableSql);
-            //结果集元数据
-            ResultSetMetaData rsmd = pStemt.getMetaData();
-            //表列数
-            int size = rsmd.getColumnCount();
-            for (int i = 0; i < size; i++) {
-                columnTypes.add(rsmd.getColumnTypeName(i + 1));
-            }
-        } catch (SQLException e) {
-            LOGGER.error("getColumnTypes failure", e);
-        } finally {
-            if (pStemt != null) {
-                try {
-                    pStemt.close();
-                    closeConnection(conn);
-                } catch (SQLException e) {
-                    LOGGER.error("getColumnTypes close pstem and connection failure", e);
-                }
-            }
-        }
-        return columnTypes;
-    }
-
-    /**
-     * 获取表中字段的所有注释
-     * @param tableName
-     * @return
-     */
-    public static List<String> getColumnComments(String tableName) {
-        List<String> columnTypes = new ArrayList<>();
-        //与数据库的连接
-        Connection conn = getConnection();
-        PreparedStatement pStemt = null;
-        String tableSql = SQL + tableName;
-        List<String> columnComments = new ArrayList<>();//列名注释集合
-        ResultSet rs = null;
-        try {
-            pStemt = conn.prepareStatement(tableSql);
-            rs = pStemt.executeQuery("show full columns from " + tableName);
+    public static List<ColumnMeta> getColumnMeta(String tableName) {
+        ArrayList<ColumnMeta> metas = new ArrayList<>();
+        try (Connection connection = getConnection();
+             ResultSet rs = connection.getMetaData().getColumns(null, "%", tableName, "%")) {
+            int index = 0;
             while (rs.next()) {
-                columnComments.add(rs.getString("Comment"));
+                index++;
+                DefaultColumnMeta meta = new DefaultColumnMeta();
+                meta.set("COLUMN_INDEX", index);
+                meta.set("COLUMN_NAME", rs.getString("COLUMN_NAME"));
+                // 数据类型
+                meta.set("TYPE_NAME", rs.getString("TYPE_NAME"));
+                // 描述
+                meta.set("REMARKS", rs.getString("REMARKS"));
+                metas.add(meta);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                    closeConnection(conn);
-                } catch (SQLException e) {
-                    LOGGER.error("getColumnComments close ResultSet and connection failure", e);
-                }
-            }
+            LOGGER.error("数据获取异常", e);
         }
-        return columnComments;
-    }
-    public static void main(String[] args) {
-        List<String> tableNames = getTableNames();
-        System.out.println("tableNames:" + tableNames);
-        for (String tableName : tableNames) {
-            System.out.println("ColumnNames:" + getColumnNames(tableName));
-            System.out.println("ColumnTypes:" + getColumnTypes(tableName));
-            System.out.println("ColumnComments:" + getColumnComments(tableName));
-        }
+        return metas;
     }
 }

@@ -1,5 +1,6 @@
 package com.quan.demo.freemarker;
 
+import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -43,7 +44,7 @@ public class FreemarkerDemo {
     public static void gen(Map<String, Object> rootMap) throws IOException, TemplateException {
         Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
         config.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
-//        config.setTemplateLoader(new ClassTemplateLoader(FreemarkerDemo.class, "/ftl"));
+        config.setTemplateLoader(new ClassTemplateLoader(FreemarkerDemo.class, "/ftl"));
 
         Template template = config.getTemplate("/entity.ftl", "UTF-8");
         Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/src/main/java/com/quan/demo/freemarker/User.java"), StandardCharsets.UTF_8));
@@ -51,6 +52,9 @@ public class FreemarkerDemo {
         out.flush();
         out.close();
 
+        // 生成数据模版
+        // 构建模版生成文件
     }
+
 
 }
