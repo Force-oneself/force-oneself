@@ -45,7 +45,7 @@ public class AutoColumnWidthStrategy extends AbstractColumnWidthStyleStrategy {
 
     private Integer dataLength(List<CellData> cellDataList, Cell cell, Boolean isHead) {
         if (isHead != null && isHead) {
-            return Math.max(cell.getStringCellValue().getBytes().length, cell.getStringCellValue().length() * 2);
+            return autoLength(cell.getStringCellValue());
         }
         CellData cellData = cellDataList.get(0);
         CellDataTypeEnum type = cellData.getType();
@@ -54,13 +54,17 @@ public class AutoColumnWidthStrategy extends AbstractColumnWidthStyleStrategy {
         }
         switch (type) {
             case STRING:
-                return cellData.getStringValue().getBytes().length;
+                return this.autoLength(cellData.getStringValue());
             case BOOLEAN:
-                return cellData.getBooleanValue().toString().getBytes().length;
+                return this.autoLength(cellData.getBooleanValue().toString());
             case NUMBER:
-                return cellData.getNumberValue().toString().getBytes().length;
+                return this.autoLength(cellData.getNumberValue().toString());
             default:
                 return -1;
         }
+    }
+
+    private int autoLength(String cellValue) {
+        return Math.max(cellValue.getBytes().length, cellValue.length() * 2);
     }
 }
