@@ -18,6 +18,7 @@
         <module>force-demo</module>
         <module>force-security</module>
         <module>force-amqp</module>
+        <module>force-producer-core</module>
     </modules>
 
     <artifactId>force-framework</artifactId>
