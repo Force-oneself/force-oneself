@@ -1,6 +1,5 @@
 package com.quan.framework.spring.demo;
 
-import cn.hutool.json.JSONUtil;
 import com.quan.framework.spring.config.MyApplicationContext;
 import com.quan.framework.spring.expand.json.context.ClassPathJsonApplicationContext;
 import com.quan.framework.spring.config.BeanConfig;
@@ -48,8 +47,6 @@ public class SpringReaderDemo {
 
     public static void print(List<?> list) {
         list.stream()
-                .map(JSONUtil::parse)
-                .map(JSONUtil::toJsonStr)
                 .forEach(System.out::println);
     }
 
