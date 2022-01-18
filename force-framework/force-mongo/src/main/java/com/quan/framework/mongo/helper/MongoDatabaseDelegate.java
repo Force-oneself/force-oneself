@@ -73,12 +73,13 @@ public class MongoDatabaseDelegate implements MongoDatabase {
 
     @Override
     public MongoCollection<Document> getCollection(String collectionName) {
-        return new MongoCollectionDelegate<>(delegate.getCollection(collectionName));
+        return new MongoCollectionDelegate<>(delegate.getCollection(collectionName), collectionName, Document.class);
     }
 
     @Override
     public <TDocument> MongoCollection<TDocument> getCollection(String collectionName, Class<TDocument> tDocumentClass) {
-        return new MongoCollectionDelegate<>(delegate.getCollection(collectionName, tDocumentClass));
+        return new MongoCollectionDelegate<>(delegate.getCollection(collectionName, tDocumentClass),
+                collectionName, tDocumentClass);
     }
 
     @Override

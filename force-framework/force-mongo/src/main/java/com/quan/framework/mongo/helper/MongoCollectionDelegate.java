@@ -24,10 +24,25 @@ import java.util.List;
 @SuppressWarnings("NullableProblems")
 public class MongoCollectionDelegate<T> implements MongoCollection<T> {
 
+    /**
+     * 实际执行的代理类
+     */
     private final MongoCollection<T> delegate;
 
-    public MongoCollectionDelegate(MongoCollection<T> delegate) {
+    /**
+     * 集合名
+     */
+    private final String collectionName;
+
+    /**
+     * class
+     */
+    private final Class<T> tDocumentClass;
+
+    public MongoCollectionDelegate(MongoCollection<T> delegate, String collectionName, Class<T> tDocumentClass) {
         this.delegate = delegate;
+        this.collectionName = collectionName;
+        this.tDocumentClass = tDocumentClass;
     }
 
     @Override

@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.MongoDbFactory;
 @SuppressWarnings("NullableProblems")
 public class MongoDbFactoryDelegate implements MongoDbFactory {
 
-    private MongoDbFactory delegate;
+    private final MongoDbFactory delegate;
 
     public MongoDbFactoryDelegate(MongoDbFactory delegate) {
         this.delegate = delegate;
@@ -38,6 +38,7 @@ public class MongoDbFactoryDelegate implements MongoDbFactory {
     }
 
     @Override
+    @Deprecated
     public DB getLegacyDb() {
         return this.delegate.getLegacyDb();
     }
