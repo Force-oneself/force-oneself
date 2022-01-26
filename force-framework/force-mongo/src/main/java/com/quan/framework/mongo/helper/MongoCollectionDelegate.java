@@ -14,6 +14,7 @@ import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.conversions.Bson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,10 +40,22 @@ public class MongoCollectionDelegate<T> implements MongoCollection<T> {
      */
     private final Class<T> tDocumentClass;
 
+    /**
+     * 处理器
+     */
+    private final List<CollectionHandler> collectionHandlers;
+
+
     public MongoCollectionDelegate(MongoCollection<T> delegate, String collectionName, Class<T> tDocumentClass) {
+        this(delegate, collectionName, tDocumentClass, new ArrayList<>());
+    }
+
+    public MongoCollectionDelegate(MongoCollection<T> delegate, String collectionName, Class<T> tDocumentClass,
+                                   List<CollectionHandler> handlers) {
         this.delegate = delegate;
         this.collectionName = collectionName;
         this.tDocumentClass = tDocumentClass;
+        this.collectionHandlers = handlers == null ? new ArrayList<>() : handlers;
     }
 
     @Override
@@ -103,71 +116,85 @@ public class MongoCollectionDelegate<T> implements MongoCollection<T> {
     @Override
     @Deprecated
     public long count() {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT));
         return delegate.count();
     }
+
 
     @Override
     @Deprecated
     public long count(Bson filter) {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT).param(filter));
         return delegate.count(filter);
     }
 
     @Override
     @Deprecated
     public long count(Bson filter, CountOptions options) {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT).param(filter).param(options));
         return delegate.count(filter, options);
     }
 
     @Override
     @Deprecated
     public long count(ClientSession clientSession) {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT).param(clientSession));
         return delegate.count(clientSession);
     }
 
     @Override
     @Deprecated
     public long count(ClientSession clientSession, Bson filter) {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT).param(clientSession).param(filter));
         return delegate.count(clientSession, filter);
     }
 
     @Override
     @Deprecated
     public long count(ClientSession clientSession, Bson filter, CountOptions options) {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT).param(clientSession).param(filter).param(options));
         return delegate.count(clientSession, filter, options);
     }
 
     @Override
     public long countDocuments() {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT_DOCUMENTS));
         return delegate.countDocuments();
     }
 
     @Override
     public long countDocuments(Bson filter) {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT_DOCUMENTS).param(filter));
         return delegate.countDocuments(filter);
     }
 
     @Override
     public long countDocuments(Bson filter, CountOptions options) {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT_DOCUMENTS).param(filter).param(options));
         return delegate.countDocuments(filter, options);
     }
 
     @Override
     public long countDocuments(ClientSession clientSession) {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT_DOCUMENTS).param(clientSession));
         return delegate.countDocuments(clientSession);
     }
 
     @Override
     public long countDocuments(ClientSession clientSession, Bson filter) {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT_DOCUMENTS).param(clientSession).param(filter));
         return delegate.countDocuments(clientSession, filter);
     }
 
     @Override
     public long countDocuments(ClientSession clientSession, Bson filter, CountOptions options) {
+        this.handler(SimpleMethodOptions.of(MethodType.COUNT_DOCUMENTS).param(clientSession).param(filter).param(options));
         return delegate.countDocuments(clientSession, filter, options);
     }
 
     @Override
     public long estimatedDocumentCount() {
+        this.handler(SimpleMethodOptions.of(MethodType.ESTIMATED_DOCUMENT_COUNT));
         return delegate.estimatedDocumentCount();
     }
 
@@ -178,121 +205,148 @@ public class MongoCollectionDelegate<T> implements MongoCollection<T> {
 
     @Override
     public <TResult> DistinctIterable<TResult> distinct(String fieldName, Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.DISTINCT).param(fieldName).param(tResultClass));
         return delegate.distinct(fieldName, tResultClass);
     }
 
     @Override
     public <TResult> DistinctIterable<TResult> distinct(String fieldName, Bson filter, Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.DISTINCT).param(fieldName).param(filter).param(tResultClass));
         return delegate.distinct(fieldName, filter, tResultClass);
     }
 
     @Override
-    public <TResult> DistinctIterable<TResult> distinct(ClientSession clientSession, String fieldName, Class<TResult> tResultClass) {
+    public <TResult> DistinctIterable<TResult> distinct(ClientSession clientSession, String fieldName,
+                                                        Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.DISTINCT).param(clientSession).param(fieldName).param(tResultClass));
         return delegate.distinct(clientSession, fieldName, tResultClass);
     }
 
     @Override
-    public <TResult> DistinctIterable<TResult> distinct(ClientSession clientSession, String fieldName, Bson filter, Class<TResult> tResultClass) {
+    public <TResult> DistinctIterable<TResult> distinct(ClientSession clientSession, String fieldName, Bson filter,
+                                                        Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.DISTINCT).param(fieldName).param(filter).param(tResultClass));
         return delegate.distinct(clientSession, fieldName, filter, tResultClass);
     }
 
     @Override
     public FindIterable<T> find() {
+        this.handler(SimpleMethodOptions.of(MethodType.FIND));
         return delegate.find();
     }
 
     @Override
     public <TResult> FindIterable<TResult> find(Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.FIND).param(tResultClass));
         return delegate.find(tResultClass);
     }
 
     @Override
     public FindIterable<T> find(Bson filter) {
+        this.handler(SimpleMethodOptions.of(MethodType.FIND).param(filter));
         return delegate.find(filter);
     }
 
     @Override
     public <TResult> FindIterable<TResult> find(Bson filter, Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.FIND).param(filter).param(tResultClass));
         return delegate.find(filter, tResultClass);
     }
 
     @Override
     public FindIterable<T> find(ClientSession clientSession) {
+        this.handler(SimpleMethodOptions.of(MethodType.FIND).param(clientSession));
         return delegate.find(clientSession);
     }
 
     @Override
     public <TResult> FindIterable<TResult> find(ClientSession clientSession, Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.FIND).param(clientSession).param(tResultClass));
         return delegate.find(clientSession, tResultClass);
     }
 
     @Override
     public FindIterable<T> find(ClientSession clientSession, Bson filter) {
+        this.handler(SimpleMethodOptions.of(MethodType.FIND).param(clientSession).param(filter));
         return delegate.find(clientSession, filter);
     }
 
     @Override
     public <TResult> FindIterable<TResult> find(ClientSession clientSession, Bson filter, Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.FIND).param(clientSession).param(filter).param(tResultClass));
         return delegate.find(clientSession, filter, tResultClass);
     }
 
     @Override
     public AggregateIterable<T> aggregate(List<? extends Bson> pipeline) {
+        this.handler(SimpleMethodOptions.of(MethodType.AGGREGATE).param(pipeline));
         return delegate.aggregate(pipeline);
     }
 
     @Override
     public <TResult> AggregateIterable<TResult> aggregate(List<? extends Bson> pipeline, Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.AGGREGATE).param(pipeline).param(tResultClass));
         return delegate.aggregate(pipeline, tResultClass);
     }
 
     @Override
     public AggregateIterable<T> aggregate(ClientSession clientSession, List<? extends Bson> pipeline) {
+        this.handler(SimpleMethodOptions.of(MethodType.AGGREGATE).param(clientSession).param(pipeline));
         return delegate.aggregate(clientSession, pipeline);
     }
 
     @Override
     public <TResult> AggregateIterable<TResult> aggregate(ClientSession clientSession, List<? extends Bson> pipeline, Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.AGGREGATE).param(clientSession).param(pipeline).param(tResultClass));
         return delegate.aggregate(clientSession, pipeline, tResultClass);
     }
 
     @Override
     public ChangeStreamIterable<T> watch() {
+        this.handler(SimpleMethodOptions.of(MethodType.WATCH));
         return delegate.watch();
     }
 
     @Override
     public <TResult> ChangeStreamIterable<TResult> watch(Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.WATCH).param(tResultClass));
         return delegate.watch(tResultClass);
     }
 
     @Override
     public ChangeStreamIterable<T> watch(List<? extends Bson> pipeline) {
+        this.handler(SimpleMethodOptions.of(MethodType.WATCH).param(pipeline));
         return delegate.watch(pipeline);
     }
 
     @Override
     public <TResult> ChangeStreamIterable<TResult> watch(List<? extends Bson> pipeline, Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.WATCH).param(tResultClass).param(tResultClass));
         return delegate.watch(pipeline, tResultClass);
     }
 
     @Override
     public ChangeStreamIterable<T> watch(ClientSession clientSession) {
+        this.handler(SimpleMethodOptions.of(MethodType.WATCH).param(clientSession));
         return delegate.watch(clientSession);
     }
 
     @Override
     public <TResult> ChangeStreamIterable<TResult> watch(ClientSession clientSession, Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.WATCH).param(tResultClass).param(tResultClass));
         return delegate.watch(clientSession, tResultClass);
     }
 
     @Override
     public ChangeStreamIterable<T> watch(ClientSession clientSession, List<? extends Bson> pipeline) {
+        this.handler(SimpleMethodOptions.of(MethodType.WATCH).param(clientSession).param(pipeline));
         return delegate.watch(clientSession, pipeline);
     }
 
     @Override
-    public <TResult> ChangeStreamIterable<TResult> watch(ClientSession clientSession, List<? extends Bson> pipeline, Class<TResult> tResultClass) {
+    public <TResult> ChangeStreamIterable<TResult> watch(ClientSession clientSession, List<? extends Bson> pipeline,
+                                                         Class<TResult> tResultClass) {
+        this.handler(SimpleMethodOptions.of(MethodType.WATCH).param(clientSession).param(pipeline).param(tResultClass));
         return delegate.watch(clientSession, pipeline, tResultClass);
     }
 
@@ -774,5 +828,11 @@ public class MongoCollectionDelegate<T> implements MongoCollection<T> {
         delegate.renameCollection(clientSession, newCollectionNamespace, renameCollectionOptions);
     }
 
-
+    private void handler(MethodOptions methodOptions) {
+        SimpleCollectionHolder<T> holder = new SimpleCollectionHolder<>(collectionName, tDocumentClass, delegate,
+                methodOptions);
+        collectionHandlers.stream()
+                .filter(handler -> handler.support(holder))
+                .forEach(handler -> handler.handle(holder));
+    }
 }

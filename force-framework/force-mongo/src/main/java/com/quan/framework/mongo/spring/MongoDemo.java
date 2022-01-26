@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,6 +46,7 @@ public class MongoDemo {
 
     public void find() {
         Query query = new Query();
+        query.addCriteria(Criteria.where("_id").gt(0).and("ss").exists(true).and("time").gt(new Date()));
         List<MongoEntity> entities = mongoTemplate.find(query, MongoEntity.class);
         System.out.println(entities);
     }

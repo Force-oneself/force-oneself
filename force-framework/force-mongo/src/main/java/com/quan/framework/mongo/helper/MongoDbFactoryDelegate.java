@@ -8,6 +8,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.PersistenceExceptionTranslator;
 import org.springframework.data.mongodb.MongoDbFactory;
 
+import java.util.List;
+
 /**
  * @author Force-oneself
  * @description MongoDbFactoryDelegate
@@ -17,19 +19,21 @@ import org.springframework.data.mongodb.MongoDbFactory;
 public class MongoDbFactoryDelegate implements MongoDbFactory {
 
     private final MongoDbFactory delegate;
+    private final List<CollectionHandler> collectionHandlers;
 
-    public MongoDbFactoryDelegate(MongoDbFactory delegate) {
+    public MongoDbFactoryDelegate(MongoDbFactory delegate, List<CollectionHandler> collectionHandlers) {
         this.delegate = delegate;
+        this.collectionHandlers = collectionHandlers;
     }
 
     @Override
     public MongoDatabase getDb() throws DataAccessException {
-        return new MongoDatabaseDelegate(this.delegate.getDb());
+        return new MongoDatabaseDelegate(this.delegate.getDb(), collectionHandlers);
     }
 
     @Override
     public MongoDatabase getDb(String dbName) throws DataAccessException {
-        return new MongoDatabaseDelegate(this.delegate.getDb(dbName));
+        return new MongoDatabaseDelegate(this.delegate.getDb(dbName), collectionHandlers);
     }
 
     @Override

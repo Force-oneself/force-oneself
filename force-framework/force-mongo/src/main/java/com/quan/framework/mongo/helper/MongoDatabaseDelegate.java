@@ -22,8 +22,11 @@ public class MongoDatabaseDelegate implements MongoDatabase {
 
     private final MongoDatabase delegate;
 
-    public MongoDatabaseDelegate(MongoDatabase delegate) {
+    private final List<CollectionHandler> collectionHandlers;
+
+    public MongoDatabaseDelegate(MongoDatabase delegate, List<CollectionHandler> collectionHandlers) {
         this.delegate = delegate;
+        this.collectionHandlers = collectionHandlers;
     }
 
     @Override
@@ -73,13 +76,13 @@ public class MongoDatabaseDelegate implements MongoDatabase {
 
     @Override
     public MongoCollection<Document> getCollection(String collectionName) {
-        return new MongoCollectionDelegate<>(delegate.getCollection(collectionName), collectionName, Document.class);
+        return this.getCollection(collectionName, Document.class);
     }
 
     @Override
     public <TDocument> MongoCollection<TDocument> getCollection(String collectionName, Class<TDocument> tDocumentClass) {
         return new MongoCollectionDelegate<>(delegate.getCollection(collectionName, tDocumentClass),
-                collectionName, tDocumentClass);
+                collectionName, tDocumentClass, collectionHandlers);
     }
 
     @Override
