@@ -30,5 +30,7 @@ public enum MethodType {
     CREATE_INDEX,
     CREATE_INDEXES,
     LIST_INDEXES,
-    DROP_INDEX
+    DROP_INDEX,
+    DROP_INDEXES,
+    RENAME_COLLECTION
 }

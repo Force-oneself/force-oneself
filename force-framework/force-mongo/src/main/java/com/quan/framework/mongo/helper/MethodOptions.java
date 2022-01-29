@@ -11,22 +11,30 @@ public interface MethodOptions {
 
     /**
      * 方法类型
+     *
      * @return java.lang.String
      */
     MethodType methodType();
 
     /**
      * 参数列表
-     * @return java.util.Map<java.lang.Integer,java.lang.Object>
+     *
+     * @return java.util.Map<java.lang.Integer, java.lang.Object>
      */
     Map<Integer, Object> params();
 
     @SuppressWarnings("unchecked")
     default <T> T find(Class<T> param) {
         return (T) params().values().stream()
-                .filter(obj ->  param.isAssignableFrom(obj.getClass()))
+                .filter(obj -> param.isAssignableFrom(obj.getClass()))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @SuppressWarnings("unchecked")
+    default <T> T find(int index, Class<T> param) {
+        Object holder = params().getOrDefault(index, null);
+        return holder == null || param.isAssignableFrom(holder.getClass()) ? null : (T) holder;
     }
 
 
@@ -36,6 +44,6 @@ public interface MethodOptions {
 
     default boolean isExist(int index, Class<?> param) {
         Map<Integer, Object> params = params();
-        return params.containsKey(index) &&  param.isAssignableFrom(params.get(index).getClass());
+        return params.containsKey(index) && param.isAssignableFrom(params.get(index).getClass());
     }
 }
