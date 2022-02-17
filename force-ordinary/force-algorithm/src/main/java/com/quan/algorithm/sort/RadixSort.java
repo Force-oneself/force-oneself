@@ -2,7 +2,7 @@ package com.quan.algorithm.sort;
 
 import java.util.Arrays;
 
-class RadixSort {
+public class RadixSort {
 
     private static int getMax(int[] arr, int n) {
         int mx = arr[0];

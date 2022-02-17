@@ -9,7 +9,7 @@ import static com.quan.algorithm.sort.SortUtils.print;
  * @author Podshivalov Nikita (https://github.com/nikitap492)
  * @see SortAlgorithm
  */
-class MergeSort implements SortAlgorithm {
+public class MergeSort implements SortAlgorithm {
 
     /**
      * This method implements the Generic Merge Sort

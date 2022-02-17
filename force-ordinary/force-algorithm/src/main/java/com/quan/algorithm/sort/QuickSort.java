@@ -10,7 +10,7 @@ import static com.quan.algorithm.sort.SortUtils.print;
  * @author Podshivalov Nikita (https://github.com/nikitap492)
  * @see SortAlgorithm
  */
-class QuickSort implements SortAlgorithm {
+public class QuickSort implements SortAlgorithm {
 
     /**
      * This method implements the Generic Quick Sort

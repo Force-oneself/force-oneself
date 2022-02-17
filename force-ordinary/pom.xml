@@ -15,6 +15,7 @@
     <modules>
         <module>force-algorithm</module>
         <module>force-pattern</module>
+        <module>force-easy-rule</module>
     </modules>
 
     <properties>

@@ -10,10 +10,10 @@ import java.util.Scanner;
 public class AES {
 
     /**
-     * Precalculated values for x to the power of 2 in Rijndaels galois field. Used
+     * Precalculated values for x to the power of 2 in Rijndael galois field. Used
      * as 'RCON' during the key expansion.
      */
-    private static final int[] RCON = {0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8,
+    private static final int[] RECON = {0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8,
             0xab, 0x4d, 0x9a, 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91,
             0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74,
             0xe8, 0xcb, 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a,
@@ -192,58 +192,53 @@ public class AES {
     /**
      * Subroutine of the Rijndael key expansion.
      *
-     * @param t
-     * @param rconCounter
-     * @return
      */
     public static BigInteger scheduleCore(BigInteger t, int rconCounter) {
-        String rBytes = t.toString(16);
+        StringBuilder rBytes = new StringBuilder(t.toString(16));
 
         // Add zero padding
         while (rBytes.length() < 8) {
-            rBytes = "0" + rBytes;
+            rBytes.insert(0, "0");
         }
 
         // rotate the first 16 bits to the back
         String rotatingBytes = rBytes.substring(0, 2);
         String fixedBytes = rBytes.substring(2);
 
-        rBytes = fixedBytes + rotatingBytes;
+        rBytes = new StringBuilder(fixedBytes + rotatingBytes);
 
         // apply S-Box to all 8-Bit Substrings
         for (int i = 0; i < 4; i++) {
-            String currentByteBits = rBytes.substring(i * 2, (i + 1) * 2);
+            StringBuilder currentByteBits = new StringBuilder(rBytes.substring(i * 2, (i + 1) * 2));
 
-            int currentByte = Integer.parseInt(currentByteBits, 16);
+            int currentByte = Integer.parseInt(currentByteBits.toString(), 16);
             currentByte = SBOX[currentByte];
 
-            // add the current RCON value to the first byte
+            // add the current RECON value to the first byte
             if (i == 0) {
-                currentByte = currentByte ^ RCON[rconCounter];
+                currentByte = currentByte ^ RECON[rconCounter];
             }
 
-            currentByteBits = Integer.toHexString(currentByte);
+            currentByteBits = new StringBuilder(Integer.toHexString(currentByte));
 
             // Add zero padding
 
             while (currentByteBits.length() < 2) {
-                currentByteBits = '0' + currentByteBits;
+                currentByteBits.insert(0, '0');
             }
 
             // replace bytes in original string
-            rBytes = rBytes.substring(0, i * 2) + currentByteBits + rBytes.substring((i + 1) * 2);
+            rBytes = new StringBuilder(rBytes.substring(0, i * 2) + currentByteBits + rBytes.substring((i + 1) * 2));
         }
 
-        // t = new BigInteger(rBytes, 16);
-        // return t;
-        return new BigInteger(rBytes, 16);
+        return new BigInteger(rBytes.toString(), 16);
     }
 
     /**
      * Returns an array of 10 + 1 round keys that are calculated by using Rijndael
      * key schedule
      *
-     * @param initialKey
+     * @param initialKey 初始化key
      * @return array of 10 + 1 round keys
      */
     public static BigInteger[] keyExpansion(BigInteger initialKey) {
@@ -251,8 +246,8 @@ public class AES {
                 new BigInteger("0"), new BigInteger("0"), new BigInteger("0"), new BigInteger("0"), new BigInteger("0"),
                 new BigInteger("0"), new BigInteger("0"),};
 
-        // initialize rcon iteration
-        int rconCounter = 1;
+        // initialize recon iteration
+        int reconCounter = 1;
 
         for (int i = 1; i < 11; i++) {
 
@@ -268,8 +263,8 @@ public class AES {
                     roundKeys[i - 1].divide(new BigInteger("1000000000000000000000000", 16)),};
 
             // run schedule core
-            t = scheduleCore(t, rconCounter);
-            rconCounter += 1;
+            t = scheduleCore(t, reconCounter);
+            reconCounter += 1;
 
             // Calculate partial round key
             BigInteger t0 = t.xor(prevKey[3]);
@@ -296,11 +291,11 @@ public class AES {
     public static int[] splitBlockIntoCells(BigInteger block) {
 
         int[] cells = new int[16];
-        String blockBits = block.toString(2);
+        StringBuilder blockBits = new StringBuilder(block.toString(2));
 
         // Append leading 0 for full "128-bit" string
         while (blockBits.length() < 128) {
-            blockBits = '0' + blockBits;
+            blockBits.insert(0, '0');
         }
 
         // split 128 to 8 bit cells
@@ -321,24 +316,24 @@ public class AES {
      */
     public static BigInteger mergeCellsIntoBlock(int[] cells) {
 
-        String blockBits = "";
+        StringBuilder blockBits = new StringBuilder();
         for (int i = 0; i < 16; i++) {
-            String cellBits = Integer.toBinaryString(cells[i]);
+            StringBuilder cellBits = new StringBuilder(Integer.toBinaryString(cells[i]));
 
             // Append leading 0 for full "8-bit" strings
             while (cellBits.length() < 8) {
-                cellBits = '0' + cellBits;
+                cellBits.insert(0, '0');
             }
 
-            blockBits += cellBits;
+            blockBits.append(cellBits);
         }
 
-        return new BigInteger(blockBits, 2);
+        return new BigInteger(blockBits.toString(), 2);
     }
 
     /**
-     * @param ciphertext
-     * @param key
+     * @param ciphertext 密文
+     * @param key key
      * @return ciphertext XOR key
      */
     public static BigInteger addRoundKey(BigInteger ciphertext, BigInteger key) {
@@ -349,7 +344,7 @@ public class AES {
      * substitutes 8-Bit long substrings of the input using the S-Box and returns
      * the result.
      *
-     * @param ciphertext
+     * @param ciphertext 密文
      * @return subtraction Output
      */
     public static BigInteger subBytes(BigInteger ciphertext) {
@@ -367,7 +362,7 @@ public class AES {
      * substitutes 8-Bit long substrings of the input using the inverse S-Box for
      * decryption and returns the result.
      *
-     * @param ciphertext
+     * @param ciphertext 密文
      * @return subtraction Output
      */
     public static BigInteger subBytesDec(BigInteger ciphertext) {
@@ -385,7 +380,7 @@ public class AES {
      * Cell permutation step. Shifts cells within the rows of the input and returns
      * the result.
      *
-     * @param ciphertext
+     * @param ciphertext 密文
      */
     public static BigInteger shiftRows(BigInteger ciphertext) {
         int[] cells = splitBlockIntoCells(ciphertext);
@@ -422,7 +417,7 @@ public class AES {
      * Cell permutation step for decryption . Shifts cells within the rows of the
      * input and returns the result.
      *
-     * @param ciphertext
+     * @param ciphertext 密文
      */
     public static BigInteger shiftRowsDec(BigInteger ciphertext) {
         int[] cells = splitBlockIntoCells(ciphertext);
@@ -458,7 +453,7 @@ public class AES {
     /**
      * Applies the Rijndael MixColumns to the input and returns the result.
      *
-     * @param ciphertext
+     * @param ciphertext 密文
      */
     public static BigInteger mixColumns(BigInteger ciphertext) {
 
@@ -480,7 +475,7 @@ public class AES {
      * Applies the inverse Rijndael MixColumns for decryption to the input and
      * returns the result.
      *
-     * @param ciphertext
+     * @param ciphertext 密文
      */
     public static BigInteger mixColumnsDec(BigInteger ciphertext) {
 
@@ -531,7 +526,7 @@ public class AES {
      * Decrypts the ciphertext with the key and returns the result
      *
      * @param cipherText The Encrypted text which we want to decrypt
-     * @param key
+     * @param key 密钥
      * @return decryptedText
      */
     public static BigInteger decrypt(BigInteger cipherText, BigInteger key) {

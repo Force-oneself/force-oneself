@@ -7,7 +7,7 @@ import static com.quan.algorithm.sort.SortUtils.print;
 /**
  * @author Podshivalov Nikita (https://github.com/nikitap492)
  */
-class CycleSort implements SortAlgorithm {
+public class CycleSort implements SortAlgorithm {
 
     @Override
     public <T extends Comparable<T>> T[] sort(T[] arr) {

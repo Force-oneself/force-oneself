@@ -10,7 +10,7 @@ public class AnyBaseToDecimal {
         assert convertToDecimal("1010", 2) == Integer.valueOf("1010", 2);
         assert convertToDecimal("777", 8) == Integer.valueOf("777", 8);
         assert convertToDecimal("999", 10) == Integer.valueOf("999", 10);
-        assert convertToDecimal("ABCDEF", 16) == Integer.valueOf("ABCDEF", 16);
+        assert convertToDecimal("ABIDE", 16) == Integer.valueOf("ABIDE", 16);
         assert convertToDecimal("XYZ", 36) == Integer.valueOf("XYZ", 36);
     }
 

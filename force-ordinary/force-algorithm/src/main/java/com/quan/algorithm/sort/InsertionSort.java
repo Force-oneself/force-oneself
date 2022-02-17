@@ -7,7 +7,7 @@ import static com.quan.algorithm.sort.SortUtils.print;
  * @author Podshivalov Nikita (https://github.com/nikitap492)
  */
 
-class InsertionSort implements SortAlgorithm {
+public class InsertionSort implements SortAlgorithm {
 
     /**
      * This method implements the Generic Insertion Sort

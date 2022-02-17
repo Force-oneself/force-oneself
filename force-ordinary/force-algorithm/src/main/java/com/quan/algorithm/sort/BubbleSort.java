@@ -11,7 +11,7 @@ import static com.quan.algorithm.sort.SortUtils.print;
  * @see SortAlgorithm
  */
 
-class BubbleSort implements SortAlgorithm {
+public class BubbleSort implements SortAlgorithm {
     /**
      * This method implements the Generic Bubble Sort
      *

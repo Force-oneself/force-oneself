@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Podshivalov Nikita (https://github.com/nikitap492)
  **/
-final class SortUtils {
+public final class SortUtils {
 
     /**
      * Helper method for swapping places in array
@@ -17,7 +17,7 @@ final class SortUtils {
      * @param idx   index of the first element
      * @param idy   index of the second element
      */
-    static <T> boolean swap(T[] array, int idx, int idy) {
+    public static <T> boolean swap(T[] array, int idx, int idy) {
         T swap = array[idx];
         array[idx] = array[idy];
         array[idy] = swap;
@@ -32,7 +32,7 @@ final class SortUtils {
      * @param w second element
      * @return true if the first element is less then the second element
      */
-    static <T extends Comparable<T>> boolean less(T v, T w) {
+    public static <T extends Comparable<T>> boolean less(T v, T w) {
         return v.compareTo(w) < 0;
     }
 
@@ -42,7 +42,7 @@ final class SortUtils {
      *
      * @param toPrint - a list which should be printed
      */
-    static void print(List<?> toPrint) {
+    public static void print(List<?> toPrint) {
         toPrint.stream()
                 .map(Object::toString)
                 .map(str -> str + " ")
@@ -57,7 +57,7 @@ final class SortUtils {
      *
      * @param toPrint - the array  which should be printed
      */
-    static void print(Object[] toPrint) {
+    public static void print(Object[] toPrint) {
         System.out.println(Arrays.toString(toPrint));
     }
 
@@ -69,7 +69,7 @@ final class SortUtils {
      * @param left  is a left flip border of the array
      * @param right is a right flip border of the array
      */
-    static <T extends Comparable<T>> void flip(T[] array, int left, int right) {
+    public static <T extends Comparable<T>> void flip(T[] array, int left, int right) {
         while (left <= right) {
             swap(array, left++, right--);
         }

@@ -19,13 +19,13 @@ import static com.quan.algorithm.sort.SortUtils.print;
  * @see BubbleSort
  * @see SortAlgorithm
  */
-class CombSort implements SortAlgorithm {
+public class CombSort implements SortAlgorithm {
 
     // To find gap between elements
     private int nextGap(int gap) {
         // Shrink gap by Shrink factor
         gap = (gap * 10) / 13;
-        return (gap < 1) ? 1 : gap;
+        return Math.max(gap, 1);
     }
 
     /**

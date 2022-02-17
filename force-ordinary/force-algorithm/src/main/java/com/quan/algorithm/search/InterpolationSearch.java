@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import static java.lang.String.format;
-
 /**
  * Interpolation search algorithm implementation
  * <p>
@@ -24,7 +22,7 @@ class InterpolationSearch {
      * @param key   is a value what shoulb be found in the array
      * @return an index if the array contains the key unless -1
      */
-    public int find(int array[], int key) {
+    public int find(int[] array, int key) {
         // Find indexes of two corners
         int start = 0, end = (array.length - 1);
 
@@ -59,17 +57,17 @@ class InterpolationSearch {
 
 
         //the element that should be found
-        Integer shouldBeFound = integers[r.nextInt(size - 1)];
+        int shouldBeFound = integers[r.nextInt(size - 1)];
 
         InterpolationSearch search = new InterpolationSearch();
         int atIndex = search.find(integers, shouldBeFound);
 
-        System.out.println(String.format("Should be found: %d. Found %d at index %d. An array length %d"
-                , shouldBeFound, integers[atIndex], atIndex, size));
+        System.out.printf("Should be found: %d. Found %d at index %d. An array length %d%n"
+                , shouldBeFound, integers[atIndex], atIndex, size);
 
 
         int toCheck = Arrays.binarySearch(integers, shouldBeFound);
-        System.out.println(format("Found by system method at an index: %d. Is equal: %b", toCheck, toCheck == atIndex));
+        System.out.printf("Found by system method at an index: %d. Is equal: %b%n", toCheck, toCheck == atIndex);
     }
 }
 

@@ -13,7 +13,7 @@ import java.util.Properties;
 public class BeanFactory {
 
     // 定义一个Map
-    private static Map<String, Object> beans;
+    private static final Map<String, Object> beans;
     // 定义一个bean容器是否初始化完成的标识
     private static int initStatus;
 
@@ -30,7 +30,7 @@ public class BeanFactory {
             // 实例化容器
             beans = new HashMap<>();
             // 取出配置文件中所有的key
-            Enumeration keys = props.keys();
+            Enumeration<Object> keys = props.keys();
             // 遍历枚举
             while (keys.hasMoreElements()) {
                 // 取出每个key

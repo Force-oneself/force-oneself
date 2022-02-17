@@ -29,18 +29,19 @@ public class DocumentEditThread extends Thread {
         int times = 0;
 
         try {
-            Document document = Document.create(documentPath, documentName);   //创建编辑文档
+            // 创建编辑文档
+            Document document = Document.create(documentPath, documentName);
             while (true) {
-                //获取用户的键盘输入
+                // 获取用户的键盘输入
                 String text = scanner.next();
                 if ("quit".equals(text)) {
                     document.close();
                     break;
                 }
-                //将内容编辑到document中
+                // 将内容编辑到document中
                 document.edit(text);
                 if (times == 5) {
-                    //用户在输入了5次之后进行文档保存
+                    // 用户在输入了5次之后进行文档保存
                     document.save();
                     times = 0;
                 }

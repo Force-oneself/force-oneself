@@ -5,7 +5,7 @@ package com.quan.algorithm.sort;
  * @author Podshivalov Nikita (https://github.com/nikitap492)
  */
 
-class CocktailShakerSort implements SortAlgorithm {
+public class CocktailShakerSort implements SortAlgorithm {
 
     /**
      * This method implements the Generic Cocktail Shaker Sort

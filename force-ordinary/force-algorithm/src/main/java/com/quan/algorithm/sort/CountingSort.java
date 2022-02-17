@@ -16,7 +16,7 @@ import static java.util.stream.Collectors.toMap;
  * @author Youssef Ali (https://github.com/youssefAli11997)
  * @author Podshivalov Nikita (https://github.com/nikitap492)
  */
-class CountingSort implements SortAlgorithm {
+public class CountingSort implements SortAlgorithm {
 
     @Override
     public <T extends Comparable<T>> T[] sort(T[] unsorted) {

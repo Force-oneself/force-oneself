@@ -10,7 +10,7 @@ import java.util.Comparator;
  * Time complexity: O(nlogn), because it is a divide and conquer algorithm
  */
 public class SkylineAlgorithm {
-    private ArrayList<Point> points;
+    private final ArrayList<Point> points;
 
     /**
      * Main constructor of the application.

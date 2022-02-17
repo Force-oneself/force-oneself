@@ -88,7 +88,6 @@ public final class ClosestPair {
             final Location[] a, final int first, final int last) {
 
         Location pivot = a[last]; // pivot
-        int pIndex = last;
         int i = first - 1;
         Location temp; // Temporarily store value for position transformation
         for (int j = first; j <= last - 1; j++) {
@@ -101,8 +100,8 @@ public final class ClosestPair {
         }
         i++;
         temp = a[i]; // array[pivot] <-> array[i]
-        a[i] = a[pIndex];
-        a[pIndex] = temp;
+        a[i] = a[last];
+        a[last] = temp;
         return i; // pivot index
     }
 
@@ -119,7 +118,6 @@ public final class ClosestPair {
             final Location[] a, final int first, final int last) {
 
         Location pivot = a[last]; // pivot
-        int pIndex = last;
         int i = first - 1;
         Location temp; // Temporarily store value for position transformation
         for (int j = first; j <= last - 1; j++) {
@@ -132,8 +130,8 @@ public final class ClosestPair {
         }
         i++;
         temp = a[i]; // array[pivot] <-> array[i]
-        a[i] = a[pIndex];
-        a[pIndex] = temp;
+        a[i] = a[last];
+        a[last] = temp;
         return i; // pivot index
     }
 
@@ -185,11 +183,10 @@ public final class ClosestPair {
 
         Location[] divideArray = new Location[indexNum];
         System.arraycopy(a, 0, divideArray, 0, indexNum); // Copy previous array
-        int totalNum = indexNum; // number of coordinates in the divideArray
         int divideX = indexNum / 2; // Intermediate value for divide
         Location[] leftArray = new Location[divideX]; //divide - left array
         //divide-right array
-        Location[] rightArray = new Location[totalNum - divideX];
+        Location[] rightArray = new Location[indexNum - divideX];
         if (indexNum <= 3) { // If the number of coordinates is 3 or less
             return bruteForce(divideArray);
         }
@@ -197,20 +194,20 @@ public final class ClosestPair {
         System.arraycopy(divideArray, 0, leftArray, 0, divideX);
         //divide-right array
         System.arraycopy(
-                divideArray, divideX, rightArray, 0, totalNum - divideX);
+                divideArray, divideX, rightArray, 0, indexNum - divideX);
 
         double minLeftArea = 0; //Minimum length of left array
         double minRightArea = 0; //Minimum length of right array
         double minValue = 0; //Minimum lengt
 
         minLeftArea = closestPair(leftArray, divideX); // recursive closestPair
-        minRightArea = closestPair(rightArray, totalNum - divideX);
+        minRightArea = closestPair(rightArray, indexNum - divideX);
         // window size (= minimum length)
         minValue = Math.min(minLeftArea, minRightArea);
 
         // Create window.  Set the size for creating a window
         // and creating a new array for the coordinates in the window
-        for (int i = 0; i < totalNum; i++) {
+        for (int i = 0; i < indexNum; i++) {
             double xGap = Math.abs(divideArray[divideX].x - divideArray[i].x);
             if (xGap < minValue) {
                 secondCount++; // size of the array
@@ -223,7 +220,7 @@ public final class ClosestPair {
         // new array for coordinates in window
         Location[] firstWindow = new Location[secondCount];
         int k = 0;
-        for (int i = 0; i < totalNum; i++) {
+        for (int i = 0; i < indexNum; i++) {
             double xGap = Math.abs(divideArray[divideX].x - divideArray[i].x);
             if (xGap < minValue) { // if it's inside a window
                 firstWindow[k] = divideArray[i]; // put in an array
