@@ -5,12 +5,33 @@ import java.util.concurrent.locks.LockSupport;
 public class FutureTask<V> implements RunnableFuture<V> {
     
     private volatile int state;
+    /**
+     * 刚创建
+     */
     private static final int NEW          = 0;
+    /**
+     * 执行中
+     */
     private static final int COMPLETING   = 1;
+    /**
+     * 执行完成
+     */
     private static final int NORMAL       = 2;
+    /**
+     * 异常结束状态
+     */
     private static final int EXCEPTIONAL  = 3;
+    /**
+     * 被取消
+     */
     private static final int CANCELLED    = 4;
+    /**
+     * 取消中
+     */
     private static final int INTERRUPTING = 5;
+    /**
+     * 取消结束
+     */
     private static final int INTERRUPTED  = 6;
 
     /** The underlying callable; nulled out after running */
@@ -168,6 +189,7 @@ public class FutureTask<V> implements RunnableFuture<V> {
     }
 
     public void run() {
+        // 非创建状态，每个线程都应该是从NEW开始
         if (state != NEW ||
             !UNSAFE.compareAndSwapObject(this, runnerOffset,
                                          null, Thread.currentThread()))
@@ -186,6 +208,7 @@ public class FutureTask<V> implements RunnableFuture<V> {
                     setException(ex);
                 }
                 if (ran)
+                    // 执行成功设置返回值
                     set(result);
             }
         } finally {

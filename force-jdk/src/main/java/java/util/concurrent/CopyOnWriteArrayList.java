@@ -624,8 +624,7 @@ public class CopyOnWriteArrayList<E>
      */
     public boolean addIfAbsent(E e) {
         Object[] snapshot = getArray();
-        return indexOf(e, snapshot, 0, snapshot.length) >= 0 ? false :
-                addIfAbsent(e, snapshot);
+        return indexOf(e, snapshot, 0, snapshot.length) < 0 && addIfAbsent(e, snapshot);
     }
 
     /**
