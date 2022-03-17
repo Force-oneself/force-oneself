@@ -16,6 +16,7 @@
         <module>force-wx</module>
         <module>force-reactive</module>
         <module>force-jdk</module>
+        <module>force-leetcode</module>
     </modules>
 
     <properties>

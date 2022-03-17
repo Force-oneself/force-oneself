@@ -1,17 +1,15 @@
 package com.quan.demo.freemarker;
 
-import freemarker.cache.ClassTemplateLoader;
+import com.quan.demo.freemarker.api.ConfigurableFreemarkerGenerator;
+import com.quan.demo.freemarker.api.Generator;
+import com.quan.demo.freemarker.api.TemplateGlobalConfig;
+import com.quan.demo.freemarker.base.TemplateConfigHolder;
 import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
-import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * @author Force-oneself
@@ -21,8 +19,43 @@ import java.util.Map;
 public class FreemarkerDemo {
 
     public static void main(String[] args) throws TemplateException, IOException {
+        Generator generator = new ConfigurableFreemarkerGenerator() {
 
-        gen(param());
+            @Override
+            public Collection<TemplateConfigHolder> configHolders() {
+                TemplateConfigHolder holder = new TemplateConfigHolder();
+                holder.setTemplatePath("entity.ftl");
+                holder.setOutPath("User.java");
+                return Collections.singleton(holder);
+            }
+
+
+            @Override
+            public TemplateGlobalConfig globalConfig() {
+                return new TemplateGlobalConfig() {
+                    @Override
+                    public Consumer<Configuration> customizeConfig() {
+                        return null;
+                    }
+
+                    @Override
+                    public String outPrefixPath() {
+                        return "/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/src/main/java/com/quan/demo/freemarker/";
+                    }
+
+                    @Override
+                    public String templatePrefixPath() {
+                        return "/force-framework/force-demo/src/main/resources/ftl/";
+                    }
+                };
+            }
+
+            @Override
+            public Object dataModel() {
+                return param();
+            }
+        };
+        generator.generate();
     }
 
     public static Map<String, Object> param() {
@@ -39,21 +72,6 @@ public class FreemarkerDemo {
         }
         beanMap.put("params", paramsList);
         return beanMap;
-    }
-
-    public static void gen(Map<String, Object> rootMap) throws IOException, TemplateException {
-        Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
-        config.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
-        config.setTemplateLoader(new ClassTemplateLoader(FreemarkerDemo.class, "/ftl"));
-
-        Template template = config.getTemplate("/entity.ftl", "UTF-8");
-        Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/src/main/java/com/quan/demo/freemarker/User.java"), StandardCharsets.UTF_8));
-        template.process(rootMap, out);
-        out.flush();
-        out.close();
-
-        // 生成数据模版
-        // 构建模版生成文件
     }
 
 
