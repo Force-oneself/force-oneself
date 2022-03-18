@@ -1,6 +1,6 @@
 package com.quan.demo.freemarker.base;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Force-oneself
@@ -9,13 +9,23 @@ import java.util.Collection;
  */
 public class JavaDomainModel extends ClassModel {
 
-    private Collection<? extends ClassModel> fields;
+    private String name;
 
-    public Collection<? extends ClassModel> getFields() {
+    private List<? extends ClassModel> fields;
+
+    public List<? extends ClassModel> getFields() {
         return fields;
     }
 
-    public void setFields(Collection<? extends ClassModel> fields) {
+    public void setFields(List<? extends ClassModel> fields) {
         this.fields = fields;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

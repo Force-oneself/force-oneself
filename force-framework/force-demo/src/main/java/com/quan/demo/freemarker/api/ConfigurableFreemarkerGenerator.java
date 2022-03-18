@@ -1,5 +1,6 @@
 package com.quan.demo.freemarker.api;
 
+import com.google.common.base.Strings;
 import com.quan.demo.freemarker.base.TemplateConfigHolder;
 import com.quan.demo.freemarker.base.TemplateHolder;
 import freemarker.template.Configuration;
@@ -36,19 +37,28 @@ public interface ConfigurableFreemarkerGenerator extends FreemarkerGenerator {
     default Collection<TemplateHolder> templateHolders() {
         Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
         config.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
-        final TemplateGlobalConfig globalConfig = globalConfig();
+        final TemplateGlobalConfig globalConfig = this.globalConfig();
         if (globalConfig.customizeConfig() != null) {
             globalConfig.customizeConfig().accept(config);
         }
-        return configHolders().stream()
+        return this.configHolders().stream()
+                .peek(configHolder -> {
+                    if (Strings.isNullOrEmpty(configHolder.getTemplatePrefixPath())) {
+                        configHolder.setTemplatePrefixPath(globalConfig.templatePrefixPath());
+                    }
+                    if (Strings.isNullOrEmpty(configHolder.getOutPrefixPath())) {
+                        configHolder.setTemplatePrefixPath(globalConfig.outPrefixPath());
+                    }
+                })
                 .map(configHolder -> {
                     try {
-                        String templatePath = globalConfig.templatePrefixPath() + configHolder.getTemplatePath();
+                        final String templatePath = configHolder.getTemplatePrefixPath() + configHolder.getTemplatePath();
+                        final String outPath = configHolder.getOutPrefixPath() + configHolder.getOutPath();
                         return new TemplateHolder(config.getTemplate(templatePath, configHolder.getEncoding()),
                                 () -> {
                                     try {
                                         return new BufferedWriter(new OutputStreamWriter(
-                                                new FileOutputStream(globalConfig.outPrefixPath() + configHolder.getOutPath()),
+                                                new FileOutputStream(outPath),
                                                 StandardCharsets.UTF_8));
                                     } catch (FileNotFoundException e) {
                                         throw new RuntimeException(e);

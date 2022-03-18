@@ -18,6 +18,16 @@ public class TemplateConfigHolder {
     protected String templatePath;
 
     /**
+     * 输出路径前缀
+     */
+    protected String outPrefixPath;
+
+    /**
+     * 模版路径前缀
+     */
+    protected String templatePrefixPath;
+
+    /**
      * 编码格式
      */
     protected String encoding = "UTF-8";
@@ -46,5 +56,19 @@ public class TemplateConfigHolder {
         this.encoding = encoding;
     }
 
+    public String getOutPrefixPath() {
+        return outPrefixPath;
+    }
 
+    public void setOutPrefixPath(String outPrefixPath) {
+        this.outPrefixPath = outPrefixPath;
+    }
+
+    public String getTemplatePrefixPath() {
+        return templatePrefixPath;
+    }
+
+    public void setTemplatePrefixPath(String templatePrefixPath) {
+        this.templatePrefixPath = templatePrefixPath;
+    }
 }

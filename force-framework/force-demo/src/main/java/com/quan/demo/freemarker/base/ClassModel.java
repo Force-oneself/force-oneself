@@ -1,5 +1,7 @@
 package com.quan.demo.freemarker.base;
 
+import java.util.List;
+
 /**
  * @author Force-oneself
  * @description ClassModel
@@ -12,6 +14,8 @@ public class ClassModel {
     private String className;
 
     private String classType;
+
+    private List<String> imports;
 
     private String describe;
 
