@@ -8,10 +8,10 @@ package com.quan.algorithm.graph;
 public class Edge {
 
     public int weight;
-    public GraphNode from;
-    public GraphNode to;
+    public Node from;
+    public Node to;
 
-    public Edge(int weight, GraphNode from, GraphNode to) {
+    public Edge(int weight, Node from, Node to) {
         this.weight = weight;
         this.from = from;
         this.to = to;

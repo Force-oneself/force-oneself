@@ -1,4 +1,4 @@
-package com.quan.algorithm.tree;
+package com.quan.algorithm.graph.tree;
 
 /**
  * @author Force-oneself

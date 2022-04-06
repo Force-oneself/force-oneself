@@ -8,15 +8,15 @@ import java.util.List;
  * @description GraphNode
  * @date 2022-03-14
  */
-public class GraphNode {
+public class Node {
 
     public int value;
     public int in;
     public int out;
-    public List<GraphNode> nextList;
+    public List<Node> nextList;
     public List<Edge> edges;
 
-    public GraphNode(int value) {
+    public Node(int value) {
         this.value = value;
         this.in = 0;
         this.out = 0;

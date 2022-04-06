@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public class Graph {
 
-    public Map<Integer, GraphNode> nodes;
+    public Map<Integer, Node> nodes;
 
     public Set<Edge> edges;
 

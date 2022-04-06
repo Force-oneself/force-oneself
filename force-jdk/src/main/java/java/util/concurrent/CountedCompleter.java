@@ -546,8 +546,9 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      */
     public final int decrementPendingCountUnlessZero() {
         int c;
-        do {} while ((c = pending) != 0 &&
-                     !U.compareAndSwapInt(this, PENDING, c, c - 1));
+        do {
+
+        } while ((c = pending) != 0 && !U.compareAndSwapInt(this, PENDING, c, c - 1));
         return c;
     }
 
@@ -573,6 +574,7 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
     public final void tryComplete() {
         CountedCompleter<?> a = this, s = a;
         for (int c;;) {
+            // 任务完成进入等待
             if ((c = a.pending) == 0) {
                 a.onCompletion(s);
                 if ((a = (s = a).completer) == null) {

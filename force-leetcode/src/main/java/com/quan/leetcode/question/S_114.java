@@ -10,7 +10,7 @@ import java.util.List;
  * @description Solution114
  * @date 2022-03-15
  */
-public class Solution114 {
+public class S_114 {
 
     public void flatten(TreeNode root) {
 

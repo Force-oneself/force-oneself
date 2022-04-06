@@ -37,8 +37,12 @@ import java.util.concurrent.ForkJoinPool;
  * the {@code Spliterator}) or internal nodes (which split the
  * {@code Spliterator} into multiple child tasks).
  *
- * @implNote
- * <p>This class is based on {@link CountedCompleter}, a form of fork-join task
+ * @param <P_IN>  Type of elements input to the pipeline
+ * @param <P_OUT> Type of elements output from the pipeline
+ * @param <R>     Type of intermediate result, which may be different from operation
+ *                result type
+ * @param <K>     Type of parent, child and sibling tasks
+ * @implNote <p>This class is based on {@link CountedCompleter}, a form of fork-join task
  * where each task has a semaphore-like count of uncompleted children, and the
  * task is implicitly completed and notified when its last child completes.
  * Internal node tasks will likely override the {@code onCompletion} method from
@@ -75,17 +79,11 @@ import java.util.concurrent.ForkJoinPool;
  *
  * <p>Serialization is not supported as there is no intention to serialize
  * tasks managed by stream ops.
- *
- * @param <P_IN> Type of elements input to the pipeline
- * @param <P_OUT> Type of elements output from the pipeline
- * @param <R> Type of intermediate result, which may be different from operation
- *        result type
- * @param <K> Type of parent, child and sibling tasks
  * @since 1.8
  */
 @SuppressWarnings("serial")
 abstract class AbstractTask<P_IN, P_OUT, R,
-                            K extends AbstractTask<P_IN, P_OUT, R, K>>
+        K extends AbstractTask<P_IN, P_OUT, R, K>>
         extends CountedCompleter<R> {
 
     /**
@@ -96,7 +94,9 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      */
     static final int LEAF_TARGET = ForkJoinPool.getCommonPoolParallelism() << 2;
 
-    /** The pipeline helper, common to all tasks in a computation */
+    /**
+     * The pipeline helper, common to all tasks in a computation
+     */
     protected final PipelineHelper<P_OUT> helper;
 
     /**
@@ -105,7 +105,9 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      */
     protected Spliterator<P_IN> spliterator;
 
-    /** Target leaf size, common to all tasks in a computation */
+    /**
+     * Target leaf size, common to all tasks in a computation
+     */
     protected long targetSize; // may be laziliy initialized
 
     /**
@@ -122,14 +124,16 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      */
     protected K rightChild;
 
-    /** The result of this node, if completed */
+    /**
+     * The result of this node, if completed
+     */
     private R localResult;
 
     /**
      * Constructor for root nodes.
      *
-     * @param helper The {@code PipelineHelper} describing the stream pipeline
-     *               up to this operation
+     * @param helper      The {@code PipelineHelper} describing the stream pipeline
+     *                    up to this operation
      * @param spliterator The {@code Spliterator} describing the source for this
      *                    pipeline
      */
@@ -144,9 +148,9 @@ abstract class AbstractTask<P_IN, P_OUT, R,
     /**
      * Constructor for non-root nodes.
      *
-     * @param parent this node's parent task
+     * @param parent      this node's parent task
      * @param spliterator {@code Spliterator} describing the subtree rooted at
-     *        this node, obtained by splitting the parent {@code Spliterator}
+     *                    this node, obtained by splitting the parent {@code Spliterator}
      */
     protected AbstractTask(K parent,
                            Spliterator<P_IN> spliterator) {
@@ -162,7 +166,7 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * provided Spliterator.
      *
      * @param spliterator {@code Spliterator} describing the subtree rooted at
-     *        this node, obtained by splitting the parent {@code Spliterator}
+     *                    this node, obtained by splitting the parent {@code Spliterator}
      * @return newly constructed child node
      */
     protected abstract K makeChild(Spliterator<P_IN> spliterator);
@@ -214,8 +218,8 @@ abstract class AbstractTask<P_IN, P_OUT, R,
      * {@link #setLocalResult(Object)}} to manage results.
      *
      * @param result must be null, or an exception is thrown (this is a safety
-     *        tripwire to detect when {@code setRawResult()} is being used
-     *        instead of {@code setLocalResult()}
+     *               tripwire to detect when {@code setRawResult()} is being used
+     *               instead of {@code setLocalResult()}
      */
     @Override
     protected void setRawResult(R result) {
@@ -314,7 +318,7 @@ abstract class AbstractTask<P_IN, P_OUT, R,
          */
         while (sizeEstimate > sizeThreshold && (ls = rs.trySplit()) != null) {
             K leftChild, rightChild, taskToFork;
-            task.leftChild  = leftChild = task.makeChild(ls);
+            task.leftChild = leftChild = task.makeChild(ls);
             task.rightChild = rightChild = task.makeChild(rs);
             task.setPendingCount(1);
             // 左右轮流fork
@@ -324,8 +328,7 @@ abstract class AbstractTask<P_IN, P_OUT, R,
                 rs = ls;
                 task = leftChild;
                 taskToFork = rightChild;
-            }
-            else {
+            } else {
                 forkRight = true;
                 task = rightChild;
                 taskToFork = leftChild;
@@ -343,8 +346,7 @@ abstract class AbstractTask<P_IN, P_OUT, R,
     /**
      * {@inheritDoc}
      *
-     * @implNote
-     * Clears spliterator and children fields.  Overriders MUST call
+     * @implNote Clears spliterator and children fields.  Overriders MUST call
      * {@code super.onCompletion} as the last thing they do if they want these
      * cleared.
      */
@@ -355,9 +357,8 @@ abstract class AbstractTask<P_IN, P_OUT, R,
     }
 
     /**
-     * Returns whether this node is a "leftmost" node -- whether the path from
-     * the root to this node involves only traversing leftmost child links.  For
-     * a leaf node, this means it is the first leaf node in the encounter order.
+     * 返回此节点是否为“最左”节点——从根到该节点的路径是否仅涉及遍历最左边的子链接。
+     * 对于叶节点，这意味着它是相遇顺序中的第一个叶节点
      *
      * @return {@code true} if this node is a "leftmost" node
      */

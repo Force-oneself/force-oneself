@@ -1,21 +1,13 @@
 package java.util.concurrent;
 
 import java.io.Serializable;
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Constructor;
 import java.util.Collection;
 import java.util.List;
 import java.util.RandomAccess;
-import java.lang.ref.WeakReference;
-import java.lang.ref.ReferenceQueue;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.RunnableFuture;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
-import java.lang.reflect.Constructor;
 
 import static java.util.concurrent.ForkJoinPool.*;
 
@@ -220,9 +212,8 @@ public abstract class ForkJoinTask<V> implements Future<V>, Serializable {
      * 1111 0000 0000 0000 0000 0000 0000 0000
      */
     static final int DONE_MASK   = 0xf0000000;  // mask out non-completion bits
-    /**
-     * 高四位为完成状态位
-     */
+
+    // 高四位为完成状态位
 
     /**
      * 1111 0000 0000 0000 0000 0000 0000 0000
@@ -237,18 +228,14 @@ public abstract class ForkJoinTask<V> implements Future<V>, Serializable {
      */
     static final int EXCEPTIONAL = 0x80000000;  // must be < CANCELLED
 
-    /**
-     * 中5-17位为信号量, 代表任务数共享独占资源
-     */
+    // 中5-17位为信号量, 代表任务数共享独占资源
 
     /**
      * 0000 0000 0000 0001 0000 0000 0000 0000
      */
     static final int SIGNAL      = 0x00010000;  // must be >= 1 << 16
 
-    /**
-     * 低16位设置任务标签，SMASK二进制运算的掩码
-     */
+    // 低16位设置任务标签，SMASK二进制运算的掩码
 
     /**
      * 0000 0000 0000 0000 1111 1111 1111 1111
@@ -256,8 +243,7 @@ public abstract class ForkJoinTask<V> implements Future<V>, Serializable {
     static final int SMASK       = 0x0000ffff;
 
     /**
-     * Marks completion and wakes up threads waiting to join this
-     * task.
+     * 标记完成并唤醒等待加入此任务的线程
      *
      * @param completion one of NORMAL, CANCELLED, EXCEPTIONAL
      * @return completion status on exit
@@ -275,9 +261,7 @@ public abstract class ForkJoinTask<V> implements Future<V>, Serializable {
     }
 
     /**
-     * Primary execution method for stolen tasks. Unless done, calls
-     * exec and records status if completed, but doesn't wait for
-     * completion otherwise.
+     * 被盗任务的主要执行方法。除非完成，否则调用 exec 并记录状态，否则不等待完成
      *
      * @return status on exit from this method
      */
@@ -290,6 +274,7 @@ public abstract class ForkJoinTask<V> implements Future<V>, Serializable {
                 return setExceptionalCompletion(rex);
             }
             if (completed)
+                // 任务完成
                 s = setCompletion(NORMAL);
         }
         return s;
@@ -303,8 +288,8 @@ public abstract class ForkJoinTask<V> implements Future<V>, Serializable {
      */
     final void internalWait(long timeout) {
         int s;
-        if ((s = status) >= 0 && // force completer to issue notify
-            U.compareAndSwapInt(this, STATUS, s, s | SIGNAL)) {
+        // 强制完成者发出通知
+        if ((s = status) >= 0 && U.compareAndSwapInt(this, STATUS, s, s | SIGNAL)) {
             synchronized (this) {
                 if (status >= 0)
                     try { wait(timeout); } catch (InterruptedException ie) { }
@@ -318,8 +303,8 @@ public abstract class ForkJoinTask<V> implements Future<V>, Serializable {
      * Blocks a non-worker-thread until completion.
      * @return status upon completion
      */
-    // 外部线程等待一个common池中的任务完成.
     private int externalAwaitDone() {
+        // 外部线程等待一个common池中的任务完成.
         int s = ((this instanceof CountedCompleter) ? // try helping
                  // 当前task是一个CountedCompleter,尝试使用common ForkJoinPool去外部帮助完成,并将完成状态返回.
                  common.externalHelpComplete(
@@ -410,11 +395,15 @@ public abstract class ForkJoinTask<V> implements Future<V>, Serializable {
      */
     private int doInvoke() {
         int s; Thread t; ForkJoinWorkerThread wt;
-        return (s = doExec()) < 0 ? s :
-            ((t = Thread.currentThread()) instanceof ForkJoinWorkerThread) ?
-            (wt = (ForkJoinWorkerThread)t).pool.
-            awaitJoin(wt.workQueue, this, 0L) :
-            externalAwaitDone();
+        return (s = doExec()) < 0
+                // 小于0说明任务是完成状态，异常/成功/取消 都是完成状态
+                ? s
+                // 任务还在执行中
+                : ((t = Thread.currentThread()) instanceof ForkJoinWorkerThread)
+                    // ForkJoinWorkerThread
+                    ? (wt = (ForkJoinWorkerThread)t).pool.awaitJoin(wt.workQueue, this, 0L)
+                    // 等待完成
+                    : externalAwaitDone();
     }
 
     // Exception table support
@@ -500,6 +489,7 @@ public abstract class ForkJoinTask<V> implements Future<V>, Serializable {
      * @return status on exit
      */
     private int setExceptionalCompletion(Throwable ex) {
+        // 记录异常
         int s = recordExceptionalCompletion(ex);
         if ((s & DONE_MASK) == EXCEPTIONAL)
             internalPropagateException(ex);
@@ -736,17 +726,18 @@ public abstract class ForkJoinTask<V> implements Future<V>, Serializable {
     }
 
     /**
-     * Commences performing this task, awaits its completion if
-     * necessary, and returns its result, or throws an (unchecked)
-     * {@code RuntimeException} or {@code Error} if the underlying
-     * computation did so.
+     * 开始执行此任务，必要时等待其完成，并返回其结果，或者如果底层计算这样做，
+     * 则抛出（未检查的）{@code RuntimeException} 或 {@code Error}。
      *
      * @return the computed result
      */
     public final V invoke() {
         int s;
+        // 调用任务返回状态码非完成
         if ((s = doInvoke() & DONE_MASK) != NORMAL)
+            // 处理记录异常
             reportException(s);
+        // 获取结果
         return getRawResult();
     }
 
