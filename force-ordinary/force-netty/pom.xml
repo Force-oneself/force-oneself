@@ -3,32 +3,30 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>force-to-live</artifactId>
+        <artifactId>force-ordinary</artifactId>
         <groupId>com.quan</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>force-ordinary</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>force-algorithm</module>
-        <module>force-pattern</module>
-        <module>force-easy-rule</module>
-        <module>force-netty</module>
-    </modules>
+    <artifactId>force-netty</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.quan</groupId>
-            <artifactId>force-common</artifactId>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.48.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.12.4</version>
+<!--            <type>bundle</type>-->
         </dependency>
     </dependencies>
 
