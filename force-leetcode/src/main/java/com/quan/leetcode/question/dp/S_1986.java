@@ -1,4 +1,4 @@
-package com.quan.leetcode.question;
+package com.quan.leetcode.question.dp;
 
 import java.util.Arrays;
 

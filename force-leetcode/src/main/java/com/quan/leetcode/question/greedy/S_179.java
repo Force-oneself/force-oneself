@@ -1,4 +1,4 @@
-package com.quan.leetcode.question;
+package com.quan.leetcode.question.greedy;
 
 import java.util.ArrayList;
 import java.util.List;
