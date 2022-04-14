@@ -10,11 +10,8 @@ import io.netty.channel.ChannelHandlerContext;
  */
 public class LoginAuthReqHandler extends ChannelHandlerAdapter {
 
-
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         super.handlerAdded(ctx);
     }
-
-
 }

@@ -16,7 +16,6 @@ import java.util.Map;
  */
 public final class NettyMessageEncoder extends MessageToMessageEncoder<NettyMessage> {
 
-
     MarshallingEncoder marshallingEncoder;
 
     public NettyMessageEncoder(MarshallingEncoder marshallingEncoder) {

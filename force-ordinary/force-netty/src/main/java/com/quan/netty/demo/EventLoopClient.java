@@ -1,6 +1,9 @@
-package com.quan.demo.io.netty;
+package com.quan.netty.demo;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -13,10 +16,10 @@ import java.net.InetSocketAddress;
  * @description HelloClient
  * @date 2022-03-29
  */
-public class HelloClient {
+public class EventLoopClient {
 
     public static void main(String[] args) throws InterruptedException {
-        new Bootstrap()
+        ChannelFuture channelFuture = new Bootstrap()
                 .group(new NioEventLoopGroup())
                 .channel(NioSocketChannel.class)
                 .handler(new ChannelInitializer<NioSocketChannel>() {
@@ -26,8 +29,15 @@ public class HelloClient {
                     }
                 })
                 .connect(new InetSocketAddress("localhost", 8080))
-                .sync()
+                // 同步连接完成
+//                .sync()
                 .channel()
                 .writeAndFlush("Hello, World");
+
+        // 处理回调
+        channelFuture.addListener((ChannelFutureListener) channelFuture1 -> {
+            Channel channel = channelFuture.channel();
+            channel.writeAndFlush("hello world");
+        });
     }
 }

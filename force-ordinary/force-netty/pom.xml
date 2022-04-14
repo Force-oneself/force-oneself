@@ -26,7 +26,22 @@
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
             <version>3.12.4</version>
-<!--            <type>bundle</type>-->
+            <!-- <type>bundle</type>-->
+        </dependency>
+
+        <!-- Marshalling -->
+        <!-- https://mvnrepository.com/artifact/org.jboss.marshalling/jboss-marshalling -->
+        <dependency>
+            <groupId>org.jboss.marshalling</groupId>
+            <artifactId>jboss-marshalling</artifactId>
+            <version>2.0.2.Final</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jboss.marshalling/jboss-marshalling-serial -->
+        <dependency>
+            <groupId>org.jboss.marshalling</groupId>
+            <artifactId>jboss-marshalling-serial</artifactId>
+            <version>2.0.2.Final</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

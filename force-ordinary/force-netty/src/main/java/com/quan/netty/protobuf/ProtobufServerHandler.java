@@ -7,7 +7,7 @@ import io.netty.channel.ChannelHandlerAdapter;
  * @description SubReqServerHandler
  * @date 2022-04-10
  */
-public class SubReqServerHandler extends ChannelHandlerAdapter {
+public class ProtobufServerHandler extends ChannelHandlerAdapter {
 
 
 }

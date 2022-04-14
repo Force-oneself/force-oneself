@@ -1,5 +1,6 @@
-package com.quan.demo.io.netty;
+package com.quan.netty.demo;
 
+import com.quan.netty.util.NettyUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.CompositeByteBuf;

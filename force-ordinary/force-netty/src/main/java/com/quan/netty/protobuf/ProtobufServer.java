@@ -17,7 +17,7 @@ import io.netty.handler.logging.LoggingHandler;
  * @description SubReqServer
  * @date 2022-04-10
  */
-public class SubReqServer {
+public class ProtobufServer {
 
     public void bind(int port) throws Exception {
         NioEventLoopGroup boss = new NioEventLoopGroup();

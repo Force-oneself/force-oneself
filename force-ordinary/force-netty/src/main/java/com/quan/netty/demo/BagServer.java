@@ -1,4 +1,4 @@
-package com.quan.demo.io.netty;
+package com.quan.netty.demo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.AdaptiveRecvByteBufAllocator;

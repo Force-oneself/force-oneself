@@ -39,9 +39,9 @@ public class NettyMessageDecoder extends LengthFieldBasedFrameDecoder {
         int size = in.readInt();
         if (size > 0) {
             Map<String, Object> attch = new HashMap<>(size);
-            int keySize = 0;
-            String key = null;
-            byte[] keyArray = null;
+            int keySize;
+            String key;
+            byte[] keyArray;
             for (int i = 0; i < size; i++) {
                 keySize = in.readInt();
                 keyArray = new byte[keySize];
