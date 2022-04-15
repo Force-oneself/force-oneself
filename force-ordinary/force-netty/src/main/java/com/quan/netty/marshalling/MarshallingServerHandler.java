@@ -11,22 +11,21 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class MarshallingServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg){
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
         MarshallingReq req = (MarshallingReq) msg;
-        System.out.println("服务端收到消息体："+req.toString());
-        if("gholly".equalsIgnoreCase(req.getUserName())){
-            ctx.writeAndFlush(subResp(req.getSubReqID()));
-        }
+        System.out.println("服务端收到消息体：" + req.toString());
+        ctx.writeAndFlush(subResp(req.getSubReqID()));
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause){
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         ctx.close();
+        cause.printStackTrace();
     }
 
 
-    private MarshallingResp subResp(int i){
-        MarshallingResp resp =new MarshallingResp();
+    private MarshallingResp subResp(int i) {
+        MarshallingResp resp = new MarshallingResp();
         resp.setSubReqID(i);
         resp.setRespCode(0);
         resp.setDesc("I love China");

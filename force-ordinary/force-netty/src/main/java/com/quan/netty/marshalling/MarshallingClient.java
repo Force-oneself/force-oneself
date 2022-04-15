@@ -44,6 +44,6 @@ public class MarshallingClient {
 
 
     public static void main(String[] args) throws InterruptedException {
-        new MarshallingClient().connect("127.0.0.1", 8080);
+        new MarshallingClient().connect("localhost", 8080);
     }
 }
