@@ -26,13 +26,14 @@ public class MarshallingServer {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .option(ChannelOption.SO_BACKLOG, 100)
-                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .option(ChannelOption.SO_BACKLOG, 1024)
+                    .handler(new LoggingHandler(LogLevel.DEBUG))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(MarshallingCodeFactory.buildMarshallingDecoder());
-                            ch.pipeline().addLast(MarshallingCodeFactory.buildMarshallingEncoder());
+//                            ch.pipeline().addLast(MarshallingCodeFactory.buildMarshallingDecoder());
+//                            ch.pipeline().addLast(MarshallingCodeFactory.buildMarshallingEncoder());
+                            ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
                             ch.pipeline().addLast(new MarshallingServerHandler());
                         }
                     });

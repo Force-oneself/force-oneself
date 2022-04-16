@@ -31,7 +31,6 @@ public class MarshallingClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        System.out.println("发送消息");
         for (int i = 0; i < 10; i++) {
             ctx.write(subReq(i));
         }

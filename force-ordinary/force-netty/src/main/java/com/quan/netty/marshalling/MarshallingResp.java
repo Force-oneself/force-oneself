@@ -1,12 +1,15 @@
 package com.quan.netty.marshalling;
 
+import java.io.Serializable;
+
 /**
  * @author Force-oneself
  * @description MarshallingResp
  * @date 2022-04-14
  */
-public class MarshallingResp {
+public class MarshallingResp implements Serializable {
 
+    private static final long serialVersionUID = 1690212024000173617L;
     private int subReqID;
     private int respCode;
     private String desc;

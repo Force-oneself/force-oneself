@@ -1,11 +1,15 @@
 package com.quan.netty.marshalling;
 
+import java.io.Serializable;
+
 /**
  * @author Force-oneself
  * @description MarshallingReq
  * @date 2022-04-14
  */
-public class MarshallingReq {
+public class MarshallingReq implements Serializable {
+
+    private static final long serialVersionUID = 5027897611366166589L;
 
     private String address;
     private String phoneNumber;
@@ -51,5 +55,16 @@ public class MarshallingReq {
 
     public String getUserName() {
         return userName;
+    }
+
+    @Override
+    public String toString() {
+        return "MarshallingReq{" +
+                "address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", productName='" + productName + '\'' +
+                ", subReqID=" + subReqID +
+                ", userName='" + userName + '\'' +
+                '}';
     }
 }

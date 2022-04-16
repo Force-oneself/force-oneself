@@ -8,6 +8,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 
 /**
  * @author Force-oneself
@@ -27,8 +29,9 @@ public class MarshallingClient {
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(MarshallingCodeFactory.buildMarshallingDecoder());
-                            ch.pipeline().addLast(MarshallingCodeFactory.buildMarshallingEncoder());
+//                            ch.pipeline().addLast(MarshallingCodeFactory.buildMarshallingDecoder());
+//                            ch.pipeline().addLast(MarshallingCodeFactory.buildMarshallingEncoder());
+                            ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
                             ch.pipeline().addLast(new MarshallingClientHandler());
                         }
                     });
