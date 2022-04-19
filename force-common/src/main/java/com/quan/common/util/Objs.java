@@ -8,8 +8,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.quan.common.bean.R;
-import com.sun.istack.internal.Nullable;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -317,7 +315,7 @@ public class Objs {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the object is not {@code null}
      */
-    public static void isNull(@Nullable Object object, String message) {
+    public static void isNull( Object object, String message) {
         if (object != null) {
             throw new IllegalArgumentException(message);
         }
@@ -334,7 +332,7 @@ public class Objs {
      * @throws IllegalArgumentException if the object is not {@code null}
      * @since 5.0
      */
-    public static void isNull(@Nullable Object object, Supplier<String> messageSupplier) {
+    public static void isNull( Object object, Supplier<String> messageSupplier) {
         if (object != null) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -347,7 +345,7 @@ public class Objs {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the object is {@code null}
      */
-    public static void notNull(@Nullable Object object, String message) {
+    public static void notNull( Object object, String message) {
         if (object == null) {
             throw new IllegalArgumentException(message);
         }
@@ -365,7 +363,7 @@ public class Objs {
      * @throws IllegalArgumentException if the object is {@code null}
      * @since 5.0
      */
-    public static void notNull(@Nullable Object object, Supplier<String> messageSupplier) {
+    public static void notNull( Object object, Supplier<String> messageSupplier) {
         if (object == null) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -380,7 +378,7 @@ public class Objs {
      * @throws IllegalArgumentException if the text is empty
      * @see StringUtils#hasLength
      */
-    public static void hasLength(@Nullable String text, String message) {
+    public static void hasLength( String text, String message) {
         if (!StringUtils.hasLength(text)) {
             throw new IllegalArgumentException(message);
         }
@@ -400,7 +398,7 @@ public class Objs {
      * @since 5.0
      * @see StringUtils#hasLength
      */
-    public static void hasLength(@Nullable String text, Supplier<String> messageSupplier) {
+    public static void hasLength( String text, Supplier<String> messageSupplier) {
         if (!StringUtils.hasLength(text)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -415,7 +413,7 @@ public class Objs {
      * @throws IllegalArgumentException if the text does not contain valid text content
      * @see StringUtils#hasText
      */
-    public static void hasText(@Nullable String text, String message) {
+    public static void hasText( String text, String message) {
         if (!StringUtils.hasText(text)) {
             throw new IllegalArgumentException(message);
         }
@@ -435,7 +433,7 @@ public class Objs {
      * @since 5.0
      * @see StringUtils#hasText
      */
-    public static void hasText(@Nullable String text, Supplier<String> messageSupplier) {
+    public static void hasText( String text, Supplier<String> messageSupplier) {
         if (!StringUtils.hasText(text)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -449,7 +447,7 @@ public class Objs {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the text contains the substring
      */
-    public static void doesNotContain(@Nullable String textToSearch, String substring, String message) {
+    public static void doesNotContain( String textToSearch, String substring, String message) {
         if (StringUtils.hasLength(textToSearch) && StringUtils.hasLength(substring) &&
                 textToSearch.contains(substring)) {
             throw new IllegalArgumentException(message);
@@ -468,7 +466,7 @@ public class Objs {
      * @throws IllegalArgumentException if the text contains the substring
      * @since 5.0
      */
-    public static void doesNotContain(@Nullable String textToSearch, String substring, Supplier<String> messageSupplier) {
+    public static void doesNotContain( String textToSearch, String substring, Supplier<String> messageSupplier) {
         if (StringUtils.hasLength(textToSearch) && StringUtils.hasLength(substring) &&
                 textToSearch.contains(substring)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
@@ -483,7 +481,7 @@ public class Objs {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the object array is {@code null} or contains no elements
      */
-    public static void notEmpty(@Nullable Object[] array, String message) {
+    public static void notEmpty( Object[] array, String message) {
         if (ObjectUtils.isEmpty(array)) {
             throw new IllegalArgumentException(message);
         }
@@ -501,7 +499,7 @@ public class Objs {
      * @throws IllegalArgumentException if the object array is {@code null} or contains no elements
      * @since 5.0
      */
-    public static void notEmpty(@Nullable Object[] array, Supplier<String> messageSupplier) {
+    public static void notEmpty( Object[] array, Supplier<String> messageSupplier) {
         if (ObjectUtils.isEmpty(array)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -515,7 +513,7 @@ public class Objs {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the object array contains a {@code null} element
      */
-    public static void noNullElements(@Nullable Object[] array, String message) {
+    public static void noNullElements( Object[] array, String message) {
         if (array != null) {
             for (Object element : array) {
                 if (element == null) {
@@ -537,7 +535,7 @@ public class Objs {
      * @throws IllegalArgumentException if the object array contains a {@code null} element
      * @since 5.0
      */
-    public static void noNullElements(@Nullable Object[] array, Supplier<String> messageSupplier) {
+    public static void noNullElements( Object[] array, Supplier<String> messageSupplier) {
         if (array != null) {
             for (Object element : array) {
                 if (element == null) {
@@ -556,7 +554,7 @@ public class Objs {
      * @throws IllegalArgumentException if the collection is {@code null} or
      * contains no elements
      */
-    public static void notEmpty(@Nullable Collection<?> collection, String message) {
+    public static void notEmpty( Collection<?> collection, String message) {
         if (CollectionUtils.isEmpty(collection)) {
             throw new IllegalArgumentException(message);
         }
@@ -575,7 +573,7 @@ public class Objs {
      * contains no elements
      * @since 5.0
      */
-    public static void notEmpty(@Nullable Collection<?> collection, Supplier<String> messageSupplier) {
+    public static void notEmpty( Collection<?> collection, Supplier<String> messageSupplier) {
         if (CollectionUtils.isEmpty(collection)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -590,7 +588,7 @@ public class Objs {
      * @throws IllegalArgumentException if the collection contains a {@code null} element
      * @since 5.2
      */
-    public static void noNullElements(@Nullable Collection<?> collection, String message) {
+    public static void noNullElements( Collection<?> collection, String message) {
         if (collection != null) {
             for (Object element : collection) {
                 if (element == null) {
@@ -612,7 +610,7 @@ public class Objs {
      * @throws IllegalArgumentException if the collection contains a {@code null} element
      * @since 5.2
      */
-    public static void noNullElements(@Nullable Collection<?> collection, Supplier<String> messageSupplier) {
+    public static void noNullElements( Collection<?> collection, Supplier<String> messageSupplier) {
         if (collection != null) {
             for (Object element : collection) {
                 if (element == null) {
@@ -630,7 +628,7 @@ public class Objs {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the map is {@code null} or contains no entries
      */
-    public static void notEmpty(@Nullable Map<?, ?> map, String message) {
+    public static void notEmpty( Map<?, ?> map, String message) {
         if (CollectionUtils.isEmpty(map)) {
             throw new IllegalArgumentException(message);
         }
@@ -648,7 +646,7 @@ public class Objs {
      * @throws IllegalArgumentException if the map is {@code null} or contains no entries
      * @since 5.0
      */
-    public static void notEmpty(@Nullable Map<?, ?> map, Supplier<String> messageSupplier) {
+    public static void notEmpty( Map<?, ?> map, Supplier<String> messageSupplier) {
         if (CollectionUtils.isEmpty(map)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -666,7 +664,7 @@ public class Objs {
      * of the offending object's type will be appended.
      * @throws IllegalArgumentException if the object is not an instance of type
      */
-    public static void isInstanceOf(Class<?> type, @Nullable Object obj, String message) {
+    public static void isInstanceOf(Class<?> type,  Object obj, String message) {
         notNull(type, "Type to check against must not be null");
         if (!type.isInstance(obj)) {
             instanceCheckFailed(type, obj, message);
@@ -685,7 +683,7 @@ public class Objs {
      * @throws IllegalArgumentException if the object is not an instance of type
      * @since 5.0
      */
-    public static void isInstanceOf(Class<?> type, @Nullable Object obj, Supplier<String> messageSupplier) {
+    public static void isInstanceOf(Class<?> type,  Object obj, Supplier<String> messageSupplier) {
         notNull(type, "Type to check against must not be null");
         if (!type.isInstance(obj)) {
             instanceCheckFailed(type, obj, nullSafeGet(messageSupplier));
@@ -699,7 +697,7 @@ public class Objs {
      * @param obj the object to check
      * @throws IllegalArgumentException if the object is not an instance of type
      */
-    public static void isInstanceOf(Class<?> type, @Nullable Object obj) {
+    public static void isInstanceOf(Class<?> type,  Object obj) {
         isInstanceOf(type, obj, "");
     }
 
@@ -715,7 +713,7 @@ public class Objs {
      * offending sub type will be appended.
      * @throws IllegalArgumentException if the classes are not assignable
      */
-    public static void isAssignable(Class<?> superType, @Nullable Class<?> subType, String message) {
+    public static void isAssignable(Class<?> superType,  Class<?> subType, String message) {
         notNull(superType, "Super type to check against must not be null");
         if (subType == null || !superType.isAssignableFrom(subType)) {
             assignableCheckFailed(superType, subType, message);
@@ -734,7 +732,7 @@ public class Objs {
      * @throws IllegalArgumentException if the classes are not assignable
      * @since 5.0
      */
-    public static void isAssignable(Class<?> superType, @Nullable Class<?> subType, Supplier<String> messageSupplier) {
+    public static void isAssignable(Class<?> superType,  Class<?> subType, Supplier<String> messageSupplier) {
         notNull(superType, "Super type to check against must not be null");
         if (subType == null || !superType.isAssignableFrom(subType)) {
             assignableCheckFailed(superType, subType, nullSafeGet(messageSupplier));
@@ -753,7 +751,7 @@ public class Objs {
     }
 
 
-    private static void instanceCheckFailed(Class<?> type, @Nullable Object obj, @Nullable String msg) {
+    private static void instanceCheckFailed(Class<?> type,  Object obj,  String msg) {
         String className = (obj != null ? obj.getClass().getName() : "null");
         String result = "";
         boolean defaultMessage = true;
@@ -772,7 +770,7 @@ public class Objs {
         throw new IllegalArgumentException(result);
     }
 
-    private static void assignableCheckFailed(Class<?> superType, @Nullable Class<?> subType, @Nullable String msg) {
+    private static void assignableCheckFailed(Class<?> superType,  Class<?> subType,  String msg) {
         String result = "";
         boolean defaultMessage = true;
         if (StringUtils.hasLength(msg)) {
@@ -794,12 +792,12 @@ public class Objs {
         return (msg.endsWith(":") || msg.endsWith(";") || msg.endsWith(",") || msg.endsWith("."));
     }
 
-    private static String messageWithTypeName(String msg, @Nullable Object typeName) {
+    private static String messageWithTypeName(String msg,  Object typeName) {
         return msg + (msg.endsWith(" ") ? "" : ": ") + typeName;
     }
 
-    @Nullable
-    private static String nullSafeGet(@Nullable Supplier<String> messageSupplier) {
+    
+    private static String nullSafeGet( Supplier<String> messageSupplier) {
         return (messageSupplier != null ? messageSupplier.get() : null);
     }
 
@@ -823,7 +821,7 @@ public class Objs {
      * @param declaredExceptions the exception types declared in the throws clause
      * @return whether the given exception is compatible
      */
-    public static boolean isCompatibleWithThrowsClause(Throwable ex, @Nullable Class<?>... declaredExceptions) {
+    public static boolean isCompatibleWithThrowsClause(Throwable ex,  Class<?>... declaredExceptions) {
         if (!isCheckedException(ex)) {
             return true;
         }
@@ -842,7 +840,7 @@ public class Objs {
      * either an Object array or a primitive array.
      * @param obj the object to check
      */
-    public static boolean isArray(@Nullable Object obj) {
+    public static boolean isArray( Object obj) {
         return (obj != null && obj.getClass().isArray());
     }
 
@@ -852,7 +850,7 @@ public class Objs {
      * @param array the array to check
      * @see #isEmpty(Object)
      */
-    public static boolean isEmpty(@Nullable Object[] array) {
+    public static boolean isEmpty( Object[] array) {
         return (array == null || array.length == 0);
     }
 
@@ -878,7 +876,7 @@ public class Objs {
      * @see CollectionUtils#isEmpty(java.util.Collection)
      * @see CollectionUtils#isEmpty(java.util.Map)
      */
-    public static boolean isEmpty(@Nullable Object obj) {
+    public static boolean isEmpty( Object obj) {
         if (obj == null) {
             return true;
         }
@@ -910,8 +908,8 @@ public class Objs {
      * if the {@code Optional} is empty, or simply the given object as-is
      * @since 5.0
      */
-    @Nullable
-    public static Object unwrapOptional(@Nullable Object obj) {
+    
+    public static Object unwrapOptional( Object obj) {
         if (obj instanceof Optional) {
             Optional<?> optional = (Optional<?>) obj;
             if (!optional.isPresent()) {
@@ -931,7 +929,7 @@ public class Objs {
      * @param element the element to check for
      * @return whether the element has been found in the given array
      */
-    public static boolean containsElement(@Nullable Object[] array, Object element) {
+    public static boolean containsElement( Object[] array, Object element) {
         if (array == null) {
             return false;
         }
@@ -996,7 +994,7 @@ public class Objs {
      * @param obj the object to append
      * @return the new array (of the same component type; never {@code null})
      */
-    public static <A, O extends A> A[] addObjectToArray(@Nullable A[] array, @Nullable O obj) {
+    public static <A, O extends A> A[] addObjectToArray( A[] array,  O obj) {
         Class<?> compType = Object.class;
         if (array != null) {
             compType = array.getClass().getComponentType();
@@ -1023,7 +1021,7 @@ public class Objs {
      * @return the corresponding object array (never {@code null})
      * @throws IllegalArgumentException if the parameter is not an array
      */
-    public static Object[] toObjectArray(@Nullable Object source) {
+    public static Object[] toObjectArray( Object source) {
         if (source instanceof Object[]) {
             return (Object[]) source;
         }
@@ -1061,7 +1059,7 @@ public class Objs {
      * @see Object#equals(Object)
      * @see java.util.Arrays#equals
      */
-    public static boolean nullSafeEquals(@Nullable Object o1, @Nullable Object o2) {
+    public static boolean nullSafeEquals( Object o1,  Object o2) {
         if (o1 == o2) {
             return true;
         }
@@ -1134,7 +1132,7 @@ public class Objs {
      * @see #nullSafeHashCode(long[])
      * @see #nullSafeHashCode(short[])
      */
-    public static int nullSafeHashCode(@Nullable Object obj) {
+    public static int nullSafeHashCode( Object obj) {
         if (obj == null) {
             return 0;
         }
@@ -1174,7 +1172,7 @@ public class Objs {
      * Return a hash code based on the contents of the specified array.
      * If {@code array} is {@code null}, this method returns 0.
      */
-    public static int nullSafeHashCode(@Nullable Object[] array) {
+    public static int nullSafeHashCode( Object[] array) {
         if (array == null) {
             return 0;
         }
@@ -1189,7 +1187,7 @@ public class Objs {
      * Return a hash code based on the contents of the specified array.
      * If {@code array} is {@code null}, this method returns 0.
      */
-    public static int nullSafeHashCode(@Nullable boolean[] array) {
+    public static int nullSafeHashCode( boolean[] array) {
         if (array == null) {
             return 0;
         }
@@ -1204,7 +1202,7 @@ public class Objs {
      * Return a hash code based on the contents of the specified array.
      * If {@code array} is {@code null}, this method returns 0.
      */
-    public static int nullSafeHashCode(@Nullable byte[] array) {
+    public static int nullSafeHashCode( byte[] array) {
         if (array == null) {
             return 0;
         }
@@ -1219,7 +1217,7 @@ public class Objs {
      * Return a hash code based on the contents of the specified array.
      * If {@code array} is {@code null}, this method returns 0.
      */
-    public static int nullSafeHashCode(@Nullable char[] array) {
+    public static int nullSafeHashCode( char[] array) {
         if (array == null) {
             return 0;
         }
@@ -1234,7 +1232,7 @@ public class Objs {
      * Return a hash code based on the contents of the specified array.
      * If {@code array} is {@code null}, this method returns 0.
      */
-    public static int nullSafeHashCode(@Nullable double[] array) {
+    public static int nullSafeHashCode( double[] array) {
         if (array == null) {
             return 0;
         }
@@ -1249,7 +1247,7 @@ public class Objs {
      * Return a hash code based on the contents of the specified array.
      * If {@code array} is {@code null}, this method returns 0.
      */
-    public static int nullSafeHashCode(@Nullable float[] array) {
+    public static int nullSafeHashCode( float[] array) {
         if (array == null) {
             return 0;
         }
@@ -1264,7 +1262,7 @@ public class Objs {
      * Return a hash code based on the contents of the specified array.
      * If {@code array} is {@code null}, this method returns 0.
      */
-    public static int nullSafeHashCode(@Nullable int[] array) {
+    public static int nullSafeHashCode( int[] array) {
         if (array == null) {
             return 0;
         }
@@ -1279,7 +1277,7 @@ public class Objs {
      * Return a hash code based on the contents of the specified array.
      * If {@code array} is {@code null}, this method returns 0.
      */
-    public static int nullSafeHashCode(@Nullable long[] array) {
+    public static int nullSafeHashCode( long[] array) {
         if (array == null) {
             return 0;
         }
@@ -1294,7 +1292,7 @@ public class Objs {
      * Return a hash code based on the contents of the specified array.
      * If {@code array} is {@code null}, this method returns 0.
      */
-    public static int nullSafeHashCode(@Nullable short[] array) {
+    public static int nullSafeHashCode( short[] array) {
         if (array == null) {
             return 0;
         }
@@ -1315,7 +1313,7 @@ public class Objs {
      * @return the object's identity as String representation,
      * or an empty String if the object was {@code null}
      */
-    public static String identityToString(@Nullable Object obj) {
+    public static String identityToString( Object obj) {
         if (obj == null) {
             return EMPTY_STRING;
         }
@@ -1340,7 +1338,7 @@ public class Objs {
      * @return a display String representation of {@code obj}
      * @see #nullSafeToString(Object)
      */
-    public static String getDisplayString(@Nullable Object obj) {
+    public static String getDisplayString( Object obj) {
         if (obj == null) {
             return EMPTY_STRING;
         }
@@ -1353,7 +1351,7 @@ public class Objs {
      * @param obj the object to introspect (may be {@code null})
      * @return the corresponding class name
      */
-    public static String nullSafeClassName(@Nullable Object obj) {
+    public static String nullSafeClassName( Object obj) {
         return (obj != null ? obj.getClass().getName() : NULL_STRING);
     }
 
@@ -1364,7 +1362,7 @@ public class Objs {
      * @param obj the object to build a String representation for
      * @return a String representation of {@code obj}
      */
-    public static String nullSafeToString(@Nullable Object obj) {
+    public static String nullSafeToString( Object obj) {
         if (obj == null) {
             return NULL_STRING;
         }
@@ -1411,7 +1409,7 @@ public class Objs {
      * @param array the array to build a String representation for
      * @return a String representation of {@code array}
      */
-    public static String nullSafeToString(@Nullable Object[] array) {
+    public static String nullSafeToString( Object[] array) {
         if (array == null) {
             return NULL_STRING;
         }
@@ -1435,7 +1433,7 @@ public class Objs {
      * @param array the array to build a String representation for
      * @return a String representation of {@code array}
      */
-    public static String nullSafeToString(@Nullable boolean[] array) {
+    public static String nullSafeToString( boolean[] array) {
         if (array == null) {
             return NULL_STRING;
         }
@@ -1459,7 +1457,7 @@ public class Objs {
      * @param array the array to build a String representation for
      * @return a String representation of {@code array}
      */
-    public static String nullSafeToString(@Nullable byte[] array) {
+    public static String nullSafeToString( byte[] array) {
         if (array == null) {
             return NULL_STRING;
         }
@@ -1483,7 +1481,7 @@ public class Objs {
      * @param array the array to build a String representation for
      * @return a String representation of {@code array}
      */
-    public static String nullSafeToString(@Nullable char[] array) {
+    public static String nullSafeToString( char[] array) {
         if (array == null) {
             return NULL_STRING;
         }
@@ -1507,7 +1505,7 @@ public class Objs {
      * @param array the array to build a String representation for
      * @return a String representation of {@code array}
      */
-    public static String nullSafeToString(@Nullable double[] array) {
+    public static String nullSafeToString( double[] array) {
         if (array == null) {
             return NULL_STRING;
         }
@@ -1531,7 +1529,7 @@ public class Objs {
      * @param array the array to build a String representation for
      * @return a String representation of {@code array}
      */
-    public static String nullSafeToString(@Nullable float[] array) {
+    public static String nullSafeToString( float[] array) {
         if (array == null) {
             return NULL_STRING;
         }
@@ -1555,7 +1553,7 @@ public class Objs {
      * @param array the array to build a String representation for
      * @return a String representation of {@code array}
      */
-    public static String nullSafeToString(@Nullable int[] array) {
+    public static String nullSafeToString( int[] array) {
         if (array == null) {
             return NULL_STRING;
         }
@@ -1579,7 +1577,7 @@ public class Objs {
      * @param array the array to build a String representation for
      * @return a String representation of {@code array}
      */
-    public static String nullSafeToString(@Nullable long[] array) {
+    public static String nullSafeToString( long[] array) {
         if (array == null) {
             return NULL_STRING;
         }
@@ -1603,7 +1601,7 @@ public class Objs {
      * @param array the array to build a String representation for
      * @return a String representation of {@code array}
      */
-    public static String nullSafeToString(@Nullable short[] array) {
+    public static String nullSafeToString( short[] array) {
         if (array == null) {
             return NULL_STRING;
         }

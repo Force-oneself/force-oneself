@@ -1,6 +1,5 @@
 package com.quan.framework.elasticsearch.config;
 
-import com.quan.common.util.Masks;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -14,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * @Description: class EsConifg
@@ -80,7 +81,10 @@ public class EsConfig {
     }
 
     public static void main(String[] args) {
-        System.out.println(Masks.eqMulti(6, 1, 3));
+        Properties properties = System.getProperties();
+        Map<String, String> getenv = System.getenv();
+
+        System.out.println(System.getProperty("JASYPT_ENCRYPTOR_PASSWORD"));
     }
 
 }

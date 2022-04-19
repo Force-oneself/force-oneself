@@ -4,10 +4,8 @@ import com.alibaba.excel.EasyExcel;
 import com.quan.framework.document.excel.constant.DefaultExcel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -80,8 +78,8 @@ public class EasyExcelUtil {
      * @param sheetName sheet表的名称
      * @param data      需要写入的数据
      */
-    public static void write(@NotNull HttpServletResponse response, @NotNull Class<?> clazz, @NotNull String fileName,
-                             @NotNull String sheetName, List<?> data) {
+    public static void write(HttpServletResponse response, Class<?> clazz, String fileName,
+                             String sheetName, List<?> data) {
         doGarbled(response, fileName);
         try (ServletOutputStream outputStream = response.getOutputStream()) {
             EasyExcel.write(outputStream, clazz)
@@ -102,7 +100,7 @@ public class EasyExcelUtil {
      * @param sheetName sheet名称
      * @param data      写入数据
      */
-    public static void write(@NotNull String fileName, @NotNull Class<?> clazz, @NotNull String sheetName, List<?> data) {
+    public static void write(String fileName, Class<?> clazz, String sheetName, List<?> data) {
         EasyExcel.write(fileName, clazz)
                 .sheet(sheetName)
                 .registerWriteHandler(DefaultExcel.DEFAULT_CELL_STYLE_STRATEGY)

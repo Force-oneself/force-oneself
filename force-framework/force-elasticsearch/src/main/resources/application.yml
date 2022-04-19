@@ -1,4 +1,9 @@
 spring:
   application:
     name: force-elasticsearch
-
+  elasticsearch:
+    rest:
+      uris:
+        - ${ES_URL}
+      username: elastic
+      password: ${ES_PWD}
