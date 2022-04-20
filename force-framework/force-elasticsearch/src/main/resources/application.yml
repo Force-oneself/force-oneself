@@ -3,7 +3,5 @@ spring:
     name: force-elasticsearch
   elasticsearch:
     rest:
-      uris:
-        - ${ES_URL}
+      uris: 101.43.20.134:9200
       username: elastic
-      password: ${ES_PWD}

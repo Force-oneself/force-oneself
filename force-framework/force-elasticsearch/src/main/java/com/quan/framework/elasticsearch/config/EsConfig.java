@@ -1,30 +1,19 @@
 package com.quan.framework.elasticsearch.config;
 
 import org.apache.http.HttpHost;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.*;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHits;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.IOException;
-import java.util.Map;
-import java.util.Properties;
-
 /**
- * @Description: class EsConifg
- * @Author Force丶Oneself
- * @Date 2021-05-28
- **/
+ * EsConfig.java
+ *
+ * @author Force-oneself
+ * @date 2022-04-20 13:53
+ */
 @Configuration
 public class EsConfig {
 
-    @Bean
+//    @Bean
     public RestHighLevelClient restHighLevelClient() {
         RestClientBuilder restClient = RestClient.builder(new HttpHost("localhost", 9200, "http"));
 
@@ -45,46 +34,6 @@ public class EsConfig {
                 .setSocketTimeout(30000));
 
         return new RestHighLevelClient(restClient);
-    }
-
-
-    public static void testMultiMatchSearch(RestHighLevelClient client) throws IOException {
-        // 基础设置
-        SearchRequest searchRequest = new SearchRequest("caselist");
-        // 搜索源构建对象
-        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-
-        BoolQueryBuilder queryBuilder =
-                //一定要转成小写 toLowerCase() 否则搜索不到，加上以后大小写都可搜索到
-                QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("case_number", ("*201910*").toLowerCase()));
-        // 注意 searchSourceBuilder 默认返回10 条数据，如果需要返回实级条数需要设置
-        // 可以使用分页查找 比如设置 searchSourceBuilder.from(1);就是从第二页进行查找，类似于MySQL中的limit
-
-
-        searchSourceBuilder.from(0);
-        searchSourceBuilder.size(10);
-        searchSourceBuilder.query(queryBuilder);
-
-        searchRequest.source(searchSourceBuilder);
-        // 发起请求，获取结果
-        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
-
-        SearchHits hits = searchResponse.getHits();
-        // 得到匹配度高的文档
-        SearchHit[] searchHits = hits.getHits();
-        // 打印结果集
-        System.out.println(searchHits.length);
-        for (SearchHit searchHit : searchHits) {
-            System.out.println(searchHit.toString());
-            System.out.println("=============1");
-        }
-    }
-
-    public static void main(String[] args) {
-        Properties properties = System.getProperties();
-        Map<String, String> getenv = System.getenv();
-
-        System.out.println(System.getProperty("JASYPT_ENCRYPTOR_PASSWORD"));
     }
 
 }

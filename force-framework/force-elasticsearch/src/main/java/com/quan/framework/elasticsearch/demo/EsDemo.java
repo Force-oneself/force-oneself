@@ -12,11 +12,13 @@ import org.elasticsearch.action.support.IndicesOptions;
 import org.elasticsearch.action.support.WriteRequest;
 import org.elasticsearch.action.support.replication.ReplicationResponse;
 import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -44,9 +46,10 @@ import java.util.concurrent.TimeUnit;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 
 /**
+ * EsDemo.java
+ *
  * @author Force-oneself
- * @Description EsDemo
- * @date 2021-11-29
+ * @date 2022-04-20 14:22
  */
 public class EsDemo {
 
@@ -274,5 +277,42 @@ public class EsDemo {
         request.add(secondSearchRequest);
 
         MultiSearchResponse response = EsUtils.getClient().msearch(request, RequestOptions.DEFAULT);
+    }
+
+    public static void testMultiMatchSearch(RestHighLevelClient client) throws IOException {
+        // 基础设置
+        SearchRequest searchRequest = new SearchRequest("caselist");
+        // 搜索源构建对象
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+        BoolQueryBuilder queryBuilder =
+                //一定要转成小写 toLowerCase() 否则搜索不到，加上以后大小写都可搜索到
+                QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("case_number", ("*201910*").toLowerCase()));
+        // 注意 searchSourceBuilder 默认返回10 条数据，如果需要返回实级条数需要设置
+        // 可以使用分页查找 比如设置 searchSourceBuilder.from(1);就是从第二页进行查找，类似于MySQL中的limit
+
+
+        searchSourceBuilder.from(0);
+        searchSourceBuilder.size(10);
+        searchSourceBuilder.query(queryBuilder);
+
+        searchRequest.source(searchSourceBuilder);
+        // 发起请求，获取结果
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
+        SearchHits hits = searchResponse.getHits();
+        // 得到匹配度高的文档
+        SearchHit[] searchHits = hits.getHits();
+        // 打印结果集
+        System.out.println(searchHits.length);
+        for (SearchHit searchHit : searchHits) {
+            System.out.println(searchHit.toString());
+            System.out.println("=============1");
+        }
+    }
+
+    public static void main(String[] args) {
+        RestHighLevelClient client = EsUtils.getClient();
+        System.out.println(client);
     }
 }
