@@ -51,7 +51,7 @@ import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
  * @author Force-oneself
  * @date 2022-04-20 14:22
  */
-public class EsDemo {
+public class EsHighLevelDemo {
 
     public void index() throws IOException {
         // 字符串JSON
@@ -149,7 +149,7 @@ public class EsDemo {
                     .source("field", "value")
                     .setIfSeqNo(10L)
                     .setIfPrimaryTerm(20), RequestOptions.DEFAULT);
-        } catch(ElasticsearchException e) {
+        } catch (ElasticsearchException e) {
             if (e.status() == RestStatus.CONFLICT) {
                 // 引发的异常表示返回了版本冲突错误
             }
@@ -172,18 +172,18 @@ public class EsDemo {
         searchRequest.preference("_local");
 
         // SearchSourceBuilder
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        sourceBuilder.query(QueryBuilders.termQuery("user", "kimchy"));
-        sourceBuilder.from(0);
-        sourceBuilder.size(5);
-        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder()
+                .query(QueryBuilders.termQuery("user", "kimchy"))
+                .from(0)
+                .size(5)
+                .timeout(new TimeValue(60, TimeUnit.SECONDS));
         searchRequest.indices("posts");
         searchRequest.source(sourceBuilder);
 
-        MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("user", "kimchy");
-        matchQueryBuilder.fuzziness(Fuzziness.AUTO);
-        matchQueryBuilder.prefixLength(3);
-        matchQueryBuilder.maxExpansions(10);
+        MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("user", "kimchy")
+                .fuzziness(Fuzziness.AUTO)
+                .prefixLength(3)
+                .maxExpansions(10);
 
         QueryBuilder matchQueryBuilder1 = matchQuery("user", "kimchy")
                 .fuzziness(Fuzziness.AUTO)
@@ -198,8 +198,8 @@ public class EsDemo {
         sourceBuilder.sort(new FieldSortBuilder("_id").order(SortOrder.ASC));
 
         // 选择展示字段
-        String[] includeFields = new String[] {"title", "innerObject.*"};
-        String[] excludeFields = new String[] {"user"};
+        String[] includeFields = new String[]{"title", "innerObject.*"};
+        String[] excludeFields = new String[]{"user"};
         sourceBuilder.fetchSource(includeFields, excludeFields);
 
         // 设置高亮
@@ -239,12 +239,7 @@ public class EsDemo {
 
         final Scroll scroll = new Scroll(TimeValue.timeValueMinutes(1L));
         searchRequest.scroll(scroll);
-//        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-//        searchSourceBuilder.query(matchQuery("title", "Elasticsearch"));
-        searchRequest.source(searchSourceBuilder);
 
-//        SearchResponse searchResponse = EsUtils.getClient().search(searchRequest, RequestOptions.DEFAULT);
-//        String scrollId = searchResponse.getScrollId();
         SearchHit[] searchHits = searchResponse.getHits().getHits();
 
         while (searchHits != null && searchHits.length > 0) {
@@ -311,8 +306,4 @@ public class EsDemo {
         }
     }
 
-    public static void main(String[] args) {
-        RestHighLevelClient client = EsUtils.getClient();
-        System.out.println(client);
-    }
 }

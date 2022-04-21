@@ -1,5 +1,7 @@
 package com.quan.framework.elasticsearch.util;
 
+import org.apache.http.HttpHost;
+import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 
 /**
@@ -11,6 +13,9 @@ import org.elasticsearch.client.RestHighLevelClient;
 public final class EsUtils {
 
     public static RestHighLevelClient getClient() {
-        return null;
+        return new RestHighLevelClient(
+                RestClient.builder(
+                        new HttpHost("localhost", 9200, "http"),
+                        new HttpHost("localhost", 9201, "http")));
     }
 }
