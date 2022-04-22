@@ -2,7 +2,15 @@ package com.quan.framework.elasticsearch.config;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.*;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.elasticsearch.client.ClientConfiguration;
+import org.springframework.data.elasticsearch.client.RestClients;
+import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.lang.NonNull;
+
+import java.time.Duration;
 
 /**
  * EsConfig.java
@@ -11,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2022-04-20 13:53
  */
 @Configuration
-public class EsConfig {
+public class EsConfig extends AbstractElasticsearchConfiguration {
 
 //    @Bean
     public RestHighLevelClient restHighLevelClient() {
@@ -36,4 +44,43 @@ public class EsConfig {
         return new RestHighLevelClient(restClient);
     }
 
+
+    @Bean
+    @NonNull
+    @Override
+    public RestHighLevelClient elasticsearchClient() {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("some-header", "on every request");
+
+        ClientConfiguration clientConfiguration = ClientConfiguration.builder()
+                .connectedTo("localhost:9200", "localhost:9291")
+                .usingSsl()
+                .withProxy("localhost:8888")
+                .withPathPrefix("ela")
+                .withConnectTimeout(Duration.ofSeconds(5))
+                .withSocketTimeout(Duration.ofSeconds(3))
+                .withDefaultHeaders(httpHeaders)
+                .withBasicAuth("username", "password")
+                .withHeaders(() -> {
+                    // 7版本访问8的兼容性设置
+                    HttpHeaders defaultCompatibilityHeaders = new HttpHeaders();
+                    defaultCompatibilityHeaders.add("Accept",
+                            "application/vnd.elasticsearch+json;compatible-with=7");
+                    defaultCompatibilityHeaders.add("Content-Type",
+                            "application/vnd.elasticsearch+json;compatible-with=7");
+                    return defaultCompatibilityHeaders;
+                })
+                .withWebClientConfigurer(webClient -> {
+                    //...
+                    return webClient;
+                })
+//
+//                .withHttpClientConfigurer(clientBuilder -> {
+//                    //...
+//                    return clientBuilder;
+//                })
+                .build();
+
+        return RestClients.create(clientConfiguration).rest();
+    }
 }
