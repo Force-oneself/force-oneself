@@ -70,15 +70,6 @@ public class EsConfig extends AbstractElasticsearchConfiguration {
                             "application/vnd.elasticsearch+json;compatible-with=7");
                     return defaultCompatibilityHeaders;
                 })
-                .withWebClientConfigurer(webClient -> {
-                    //...
-                    return webClient;
-                })
-//
-//                .withHttpClientConfigurer(clientBuilder -> {
-//                    //...
-//                    return clientBuilder;
-//                })
                 .build();
 
         return RestClients.create(clientConfiguration).rest();
