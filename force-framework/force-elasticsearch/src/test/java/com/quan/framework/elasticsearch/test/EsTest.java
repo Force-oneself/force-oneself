@@ -11,7 +11,12 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -22,19 +27,37 @@ import java.util.Arrays;
  * @author Force-oneself
  * @date 2022-04-23
  */
-public class EsTest extends ForceElasticsearchApplicationTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@SpringBootApplication
+public class EsTest {
 
     public static final String ES_DEMO_INDEX = "es_demo";
-    private final RestHighLevelClient restHighLevelClient;
-
-    public EsTest(RestHighLevelClient restHighLevelClient) {
-        this.restHighLevelClient = restHighLevelClient;
-    }
+    @Autowired
+    private RestHighLevelClient restHighLevelClient;
 
     @Test
     public void index() throws IOException {
         CreateIndexRequest request = new CreateIndexRequest(ES_DEMO_INDEX);
-        request.mapping("", XContentType.JSON);
+        request.mapping("{\n" +
+                "    \"properties\": {\n" +
+                "      \"name\": {\n" +
+                "        \"type\": \"text\"\n" +
+                "      },\n" +
+                "      \"age\": {\n" +
+                "        \"type\": \"integer\"\n" +
+                "      },\n" +
+                "      \"city\": {\n" +
+                "        \"type\": \"text\",\n" +
+                "        \"fields\": {\n" +
+                "          \"keyword\": {\n" +
+                "            \"type\": \"keyword\",\n" +
+                "            \"ignore_above\": 256\n" +
+                "          }\n" +
+                "        }\n" +
+                "      }\n" +
+                "    }\n" +
+                "  }", XContentType.JSON);
         CreateIndexResponse response = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);
         boolean ack = response.isAcknowledged();
         System.out.println(ack);
@@ -44,7 +67,7 @@ public class EsTest extends ForceElasticsearchApplicationTest {
     public void query() throws IOException {
 
         // term 关键字
-        this.query(QueryBuilders.termQuery("termFiledName", "term"));
+        this.query(QueryBuilders.termQuery("firstname", "Parker"));
         // bool 多条件
         this.query(QueryBuilders.boolQuery()
                 .must(QueryBuilders.matchQuery("must", "must"))
@@ -53,19 +76,19 @@ public class EsTest extends ForceElasticsearchApplicationTest {
                 .filter(QueryBuilders.matchQuery("filter", "filter")));
 
         // prefix 前缀
-        this.query(QueryBuilders.prefixQuery("prefix", "prefix"));
+        this.query(QueryBuilders.prefixQuery("address", "990"));
         // wildcard 通配符
-        this.query(QueryBuilders.wildcardQuery("wildcard", "wildcard*"));
+        this.query(QueryBuilders.wildcardQuery("city", "Lop*"));
         // range 范围
-        this.query(QueryBuilders.rangeQuery("range").gt(12).lt(22));
+        this.query(QueryBuilders.rangeQuery("balance").gt(9800).lt(10000));
         // ids
-        this.query(QueryBuilders.idsQuery().addIds("1", "2"));
+        this.query(QueryBuilders.idsQuery().addIds("136", "970"));
         // matchPhrase 短词
-        this.query(QueryBuilders.matchPhraseQuery("matchPhrase", "matchPhrase"));
+        this.query(QueryBuilders.matchPhraseQuery("email", "forbeswallace@pheast.com"));
     }
 
     private void query(QueryBuilder query) throws IOException {
-        SearchRequest request = new SearchRequest(ES_DEMO_INDEX);
+        SearchRequest request = new SearchRequest("bank");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         sourceBuilder.query(query);
         request.source(sourceBuilder);
