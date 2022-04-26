@@ -17,6 +17,7 @@
         <module>force-pattern</module>
         <module>force-easy-rule</module>
         <module>force-netty</module>
+        <module>force-rocketmq</module>
     </modules>
 
     <properties>
