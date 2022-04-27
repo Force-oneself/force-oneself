@@ -21,5 +21,10 @@
             <artifactId>rocketmq-client</artifactId>
             <version>${rocket.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.openmessaging</groupId>
+            <artifactId>openmessaging-api</artifactId>
+            <version>0.3.0-alpha</version>
+        </dependency>
     </dependencies>
 </project>
