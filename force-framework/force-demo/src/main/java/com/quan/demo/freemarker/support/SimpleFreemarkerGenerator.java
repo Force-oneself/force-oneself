@@ -1,8 +1,8 @@
 package com.quan.demo.freemarker.support;
 
 import com.quan.demo.freemarker.api.ConfigurableFreemarkerGenerator;
-import com.quan.demo.freemarker.api.DriverDataModel;
-import com.quan.demo.freemarker.base.TemplateConfigHolder;
+import com.quan.demo.freemarker.support.mysql.DriverDataModel;
+import com.quan.demo.freemarker.api.TemplateConfig;
 
 import java.util.Collection;
 
@@ -14,7 +14,7 @@ import java.util.Collection;
 public class SimpleFreemarkerGenerator implements ConfigurableFreemarkerGenerator, DriverDataModel {
 
     @Override
-    public Collection<TemplateConfigHolder> configHolders() {
+    public Collection<TemplateConfig> templateConfig() {
         return null;
     }
 }

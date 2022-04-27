@@ -2,14 +2,12 @@ package com.quan.demo.freemarker;
 
 import com.quan.demo.freemarker.api.ConfigurableFreemarkerGenerator;
 import com.quan.demo.freemarker.api.Generator;
-import com.quan.demo.freemarker.api.TemplateGlobalConfig;
-import com.quan.demo.freemarker.base.TemplateConfigHolder;
-import freemarker.template.Configuration;
+import com.quan.demo.freemarker.api.TemplateConfig;
+import com.quan.demo.freemarker.base.SimpleTemplateConfig;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Consumer;
 
 /**
  * @author Force-oneself
@@ -22,33 +20,19 @@ public class FreemarkerDemo {
         Generator generator = new ConfigurableFreemarkerGenerator() {
 
             @Override
-            public Collection<TemplateConfigHolder> configHolders() {
-                TemplateConfigHolder holder = new TemplateConfigHolder();
+            public Collection<TemplateConfig> templateConfig() {
+                SimpleTemplateConfig holder = new SimpleTemplateConfig();
+                // Configuration未配置TemplateLoader需要配置全路径
+//                holder.setTemplatePrefixPath("/force-framework/force-demo/src/main/resources/ftl/");
                 holder.setTemplatePath("entity.ftl");
+                holder.setOutPrefixPath("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/src/main/java/com/quan/demo/freemarker/");
                 holder.setOutPath("User.java");
                 return Collections.singleton(holder);
             }
 
-
-            @Override
-            public TemplateGlobalConfig globalConfig() {
-                return new TemplateGlobalConfig() {
-                    @Override
-                    public Consumer<Configuration> customizeConfig() {
-                        return null;
-                    }
-
-                    @Override
-                    public String outPrefixPath() {
-                        return "/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/src/main/java/com/quan/demo/freemarker/";
-                    }
-
-                    @Override
-                    public String templatePrefixPath() {
-                        return "/force-framework/force-demo/src/main/resources/ftl/";
-                    }
-                };
-            }
+//            @Override
+//            public void configurationCustom(Configuration configuration) {
+//            }
 
             @Override
             public Object dataModel() {
@@ -59,9 +43,11 @@ public class FreemarkerDemo {
     }
 
     public static Map<String, Object> param() {
-        Map<String, Object> beanMap = new HashMap<>();
-        beanMap.put("beanName", "User");// 实体类名
-        beanMap.put("interfaceName", "User");// 接口名
+        Map<String, Object> beanMap = new HashMap<>(16);
+        // 实体类名
+        beanMap.put("beanName", "User");
+        // 接口名
+        beanMap.put("interfaceName", "User");
         List<Map<String, String>> paramsList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             Map<String, String> tmpParamMap = new HashMap<>();

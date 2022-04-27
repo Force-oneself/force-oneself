@@ -1,7 +1,7 @@
-package com.quan.demo.freemarker;
+package com.quan.demo.freemarker.support.mysql;
 
-import com.quan.demo.freemarker.meta.ColumnMeta;
-import com.quan.demo.freemarker.meta.DefaultColumnMeta;
+import com.quan.demo.freemarker.support.mysql.meta.ColumnMeta;
+import com.quan.demo.freemarker.support.mysql.meta.DefaultColumnMeta;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

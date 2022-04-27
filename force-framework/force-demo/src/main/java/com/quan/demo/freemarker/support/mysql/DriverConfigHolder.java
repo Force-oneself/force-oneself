@@ -1,4 +1,4 @@
-package com.quan.demo.freemarker.base;
+package com.quan.demo.freemarker.support.mysql;
 
 /**
  * @author Force-oneself

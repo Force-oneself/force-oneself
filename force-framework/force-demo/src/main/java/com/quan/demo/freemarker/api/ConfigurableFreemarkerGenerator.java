@@ -1,18 +1,14 @@
 package com.quan.demo.freemarker.api;
 
-import com.google.common.base.Strings;
-import com.quan.demo.freemarker.base.TemplateConfigHolder;
-import com.quan.demo.freemarker.base.TemplateHolder;
+import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.Template;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -25,63 +21,66 @@ public interface ConfigurableFreemarkerGenerator extends FreemarkerGenerator {
     /**
      * 模板配置集
      *
-     * @return java.util.Collection<com.quan.demo.freemarker.base.TemplateConfigHolder>
+     * @return Collection<TemplateConfig>
      */
-    Collection<TemplateConfigHolder> configHolders();
+    Collection<TemplateConfig> templateConfig();
 
     /**
      * 可配置模版集生成
      *
-     * @return java.util.Collection<com.quan.demo.freemarker.base.TemplateHolder>
+     * @return return
      */
-    default Collection<TemplateHolder> templateHolders() {
+    @Override
+    default Collection<TemplateBear> templateHolders() {
         Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
         config.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
-        final TemplateGlobalConfig globalConfig = this.globalConfig();
-        if (globalConfig.customizeConfig() != null) {
-            globalConfig.customizeConfig().accept(config);
-        }
-        return this.configHolders().stream()
-                .peek(configHolder -> {
-                    if (Strings.isNullOrEmpty(configHolder.getTemplatePrefixPath())) {
-                        configHolder.setTemplatePrefixPath(globalConfig.templatePrefixPath());
-                    }
-                    if (Strings.isNullOrEmpty(configHolder.getOutPrefixPath())) {
-                        configHolder.setTemplatePrefixPath(globalConfig.outPrefixPath());
-                    }
-                })
-                .map(configHolder -> {
-                    try {
-                        final String templatePath = configHolder.getTemplatePrefixPath() + configHolder.getTemplatePath();
-                        final String outPath = configHolder.getOutPrefixPath() + configHolder.getOutPath();
-                        return new TemplateHolder(config.getTemplate(templatePath, configHolder.getEncoding()),
-                                () -> {
-                                    try {
-                                        return new BufferedWriter(new OutputStreamWriter(
-                                                new FileOutputStream(outPath),
-                                                StandardCharsets.UTF_8));
-                                    } catch (FileNotFoundException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                });
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                })
+        this.configurationCustom(config);
+        return this.templateConfig().stream()
+                .map(templateConfig -> templateBear(config, templateConfig))
                 .collect(Collectors.toList());
     }
 
     /**
-     * 全局配置
+     * ignore
      *
-     * @return com.quan.demo.freemarker.api.TemplateGlobalConfig
+     * @param config         freemarker Configuration
+     * @param templateConfig TemplateConfig
+     * @return TemplateBear
      */
-    default TemplateGlobalConfig globalConfig() {
-        return new TemplateGlobalConfig() {
+    default TemplateBear templateBear(Configuration config, TemplateConfig templateConfig) {
+        return new TemplateBear() {
             @Override
-            public Consumer<Configuration> customizeConfig() {
-                return TemplateGlobalConfig.super.customizeConfig();
+            public Supplier<Template> template() {
+                return () -> {
+                    try {
+                        return config.getTemplate(templateConfig.templatePath(), templateConfig.encoding());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                };
+            }
+
+            @Override
+            public Supplier<Writer> out() {
+                return () -> {
+                    try {
+                        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(templateConfig.outPath()),
+                                StandardCharsets.UTF_8));
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                };
             }
         };
+    }
+
+    /**
+     * Configuration 自定义配置可以实现获取外部模版类加载器的接口
+     *
+     * @param configuration configuration
+     */
+    default void configurationCustom(Configuration configuration) {
+        configuration.setTemplateLoader(
+                new ClassTemplateLoader(ConfigurableFreemarkerGenerator.class, "/ftl"));
     }
 }

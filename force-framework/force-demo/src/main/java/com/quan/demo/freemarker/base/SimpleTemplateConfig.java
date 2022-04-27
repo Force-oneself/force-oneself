@@ -1,11 +1,13 @@
 package com.quan.demo.freemarker.base;
 
+import com.quan.demo.freemarker.api.TemplateConfig;
+
 /**
  * @author Force-oneself
  * @description TemplateConfig
  * @date 2022-03-17
  */
-public class TemplateConfigHolder {
+public class SimpleTemplateConfig implements TemplateConfig {
 
     /**
      * 输出路径
@@ -20,17 +22,34 @@ public class TemplateConfigHolder {
     /**
      * 输出路径前缀
      */
-    protected String outPrefixPath;
+    protected String outPrefixPath = "";
 
     /**
      * 模版路径前缀
      */
-    protected String templatePrefixPath;
+    protected String templatePrefixPath = "";
 
     /**
      * 编码格式
      */
     protected String encoding = "UTF-8";
+
+
+
+    @Override
+    public String templatePath() {
+        return this.getTemplatePrefixPath() + this.getTemplatePath();
+    }
+
+    @Override
+    public String outPath() {
+        return this.getOutPrefixPath() + this.getOutPath();
+    }
+
+    @Override
+    public String encoding() {
+        return this.getEncoding();
+    }
 
     public String getOutPath() {
         return outPath;

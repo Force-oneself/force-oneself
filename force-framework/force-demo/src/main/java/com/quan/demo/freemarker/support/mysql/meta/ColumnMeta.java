@@ -1,4 +1,4 @@
-package com.quan.demo.freemarker.meta;
+package com.quan.demo.freemarker.support.mysql.meta;
 
 import java.util.HashMap;
 import java.util.Map;

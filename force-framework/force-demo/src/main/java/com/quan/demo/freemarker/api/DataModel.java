@@ -9,9 +9,9 @@ package com.quan.demo.freemarker.api;
 public interface DataModel {
 
     /**
-     * 数据模型
+     * freemarker 数据模型
      *
-     * @return java.lang.Object
+     * @return 模型
      */
     Object dataModel();
 }

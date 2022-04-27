@@ -1,6 +1,5 @@
 package com.quan.demo.freemarker.api;
 
-import com.quan.demo.freemarker.base.TemplateHolder;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
@@ -15,25 +14,24 @@ import java.util.Collection;
 public interface FreemarkerGenerator extends Generator, DataModel {
 
     /**
-     * 模版集
+     * 模版生成器集合
      *
-     * @return java.util.Collection<com.quan.demo.freemarker.base.TemplateHolder>
+     * @return return
      */
-    Collection<TemplateHolder> templateHolders();
+    Collection<TemplateBear> templateHolders();
 
     /**
-     * 生成代码
+     * 生成代码的模版方法
      */
     @Override
     default void generate() {
-        templateHolders().forEach(templateHolder -> {
-            try (Writer out = templateHolder.getOut().get()) {
-                templateHolder.getTemplate().process(dataModel(), out);
+        this.templateHolders().forEach(templateHolder -> {
+            try (Writer out = templateHolder.out().get()) {
+                templateHolder.template().get().process(this.dataModel(), out);
                 out.flush();
             } catch (TemplateException | IOException e) {
                 throw new RuntimeException(e);
             }
         });
-
     }
 }

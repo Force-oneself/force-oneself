@@ -7,10 +7,13 @@ package com.quan.demo.freemarker.enums;
  */
 public enum InternalKeyEnum {
 
+    /**
+     * 内置key枚举
+     */
     ENTITY,
     CONTROLLER,
     MAPPER,
-    SYSTEM,
-    CLASSPATH,
+    SYSTEM_ENV,
+    SYSTEM_PROPERTIES,
     SERVICE;
 }

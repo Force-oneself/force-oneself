@@ -7,15 +7,4 @@ package com.quan.demo.freemarker.api;
  */
 public interface Config {
 
-    default String outPrefixPath() {
-        return "";
-    }
-
-    default String templatePrefixPath() {
-        return "";
-    }
-
-    default String basePackage() {
-        return "";
-    }
 }

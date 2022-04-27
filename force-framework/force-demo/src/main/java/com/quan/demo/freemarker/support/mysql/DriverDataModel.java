@@ -1,11 +1,9 @@
-package com.quan.demo.freemarker.api;
+package com.quan.demo.freemarker.support.mysql;
 
-import com.quan.demo.freemarker.DatabaseUtils;
-import com.quan.demo.freemarker.base.DriverConfigHolder;
+import com.quan.demo.freemarker.api.DataModel;
 import com.quan.demo.freemarker.base.JavaDomainModel;
 import com.quan.demo.freemarker.enums.InternalKeyEnum;
-import com.quan.demo.freemarker.meta.ColumnMeta;
-import com.quan.demo.freemarker.support.mysql.DomainSupport;
+import com.quan.demo.freemarker.support.mysql.meta.ColumnMeta;
 
 import java.util.HashMap;
 import java.util.List;
@@ -62,9 +60,9 @@ public interface DriverDataModel extends DataModel {
         DomainSupport.processModel(feilds);
         DomainSupport.processModel(domain);
 
-        Map<String, Object> data = new HashMap<>();
-        data.put(InternalKeyEnum.SYSTEM.name(), System.getenv());
-        data.put(InternalKeyEnum.CLASSPATH.name(), System.getProperties());
+        Map<String, Object> data = new HashMap<>(16);
+        data.put(InternalKeyEnum.SYSTEM_ENV.name(), System.getenv());
+        data.put(InternalKeyEnum.SYSTEM_PROPERTIES.name(), System.getProperties());
         data.put(InternalKeyEnum.ENTITY.name(), domain);
         return data;
     }

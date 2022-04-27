@@ -1,4 +1,4 @@
-package com.quan.demo.freemarker.meta;
+package com.quan.demo.freemarker.support.mysql.meta;
 
 import java.util.Collection;
 
@@ -19,7 +19,7 @@ public interface TableMeta {
     /**
      * 列信息
      *
-     * @return java.util.Collection<com.quan.demo.freemarker.meta.ColumnMeta>
+     * @return java.util.Collection<com.quan.demo.freemarker.support.mysql.meta.ColumnMeta>
      */
     Collection<ColumnMeta> columns();
 
