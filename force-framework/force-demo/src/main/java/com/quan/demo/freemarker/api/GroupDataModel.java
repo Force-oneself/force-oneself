@@ -1,6 +1,7 @@
 package com.quan.demo.freemarker.api;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * GroupDataModel
@@ -10,8 +11,18 @@ import java.util.List;
  */
 public interface GroupDataModel extends DataModel {
 
+    /**
+     * 多分组模型
+     *
+     * @return 数据模型组集合
+     */
     List<ClassMetaGroup> groups();
 
+    /**
+     * ignore
+     *
+     * @return return
+     */
     @Override
-    List<Object> dataModel();
+    List<Map<String, Object>> dataModel();
 }

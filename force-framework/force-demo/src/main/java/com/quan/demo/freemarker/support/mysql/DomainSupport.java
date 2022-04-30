@@ -1,14 +1,13 @@
 package com.quan.demo.freemarker.support.mysql;
 
 import com.google.common.base.CaseFormat;
+import com.quan.demo.freemarker.base.DefaultClassMeta;
+import com.quan.demo.freemarker.base.DefaultFieldMeta;
 import com.quan.demo.freemarker.base.JavaDomainModel;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
 public class DomainSupport {
 
     private final static List<DomainProcessor> PROCESSORS = new ArrayList<>();
+    public static final String JDK_PKG = "java.lang";
 
     private final static Map<String, String> CONVERTER;
 
@@ -39,10 +39,10 @@ public class DomainSupport {
 
         PROCESSORS.add(model -> {
             // 下划线转驼峰: test_data ==> TestData
-            model.setClassName(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, model.getName()));
+            model.setClassName(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, model.getClassName()));
             // 下划线转驼峰: test_data ==> testData
-            model.setName(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, model.getName()));
-            model.setClassType(CONVERTER.getOrDefault(model.getClassName(), model.getClassName()));
+            model.setName(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, model.getName()));
+            model.setClassType(CONVERTER.getOrDefault(model.getClassType(), model.getClassType()));
         });
 
         Properties config = new Properties();
@@ -67,5 +67,34 @@ public class DomainSupport {
 
     public static Map<String, String> config() {
         return DRIVER_CONFIG;
+    }
+
+    public static void processMeta(DefaultClassMeta classMeta, Set<DefaultFieldMeta> fieldMetas) {
+        Set<String> imports = new HashSet<>();
+        fieldMetas.forEach(field -> {
+            // 数据库类型与java类型的映射
+            String reference = CONVERTER.getOrDefault(field.getType(), field.getType());
+            if (reference.startsWith(JDK_PKG)) {
+                field.setPkg(JDK_PKG);
+                reference = reference.substring(JDK_PKG.length() + 1);
+            } else {
+                int endIndex = reference.lastIndexOf('.');
+                if (endIndex > -1) {
+                    imports.add(reference);
+                    field.setPkg(reference.substring(0, endIndex));
+                    reference = reference.substring(endIndex + 1);
+                } else {
+                    field.setPkg(JDK_PKG);
+                }
+            }
+            field.setType(reference);
+            // 下划线转驼峰: test_data ==> testData
+            field.setName(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, field.getName()));
+            // 下划线转驼峰: test_data ==> TestData
+            field.setType(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, field.getType()));
+        });
+        classMeta.setImports(imports);
+        // 下划线转驼峰: test_data ==> TestData
+        classMeta.setType(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, classMeta.getType()));
     }
 }

@@ -9,6 +9,11 @@ package com.quan.demo.freemarker.api;
 public interface TemplateConfig extends Config {
 
     /**
+     * 默认编码格式
+     */
+    String DEFAULT_ENCODING = "UTF-8";
+
+    /**
      * 模版路径
      *
      * @return return
@@ -27,5 +32,8 @@ public interface TemplateConfig extends Config {
      *
      * @return return
      */
-    String encoding();
+    default String encoding() {
+        return DEFAULT_ENCODING;
+    }
+
 }

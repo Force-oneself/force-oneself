@@ -1,13 +1,13 @@
 package com.quan.demo.freemarker.base;
 
-import com.quan.demo.freemarker.api.TemplateConfig;
+import com.quan.demo.freemarker.api.SourceTemplateConfig;
 
 /**
  * @author Force-oneself
  * @description TemplateConfig
  * @date 2022-03-17
  */
-public class SimpleTemplateConfig implements TemplateConfig {
+public class SimpleTemplateConfig implements SourceTemplateConfig {
 
     /**
      * 输出路径
@@ -15,64 +15,52 @@ public class SimpleTemplateConfig implements TemplateConfig {
     protected String outPath;
 
     /**
-     * 模版路径
+     * source路径
      */
-    protected String templatePath;
+    protected String src = MAVEN_SRC;
 
     /**
      * 输出路径前缀
      */
     protected String outPrefixPath = "";
 
+
     /**
      * 模版路径前缀
      */
     protected String templatePrefixPath = "";
 
-    /**
-     * 编码格式
-     */
-    protected String encoding = "UTF-8";
+    protected String templateFileName;
 
-
+    protected String fileName;
 
     @Override
-    public String templatePath() {
-        return this.getTemplatePrefixPath() + this.getTemplatePath();
+    public String outPrefixPath() {
+        return this.outPrefixPath;
     }
 
     @Override
-    public String outPath() {
-        return this.getOutPrefixPath() + this.getOutPath();
+    public String templateFileName() {
+        return this.templateFileName;
     }
 
     @Override
-    public String encoding() {
-        return this.getEncoding();
+    public String templatePrefixPath() {
+        return this.templatePrefixPath;
+    }
+
+    @Override
+    public String fileName() {
+        return this.fileName;
     }
 
     public String getOutPath() {
         return outPath;
     }
 
+    @Override
     public void setOutPath(String outPath) {
-        this.outPath = outPath;
-    }
-
-    public String getTemplatePath() {
-        return templatePath;
-    }
-
-    public void setTemplatePath(String templatePath) {
-        this.templatePath = templatePath;
-    }
-
-    public String getEncoding() {
-        return encoding;
-    }
-
-    public void setEncoding(String encoding) {
-        this.encoding = encoding;
+        this.outPath = this.getOutPrefixPath() + this.getSrc() + outPath;
     }
 
     public String getOutPrefixPath() {
@@ -90,4 +78,29 @@ public class SimpleTemplateConfig implements TemplateConfig {
     public void setTemplatePrefixPath(String templatePrefixPath) {
         this.templatePrefixPath = templatePrefixPath;
     }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
+
+    public String getTemplateFileName() {
+        return templateFileName;
+    }
+
+    public void setTemplateFileName(String templateFileName) {
+        this.templateFileName = templateFileName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 }
+

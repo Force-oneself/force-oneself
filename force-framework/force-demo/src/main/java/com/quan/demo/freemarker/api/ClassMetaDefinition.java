@@ -9,21 +9,14 @@ import java.util.Set;
  * @author Force-oneself
  * @date 2022-04-27
  */
-public interface ClassMeta extends Meta {
-
-    /**
-     * package路径
-     *
-     * @return 路径名
-     */
-    String pkg();
+public interface ClassMetaDefinition extends MetaDefinition {
 
     /**
      * import包
      *
      * @return 倒入包名
      */
-    default Set<String> imports() {
+    default Set<String> getImports() {
         return Collections.emptySet();
     }
 
@@ -32,7 +25,7 @@ public interface ClassMeta extends Meta {
      *
      * @return 父类名
      */
-    default String extend() {
+    default String getExtend() {
         return EMPTY_STR;
     }
 
@@ -41,7 +34,7 @@ public interface ClassMeta extends Meta {
      *
      * @return 接口名
      */
-    default Set<String> implement() {
+    default Set<String> getImplement() {
         return Collections.emptySet();
     }
 
@@ -50,7 +43,7 @@ public interface ClassMeta extends Meta {
      *
      * @return 成员信息
      */
-    default Set<FieldMeta> fields() {
+    default Set<? extends FieldMetaDefinition> getFields() {
         return Collections.emptySet();
     }
 

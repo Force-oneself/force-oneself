@@ -1,10 +1,13 @@
 package com.quan.demo.freemarker.api;
 
+import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Force-oneself
@@ -18,20 +21,31 @@ public interface FreemarkerGenerator extends Generator, DataModel {
      *
      * @return return
      */
-    Collection<TemplateBear> templateHolders();
+    Collection<TemplateBear> templateBears();
 
     /**
      * 生成代码的模版方法
      */
     @Override
+    @SuppressWarnings("unchecked")
     default void generate() {
-        this.templateHolders().forEach(templateHolder -> {
-            try (Writer out = templateHolder.out().get()) {
-                templateHolder.template().get().process(this.dataModel(), out);
+        List<Object> models = new ArrayList<>();
+        final Object dataModel = this.dataModel();
+        if (dataModel instanceof Collection) {
+            models.addAll(((Collection<Object>) dataModel));
+        } else {
+            models.add(dataModel);
+        }
+        final Collection<TemplateBear> bears = this.templateBears();
+        models.forEach(model -> bears.forEach(bear -> {
+            try (Writer out = bear.out().get()) {
+                Template template = bear.template().get();
+                template.process(model, out);
                 out.flush();
             } catch (TemplateException | IOException e) {
                 throw new RuntimeException(e);
             }
-        });
+        }));
     }
+
 }

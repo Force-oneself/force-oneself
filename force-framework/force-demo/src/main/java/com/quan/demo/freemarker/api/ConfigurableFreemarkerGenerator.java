@@ -16,14 +16,14 @@ import java.util.stream.Collectors;
  * @description ConfigurableFreemarkerGenerator
  * @date 2022-03-17
  */
-public interface ConfigurableFreemarkerGenerator extends FreemarkerGenerator {
+public interface ConfigurableFreemarkerGenerator<T extends TemplateConfig> extends FreemarkerGenerator {
 
     /**
      * 模板配置集
      *
      * @return Collection<TemplateConfig>
      */
-    Collection<TemplateConfig> templateConfig();
+    Collection<T> templateConfig();
 
     /**
      * 可配置模版集生成
@@ -31,13 +31,24 @@ public interface ConfigurableFreemarkerGenerator extends FreemarkerGenerator {
      * @return return
      */
     @Override
-    default Collection<TemplateBear> templateHolders() {
+    default Collection<TemplateBear> templateBears() {
         Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
         config.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
         this.configurationCustom(config);
         return this.templateConfig().stream()
+                .peek(templateConfig -> templateConfigCustom(config, templateConfig))
                 .map(templateConfig -> templateBear(config, templateConfig))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * 配置每个模版配置
+     *
+     * @param config         config
+     * @param templateConfig templateConfig
+     */
+    default void templateConfigCustom(Configuration config, T templateConfig) {
+
     }
 
     /**
@@ -80,7 +91,6 @@ public interface ConfigurableFreemarkerGenerator extends FreemarkerGenerator {
      * @param configuration configuration
      */
     default void configurationCustom(Configuration configuration) {
-        configuration.setTemplateLoader(
-                new ClassTemplateLoader(ConfigurableFreemarkerGenerator.class, "/ftl"));
+        configuration.setTemplateLoader(new ClassTemplateLoader(ConfigurableFreemarkerGenerator.class, "/ftl"));
     }
 }

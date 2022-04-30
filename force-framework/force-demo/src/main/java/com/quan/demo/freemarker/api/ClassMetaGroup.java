@@ -15,5 +15,5 @@ public interface ClassMetaGroup {
      *
      * @return return
      */
-    List<ClassMeta> metas();
+    List<ClassMetaDefinition> metas();
 }

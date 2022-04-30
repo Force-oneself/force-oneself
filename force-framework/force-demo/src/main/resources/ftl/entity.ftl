@@ -1,23 +1,26 @@
-package ${interfaceName?lower_case};
+package ${meta.pkg};
 
-import java.util.Date;
-
-public class ${beanName} {
-
-<#list params as param>
-    /**
-     * ${param.fieldNote}
-     */
-    private ${param.fieldType} ${param.fieldName};
+<#list meta.imports as import>
+import ${import};
 
 </#list>
-<#list params as param>
-    public void set${param.fieldName?cap_first}(${param.fieldType} ${param.fieldName}){
-        this.${param.fieldName} = ${param.fieldName};
+
+public class ${meta.type} {
+
+<#list meta.fields as field>
+    /**
+     * ${field.describe}
+     */
+    private ${field.type} ${field.name};
+
+</#list>
+<#list meta.fields as param>
+    public void set${param.name?cap_first}(${param.type} ${param.name}) {
+        this.${param.name} = ${param.name};
     }
 
-    public ${param.fieldType} get${param.fieldName?cap_first}(){
-        return this.${param.fieldName};
+    public ${param.type} get${param.name?cap_first}() {
+        return this.${param.name};
     }
 
 </#list>

@@ -26,4 +26,5 @@ public interface TemplateBear {
      * @return return
      */
     Supplier<Writer> out();
+
 }

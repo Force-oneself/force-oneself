@@ -4,6 +4,8 @@ import com.quan.demo.freemarker.api.ConfigurableFreemarkerGenerator;
 import com.quan.demo.freemarker.api.Generator;
 import com.quan.demo.freemarker.api.TemplateConfig;
 import com.quan.demo.freemarker.base.SimpleTemplateConfig;
+import com.quan.demo.freemarker.support.mysql.MysqlGenerator;
+import com.quan.demo.freemarker.support.mysql.SimpleMysqlTemplateConfig;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
@@ -17,14 +19,34 @@ import java.util.*;
 public class FreemarkerDemo {
 
     public static void main(String[] args) throws TemplateException, IOException {
-        Generator generator = new ConfigurableFreemarkerGenerator() {
+        mysql();
+    }
+
+    private static void mysql() {
+        MysqlGenerator generator = new MysqlGenerator();
+        SimpleMysqlTemplateConfig holder = new SimpleMysqlTemplateConfig();
+        holder.setOutPrefixPath("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/");
+        holder.setFileName("User");
+        holder.setTemplateFileName("entity.ftl");
+        holder.setSrc("src/main/java/com/quan/demo/freemarker/");
+        generator.setTemplateConfigs(Collections.singletonList(holder));
+        generator.generate();
+    }
+
+    private static void inner() {
+        Generator generator = new ConfigurableFreemarkerGenerator<TemplateConfig>() {
+
+            @Override
+            public Object dataModel() {
+                return param();
+            }
 
             @Override
             public Collection<TemplateConfig> templateConfig() {
                 SimpleTemplateConfig holder = new SimpleTemplateConfig();
                 // Configuration未配置TemplateLoader需要配置全路径
 //                holder.setTemplatePrefixPath("/force-framework/force-demo/src/main/resources/ftl/");
-                holder.setTemplatePath("entity.ftl");
+                holder.setTemplateFileName("entity-demo.ftl");
                 holder.setOutPrefixPath("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/src/main/java/com/quan/demo/freemarker/");
                 holder.setOutPath("User.java");
                 return Collections.singleton(holder);
@@ -34,10 +56,6 @@ public class FreemarkerDemo {
 //            public void configurationCustom(Configuration configuration) {
 //            }
 
-            @Override
-            public Object dataModel() {
-                return param();
-            }
         };
         generator.generate();
     }

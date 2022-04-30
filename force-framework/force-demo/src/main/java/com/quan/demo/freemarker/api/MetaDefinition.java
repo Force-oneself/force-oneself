@@ -9,23 +9,30 @@ import java.util.Set;
  * @author Force-oneself
  * @date 2022-04-27
  */
-public interface Meta {
+public interface MetaDefinition {
 
     String EMPTY_STR = "";
+
+    /**
+     * package路径
+     *
+     * @return 路径名
+     */
+    String getPkg();
 
     /**
      * 元数据类型
      *
      * @return 类型
      */
-    String type();
+    String getType();
 
     /**
      * 元数据注解
      *
      * @return 注解名
      */
-    default Set<String> annotations() {
+    default Set<String> getAnnotations() {
         return Collections.emptySet();
     }
 
@@ -34,7 +41,7 @@ public interface Meta {
      *
      * @return 描述
      */
-    default String describe() {
+    default String getDescribe() {
         return EMPTY_STR;
     }
 }
