@@ -1,14 +1,11 @@
 package com.quan.demo.freemarker.api;
 
+import com.quan.demo.freemarker.base.DefaultTemplateBear;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
-import freemarker.template.Template;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -58,31 +55,8 @@ public interface ConfigurableFreemarkerGenerator<T extends TemplateConfig> exten
      * @param templateConfig TemplateConfig
      * @return TemplateBear
      */
-    default TemplateBear templateBear(Configuration config, TemplateConfig templateConfig) {
-        return new TemplateBear() {
-            @Override
-            public Supplier<Template> template() {
-                return () -> {
-                    try {
-                        return config.getTemplate(templateConfig.templatePath(), templateConfig.encoding());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                };
-            }
-
-            @Override
-            public Supplier<Writer> out() {
-                return () -> {
-                    try {
-                        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(templateConfig.outPath()),
-                                StandardCharsets.UTF_8));
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                };
-            }
-        };
+    default TemplateBear templateBear(Configuration config, T templateConfig) {
+        return new DefaultTemplateBear(config, templateConfig);
     }
 
     /**

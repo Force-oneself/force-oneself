@@ -27,17 +27,6 @@ public interface DriverDataModel extends DataModel {
      DriverConfigHolder driverHolder();
 
     /**
-     * 列的相关信息
-     *
-     * @return 列信息
-     */
-    default List<ColumnMeta> columnMetas() {
-        DriverConfigHolder driverHolder = driverHolder();
-        return DatabaseUtils.getColumnMeta(driverHolder.getTableName(),
-                () -> DatabaseUtils.getConnection(driverHolder.getUrl(), driverHolder.getUsername(), driverHolder.getPassword()));
-    }
-
-    /**
      * MySQL 驱动返回表结构模型
      *
      * @return 模型
@@ -47,7 +36,8 @@ public interface DriverDataModel extends DataModel {
         DriverConfigHolder driverHolder = this.driverHolder();
         String packageName = driverHolder.getBasePackage();
         String tableName = driverHolder.getTableName();
-        List<ColumnMeta> columns = this.columnMetas();
+        List<ColumnMeta> columns = DatabaseUtils.getColumnMeta(driverHolder.getTableName(),
+                () -> DatabaseUtils.getConnection(driverHolder.getUrl(), driverHolder.getUsername(), driverHolder.getPassword()));
         DefaultClassMeta classMeta = new DefaultClassMeta();
         Set<DefaultFieldMeta> fieldMetas = columns.stream()
                 .map(columnMeta -> {

@@ -1,5 +1,7 @@
 package com.quan.leetcode.question.sw;
 
+import java.util.Arrays;
+
 /**
  * S_1156
  *
@@ -14,34 +16,51 @@ public class S_1156 {
      * @param text text
      * @return return
      */
-    public int maxRepOpt11(String text) {
+    public int maxRepOpt1(String text) {
         int[] last = new int[26];
+        int[] first = new int[26];
+
+        Arrays.fill(first, -1);
         int len = text.length();
         // 每个元素最后出现的位置
         for (int i = 0; i < len; i++) {
-            last[text.charAt(i) - 'a'] = i;
+            int index = text.charAt(i) - 'a';
+            if (first[index] == -1) {
+                first[index] = i;
+            }
+            last[index] = i;
         }
 
         int l = 0;
         int r = 0;
         int max = 0;
         boolean change = false;
+        int changeIndex = -1;
         while (r < len) {
             while (text.charAt(l) != text.charAt(r)) {
                 // 最后出现该元素的位置需要在r的后面并且只被交换一次
-                if (last[text.charAt(l) - 'a'] > r && !change) {
+                int leftIndex = text.charAt(l) - 'a';
+                boolean onceChange = (first[leftIndex] > l || last[leftIndex] > r) && !change;
+                if (onceChange) {
                     change = true;
+                    changeIndex = r;
                     break;
                 }
                 // 交换过还是不同则右移到r，前面相同到字符[l, r-1]
                 // 这段相同到已经和后面字符无法继续过程相同字符数组了
-                l = r;
+                l = changeIndex + 1;
             }
             // 其中有元素改变过，当r元素到被换过的元素位置时需要减掉当前的元素计数
-            if (change && last[text.charAt(l) - 'a'] == r) {
+            int leftIndex = text.charAt(l) - 'a';
+            // l已经右移到r说明已经从l开始重新计数, 需要消除之前到change标识
+            if (l == changeIndex + 1) {
+                change = false;
+            }
+            if (change && (first[leftIndex] >= l && last[leftIndex] == r)) {
                 // 当前元素已经是被替换过的 所以需要-1，并将l右移到r的位置重新开始
                 max = Math.max(max, r - l);
                 l = r;
+                changeIndex = -1;
                 change = false;
             } else {
                 max = Math.max(max, r - l + 1);
@@ -57,7 +76,7 @@ public class S_1156 {
      * @param text text
      * @return return
      */
-    public int maxRepOpt1(String text) {
+    public int maxRepOpt11(String text) {
         char[] cs = text.toCharArray();
         // 每个字符计数
         int[] dics = new int[26];
@@ -158,12 +177,21 @@ public class S_1156 {
     }
 
     public static void main(String[] args) {
-//        System.out.println(new S_1156().maxRepOpt1("ababa"));
-//        System.out.println(new S_1156().maxRepOpt1("aaabaaa"));
-//        System.out.println(new S_1156().maxRepOpt1("aaabbaaa"));
-//        System.out.println(new S_1156().maxRepOpt1("aaaaa"));
-//        System.out.println(new S_1156().maxRepOpt1("abcdef"));
+        // 3
+        System.out.println(new S_1156().maxRepOpt1("ababa"));
+        // 6
+        System.out.println(new S_1156().maxRepOpt1("aaabaaa"));
+        // 4
+        System.out.println(new S_1156().maxRepOpt1("aaabbaaa"));
+        // 5
+        System.out.println(new S_1156().maxRepOpt1("aaaaa"));
+        // 1
+        System.out.println(new S_1156().maxRepOpt1("abcdef"));
+        // 6
         System.out.println(new S_1156().maxRepOpt1("bbababaaaa"));
-//        System.out.println(new S_1156().maxRepOpt1("aaaaabaaaaaaaabbaaaaaaaaaaabba"));
+        // 7
+        System.out.println(new S_1156().maxRepOpt1("aabaaabaaaba"));
+        // 14
+        System.out.println(new S_1156().maxRepOpt1("aaaaabaaaaaaaabbaaaaaaaaaaabba"));
     }
 }
