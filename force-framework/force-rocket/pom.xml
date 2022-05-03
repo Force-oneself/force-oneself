@@ -13,6 +13,7 @@
 
     <properties>
         <rocket-boot.version>2.2.1</rocket-boot.version>
+        <rocket.version>4.9.1</rocket.version>
         <openmessaging.version>0.3.0-alpha</openmessaging.version>
     </properties>
 
@@ -21,6 +22,16 @@
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-spring-boot-starter</artifactId>
             <version>${rocket-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-namesrv</artifactId>
+            <version>${rocket.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-broker</artifactId>
+            <version>${rocket.version}</version>
         </dependency>
         <dependency>
             <groupId>io.openmessaging</groupId>
