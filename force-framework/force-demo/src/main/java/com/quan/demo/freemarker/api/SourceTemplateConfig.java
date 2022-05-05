@@ -1,5 +1,7 @@
 package com.quan.demo.freemarker.api;
 
+import com.quan.demo.freemarker.enums.StringPool;
+
 /**
  * SourceTemplateConfig
  *
@@ -7,16 +9,6 @@ package com.quan.demo.freemarker.api;
  * @date 2022-04-30
  */
 public interface SourceTemplateConfig extends TemplateConfig {
-
-    /**
-     * maven source文件夹
-     */
-    String MAVEN_SRC = "src/main/java/";
-
-    /**
-     * Java文件后缀
-     */
-    String JAVA_SUFFIX = ".java";
 
     /**
      * 模版路径默认实现
@@ -35,7 +27,7 @@ public interface SourceTemplateConfig extends TemplateConfig {
      */
     @Override
     default String outPath() {
-        return this.outPrefixPath() + this.fileName() + this.fileNameSuffix();
+        return this.outPrefixPath() + this.fileName() + this.fileNameSuffix() + this.fileSuffix();
     }
 
     /**
@@ -75,11 +67,20 @@ public interface SourceTemplateConfig extends TemplateConfig {
     String fileName();
 
     /**
-     * 输出文件后缀
+     * 输出文件名后缀
      *
      * @return return
      */
     default String fileNameSuffix() {
-        return JAVA_SUFFIX;
+        return StringPool.EMPTY;
+    }
+
+    /**
+     * 输出文件后缀
+     *
+     * @return return
+     */
+    default String fileSuffix() {
+        return StringPool.JAVA_SUFFIX;
     }
 }

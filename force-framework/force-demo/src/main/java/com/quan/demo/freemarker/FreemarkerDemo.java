@@ -23,13 +23,12 @@ public class FreemarkerDemo {
     }
 
     private static void mysql() {
-        MysqlGenerator generator = new MysqlGenerator();
         SimpleMysqlTemplateConfig holder = new SimpleMysqlTemplateConfig();
         holder.setOutPrefixPath("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/");
         holder.setFileName("User");
         holder.setTemplateFileName("entity.ftl");
         holder.setSrc("src/main/java/com/quan/demo/freemarker/");
-        generator.setTemplateConfigs(Collections.singletonList(holder));
+        MysqlGenerator generator = new MysqlGenerator(Collections.singletonList(holder));
         generator.generate();
     }
 

@@ -2,6 +2,7 @@ package com.quan.demo.freemarker.base;
 
 import com.quan.demo.freemarker.api.ClassMetaDefinition;
 import com.quan.demo.freemarker.api.FieldMetaDefinition;
+import com.quan.demo.freemarker.enums.StringPool;
 
 import java.util.Collections;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
  */
 public class DefaultClassMeta extends DefaultMeta implements ClassMetaDefinition {
 
-    protected String extend = EMPTY_STR;
+    protected String extend = StringPool.EMPTY;
     protected Set<String> imports = Collections.emptySet();
     protected Set<String> implement = Collections.emptySet();
     protected Set<? extends FieldMetaDefinition> fields = Collections.emptySet();

@@ -1,5 +1,7 @@
 package com.quan.demo.freemarker.api;
 
+import com.quan.demo.freemarker.enums.StringPool;
+
 import java.util.Collections;
 import java.util.Set;
 
@@ -10,8 +12,6 @@ import java.util.Set;
  * @date 2022-04-27
  */
 public interface MetaDefinition {
-
-    String EMPTY_STR = "";
 
     /**
      * package路径
@@ -42,6 +42,6 @@ public interface MetaDefinition {
      * @return 描述
      */
     default String getDescribe() {
-        return EMPTY_STR;
+        return StringPool.EMPTY;
     }
 }

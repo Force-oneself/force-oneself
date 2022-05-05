@@ -1,5 +1,7 @@
 package com.quan.demo.freemarker.api;
 
+import com.quan.demo.freemarker.enums.StringPool;
+
 /**
  * TemplateConfig
  *
@@ -8,10 +10,7 @@ package com.quan.demo.freemarker.api;
  */
 public interface TemplateConfig extends Config {
 
-    /**
-     * 默认编码格式
-     */
-    String DEFAULT_ENCODING = "UTF-8";
+
 
     /**
      * 模版路径
@@ -33,7 +32,7 @@ public interface TemplateConfig extends Config {
      * @return return
      */
     default String encoding() {
-        return DEFAULT_ENCODING;
+        return StringPool.DEFAULT_ENCODING;
     }
 
 }

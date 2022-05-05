@@ -1,6 +1,7 @@
 package com.quan.demo.freemarker.base;
 
 import com.quan.demo.freemarker.api.SourceTemplateConfig;
+import com.quan.demo.freemarker.enums.StringPool;
 
 /**
  * @author Force-oneself
@@ -17,18 +18,18 @@ public class SimpleTemplateConfig implements SourceTemplateConfig {
     /**
      * source路径
      */
-    protected String src = MAVEN_SRC;
+    protected String src = StringPool.MAVEN_SRC;
 
     /**
      * 输出路径前缀
      */
-    protected String outPrefixPath = "";
+    protected String outPrefixPath = StringPool.EMPTY;
 
 
     /**
      * 模版路径前缀
      */
-    protected String templatePrefixPath = "";
+    protected String templatePrefixPath = StringPool.EMPTY;
 
     protected String templateFileName;
 

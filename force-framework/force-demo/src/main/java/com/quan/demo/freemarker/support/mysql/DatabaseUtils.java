@@ -35,7 +35,7 @@ public class DatabaseUtils {
     /**
      * 获取数据库连接
      *
-     * @return
+     * @return Connection
      */
     public static Connection getConnection() {
         Connection conn = null;
@@ -59,6 +59,8 @@ public class DatabaseUtils {
 
     /**
      * 获取数据库下的所有表名
+     *
+     * @return 表名
      */
     public static List<String> getTableNames() {
         List<String> tableNames = new ArrayList<>();

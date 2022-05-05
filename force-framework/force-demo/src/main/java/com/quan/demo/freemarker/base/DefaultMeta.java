@@ -1,6 +1,7 @@
 package com.quan.demo.freemarker.base;
 
 import com.quan.demo.freemarker.api.MetaDefinition;
+import com.quan.demo.freemarker.enums.StringPool;
 
 import java.util.Collections;
 import java.util.Set;
@@ -14,9 +15,9 @@ import java.util.Set;
 public class DefaultMeta implements MetaDefinition {
 
     protected Set<String> annotations = Collections.emptySet();
-    protected String describe = EMPTY_STR;
-    protected String type = EMPTY_STR;
-    protected String pkg = EMPTY_STR;
+    protected String describe = StringPool.EMPTY;
+    protected String type = StringPool.EMPTY;
+    protected String pkg = StringPool.EMPTY;
 
     @Override
     public String getType() {

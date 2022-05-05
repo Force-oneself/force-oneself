@@ -1,5 +1,7 @@
 package com.quan.demo.freemarker.api;
 
+import com.quan.demo.freemarker.enums.StringPool;
+
 import java.util.Collections;
 import java.util.Set;
 
@@ -26,7 +28,7 @@ public interface ClassMetaDefinition extends MetaDefinition {
      * @return 父类名
      */
     default String getExtend() {
-        return EMPTY_STR;
+        return StringPool.EMPTY;
     }
 
     /**
