@@ -5,6 +5,12 @@ import ${import};
 
 </#list>
 
+/**
+ * ${meta.type}.java
+ *
+ * @author Force-oneself
+ * @date ${.now?string("yyyy-MM-dd")}
+ */
 public class ${meta.type} {
 
 <#list meta.fields as field>

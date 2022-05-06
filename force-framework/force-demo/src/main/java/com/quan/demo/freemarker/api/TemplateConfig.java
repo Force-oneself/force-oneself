@@ -10,8 +10,6 @@ import com.quan.demo.freemarker.enums.StringPool;
  */
 public interface TemplateConfig extends Config {
 
-
-
     /**
      * 模版路径
      *

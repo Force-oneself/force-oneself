@@ -11,11 +11,8 @@ public enum InternalKeyEnum {
      * 内置key枚举
      */
     ENTITY("meta", "desc"),
-    CONTROLLER("key", "desc"),
-    MAPPER("key", "desc"),
-    SYSTEM_ENV("ENV", "系统环境变量"),
-    SYSTEM_PROPERTIES("PROPERTIES", "系统变量"),
-    SERVICE("key", "desc");
+    SYSTEM_ENV("env", "系统环境变量"),
+    SYSTEM_PROPERTIES("prop", "系统变量");
 
     private final String key;
 

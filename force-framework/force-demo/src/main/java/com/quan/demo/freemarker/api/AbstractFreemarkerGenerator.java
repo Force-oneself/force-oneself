@@ -24,7 +24,9 @@ public abstract class AbstractFreemarkerGenerator<T extends TemplateConfig>
     }
 
     {
-        data.put(InternalKeyEnum.SYSTEM_ENV.getKey(), System.getenv());
+        Map<String, String> env = System.getenv();
+        // TODO 转换特殊字符
+        data.put(InternalKeyEnum.SYSTEM_ENV.getKey(), env);
         data.put(InternalKeyEnum.SYSTEM_PROPERTIES.getKey(), System.getProperties());
     }
 

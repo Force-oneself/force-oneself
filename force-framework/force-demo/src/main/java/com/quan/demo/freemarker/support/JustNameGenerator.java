@@ -1,10 +1,11 @@
 package com.quan.demo.freemarker.support;
 
-import com.quan.demo.freemarker.api.ClassMetaDefinition;
 import com.quan.demo.freemarker.api.AbstractFreemarkerGenerator;
+import com.quan.demo.freemarker.api.ClassMetaDefinition;
 import com.quan.demo.freemarker.base.DefaultClassMeta;
-import com.quan.demo.freemarker.base.SimpleTemplateConfig;
+import com.quan.demo.freemarker.base.DefaultTemplateConfig;
 import com.quan.demo.freemarker.enums.StringPool;
+import freemarker.template.Configuration;
 
 import java.util.List;
 
@@ -14,12 +15,12 @@ import java.util.List;
  * @author Force-oneself
  * @date 2022-05-05
  */
-public class JustNameGenerator extends AbstractFreemarkerGenerator<SimpleTemplateConfig> {
+public class JustNameGenerator extends AbstractFreemarkerGenerator<DefaultTemplateConfig> {
 
     private String className = StringPool.EMPTY;
     private String pkg = StringPool.EMPTY;
 
-    public JustNameGenerator(List<SimpleTemplateConfig> templateConfigs) {
+    public JustNameGenerator(List<DefaultTemplateConfig> templateConfigs) {
         super(templateConfigs);
     }
 
@@ -29,6 +30,11 @@ public class JustNameGenerator extends AbstractFreemarkerGenerator<SimpleTemplat
         classMeta.setPkg(pkg);
         classMeta.setType(className);
         return classMeta;
+    }
+
+    @Override
+    public void templateConfigCustom(Configuration config, DefaultTemplateConfig templateConfig) {
+        templateConfig.setFileName(className.concat(templateConfig.getTemplateFileNameSuffix()));
     }
 
     public String getClassName() {

@@ -21,6 +21,11 @@ public interface StringPool {
     String JAVA_SUFFIX = ".java";
 
     /**
+     * Ftl文件后缀
+     */
+    String FTL_SUFFIX = ".ftl";
+
+    /**
      * 默认编码格式
      */
     String DEFAULT_ENCODING = "UTF-8";

@@ -1,5 +1,7 @@
 package com.quan.demo.freemarker.support.mysql;
 
+import com.quan.demo.freemarker.enums.StringPool;
+
 /**
  * @author Force-oneself
  * @description DriverConfigHolder
@@ -18,6 +20,10 @@ public class DriverConfigHolder {
     protected String basePackage;
 
     protected String tableName;
+
+    protected String prefix = StringPool.EMPTY;
+
+    protected String fileName = StringPool.EMPTY;
 
     public String getDriver() {
         return driver;
@@ -65,5 +71,21 @@ public class DriverConfigHolder {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

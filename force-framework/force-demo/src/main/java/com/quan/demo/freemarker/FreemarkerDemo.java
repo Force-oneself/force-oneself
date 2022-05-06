@@ -3,8 +3,9 @@ package com.quan.demo.freemarker;
 import com.quan.demo.freemarker.api.ConfigurableFreemarkerGenerator;
 import com.quan.demo.freemarker.api.Generator;
 import com.quan.demo.freemarker.api.TemplateConfig;
-import com.quan.demo.freemarker.base.SimpleTemplateConfig;
-import com.quan.demo.freemarker.support.mysql.MysqlGenerator;
+import com.quan.demo.freemarker.base.DefaultTemplateConfig;
+import com.quan.demo.freemarker.support.JustNameGenerator;
+import com.quan.demo.freemarker.support.mysql.MysqlPropertiesGenerator;
 import com.quan.demo.freemarker.support.mysql.SimpleMysqlTemplateConfig;
 import freemarker.template.TemplateException;
 
@@ -19,16 +20,25 @@ import java.util.*;
 public class FreemarkerDemo {
 
     public static void main(String[] args) throws TemplateException, IOException {
-        mysql();
+        justName();
     }
 
     private static void mysql() {
         SimpleMysqlTemplateConfig holder = new SimpleMysqlTemplateConfig();
-        holder.setOutPrefixPath("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/");
+        holder.setOutPrefixPath("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/src/main/java/com/quan/demo/freemarker/");
         holder.setFileName("User");
-        holder.setTemplateFileName("entity.ftl");
-        holder.setSrc("src/main/java/com/quan/demo/freemarker/");
-        MysqlGenerator generator = new MysqlGenerator(Collections.singletonList(holder));
+        holder.setTemplateFileName("entity");
+        MysqlPropertiesGenerator generator = new MysqlPropertiesGenerator(Collections.singletonList(holder));
+        generator.generate();
+    }
+
+    private static void justName() {
+        DefaultTemplateConfig config = new DefaultTemplateConfig();
+        config.setOutPrefixPath("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/src/main/java/com/quan/demo/freemarker/");
+        config.setTemplateFileName("entity");
+        JustNameGenerator generator = new JustNameGenerator(Collections.singletonList(config));
+        generator.setClassName("Demo");
+        generator.setPkg("com.quan.demo.freemarker");
         generator.generate();
     }
 
@@ -42,12 +52,12 @@ public class FreemarkerDemo {
 
             @Override
             public Collection<TemplateConfig> templateConfig() {
-                SimpleTemplateConfig holder = new SimpleTemplateConfig();
+                DefaultTemplateConfig holder = new DefaultTemplateConfig();
                 // Configuration未配置TemplateLoader需要配置全路径
 //                holder.setTemplatePrefixPath("/force-framework/force-demo/src/main/resources/ftl/");
                 holder.setTemplateFileName("entity-demo.ftl");
                 holder.setOutPrefixPath("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/src/main/java/com/quan/demo/freemarker/");
-                holder.setOutPath("User.java");
+                holder.setFileName("User");
                 return Collections.singleton(holder);
             }
 
