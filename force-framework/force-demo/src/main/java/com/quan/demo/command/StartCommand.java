@@ -5,16 +5,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 /**
- * @Description:
- * @Author heyq
- * @Date 2021-02-23
- **/
+ * StartCommand.java
+ *
+ * @author Force-oneself
+ * @date 2022-05-07 23:28
+ */
 public class StartCommand {
 
     private final static Logger log = LoggerFactory.getLogger(StartCommand.class);
 
     public StartCommand(String[] args) {
-        Boolean isServerPort = false;
+        boolean isServerPort = false;
         String serverPort = "";
         if (args != null) {
             for (String arg : args) {

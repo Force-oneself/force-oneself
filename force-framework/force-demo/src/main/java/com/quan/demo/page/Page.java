@@ -3,9 +3,10 @@ package com.quan.demo.page;
 import java.util.Collection;
 
 /**
+ * Page.java
+ *
  * @author Force-oneself
- * @Description Page
- * @date 2021-11-22
+ * @date 2022-05-07 23:35
  */
 public interface Page<T, R> {
 

@@ -10,10 +10,11 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
- * @Description:
- * @Author heyq
- * @Date 2021-02-23
- **/
+ * NetUtils.java
+ *
+ * @author Force-oneself
+ * @date 2022-05-07 23:28
+ */
 public class NetUtils {
 
     private final static Logger log = LoggerFactory.getLogger(NetUtils.class);

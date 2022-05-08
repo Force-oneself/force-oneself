@@ -1,9 +1,10 @@
 package com.quan.demo.page;
 
 /**
+ * PageableQuery.java
+ *
  * @author Force-oneself
- * @Description PageableQuery
- * @date 2021-11-22
+ * @date 2022-05-07 23:34
  */
 public interface PageableQuery<T> extends PageQuery<T>, Enable {
 

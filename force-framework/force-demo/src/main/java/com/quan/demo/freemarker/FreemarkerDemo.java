@@ -26,7 +26,6 @@ public class FreemarkerDemo {
     private static void mysql() {
         SimpleMysqlTemplateConfig holder = new SimpleMysqlTemplateConfig();
         holder.setOutPrefixPath("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/src/main/java/com/quan/demo/freemarker/");
-        holder.setFileName("User");
         holder.setTemplateFileName("entity");
         MysqlPropertiesGenerator generator = new MysqlPropertiesGenerator(Collections.singletonList(holder));
         generator.generate();
