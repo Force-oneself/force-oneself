@@ -1,8 +1,9 @@
 package com.quan.demo.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * @Description: class TestController
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2021-05-22
  **/
 @RestController
+@Validated
 public class TestController {
 
 
@@ -21,7 +23,19 @@ public class TestController {
         return user;
     }
 
+    @GetMapping("/get")
+    public User get(@Validated User user) {
+        return user;
+    }
+
+    @PostMapping ("/requestBody")
+    public User requestBody(@RequestBody User user) {
+        return user;
+    }
+
     public static class User {
+        private Long id;
+        @NotBlank
         private String username;
 
         private String like;
@@ -40,6 +54,14 @@ public class TestController {
 
         public void setLike(String like) {
             this.like = like;
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
         }
     }
 }
