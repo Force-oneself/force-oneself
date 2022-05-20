@@ -24,7 +24,6 @@
         <netty.version>4.1.48.Final</netty.version>
         <easyexcel.version>2.2.6</easyexcel.version>
         <fastjson.version>1.2.75</fastjson.version>
-        <freemarker.version>2.3.30</freemarker.version>
     </properties>
 
     <dependencies>
@@ -49,9 +48,8 @@
             <version>${fastjson.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>${freemarker.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>

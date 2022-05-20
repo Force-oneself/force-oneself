@@ -20,7 +20,7 @@ import java.util.*;
 public class FreemarkerDemo {
 
     public static void main(String[] args) throws TemplateException, IOException {
-        justName();
+        mysql();
     }
 
     private static void mysql() {

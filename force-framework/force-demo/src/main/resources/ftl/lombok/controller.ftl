@@ -23,7 +23,7 @@ public class ${meta.type}Controller {
     private final ${meta.type}Service ${meta.type?uncap_first}Service;
 
     @ApiOperation(value = "根据id获取")
-    @PostMapping("findById")
+    @GetMapping("findById")
     public R${'<'}${meta.type}${'>'} findById(@RequestParam("id") Long id) {
         return R.data(${meta.type?uncap_first}Service.getById(id));
     }
