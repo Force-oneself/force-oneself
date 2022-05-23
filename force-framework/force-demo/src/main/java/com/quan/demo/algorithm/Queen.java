@@ -53,25 +53,41 @@ public class Queen {
     /**
      * ignore
      *
-     * @param limit       limit
-     * @param colLim      列的限制。1位置可以放皇后，0位置不可以
-     * @param leftDiaLIm  左斜线限制，1位置可以放皇后，0位置不可以
-     * @param rightDiaLim 右斜线的限制，1位置可以放皇后，0位置不可以
+     * @param limit       需要放置多少个皇后到二进制掩码
+     * @param colLim      列的限制。1位置不可以放皇后，0位置可以
+     * @param leftDiaLim  左斜线限制，1位置不可以放皇后，0位置可以
+     * @param rightDiaLim 右斜线的限制，1位置不可以放皇后，0位置可以
      * @return /
      */
-    private int bitProcess(int limit, int colLim, int leftDiaLIm, int rightDiaLim) {
+    private int bitProcess(int limit, int colLim, int leftDiaLim, int rightDiaLim) {
         if (limit == colLim) {
             return 1;
         }
         int mostRightOne;
-        // 候选皇后的位置
-        int pos = limit & (~(colLim | leftDiaLIm | rightDiaLim));
+        // 候选皇后的位置, limit 可以将高位的取反的1 转为0
+        int pos = limit & (
+                // 取反将可以放皇后的位置设置为 1, 方便后续取皇后的位置
+                ~(colLim | leftDiaLim | rightDiaLim)
+        );
         int res = 0;
         while (pos != 0) {
+            // 选择最右则的1
             mostRightOne = pos & (~pos + 1);
             pos -= mostRightOne;
-            res += bitProcess(limit, colLim | mostRightOne, (leftDiaLIm | mostRightOne) << 1, (rightDiaLim | mostRightOne) >>> 1);
+            res += bitProcess(limit,
+                    // mostRightOne上的列已经放了皇后
+                    colLim | mostRightOne,
+                    // 当前列放置的皇后 左移1即为该列左边斜线不能放皇后的位置
+                    (leftDiaLim | mostRightOne) << 1,
+                    // 同上
+                    (rightDiaLim | mostRightOne) >>> 1
+            );
         }
         return res;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Queen().num(10));
+        System.out.println(new Queen().bit(10));
     }
 }
