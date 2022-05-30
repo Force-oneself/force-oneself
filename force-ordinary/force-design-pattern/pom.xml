@@ -9,7 +9,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>force-pattern</artifactId>
+    <artifactId>force-design-pattern</artifactId>
 
     <name>force-pattern</name>
 </project>

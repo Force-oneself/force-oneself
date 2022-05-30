@@ -14,7 +14,7 @@
 
     <modules>
         <module>force-algorithm</module>
-        <module>force-pattern</module>
+        <module>force-design-pattern</module>
         <module>force-easy-rule</module>
         <module>force-netty</module>
     </modules>
