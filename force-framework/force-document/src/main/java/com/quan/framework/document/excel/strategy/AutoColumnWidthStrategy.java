@@ -13,10 +13,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description: 自定义列宽自适应实现策略
- * @Author heyq
- * @Date 2020-09-25
- **/
+ * 自定义列宽自适应实现策略
+ *
+ * @author Force-oneself
+ * @date 2022-06-07
+ */
 public class AutoColumnWidthStrategy extends AbstractColumnWidthStyleStrategy {
 
     private final Map<Integer, Map<Integer, Integer>> widthCache = new HashMap<>(16);

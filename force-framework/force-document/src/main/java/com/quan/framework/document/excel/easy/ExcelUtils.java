@@ -26,7 +26,7 @@ public class ExcelUtils extends EasyExcel {
      */
     public static <T> ExcelReaderBuilder batchRead(InputStream inputStream, Class<T> head,
                                                    BiConsumer<List<T>, AnalysisContext> consumer) {
-        return read(inputStream, head, new BatchableListener<>(new BatchableBuilder<T>().batch(consumer)));
+        return read(inputStream, head, new BatchListener<>(new BatchBuilder<T>().batch(consumer)));
     }
 
     /**
@@ -38,7 +38,7 @@ public class ExcelUtils extends EasyExcel {
      * @param <T>         消费的数据类型
      * @return Excel的构造器
      */
-    public static <T> ExcelReaderBuilder batchRead(InputStream inputStream, Class<T> head, BatchableBuilder<T> builder) {
-        return read(inputStream, head, new BatchableListener<>(builder));
+    public static <T> ExcelReaderBuilder batchRead(InputStream inputStream, Class<T> head, BatchBuilder<T> builder) {
+        return read(inputStream, head, new BatchListener<>(builder));
     }
 }

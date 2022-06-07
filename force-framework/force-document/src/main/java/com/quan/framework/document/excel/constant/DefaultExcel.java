@@ -11,10 +11,11 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 
 /**
- * @Description: EasyExcel 默认样式对象
- * @Author heyq
- * @Date 2020-09-24
- **/
+ * DefaultExcel.java
+ *
+ * @author Force-oneself
+ * @date 2022-06-07
+ */
 public final class DefaultExcel {
 
     /**

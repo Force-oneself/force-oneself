@@ -9,10 +9,11 @@ import com.alibaba.excel.util.ConverterUtils;
 import java.util.Map;
 
 /**
- * @Description: interface AnalysisReadListener
- * @Author Force丶Oneself
- * @Date 2021-06-07
- **/
+ * AnalysisReadListener.java
+ *
+ * @author Force-oneself
+ * @date 2022-06-07
+ */
 public interface AnalysisReadListener<T> extends ReadListener<T> {
 
     /**
