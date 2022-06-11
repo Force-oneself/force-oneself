@@ -35,7 +35,7 @@ public class TestController {
 
     public static class User {
         private Long id;
-        @NotBlank
+        @NotBlank(message = "ddd")
         private String username;
 
         private String like;

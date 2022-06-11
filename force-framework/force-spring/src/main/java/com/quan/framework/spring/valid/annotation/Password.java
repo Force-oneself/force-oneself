@@ -19,20 +19,17 @@ import java.lang.annotation.*;
 public @interface Password {
     /**
      * 密码最小长度
-     * @return
      */
     int minLength() default 8;
 
     /**
      * 密码最大长度
-     * @return
      */
     int maxLength() default 16;
 
     /**
      * 密码复杂度
      *
-     * @return
      */
     PasswordType passwordType() default PasswordType.MEDIUM;
 

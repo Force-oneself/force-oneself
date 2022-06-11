@@ -18,7 +18,7 @@ import java.lang.reflect.Type;
  * @Description RestControllerResponseAdvice.java
  * @date 2021-07-27
  */
-@RestControllerAdvice(basePackages = "com.quan.demo.controller")
+//@RestControllerAdvice(basePackages = "com.quan.demo.controller")
 public class RestControllerRequestAdvice implements RequestBodyAdvice {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());

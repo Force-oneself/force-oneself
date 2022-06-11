@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8888
 #   随机端口
 #  port: ${random.int[2000,8000]}
 #debug: true
@@ -26,7 +26,7 @@ spring:
   ################### Datasource config ###################
   datasource:
     username: root
-    password: ENC(h0FuKCIDDxtJDagwvCWZPg==)
+#    password: ENC(h0FuKCIDDxtJDagwvCWZPg==)
     url: jdbc:mysql://120.76.175.67:3306/demo?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
 #    url: jdbc:mysql://106.53.49.229:19035/winkey_bladex?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
