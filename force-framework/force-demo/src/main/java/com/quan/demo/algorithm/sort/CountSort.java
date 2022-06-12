@@ -1,10 +1,11 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.sort;
 
 import java.util.Arrays;
 
 /**
+ * CountSort 计数排序
+ *
  * @author Force-oneself
- * @description CountSort
  * @date 2022-03-07
  */
 public class CountSort {
@@ -20,7 +21,7 @@ public class CountSort {
         // 适合密集性数组，费内存
         int bucketLen = maxValue + 1;
         int[] bucket = new int[bucketLen];
-
+        // 构建桶
         for (int value : arr) {
             bucket[value]++;
         }

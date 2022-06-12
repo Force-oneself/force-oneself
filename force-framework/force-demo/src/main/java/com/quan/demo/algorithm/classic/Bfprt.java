@@ -1,4 +1,4 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.classic;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
  * @author Force-oneself
  * @date 2022-05-29
  */
-public class BFPRT {
+public class Bfprt {
 
     public static class MaxHeapComparator implements Comparator<Integer> {
 

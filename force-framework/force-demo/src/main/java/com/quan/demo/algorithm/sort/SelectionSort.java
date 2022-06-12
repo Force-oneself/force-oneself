@@ -1,8 +1,9 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.sort;
 
 /**
+ * SelectionSort 选择排序
+ *
  * @author Force-oneself
- * @description SelectionSort
  * @date 2022-03-08
  */
 public class SelectionSort {

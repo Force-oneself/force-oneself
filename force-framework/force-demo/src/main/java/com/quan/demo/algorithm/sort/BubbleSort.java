@@ -1,8 +1,9 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.sort;
 
 /**
+ * BubbleSort 冒泡排序
+ *
  * @author Force-oneself
- * @description BubbleSort
  * @date 2022-03-08
  */
 public class BubbleSort {

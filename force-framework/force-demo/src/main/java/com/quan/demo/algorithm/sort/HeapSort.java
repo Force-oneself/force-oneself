@@ -1,8 +1,9 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.sort;
 
 /**
+ * HeapSort 堆排序
+ *
  * @author Force-oneself
- * @description HeapSort
  * @date 2022-03-07
  */
 public class HeapSort {

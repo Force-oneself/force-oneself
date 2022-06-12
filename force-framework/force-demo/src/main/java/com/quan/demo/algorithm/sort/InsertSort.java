@@ -1,8 +1,9 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.sort;
 
 /**
+ * InsertSort 插入排序
+ *
  * @author Force-oneself
- * @description InsertSort
  * @date 2022-03-08
  */
 public class InsertSort {

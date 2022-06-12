@@ -1,11 +1,11 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.classic;
 
 
 import java.util.Scanner;
 
 /**
+ *  Manacher 查询最长回环字符串
  * @author Force-oneself
- * @description Manacher
  * @date 2022-03-26
  */
 public class Manacher {
@@ -17,7 +17,12 @@ public class Manacher {
         System.out.println(res + ": " + res.length());
     }
 
-    //插入字符
+    /**
+     * 插入字符
+     *
+     * @param s s
+     * @return  /
+     */
     public static String preProcess(String s) {
         int n = s.length();
         if (n == 0) {
@@ -30,12 +35,14 @@ public class Manacher {
         return ret;
     }
 
-    // 马拉车算法
+
     public static String longestPalindrome(String str) {
         String S = preProcess(str);
-        int n = S.length();// 保留回文串的长度
+        // 保留回文串的长度
+        int n = S.length();
         int[] len = new int[n];
-        int center = 0, right = 0;// 保留边界最右的回文核心以及右边界
+        // 保留边界最右的回文核心以及右边界
+        int center = 0, right = 0;
         // 从第 1 个字符开始
         for (int i = 1; i < n - 1; i++) {
             // 找出i对于后面核心的对称

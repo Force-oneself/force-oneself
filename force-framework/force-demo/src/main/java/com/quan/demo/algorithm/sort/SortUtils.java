@@ -1,8 +1,9 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.sort;
 
 /**
+ * SortUtils
+ *
  * @author Force-oneself
- * @description SortUtils
  * @date 2022-03-06
  */
 public final class SortUtils {

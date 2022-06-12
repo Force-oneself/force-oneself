@@ -7,9 +7,14 @@ package com.quan.demo.algorithm;
  */
 public class PlalindromeString {
 
-    // 预处理字符串，在两个字符之间加上#
+    /**
+     * 预处理字符串，在两个字符之间加上#
+     *
+     * @param s s
+     * @return  /
+     */
     private String preHandleString(String s) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         int len = s.length();
         sb.append('#');
         for(int i = 0; i < len; i++) {
@@ -19,7 +24,12 @@ public class PlalindromeString {
         return sb.toString();
     }
 
-    // 寻找最长回文字串
+    /**
+     * 寻找最长回文字串
+     *
+     * @param s s
+     * @return  /
+     */
     public String findLongestPlalindromeString(String s) {
         // 先预处理字符串
         String str = preHandleString(s);
@@ -74,7 +84,7 @@ public class PlalindromeString {
             }
         }
         // 去掉之前添加的#
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for(int i = center - longestHalf + 1; i <= center + longestHalf; i += 2) {
             sb.append(str.charAt(i));
         }
@@ -82,6 +92,6 @@ public class PlalindromeString {
     }
 
     public static void main(String[] args) {
-        System.out.println("012345".substring(0, 1));
+        System.out.println("012345".charAt(0));
     }
 }

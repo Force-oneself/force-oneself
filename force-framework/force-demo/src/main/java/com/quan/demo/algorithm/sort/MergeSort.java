@@ -1,10 +1,11 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.sort;
 
 import java.util.Arrays;
 
 /**
+ * MergeSort 归并排序
+ *
  * @author Force-oneself
- * @description MergeSort
  * @date 2022-03-08
  */
 public class MergeSort {

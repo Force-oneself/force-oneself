@@ -1,4 +1,4 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.classic;
 
 /**
  * SegmentTree
@@ -62,14 +62,19 @@ public class SegmentTree {
         int leftChildIdx = rootIdx << 1;
         int rightChildIdx = leftChildIdx | 1;
         if (update[rootIdx]) {
+            // 将子节点更新
             update[leftChildIdx] = true;
             update[rightChildIdx] = true;
+            // 更新值
             change[leftChildIdx] = change[rootIdx];
             change[rightChildIdx] = change[rootIdx];
+            // 新增值置零
             lazy[leftChildIdx] = 0;
             lazy[rightChildIdx] = 0;
+            // sum数组则为更新值乘 左右子节点的数量
             sum[leftChildIdx] = change[rootIdx] * leftNum;
             sum[rightChildIdx] = change[rootIdx] * rightNum;
+            // 父节点重置更新标识
             update[rootIdx] = false;
         }
         if (lazy[rootIdx] != 0) {
@@ -91,6 +96,7 @@ public class SegmentTree {
      * @param curIdx 当前节点的左边
      */
     public void build(int l, int r, int curIdx) {
+        // base case
         if (l == r) {
             sum[curIdx] = arr[l];
             return;
@@ -250,34 +256,42 @@ public class SegmentTree {
         int addOrUpdateTimes = 1000;
         int queryTimes = 500;
         for (int i = 0; i < testTimes; i++) {
+            // 生成随机数组
             int[] origin = generateRandomArray(len, max);
+            // 线段树
             SegmentTree seg = new SegmentTree(origin);
-            int S = 1;
-            int N = origin.length;
+            int start = 1;
+            int oriLen = origin.length;
+            // 根节点从下标1开始
             int root = 1;
-            seg.build(S, N, root);
+            // 初始化线段树
+            seg.build(start, oriLen, root);
+            // 暴力
             Right rig = new Right(origin);
             for (int j = 0; j < addOrUpdateTimes; j++) {
-                int num1 = (int) (Math.random() * N) + 1;
-                int num2 = (int) (Math.random() * N) + 1;
-                int L = Math.min(num1, num2);
-                int R = Math.max(num1, num2);
-                int C = (int) (Math.random() * max) - (int) (Math.random() * max);
+                // 随机任务的范围
+                int num1 = (int) (Math.random() * oriLen) + 1;
+                int num2 = (int) (Math.random() * oriLen) + 1;
+                int taskLeft = Math.min(num1, num2);
+                int taskRight = Math.max(num1, num2);
+                int opsNum = (int) (Math.random() * max) - (int) (Math.random() * max);
+                // 一般概率add/update
                 if (Math.random() < 0.5) {
-                    seg.add(L, R, C, S, N, root);
-                    rig.add(L, R, C);
+                    seg.add(taskLeft, taskRight, opsNum, start, oriLen, root);
+                    rig.add(taskLeft, taskRight, opsNum);
                 } else {
-                    seg.update(L, R, C, S, N, root);
-                    rig.update(L, R, C);
+                    seg.update(taskLeft, taskRight, opsNum, start, oriLen, root);
+                    rig.update(taskLeft, taskRight, opsNum);
                 }
             }
             for (int k = 0; k < queryTimes; k++) {
-                int num1 = (int) (Math.random() * N) + 1;
-                int num2 = (int) (Math.random() * N) + 1;
-                int L = Math.min(num1, num2);
-                int R = Math.max(num1, num2);
-                long ans1 = seg.query(L, R, S, N, root);
-                long ans2 = rig.query(L, R);
+                // 随机查询某个范围
+                int num1 = (int) (Math.random() * oriLen) + 1;
+                int num2 = (int) (Math.random() * oriLen) + 1;
+                int queryLeft = Math.min(num1, num2);
+                int queryRight = Math.max(num1, num2);
+                long ans1 = seg.query(queryLeft, queryRight, start, oriLen, root);
+                long ans2 = rig.query(queryLeft, queryRight);
                 if (ans1 != ans2) {
                     return false;
                 }

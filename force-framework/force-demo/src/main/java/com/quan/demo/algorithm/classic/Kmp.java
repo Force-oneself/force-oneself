@@ -1,4 +1,4 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.classic;
 
 /**
  * KMP
@@ -6,7 +6,7 @@ package com.quan.demo.algorithm;
  * @author Force-oneself
  * @date 2022-05-28
  */
-public class KMP {
+public class Kmp {
 
     public static int getIndexOf(String s, String m) {
         if (s == null || m == null || m.length() < 1 || s.length() < m.length()) {

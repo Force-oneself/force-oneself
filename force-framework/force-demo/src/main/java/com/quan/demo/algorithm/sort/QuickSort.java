@@ -1,8 +1,9 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.sort;
 
 /**
+ * QuickSort 快排序
+ *
  * @author Force-oneself
- * @description QuickSort
  * @date 2022-03-06
  */
 public class QuickSort {
