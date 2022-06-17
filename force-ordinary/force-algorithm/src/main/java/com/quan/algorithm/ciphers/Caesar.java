@@ -30,18 +30,22 @@ public class Caesar {
         final int length = message.length();
         for (int i = 0; i < length; i++) {
 
-//            int current = message.charAt(i); //using char to shift characters because ascii is in-order latin alphabet
-            char current = message.charAt(i); // Java law : char + int = char
+//            int current = message.charAt(i);
+// using char to shift characters because ascii is in-order latin alphabet
+            // Java law : char + int = char
+            char current = message.charAt(i);
 
-            if (IsCapitalLatinLetter(current)) {
-
-                current += shift;
-                encoded.append((char) (current > 'Z' ? current - 26 : current)); // 26 = number of latin letters
-
-            } else if (IsSmallLatinLetter(current)) {
+            if (isCapitalLatinLetter(current)) {
 
                 current += shift;
-                encoded.append((char) (current > 'z' ? current - 26 : current)); // 26 = number of latin letters
+                // 26 = number of latin letters
+                encoded.append((char) (current > 'Z' ? current - 26 : current));
+
+            } else if (isSmallLatinLetter(current)) {
+
+                current += shift;
+                // 26 = number of latin letters
+                encoded.append((char) (current > 'z' ? current - 26 : current));
 
             } else {
                 encoded.append(current);
@@ -65,15 +69,17 @@ public class Caesar {
         final int length = encryptedMessage.length();
         for (int i = 0; i < length; i++) {
             char current = encryptedMessage.charAt(i);
-            if (IsCapitalLatinLetter(current)) {
+            if (isCapitalLatinLetter(current)) {
 
                 current -= shift;
-                decoded.append((char) (current < 'A' ? current + 26 : current));// 26 = number of latin letters
+                // 26 = number of latin letters
+                decoded.append((char) (current < 'A' ? current + 26 : current));
 
-            } else if (IsSmallLatinLetter(current)) {
+            } else if (isSmallLatinLetter(current)) {
 
                 current -= shift;
-                decoded.append((char) (current < 'a' ? current + 26 : current));// 26 = number of latin letters
+                // 26 = number of latin letters
+                decoded.append((char) (current < 'a' ? current + 26 : current));
 
             } else {
                 decoded.append(current);
@@ -86,7 +92,7 @@ public class Caesar {
      * @param c
      * @return true if character is capital Latin letter or false for others
      */
-    private static boolean IsCapitalLatinLetter(char c) {
+    private static boolean isCapitalLatinLetter(char c) {
         return c >= 'A' && c <= 'Z';
     }
 
@@ -94,7 +100,7 @@ public class Caesar {
      * @param c
      * @return true if character is small Latin letter or false for others
      */
-    private static boolean IsSmallLatinLetter(char c) {
+    private static boolean isSmallLatinLetter(char c) {
         return c >= 'a' && c <= 'z';
     }
 
@@ -113,11 +119,15 @@ public class Caesar {
         switch (choice) {
             case 'E':
             case 'e':
-                System.out.println("ENCODED MESSAGE IS \n" + encode(message, shift)); //send our function to handle
+                //send our function to handle
+                System.out.println("ENCODED MESSAGE IS \n" + encode(message, shift));
                 break;
             case 'D':
             case 'd':
                 System.out.println("DECODED MESSAGE IS \n" + decode(message, shift));
+                break;
+            default:
+                System.out.println("default");
         }
         input.close();
     }

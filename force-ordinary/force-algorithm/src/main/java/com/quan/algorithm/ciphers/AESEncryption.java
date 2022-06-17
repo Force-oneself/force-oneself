@@ -47,7 +47,8 @@ public class AESEncryption {
      */
     public static SecretKey getSecretEncryptionKey() throws NoSuchAlgorithmException {
         KeyGenerator aesKeyGenerator = KeyGenerator.getInstance("AES");
-        aesKeyGenerator.init(128); // The AES key size in number of bits
+        // The AES key size in number of bits
+        aesKeyGenerator.init(128);
         return aesKeyGenerator.generateKey();
     }
 
