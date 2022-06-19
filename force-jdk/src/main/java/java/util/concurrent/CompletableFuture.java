@@ -1283,12 +1283,12 @@ public class CompletableFuture<T> implements Future<T>, CompletionStage<T> {
             d.result = NIL;
         else {
             CompletableFuture<?> a, b;
+            // 中间坐标
             int mid = (lo + hi) >>> 1;
-            if ((a = (lo == mid ? cfs[lo] :
-                      andTree(cfs, lo, mid))) == null ||
-                (b = (lo == hi ? a : (hi == mid+1) ? cfs[hi] :
-                      andTree(cfs, mid+1, hi)))  == null)
+            if ((a = (lo == mid ? cfs[lo] : andTree(cfs, lo, mid))) == null
+                    || (b = (lo == hi ? a : (hi == mid+1) ? cfs[hi] : andTree(cfs, mid+1, hi)))  == null)
                 throw new NullPointerException();
+
             if (!d.biRelay(a, b)) {
                 BiRelay<?,?> c = new BiRelay<>(d, a, b);
                 a.bipush(b, c);
