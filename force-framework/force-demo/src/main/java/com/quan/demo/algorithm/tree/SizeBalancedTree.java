@@ -1,7 +1,7 @@
 package com.quan.demo.algorithm.tree;
 
 /**
- * SizeBalancedTree
+ * SizeBalancedTree SBT
  *
  * @author Force-oneself
  * @date 2022-06-19
@@ -10,20 +10,34 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
 
     private Node<K, V> root;
 
+    /**
+     * 右旋
+     *
+     * @param cur cur
+     * @return /
+     */
     private Node<K, V> rightRotate(Node<K, V> cur) {
         Node<K, V> leftNode = cur.l;
         cur.l = leftNode.r;
         leftNode.r = cur;
         leftNode.size = cur.size;
+        // 当前节点所包含数据 = 左右子节点的数量 + 自己 1
         cur.size = (cur.l != null ? cur.l.size : 0) + (cur.r != null ? cur.r.size : 0) + 1;
         return leftNode;
     }
 
+    /**
+     * 左旋
+     *
+     * @param cur cur
+     * @return /
+     */
     private Node<K, V> leftRotate(Node<K, V> cur) {
         Node<K, V> rightNode = cur.r;
         cur.r = rightNode.l;
         rightNode.l = cur;
         rightNode.size = cur.size;
+        // 当前节点所包含数据 = 左右子节点的数量 + 自己 1
         cur.size = (cur.l != null ? cur.l.size : 0) + (cur.r != null ? cur.r.size : 0) + 1;
         return rightNode;
     }
@@ -35,23 +49,28 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
         int leftSize = cur.l != null ? cur.l.size : 0;
         int leftLeftSize = cur.l != null && cur.l.l != null ? cur.l.l.size : 0;
         int leftRightSize = cur.l != null && cur.l.r != null ? cur.l.r.size : 0;
+
         int rightSize = cur.r != null ? cur.r.size : 0;
         int rightLeftSize = cur.r != null && cur.r.l != null ? cur.r.l.size : 0;
         int rightRightSize = cur.r != null && cur.r.r != null ? cur.r.r.size : 0;
+        // LL型
         if (leftLeftSize > rightSize) {
             cur = rightRotate(cur);
             cur.r = maintain(cur.r);
             cur = maintain(cur);
+            // LR型
         } else if (leftRightSize > rightSize) {
             cur.l = leftRotate(cur.l);
             cur = rightRotate(cur);
             cur.l = maintain(cur.l);
             cur.r = maintain(cur.r);
             cur = maintain(cur);
+            // RR型
         } else if (rightRightSize > leftSize) {
             cur = leftRotate(cur);
             cur.l = maintain(cur.l);
             cur = maintain(cur);
+            // RL型
         } else if (rightLeftSize > leftSize) {
             cur.r = rightRotate(cur.r);
             cur = leftRotate(cur);
@@ -62,7 +81,7 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
         return cur;
     }
 
-    private Node<K, V> findLastIndex(K key) {
+    public Node<K, V> findLastIndex(K key) {
         Node<K, V> pre = root;
         Node<K, V> cur = root;
         while (cur != null) {
@@ -78,7 +97,7 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
         return pre;
     }
 
-    private Node<K, V> findLastNoSmallIndex(K key) {
+    public Node<K, V> findLastNoSmallIndex(K key) {
         Node<K, V> ans = null;
         Node<K, V> cur = root;
         while (cur != null) {
@@ -95,7 +114,7 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
         return ans;
     }
 
-    private Node<K, V> findLastNoBigIndex(K key) {
+    public Node<K, V> findLastNoBigIndex(K key) {
         Node<K, V> ans = null;
         Node<K, V> cur = root;
         while (cur != null) {
@@ -112,10 +131,17 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
         return ans;
     }
 
-    // 现在，以cur为头的树上，新增，加(key, value)这样的记录
-    // 加完之后，会对cur做检查，该调整调整
-    // 返回，调整完之后，整棵树的新头部
-    private Node<K, V> add(Node<K, V> cur, K key, V value) {
+    /**
+     * 现在，以cur为头的树上，新增，加(key, value)这样的记录
+     * 加完之后，会对cur做检查，该调整调整
+     * 返回，调整完之后，整棵树的新头部
+     *
+     * @param cur   需要加入的节点
+     * @param key   key
+     * @param value value
+     * @return /
+     */
+    public Node<K, V> add(Node<K, V> cur, K key, V value) {
         if (cur == null) {
             return new Node<>(key, value);
         } else {
@@ -125,13 +151,20 @@ public class SizeBalancedTree<K extends Comparable<K>, V> {
             } else {
                 cur.r = add(cur.r, key, value);
             }
+            // 维护树平衡
             return maintain(cur);
         }
     }
 
-    // 在cur这棵树上，删掉key所代表的节点
-    // 返回cur这棵树的新头部
-    private Node<K, V> delete(Node<K, V> cur, K key) {
+    /**
+     * 在cur这棵树上，删掉key所代表的节点
+     * 返回cur这棵树的新头部
+     *
+     * @param cur cur
+     * @param key key
+     * @return /
+     */
+    public Node<K, V> delete(Node<K, V> cur, K key) {
         cur.size--;
         if (key.compareTo(cur.key) > 0) {
             cur.r = delete(cur.r, key);

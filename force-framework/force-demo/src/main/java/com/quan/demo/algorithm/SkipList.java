@@ -10,12 +10,7 @@ import java.util.ArrayList;
  */
 public class SkipList {
 
-    /***
-     * SkipList.java
-     *
-     * @author Force-oneself
-     * @date 2022-06-19
-     */
+
     public static class Node<K extends Comparable<K>, V> {
         public K key;
         public V val;
@@ -24,7 +19,7 @@ public class SkipList {
         public Node(K k, V v) {
             key = k;
             val = v;
-            nextNodes = new ArrayList<Node<K, V>>();
+            nextNodes = new ArrayList<>();
         }
 
         // 遍历的时候，如果是往右遍历到的null(next == null), 遍历结束

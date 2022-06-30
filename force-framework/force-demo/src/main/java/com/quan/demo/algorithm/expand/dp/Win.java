@@ -1,4 +1,4 @@
-package com.quan.demo.algorithm;
+package com.quan.demo.algorithm.expand.dp;
 
 /**
  * win
