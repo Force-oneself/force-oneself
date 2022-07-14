@@ -17,6 +17,7 @@
         <java.version>1.8</java.version>
         <mybatis-boot.version>2.1.4</mybatis-boot.version>
         <mybatis-plus-boot.version>3.4.3</mybatis-plus-boot.version>
+        <dynamic-datasource-boot.version>3.5.1</dynamic-datasource-boot.version>
         <druid-boot.version>1.2.5</druid-boot.version>
         <redisson-boot.version>3.13.3</redisson-boot.version>
         <guava.version>30.1.1-jre</guava.version>
@@ -60,6 +61,11 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>${dynamic-datasource-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
