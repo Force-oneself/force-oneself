@@ -18,10 +18,12 @@ public class SubMatrixMaxSum {
         int[] s = null;
         // 开始的行号i
         for (int i = 0; i != m.length; i++) {
+            // 从i～j的累加压缩数组
             s = new int[m[0].length];
             // 结束的行号j，i~j行是我讨论的范围
             for (int j = i; j != m.length; j++) {
                 cur = 0;
+                // 相当于求一维的最大子数组累加和
                 for (int k = 0; k != s.length; k++) {
                     s[k] += m[j][k];
                     cur += s[k];
