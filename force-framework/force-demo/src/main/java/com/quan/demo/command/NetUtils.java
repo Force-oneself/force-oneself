@@ -32,8 +32,7 @@ public class NetUtils {
     public static boolean isPortUsing(String host, int port) throws UnknownHostException {
         boolean flag = false;
         InetAddress theAddress = InetAddress.getByName(host);
-        try {
-            Socket socket = new Socket(theAddress, port);
+        try (Socket ignored = new Socket(theAddress, port)) {
             flag = true;
         } catch (IOException e) {
             log.error("端口已占用!", e);
