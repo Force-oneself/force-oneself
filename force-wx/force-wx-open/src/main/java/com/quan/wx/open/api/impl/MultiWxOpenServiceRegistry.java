@@ -11,8 +11,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author Force-oneself 多平台配置注册中心
- * @Description MultiWxOpenServiceRegistry.java
+ * 多平台配置注册中心
+ *
+ * @author Force-oneself
  * @date 2021-08-05
  */
 public class MultiWxOpenServiceRegistry implements WxOpenServiceRegistry {

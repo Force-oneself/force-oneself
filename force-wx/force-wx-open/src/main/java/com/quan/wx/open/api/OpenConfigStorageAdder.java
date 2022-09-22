@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * @author Force-oneself 三方平台配置附加器
- * @Description OpenConfigStorageAdder.java
+ * 三方平台配置附加器
+ *
+ * @author Force-oneself
  * @date 2021-08-06
  */
 public interface OpenConfigStorageAdder extends Consumer<List<WxOpenConfigStorage>> {

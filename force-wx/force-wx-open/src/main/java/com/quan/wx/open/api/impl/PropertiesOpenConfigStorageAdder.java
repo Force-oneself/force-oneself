@@ -12,8 +12,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author Force-oneself 配置文件形式配置多三方平台的附加器
- * @Description PropertiesOpenConfigStorageAdder.java
+ * 配置文件形式配置多三方平台的附加器
+ *
+ * @author Force-oneself
  * @date 2021-08-06
  */
 public class PropertiesOpenConfigStorageAdder implements OpenConfigStorageAdder {

@@ -4,8 +4,9 @@ import com.quan.wx.open.api.base.MultiWxServiceRouter;
 import me.chanjar.weixin.open.api.WxOpenService;
 
 /**
- * @author Force-oneself 微信多三方平台支持
- * @Description WinkeyMultiWxOpenService.java
+ * 微信多三方平台支持
+ *
+ * @author Force-oneself
  * @date 2021-08-05
  */
 public interface MultiWxOpenService extends MultiWxServiceRouter<WxOpenService> {

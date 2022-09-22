@@ -9,28 +9,27 @@ import me.chanjar.weixin.open.api.WxOpenService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
 /**
- * @author Force-oneself 初始三方平台服务的处理
- * @Description MultiWxOpenServiceProcessor.java
+ * 初始三方平台服务的处理
+ *
+ * @author Force-oneself
  * @date 2021-08-05
  */
-@Component
-public class MultiWxOpenServiceFactoryProcessor implements ApplicationListener<ContextRefreshedEvent> {
+public class MultiWxOpenProcessor implements ApplicationListener<ContextRefreshedEvent> {
 
     private final WxOpenServiceRegistry registry;
     private final WxOpenServiceFactory serviceFactory;
     private final WxOpenProperties properties;
     private final WxOpenConfigStorageFactory<List<WxOpenConfigStorage>> configStorageFactory;
 
-    public MultiWxOpenServiceFactoryProcessor(WxOpenServiceRegistry registry,
-                                              WxOpenServiceFactory serviceFactory,
-                                              WxOpenProperties properties,
-                                              WxOpenConfigStorageFactory<List<WxOpenConfigStorage>> configStorageFactory) {
+    public MultiWxOpenProcessor(WxOpenServiceRegistry registry,
+                                WxOpenServiceFactory serviceFactory,
+                                WxOpenProperties properties,
+                                WxOpenConfigStorageFactory<List<WxOpenConfigStorage>> configStorageFactory) {
         this.registry = registry;
         this.serviceFactory = serviceFactory;
         this.properties = properties;

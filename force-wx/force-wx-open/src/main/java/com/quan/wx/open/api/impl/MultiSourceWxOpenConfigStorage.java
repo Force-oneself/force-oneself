@@ -8,8 +8,9 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 
 /**
- * @author Force-oneself 支持多数据源多平台配置
- * @Description MultiSourceWxOpenConfigStorageFactory.java
+ * 支持多数据源多平台配置
+ *
+ * @author Force-oneself
  * @date 2021-08-06
  */
 public class MultiSourceWxOpenConfigStorage implements MultiWxOpenConfigStorageFactory {

@@ -1,10 +1,6 @@
 wx:
   open:
-    aes-key: 123
-    app-id: 4324
-    secret: 343
-    name: 3423
-    token: ll
+    enabled: true
     multiple:
       - aes-key: 324
         app-id: 324

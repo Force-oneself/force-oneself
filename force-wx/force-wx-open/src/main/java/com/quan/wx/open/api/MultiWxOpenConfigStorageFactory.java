@@ -9,14 +9,16 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
- * @author Force-oneself 支持三方平台多配置接口工厂
- * @Description MultiWxOpenConfigStorageFactory.java
+ * 支持三方平台多配置接口工厂
+ *
+ * @author Force-oneself
  * @date 2021-08-05
  */
 public interface MultiWxOpenConfigStorageFactory extends WxOpenConfigStorageFactory<List<WxOpenConfigStorage>> {
 
     /**
      * 默认实现多平台配置的组装
+     *
      * @return 配置集合
      */
     @Override
@@ -25,7 +27,7 @@ public interface MultiWxOpenConfigStorageFactory extends WxOpenConfigStorageFact
         endow(configStorages);
         return configStorages.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(
                         () -> new TreeSet<>(Comparator.comparing(WxOpenConfigStorage::getComponentAppId))),
-                        ArrayList::new));
+                ArrayList::new));
     }
 
     /**

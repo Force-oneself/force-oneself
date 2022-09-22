@@ -3,8 +3,9 @@ package com.quan.wx.open.api.base;
 import java.util.Set;
 
 /**
- * @author Force-oneself 服务注册中心
- * @Description WxServiceRegistry.java
+ * 服务注册中心
+ *
+ * @author Force-oneself
  * @date 2021-08-05
  */
 public interface WxServiceRegistry<T> {

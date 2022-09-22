@@ -1,22 +1,23 @@
 package com.quan.wx.open.api.impl;
 
-import com.quan.wx.open.processor.MultiWxOpenServiceFactoryProcessor;
+import com.quan.wx.open.processor.MultiWxOpenProcessor;
 import com.quan.wx.open.api.MultiWxOpenService;
 import me.chanjar.weixin.open.api.WxOpenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author Force-oneself 支持多平台绑定接口服务
- * @Description WinkeyMultiWxOpenService.java
+ * 支持多平台绑定接口服务
+ *
+ * @author Force-oneself
  * @date 2021-08-05
  */
 public class MultiWxOpenServiceImpl implements MultiWxOpenService {
 
     private final Logger log = LoggerFactory.getLogger(MultiWxOpenServiceImpl.class);
-    private final MultiWxOpenServiceFactoryProcessor processor;
+    private final MultiWxOpenProcessor processor;
 
-    public MultiWxOpenServiceImpl(MultiWxOpenServiceFactoryProcessor processor) {
+    public MultiWxOpenServiceImpl(MultiWxOpenProcessor processor) {
         this.processor = processor;
     }
 
