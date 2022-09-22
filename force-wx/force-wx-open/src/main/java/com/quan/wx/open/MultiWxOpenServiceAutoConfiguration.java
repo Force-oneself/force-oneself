@@ -21,7 +21,6 @@ import java.util.List;
  * @date 2021-08-05
  */
 @Configuration
-@ComponentScan
 @EnableConfigurationProperties(WxOpenProperties.class)
 @ConditionalOnProperty(prefix = "wx.open.multi", value = "enabled", havingValue = "true", matchIfMissing = true)
 public class MultiWxOpenServiceAutoConfiguration {
