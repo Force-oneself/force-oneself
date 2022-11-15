@@ -31,4 +31,17 @@ public class DesensitizationAutoConfiguration {
     public Operation noOperation() {
         return new Desensitization.NoOperation();
     }
+
+    @Bean
+    public Operation operation() {
+        return new SimpleOperation();
+    }
+
+    public class SimpleOperation implements Operation {
+
+        @Override
+        public String mask(String content, String maskChar) {
+            return "*";
+        }
+    }
 }

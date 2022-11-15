@@ -1,5 +1,7 @@
 package com.quan.demo.controller;
 
+import com.quan.demo.framework.desensitization.annotation.Desensitization;
+import com.quan.demo.framework.desensitization.config.DesensitizationAutoConfiguration;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +36,11 @@ public class TestController {
     }
 
     public static class User {
+
         private Long id;
+
         @NotBlank(message = "ddd")
+        @Desensitization(ops = DesensitizationAutoConfiguration.SimpleOperation.class)
         private String username;
 
         private String like;

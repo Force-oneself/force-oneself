@@ -18,6 +18,8 @@
         <module>force-jdk</module>
         <module>force-leetcode</module>
         <module>force-cloud</module>
+        <module>force-boot-starter</module>
+        <module>force-tools</module>
     </modules>
 
     <properties>
