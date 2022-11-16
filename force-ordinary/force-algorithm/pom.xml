@@ -6,7 +6,7 @@
     <parent>
         <artifactId>force-ordinary</artifactId>
         <groupId>com.quan</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>force-algorithm</artifactId>
