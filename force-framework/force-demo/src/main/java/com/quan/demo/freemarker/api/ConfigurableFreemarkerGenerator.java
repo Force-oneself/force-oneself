@@ -4,6 +4,7 @@ import com.quan.demo.freemarker.base.DefaultTemplateBear;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.TemplateExceptionHandler;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -31,6 +32,11 @@ public interface ConfigurableFreemarkerGenerator<T extends TemplateConfig> exten
     default Collection<TemplateBear> templateBears() {
         Configuration config = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
         config.setObjectWrapper(new DefaultObjectWrapper(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS));
+        config.setDefaultEncoding("UTF-8");
+        config.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+        config.setLogTemplateExceptions(false);
+        config.setWrapUncheckedExceptions(true);
+        config.setFallbackOnNullLoopVariable(false);
         this.configurationCustom(config);
         return this.templateConfig().stream()
                 .peek(templateConfig -> templateConfigCustom(config, templateConfig))

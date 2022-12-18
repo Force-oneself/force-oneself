@@ -20,6 +20,7 @@
         <module>force-amqp</module>
         <module>force-rocket</module>
         <module>force-producer-core</module>
+        <module>force-generate</module>
     </modules>
 
     <artifactId>force-framework</artifactId>
@@ -36,6 +37,10 @@
         <dependency>
             <groupId>com.quan</groupId>
             <artifactId>force-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

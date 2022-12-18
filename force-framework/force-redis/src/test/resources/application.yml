@@ -1,0 +1,4 @@
+spring:
+  redis:
+    host: 106.53.49.229
+    port: 19097

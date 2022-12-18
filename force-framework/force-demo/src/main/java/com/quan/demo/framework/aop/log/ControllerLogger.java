@@ -31,7 +31,7 @@ public class ControllerLogger {
      * 日志异常处理类集合
      */
     @Autowired
-    private List<LoggerExceptionHandler> handlers;
+    private List<LoggerExceptionHandler<?>> handlers;
 
     /**
      * 所有返回ResultBean的方法都作为切入点
@@ -51,7 +51,7 @@ public class ControllerLogger {
         long startTime = System.currentTimeMillis();
         R<?> result;
         try {
-            result = (R) pjp.proceed();
+            result = (R<?>) pjp.proceed();
             log.info("{} cost time: {}", pjp.getSignature(), (System.currentTimeMillis() - startTime));
         } catch (Throwable e) {
             result = handlerException(pjp, e);
@@ -68,20 +68,20 @@ public class ControllerLogger {
      */
     private R<?> handlerException(ProceedingJoinPoint pjp, Throwable e) {
         log.error(pjp.getSignature() + " error ", e);
-        List<R> resultBeans = handlers.stream()
+        List<R<?>> resultBeans = handlers.stream()
                 .filter(handler -> handler.getExceptionClass() == e.getClass())
                 .map(handler -> handler.handle(e))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         if (resultBeans.isEmpty()) {
             //TODO 未知的异常，应该格外注意，可以发送邮件通知等
-            return new R(e);
+            return R.fail();
         }
         return resultBeans.get(0);
     }
 
     @Autowired
-    public void setHandlers(List<LoggerExceptionHandler> handlers) {
+    public void setHandlers(List<LoggerExceptionHandler<?>> handlers) {
         this.handlers = handlers;
     }
 }
