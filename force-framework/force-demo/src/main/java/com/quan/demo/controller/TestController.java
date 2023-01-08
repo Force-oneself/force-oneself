@@ -5,6 +5,7 @@ import com.quan.demo.framework.desensitization.config.DesensitizationAutoConfigu
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -13,12 +14,17 @@ import javax.validation.constraints.NotBlank;
  * @Date 2021-05-22
  **/
 @RestController
-@Validated
 public class TestController {
 
 
-    @GetMapping("/test")
-    public User test(@RequestParam("p") String p) {
+    /**
+     * p==null ==> MissingServletRequestParameterException
+     *
+     * @param p p
+     * @return  /
+     */
+    @GetMapping("/anno/requestParam")
+    public User requestParam(@RequestParam("p") String p) {
         User user = new User();
         user.setLike(p);
         user.setUsername(p);
@@ -30,8 +36,15 @@ public class TestController {
         return user;
     }
 
+    /**
+     * user == null ==> HttpMessageNotReadableException
+     * user.username == null ==> MethodArgumentNotValidException
+     *
+     * @param user user
+     * @return  /
+     */
     @PostMapping ("/requestBody")
-    public User requestBody(@RequestBody User user) {
+    public User requestBody(@Validxxx @RequestBody User user) {
         return user;
     }
 
