@@ -25,7 +25,7 @@ public class RedisTemplateSlidingWindowRateLimiter implements RedisRateLimiter {
      * 2. 统计当前元素数量
      * 3. 是否超过阈值
      */
-    public static final String SCRIPT = "redis.call('zremrangeByScore', KEYS[1], 0, ARGV[1]) " +
+    public static final String SCRIPT = "redis.call('zremrangebyscore', KEYS[1], 0, ARGV[1]) " +
             "local res = redis.call('zcard', KEYS[1]) " +
             "if (res == nil) or (res < tonumber(ARGV[3])) then " +
             "    redis.call('zadd', KEYS[1], ARGV[2], ARGV[4]) " +
@@ -40,17 +40,17 @@ public class RedisTemplateSlidingWindowRateLimiter implements RedisRateLimiter {
     /**
      * 阈值
      */
-    private final int threshold;
+    private final int capacity;
     /**
      * 统计窗口时间(毫秒)
      */
     private final long time;
 
 
-    public RedisTemplateSlidingWindowRateLimiter(String key, StringRedisTemplate redisTemplate, int threshold, long time) {
+    public RedisTemplateSlidingWindowRateLimiter(String key, StringRedisTemplate redisTemplate, int capacity, long time) {
         this.key = key;
         this.redisTemplate = redisTemplate;
-        this.threshold = threshold;
+        this.capacity = capacity;
         this.time = time;
     }
 
@@ -62,7 +62,7 @@ public class RedisTemplateSlidingWindowRateLimiter implements RedisRateLimiter {
         DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
         redisScript.setResultType(Long.class);
         redisScript.setScriptSource(new StaticScriptSource(SCRIPT));
-        Long result = redisTemplate.execute(redisScript, Collections.singletonList(key), oldest, score, threshold, score);
+        Long result = redisTemplate.execute(redisScript, Collections.singletonList(key), oldest, score, capacity, score);
         return result != null && result == 1;
     }
 }

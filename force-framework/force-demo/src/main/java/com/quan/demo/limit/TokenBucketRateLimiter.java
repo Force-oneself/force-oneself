@@ -13,8 +13,8 @@ public class TokenBucketRateLimiter implements com.quan.demo.limit.RateLimiter {
 
     private final RateLimiter rateLimiter;
 
-    public TokenBucketRateLimiter(int threshold) {
-        this.rateLimiter = RateLimiter.create(threshold);
+    public TokenBucketRateLimiter(int capacity) {
+        this.rateLimiter = RateLimiter.create(capacity);
     }
 
     @Override

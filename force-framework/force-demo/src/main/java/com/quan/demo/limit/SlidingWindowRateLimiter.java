@@ -18,7 +18,7 @@ public class SlidingWindowRateLimiter implements RateLimiter {
     /**
      * 阈值
      */
-    private final int threshold;
+    private final int capacity;
 
     /**
      * 窗口数量
@@ -30,9 +30,9 @@ public class SlidingWindowRateLimiter implements RateLimiter {
      */
     private final WindowWrap[] windowWraps;
 
-    public SlidingWindowRateLimiter(int sampleCount, int intervalInMs, int threshold) {
+    public SlidingWindowRateLimiter(int sampleCount, int intervalInMs, int capacity) {
         this.windowLengthInMs = intervalInMs / sampleCount;
-        this.threshold = threshold;
+        this.capacity = capacity;
         this.sampleCount = sampleCount;
         this.windowWraps = new WindowWrap[sampleCount];
         for (int i = 0; i < windowWraps.length; i++) {
@@ -53,12 +53,12 @@ public class SlidingWindowRateLimiter implements RateLimiter {
                 windowInfo.getCounter().set(0);
                 windowInfo.setStart(currentTimeMillis);
             }
-            if (currentIndex == i && windowInfo.getCounter().get() < threshold) {
+            if (currentIndex == i && windowInfo.getCounter().get() < capacity) {
                 windowInfo.getCounter().incrementAndGet();
             }
             sum += windowInfo.getCounter().get();
         }
-        return sum <= threshold;
+        return sum <= capacity;
     }
 
     /***

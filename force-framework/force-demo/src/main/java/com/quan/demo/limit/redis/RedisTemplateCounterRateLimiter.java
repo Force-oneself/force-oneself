@@ -30,16 +30,16 @@ public class RedisTemplateCounterRateLimiter implements RedisRateLimiter {
     /**
      * 阈值
      */
-    private final int threshold;
+    private final int capacity;
     /**
      * 统计窗口时间(毫秒)
      */
     private final long time;
 
-    public RedisTemplateCounterRateLimiter(String prefix, StringRedisTemplate redisTemplate, int threshold, long time) {
+    public RedisTemplateCounterRateLimiter(String prefix, StringRedisTemplate redisTemplate, int capacity, long time) {
         this.prefix = prefix;
         this.redisTemplate = redisTemplate;
-        this.threshold = threshold;
+        this.capacity = capacity;
         this.time = time;
     }
 
@@ -49,7 +49,7 @@ public class RedisTemplateCounterRateLimiter implements RedisRateLimiter {
         DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
         redisScript.setResultType(Long.class);
         redisScript.setScriptSource(new StaticScriptSource(SCRIPT));
-        Long result = redisTemplate.execute(redisScript, Collections.singletonList(key), threshold, time);
+        Long result = redisTemplate.execute(redisScript, Collections.singletonList(key), capacity, time);
         return result != null && result == 1;
     }
 }

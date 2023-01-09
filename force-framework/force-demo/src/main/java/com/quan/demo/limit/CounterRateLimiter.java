@@ -28,12 +28,12 @@ public class CounterRateLimiter implements RateLimiter {
     /**
      * 阈值
      */
-    private final int threshold;
+    private final int capacity;
 
 
-    public CounterRateLimiter(long time, int threshold) {
+    public CounterRateLimiter(long time, int capacity) {
         this.time = time;
-        this.threshold = threshold;
+        this.capacity = capacity;
     }
 
     @Override
@@ -42,6 +42,6 @@ public class CounterRateLimiter implements RateLimiter {
             start = System.currentTimeMillis();
             counter.set(0);
         }
-        return counter.getAndIncrement() <= threshold;
+        return counter.getAndIncrement() <= capacity;
     }
 }
