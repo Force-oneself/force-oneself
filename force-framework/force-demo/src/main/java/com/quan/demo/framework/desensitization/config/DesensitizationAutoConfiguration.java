@@ -37,7 +37,7 @@ public class DesensitizationAutoConfiguration {
         return new SimpleOperation();
     }
 
-    public class SimpleOperation implements Operation {
+    public static class SimpleOperation implements Operation {
 
         @Override
         public String mask(String content, String maskChar) {

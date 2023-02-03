@@ -56,7 +56,7 @@ public class FreemarkerDemo {
 //                holder.setTemplatePrefixPath("/force-framework/force-demo/src/main/resources/ftl/");
                 holder.setTemplateFileName("entity-demo.ftl");
                 holder.setOutPrefixPath("/Users/forceoneself/IdeaProjects/force-to-live/force-framework/force-demo/src/main/java/com/quan/demo/freemarker/");
-                holder.setFileName("User");
+                holder.setFileName("com.quan.demo.controller.User");
                 return Collections.singleton(holder);
             }
 
@@ -71,9 +71,9 @@ public class FreemarkerDemo {
     public static Map<String, Object> param() {
         Map<String, Object> beanMap = new HashMap<>(16);
         // 实体类名
-        beanMap.put("beanName", "User");
+        beanMap.put("beanName", "com.quan.demo.controller.User");
         // 接口名
-        beanMap.put("interfaceName", "User");
+        beanMap.put("interfaceName", "com.quan.demo.controller.User");
         List<Map<String, String>> paramsList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             Map<String, String> tmpParamMap = new HashMap<>();

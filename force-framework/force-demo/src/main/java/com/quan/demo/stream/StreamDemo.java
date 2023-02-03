@@ -65,9 +65,9 @@ public class StreamDemo {
         Stream<String> mapStream = userStream.map(User::getName);
         Stream<String> filterStream = mapStream.filter(Objects::nonNull);
 //        List<String> collect = filterStream.collect(Collectors.toList());
-//        Stream<User> filterStream = userStream.filter(Objects::nonNull);
+//        Stream<com.quan.demo.controller.User> filterStream = userStream.filter(Objects::nonNull);
         Stream<User> peekStream = userStream.peek(System.out::println);
-//        Stream<Hobby> flatMap = userStream.map(User::getHobbies).flatMap(Collection::stream);
+//        Stream<Hobby> flatMap = userStream.map(com.quan.demo.controller.User::getHobbies).flatMap(Collection::stream);
 
         System.out.println("debug .....");
     }
