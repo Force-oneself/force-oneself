@@ -1,5 +1,6 @@
 package com.quan.framework.document.excel.constant;
 
+import com.alibaba.excel.write.handler.WriteHandler;
 import com.alibaba.excel.write.metadata.style.WriteCellStyle;
 import com.alibaba.excel.write.metadata.style.WriteFont;
 import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
@@ -85,5 +86,9 @@ public final class DefaultExcel {
         DEFAULT_CONTENT_STYLE = contentWriteCellStyle;
 
         DEFAULT_CELL_STYLE_STRATEGY = new HorizontalCellStyleStrategy(DEFAULT_HEAD_STYLE, DEFAULT_CONTENT_STYLE);
+    }
+
+    public static WriteHandler autoColumnWidthStrategy() {
+        return new AutoColumnWidthStrategy();
     }
 }

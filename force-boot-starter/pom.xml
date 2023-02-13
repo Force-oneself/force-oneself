@@ -12,6 +12,10 @@
 
     <artifactId>force-boot-starter</artifactId>
 
+    <modules>
+        <module>force-mvc-starter</module>
+    </modules>
+
     <dependencies>
         <!-- Aop支持 -->
         <dependency>
@@ -38,6 +42,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
             </plugin>
         </plugins>
     </build>

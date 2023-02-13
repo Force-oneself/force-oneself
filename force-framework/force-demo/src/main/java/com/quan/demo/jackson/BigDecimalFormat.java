@@ -25,5 +25,5 @@ public @interface BigDecimalFormat {
     /**
      * 默认值, 凡是加了 @BigDecimalFormat 注解, 又没有指定 value 值的, 都会被格式化为下面的形式
      */
-    String value() default "#.00";
+    String value() default "#0.00";
 }

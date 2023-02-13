@@ -1,17 +1,26 @@
 package com.quan.framework.document.excel;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.write.builder.ExcelWriterBuilder;
 import com.quan.framework.document.excel.constant.DefaultExcel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.function.Consumer;
 
 /**
  * 导出excel数据工具
@@ -22,6 +31,8 @@ import java.util.Map;
 public class EasyExcelUtil {
 
     private final static Logger log = LoggerFactory.getLogger(EasyExcelUtil.class);
+    public final static String XLSX = ".xlsx";
+    public final static String XLS = ".xls";
 
     /**
      * 兼容原有替换掉老版本中PoiUtil中的方法
@@ -35,7 +46,7 @@ public class EasyExcelUtil {
     public static void download(HttpServletResponse response, List<? extends Map<String, Object>> dataList,
                                 List<List<String>> heads, List<String> fields, String filename) throws IOException {
         doGarbled(response, filename);
-        //字段和表头对应问题
+        // 字段和表头对应问题
         List<List<Object>> resultData = restructureData(fields, dataList);
 
         EasyExcel.write(response.getOutputStream())
@@ -106,6 +117,30 @@ public class EasyExcelUtil {
                 .registerWriteHandler(DefaultExcel.DEFAULT_CELL_STYLE_STRATEGY)
                 .registerWriteHandler(DefaultExcel.DEFAULT_CUSTOM_STRATEGY)
                 .doWrite(data);
+    }
+
+
+    public static MultipartFile localUpload(String fileName, Consumer<ExcelWriterBuilder> writerConsumer) {
+        final String tmpFileName = System.getProperty("java.io.tmpdir") + UUID.randomUUID() + XLSX;
+        final ExcelWriterBuilder builder = EasyExcel.write()
+                .file(tmpFileName)
+                .registerWriteHandler(DefaultExcel.DEFAULT_CELL_STYLE_STRATEGY)
+                .registerWriteHandler(DefaultExcel.autoColumnWidthStrategy());
+        writerConsumer.accept(builder);
+        Path path = null;
+        try {
+            path = Paths.get(tmpFileName);
+            return new SimpleMultipartFile("file", fileName + XLSX, null, Files.newInputStream(path));
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        } finally {
+            if (path != null) {
+                File file = path.toFile();
+                if (file.isFile()) {
+                    file.deleteOnExit();
+                }
+            }
+        }
     }
 
     /**

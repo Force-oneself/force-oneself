@@ -28,7 +28,17 @@ public class User {
     @BigDecimalFormat(value = "#0.0000")
     private BigDecimal height;
 
+    private BigDecimal weight;
+
     private String like;
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
 
     public BigDecimal getHeight() {
         return height;
