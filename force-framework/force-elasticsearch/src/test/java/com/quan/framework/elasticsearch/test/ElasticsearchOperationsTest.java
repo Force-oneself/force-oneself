@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.GetQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
@@ -33,7 +32,7 @@ public class ElasticsearchOperationsTest {
                 .withId(person.getId().toString())
                 .withObject(person)
                 .build();
-        String documentId = elasticsearchRestTemplate.index(indexQuery, IndexCoordinates.of("person"));
+        // String documentId = elasticsearchRestTemplate.index(indexQuery, IndexCoordinates.of("person"));
     }
 
     @Test

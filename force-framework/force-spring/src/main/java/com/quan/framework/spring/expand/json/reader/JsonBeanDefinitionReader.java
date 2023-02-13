@@ -1,18 +1,11 @@
 package com.quan.framework.spring.expand.json.reader;
 
 
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
-import org.springframework.beans.factory.config.RuntimeBeanReference;
-import org.springframework.beans.factory.support.AbstractBeanDefinitionReader;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.support.BeanNameGenerator;
-import org.springframework.beans.factory.support.GenericBeanDefinition;
-import org.springframework.beans.factory.support.MethodOverrides;
+import org.springframework.beans.factory.support.*;
 import org.springframework.context.annotation.AnnotationBeanNameGenerator;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.core.io.Resource;
@@ -23,11 +16,7 @@ import org.springframework.util.StreamUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Description: class JsonBeanDefinitionReader
@@ -81,7 +70,7 @@ public class JsonBeanDefinitionReader extends AbstractBeanDefinitionReader {
         }
 
         //熟悉的fastjson，熟悉的味道
-        List<GenericBeanDefinition> list = JSONUtil.toList(json, GenericBeanDefinition.class);
+        List<GenericBeanDefinition> list = Collections.emptyList();
         if (CollectionUtils.isEmpty(list)) {
             return 0;
         }
@@ -121,11 +110,11 @@ public class JsonBeanDefinitionReader extends AbstractBeanDefinitionReader {
             }
             for (ConstructorArgumentValues.ValueHolder valueHolder : map.values()) {
                 Object value = valueHolder.getValue();
-                if (value instanceof JSONObject) {
-                    JSONObject jsonObject = (JSONObject) value;
-                    RuntimeBeanReference runtimeBeanReference = jsonObject.toBean(RuntimeBeanReference.class);
-                    valueHolder.setValue(runtimeBeanReference);
-                }
+                // if (value instanceof JSONObject) {
+                //     JSONObject jsonObject = (JSONObject) value;
+                //     RuntimeBeanReference runtimeBeanReference = jsonObject.toBean(RuntimeBeanReference.class);
+                //     valueHolder.setValue(runtimeBeanReference);
+                // }
             }
         }
 

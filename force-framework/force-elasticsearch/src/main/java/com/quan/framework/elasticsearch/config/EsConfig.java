@@ -61,15 +61,15 @@ public class EsConfig extends AbstractElasticsearchConfiguration {
                 .withSocketTimeout(Duration.ofSeconds(3))
                 .withDefaultHeaders(httpHeaders)
                 .withBasicAuth("username", "password")
-                .withHeaders(() -> {
-                    // 7版本访问8的兼容性设置
-                    HttpHeaders defaultCompatibilityHeaders = new HttpHeaders();
-                    defaultCompatibilityHeaders.add("Accept",
-                            "application/vnd.elasticsearch+json;compatible-with=7");
-                    defaultCompatibilityHeaders.add("Content-Type",
-                            "application/vnd.elasticsearch+json;compatible-with=7");
-                    return defaultCompatibilityHeaders;
-                })
+                // .withHeaders(() -> {
+                //     // 7版本访问8的兼容性设置
+                //     HttpHeaders defaultCompatibilityHeaders = new HttpHeaders();
+                //     defaultCompatibilityHeaders.add("Accept",
+                //             "application/vnd.elasticsearch+json;compatible-with=7");
+                //     defaultCompatibilityHeaders.add("Content-Type",
+                //             "application/vnd.elasticsearch+json;compatible-with=7");
+                //     return defaultCompatibilityHeaders;
+                // })
                 .build();
 
         return RestClients.create(clientConfiguration).rest();

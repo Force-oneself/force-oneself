@@ -15,6 +15,7 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.nio.entity.NStringEntity;
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.*;
+import org.elasticsearch.threadpool.Scheduler;
 
 import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
@@ -156,7 +157,7 @@ public class EsLowLevelDemo {
         // 同步请求
         Response response = restClient.performRequest(request);
         // 异步请求
-        Cancellable cancellable = restClient.performRequestAsync(request,
+        restClient.performRequestAsync(request,
                 new ResponseListener() {
                     @Override
                     public void onSuccess(Response response) {
