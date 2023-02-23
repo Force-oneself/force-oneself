@@ -64,21 +64,6 @@
         </profile>
     </profiles>
 
-    <!-- 远程仓库地址 -->
-    <repositories>
-        <repository>
-            <id>nexus</id>
-            <name>Nexus Public Repository</name>
-            <url>http://101.43.20.134:8081/nexus/repository/maven-public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <!-- 部署jar包仓库 -->
     <distributionManagement>
         <repository>
