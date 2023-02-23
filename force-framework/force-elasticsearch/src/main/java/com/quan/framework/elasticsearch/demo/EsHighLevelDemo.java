@@ -36,8 +36,10 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.elasticsearch.search.suggest.SuggestBuilder;
 import org.elasticsearch.search.suggest.SuggestBuilders;
 import org.elasticsearch.search.suggest.SuggestionBuilder;
+import org.elasticsearch.search.suggest.term.TermSuggestionBuilder;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -156,7 +158,7 @@ public class EsHighLevelDemo {
         }
     }
 
-    public void search() {
+    public void search() throws IOException {
         SearchRequest searchRequest = new SearchRequest();
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
@@ -179,6 +181,9 @@ public class EsHighLevelDemo {
                 .timeout(new TimeValue(60, TimeUnit.SECONDS));
         searchRequest.indices("posts");
         searchRequest.source(sourceBuilder);
+
+        SearchResponse search = EsUtils.getClient()
+                .search(searchRequest, RequestOptions.DEFAULT);
 
         MatchQueryBuilder matchQueryBuilder = new MatchQueryBuilder("user", "kimchy")
                 .fuzziness(Fuzziness.AUTO)
@@ -218,7 +223,7 @@ public class EsHighLevelDemo {
                 .field("age"));
         searchSourceBuilder.aggregation(aggregation);
 
-        SuggestionBuilder termSuggestionBuilder =
+        SuggestionBuilder<TermSuggestionBuilder> termSuggestionBuilder =
                 SuggestBuilders.termSuggestion("user").text("kmichy");
         SuggestBuilder suggestBuilder = new SuggestBuilder();
         suggestBuilder.addSuggestion("suggest_user", termSuggestionBuilder);
@@ -305,5 +310,6 @@ public class EsHighLevelDemo {
             System.out.println("=============1");
         }
     }
+
 
 }
