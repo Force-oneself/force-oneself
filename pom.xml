@@ -15,7 +15,7 @@
         <module>force-ordinary</module>
         <module>force-wx</module>
         <module>force-reactive</module>
-        <module>force-jdk</module>
+<!--        <module>force-jdk</module>-->
         <module>force-leetcode</module>
         <module>force-cloud</module>
         <module>force-boot-starter</module>
