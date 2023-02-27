@@ -1,4 +1,4 @@
-package com.quan.demo.limit;
+package com.quan.demo.limit.local;
 
 import com.google.common.util.concurrent.RateLimiter;
 

@@ -1,4 +1,6 @@
-package com.quan.demo.limit;
+package com.quan.demo.limit.local;
+
+import com.quan.demo.limit.RateLimiter;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
