@@ -1,5 +1,8 @@
 package com.quan.framework.spring.mvc.wrapper;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -10,23 +13,12 @@ import java.io.*;
  * @author Force-oneself
  * @date 2021-08-24
  */
-public class RepeatableHttpServletRequestWrapper extends HttpServletRequestWrapper {
+public class RepeatableHttpServletRequestWrapper extends HttpServletRequestWrapper implements HttpServletRequestRepeatable {
 
-    protected final byte[] body;
+    protected byte[] body;
 
-    public RepeatableHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
+    public RepeatableHttpServletRequestWrapper(HttpServletRequest request) {
         super(request);
-        try (StringWriter writer = new StringWriter();
-             BufferedReader reader = request.getReader();) {
-            int read;
-            char[] buf = new char[1024 * 8];
-            while ((read = reader.read(buf)) != -1) {
-                writer.write(buf, 0, read);
-            }
-            this.body = writer.getBuffer()
-                    .toString()
-                    .getBytes();
-        }
     }
 
     @Override
@@ -36,11 +28,20 @@ public class RepeatableHttpServletRequestWrapper extends HttpServletRequestWrapp
 
     @Override
     public ServletInputStream getInputStream() throws IOException {
+        boolean notWrapper = super.getHeader(HttpHeaders.CONTENT_TYPE) == null
+                || super.getHeader(HttpHeaders.CONTENT_TYPE)
+                .startsWith(MediaType.MULTIPART_FORM_DATA_VALUE);
+        if (notWrapper) {
+            return super.getInputStream();
+        }
+
+        this.initBody();
+
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body);
         return new ServletInputStream() {
 
             @Override
-            public int read() throws IOException {
+            public int read() {
                 return byteArrayInputStream.read();
             }
 
@@ -58,5 +59,25 @@ public class RepeatableHttpServletRequestWrapper extends HttpServletRequestWrapp
                 return false;
             }
         };
+    }
+
+    protected void initBody() throws IOException {
+        if (body != null) {
+            return;
+        }
+        try (StringWriter writer = new StringWriter();
+             BufferedReader reader = this.getRequest().getReader()) {
+            int read;
+            char[] buf = new char[1024 * 8];
+            while ((read = reader.read(buf)) != -1) {
+                writer.write(buf, 0, read);
+            }
+            this.body = writer.getBuffer().toString().getBytes();
+        }
+    }
+
+    @Override
+    public byte[] requestBody() {
+        return body;
     }
 }

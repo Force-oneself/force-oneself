@@ -1,6 +1,6 @@
 package com.quan.framework.spring.mvc.log;
 
-import com.quan.framework.spring.mvc.wrapper.RepeatableHttpServletResponseWrapper;
+import com.quan.framework.spring.mvc.wrapper.HttpServletResponseRepeatable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
@@ -96,8 +97,9 @@ public final class ServletLoggerRecorder {
         if (ex == null) {
             if (LoggerLevel.enable(level, LoggerLevel.RESPONSE_BODY)) {
                 logRecord.append("\n\n")
-                        .append(response instanceof RepeatableHttpServletResponseWrapper
-                                ? ((RepeatableHttpServletResponseWrapper) response).byteOutputStream()
+                        .append(response instanceof HttpServletResponseRepeatable
+                                ? String.copyValueOf(new String(((HttpServletResponseRepeatable) response)
+                                .responseBody()).toCharArray())
                                 : "");
             }
             // error

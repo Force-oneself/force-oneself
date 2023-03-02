@@ -10,7 +10,7 @@ import java.io.*;
  * @author Force-oneself
  * @date 2023-03-01
  */
-public class RepeatableHttpServletResponseWrapper extends HttpServletResponseWrapper {
+public class RepeatableHttpServletResponseWrapper extends HttpServletResponseWrapper implements HttpServletResponseRepeatable {
 
     private final ByteArrayOutputStream byteArrayOutputStream;
 
@@ -40,11 +40,16 @@ public class RepeatableHttpServletResponseWrapper extends HttpServletResponseWra
     }
 
     @Override
-    public ServletOutputStream getOutputStream() throws IOException {
+    public ServletOutputStream getOutputStream() {
         return servletOutputStream;
     }
 
     public ByteArrayOutputStream byteOutputStream() {
         return byteArrayOutputStream;
+    }
+
+    @Override
+    public byte[] responseBody() {
+        return byteArrayOutputStream.toByteArray();
     }
 }
