@@ -8,29 +8,24 @@ import java.io.*;
 
 /**
  * @author Force-oneself
- * @Description CustomHttpServletRequestWrapper
  * @date 2021-08-24
  */
-public class BodyStorageHttpServletRequestWrapper extends HttpServletRequestWrapper {
+public class RepeatableHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
-    private final byte[] body;
+    protected final byte[] body;
 
-    /**
-     * Constructs a request object wrapping the given request.
-     *
-     * @param request The request to wrap
-     * @throws IllegalArgumentException if the request is null
-     */
-    public BodyStorageHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
+    public RepeatableHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
-        BufferedReader reader = request.getReader();
-        try (StringWriter writer = new StringWriter()) {
+        try (StringWriter writer = new StringWriter();
+             BufferedReader reader = request.getReader();) {
             int read;
             char[] buf = new char[1024 * 8];
             while ((read = reader.read(buf)) != -1) {
                 writer.write(buf, 0, read);
             }
-            this.body = writer.getBuffer().toString().getBytes();
+            this.body = writer.getBuffer()
+                    .toString()
+                    .getBytes();
         }
     }
 

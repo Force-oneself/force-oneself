@@ -18,8 +18,14 @@ public class DemoController {
         return name + say;
     }
     @PostMapping("/post")
-    public String post(@RequestBody Demo demo) {
-        return demo.toString();
+    public Demo post(@RequestBody Demo demo) {
+        return demo;
+    }
+
+    @PostMapping("/error")
+    public Demo error(@RequestBody Demo demo) {
+        int i = 1/0;
+        return demo;
     }
 
 
