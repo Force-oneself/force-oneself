@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
@@ -29,12 +28,13 @@ public final class ServletLoggerRecorder {
         final StringBuilder logRecord = new StringBuilder(256);
         int level = properties.getLevel();
         // basic
+        final String requestMethod = request.getMethod();
         if (LoggerLevel.enable(level, LoggerLevel.REQUEST_BASIC)) {
-            logRecord.append(request.getMethod())
+            logRecord.append(requestMethod)
                     .append(" ")
                     .append(request.getRequestURL())
                     .append(StringUtils.hasLength(request.getQueryString())
-                            ? request.getQueryString()
+                            ? "?" + request.getQueryString()
                             : "")
                     .append(" ")
                     .append(request.getProtocol());
@@ -51,8 +51,10 @@ public final class ServletLoggerRecorder {
         }
         // body
         if (LoggerLevel.enable(level, LoggerLevel.RESPONSE_BODY)) {
-            logRecord.append("\n\n")
-                    .append(readerBody(request));
+            if ("POST".equals(requestMethod) || "PUT".equals(requestMethod)) {
+                logRecord.append("\n\n")
+                        .append(readerBody(request));
+            }
         }
         return logRecord.toString();
     }
@@ -70,7 +72,10 @@ public final class ServletLoggerRecorder {
         return body.toString();
     }
 
-    public static String postRecord(ServletLoggerProperties properties, HttpServletRequest request, HttpServletResponse response, Exception ex) {
+    public static String postRecord(ServletLoggerProperties properties,
+                                    HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    Exception ex) {
         final StringBuilder logRecord = new StringBuilder(256);
         int level = properties.getLevel();
         // basic
@@ -96,11 +101,11 @@ public final class ServletLoggerRecorder {
         // body
         if (ex == null) {
             if (LoggerLevel.enable(level, LoggerLevel.RESPONSE_BODY)) {
-                logRecord.append("\n\n")
-                        .append(response instanceof HttpServletResponseRepeatable
-                                ? String.copyValueOf(new String(((HttpServletResponseRepeatable) response)
-                                .responseBody()).toCharArray())
-                                : "");
+                if (response instanceof HttpServletResponseRepeatable) {
+                    logRecord.append("\n\n")
+                            .append(String.copyValueOf(
+                                    new String(((HttpServletResponseRepeatable) response).responseBody()).toCharArray()));
+                }
             }
             // error
         } else {

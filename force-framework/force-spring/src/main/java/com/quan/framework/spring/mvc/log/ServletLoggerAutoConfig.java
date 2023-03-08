@@ -1,17 +1,13 @@
 package com.quan.framework.spring.mvc.log;
 
 import com.quan.framework.spring.mvc.filter.RepeatableWrapperFilter;
-import com.quan.framework.spring.mvc.xss.XssProperties;
-import com.quan.framework.spring.mvc.xss.XssRequestFilter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 
 import javax.servlet.DispatcherType;
-import javax.servlet.Filter;
 
 /**
  * @author Force-oneself

@@ -19,18 +19,13 @@ import java.util.Objects;
 public class RepeatableWrapperFilter implements Filter {
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        ServletRequest requestWrapper = null;
-        if (request instanceof HttpServletRequest) {
-            requestWrapper = new RepeatableHttpServletRequestWrapper((HttpServletRequest) request);
-        }
-
-        ServletResponse responseWrapper = null;
-        if (response instanceof HttpServletResponse) {
-            responseWrapper = new RepeatableHttpServletResponseWrapper((HttpServletResponse) response);
-        }
-
-        chain.doFilter(Objects.isNull(requestWrapper) ? request : requestWrapper,
-                Objects.isNull(responseWrapper) ? response : responseWrapper);
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        chain.doFilter(request instanceof HttpServletRequest
+                        ? new RepeatableHttpServletRequestWrapper((HttpServletRequest) request)
+                        : request,
+                response instanceof HttpServletResponse
+                        ? new RepeatableHttpServletResponseWrapper((HttpServletResponse) response)
+                        : response);
     }
 }
