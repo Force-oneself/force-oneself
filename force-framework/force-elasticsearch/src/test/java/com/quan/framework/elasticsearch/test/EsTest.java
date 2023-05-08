@@ -88,10 +88,9 @@ public class EsTest {
     }
 
     private void query(QueryBuilder query) throws IOException {
-        SearchRequest request = new SearchRequest("bank");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         sourceBuilder.query(query);
-        request.source(sourceBuilder);
+        SearchRequest request = new SearchRequest(new String[]{"bank"}, sourceBuilder);
         SearchResponse search = restHighLevelClient.search(request, RequestOptions.DEFAULT);
         Arrays.stream(search.getHits().getHits())
                 .map(SearchHit::getSourceAsString)

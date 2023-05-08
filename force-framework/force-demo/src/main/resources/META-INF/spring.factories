@@ -1,0 +1,2 @@
+org.springframework.boot.SpringApplicationRunListener=\
+com.quan.demo.boot.listener.EnvSpringApplicationRunListener

@@ -50,9 +50,6 @@ public class RestControllerResponseAdvice implements ResponseBodyAdvice<Object> 
                         + body + "】\",\"timestamp\": null}";
             }
         }
-        if (body instanceof R) {
-            return body;
-        }
-        return R.ok(body);
+        return (body instanceof R) ? body : R.ok(body);
     }
 }

@@ -1,6 +1,9 @@
 package com.quan.openfeign.config;
 
-import feign.*;
+import feign.Client;
+import feign.Contract;
+import feign.Request;
+import feign.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -8,13 +11,14 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
-import org.springframework.cloud.openfeign.*;
+import org.springframework.cloud.openfeign.AnnotatedParameterProcessor;
+import org.springframework.cloud.openfeign.ForceHystrixTargeter;
+import org.springframework.cloud.openfeign.Targeter;
 import org.springframework.cloud.openfeign.ribbon.CachingSpringLoadBalancerFactory;
 import org.springframework.cloud.openfeign.ribbon.LoadBalancerFeignClient;
 import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.support.DefaultConversionService;
 
@@ -34,8 +38,7 @@ public class ForceOpenFeignConfig {
 
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnClass(name = "feign.hystrix.HystrixFeign")
-    @ConditionalOnProperty(value = "feign.hystrix.enabled", havingValue = "true",
-            matchIfMissing = true)
+    @ConditionalOnProperty(value = "feign.hystrix.enabled", havingValue = "true", matchIfMissing = true)
     protected static class HystrixFeignTargeterConfiguration {
 
         @Bean

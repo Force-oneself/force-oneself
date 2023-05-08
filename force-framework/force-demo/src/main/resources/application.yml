@@ -15,8 +15,8 @@ mybatis:
 
 ################### Spring config begin ###################
 spring:
-  application:
-    name: force-demo
+#  application:
+#    name: force-demo
   ################### Security config ###################
   security:
     user:
