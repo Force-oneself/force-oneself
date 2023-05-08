@@ -20,7 +20,7 @@ import java.util.List;
 public class ProducerInOrder {
 
     public static void main(String[] args) throws Exception {
-        DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
+        DefaultMQProducer producer = new DefaultMQProducer("order_producer_group");
 
         producer.setNamesrvAddr("127.0.0.1:9876");
 

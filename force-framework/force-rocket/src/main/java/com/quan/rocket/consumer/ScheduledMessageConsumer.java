@@ -18,7 +18,7 @@ public class ScheduledMessageConsumer {
 
     public static void main(String[] args) throws Exception {
         // 实例化消费者
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("ExampleConsumer");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("scheduled_consumer_group");
         // 订阅Topics
         consumer.subscribe("TestTopic", "*");
         // 注册消息监听者

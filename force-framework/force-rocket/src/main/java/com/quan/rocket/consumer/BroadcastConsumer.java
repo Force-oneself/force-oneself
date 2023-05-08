@@ -15,7 +15,7 @@ import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 public class BroadcastConsumer {
 
     public static void main(String[] args) throws Exception {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("example_group_name");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("broadcast_consumer_group");
 
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 

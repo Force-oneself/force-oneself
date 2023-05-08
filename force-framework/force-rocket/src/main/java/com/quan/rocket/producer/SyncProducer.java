@@ -15,7 +15,7 @@ public class SyncProducer {
 
     public static void main(String[] args) throws Exception {
         // 实例化消息生产者Producer
-        DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
+        DefaultMQProducer producer = new DefaultMQProducer("sync_producer_group");
         // 设置NameServer的地址
         producer.setNamesrvAddr("localhost:9876");
         // 启动Producer实例

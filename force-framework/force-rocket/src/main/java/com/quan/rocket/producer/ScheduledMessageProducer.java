@@ -13,7 +13,7 @@ public class ScheduledMessageProducer {
 
     public static void main(String[] args) throws Exception {
         // 实例化一个生产者来产生延时消息
-        DefaultMQProducer producer = new DefaultMQProducer("ExampleProducerGroup");
+        DefaultMQProducer producer = new DefaultMQProducer("scheduled_producer_group");
         // 启动生产者
         producer.start();
         int totalMessagesToSend = 100;

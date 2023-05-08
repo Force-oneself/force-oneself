@@ -26,7 +26,7 @@ public class ProducerService {
     @PostConstruct
     public void init() {
         producer = new DefaultMQProducer("producerGroupName");
-        producer.setNamesrvAddr("nameServer");
+        producer.setNamesrvAddr("localhost:9876");
         producer.setRetryTimesWhenSendFailed(3);
         try {
             producer.start();

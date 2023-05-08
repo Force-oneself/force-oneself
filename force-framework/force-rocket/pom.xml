@@ -12,8 +12,8 @@
     <artifactId>force-rocket</artifactId>
 
     <properties>
-        <rocket-boot.version>2.2.1</rocket-boot.version>
-        <rocket.version>4.9.1</rocket.version>
+        <rocket-boot.version>2.2.2</rocket-boot.version>
+        <rocket.version>4.9.3</rocket.version>
         <openmessaging.version>0.3.0-alpha</openmessaging.version>
     </properties>
 
