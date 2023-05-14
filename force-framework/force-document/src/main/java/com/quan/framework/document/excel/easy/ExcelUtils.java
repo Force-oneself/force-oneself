@@ -8,11 +8,12 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-/**
- * @Description:
- * @Author heyq
- * @Date 2020-11-15
- **/
+/***
+ * ExcelUtils.java
+ *
+ * @author Force-oneself
+ * @date 2020-05-12
+ */
 public class ExcelUtils extends EasyExcel {
 
     /**

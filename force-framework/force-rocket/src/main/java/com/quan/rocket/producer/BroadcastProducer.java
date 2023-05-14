@@ -1,5 +1,6 @@
 package com.quan.rocket.producer;
 
+import com.quan.rocket.RocketConstant;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
@@ -15,6 +16,8 @@ public class BroadcastProducer {
 
     public static void main(String[] args) throws Exception {
         DefaultMQProducer producer = new DefaultMQProducer("broadcast_producer_group");
+        producer.setNamesrvAddr(RocketConstant.NAME_SRV_ADDR);
+        producer.setVipChannelEnabled(false);
         producer.start();
 
         for (int i = 0; i < 100; i++){

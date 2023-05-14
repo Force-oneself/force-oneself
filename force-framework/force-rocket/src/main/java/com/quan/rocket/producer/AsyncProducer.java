@@ -1,5 +1,6 @@
 package com.quan.rocket.producer;
 
+import com.quan.rocket.RocketConstant;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -21,10 +22,11 @@ public class AsyncProducer {
         // 实例化消息生产者Producer
         DefaultMQProducer producer = new DefaultMQProducer("async_producer_group");
         // 设置NameServer的地址
-        producer.setNamesrvAddr("localhost:9876");
+        producer.setNamesrvAddr(RocketConstant.NAME_SRV_ADDR);
         // 启动Producer实例
         producer.start();
         producer.setRetryTimesWhenSendAsyncFailed(0);
+        producer.setVipChannelEnabled(false);
 
         int messageCount = 100;
         // 根据消息数量实例化倒计时计算器

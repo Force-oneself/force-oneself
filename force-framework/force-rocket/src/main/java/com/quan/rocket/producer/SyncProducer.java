@@ -1,5 +1,6 @@
 package com.quan.rocket.producer;
 
+import com.quan.rocket.RocketConstant;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
@@ -17,7 +18,8 @@ public class SyncProducer {
         // 实例化消息生产者Producer
         DefaultMQProducer producer = new DefaultMQProducer("sync_producer_group");
         // 设置NameServer的地址
-        producer.setNamesrvAddr("localhost:9876");
+        producer.setNamesrvAddr(RocketConstant.NAME_SRV_ADDR);
+        producer.setVipChannelEnabled(false);
         // 启动Producer实例
         producer.start();
         for (int i = 0; i < 100; i++) {

@@ -1,5 +1,6 @@
 package com.quan.rocket.producer;
 
+import com.quan.rocket.RocketConstant;
 import com.quan.rocket.listener.TransactionListenerImpl;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -33,6 +34,8 @@ public class TransactionProducer {
         });
         producer.setExecutorService(executorService);
         producer.setTransactionListener(transactionListener);
+        producer.setNamesrvAddr(RocketConstant.NAME_SRV_ADDR);
+        producer.setVipChannelEnabled(false);
         producer.start();
         String[] tags = new String[]{"TagA", "TagB", "TagC", "TagD", "TagE"};
         for (int i = 0; i < 10; i++) {

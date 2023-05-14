@@ -1,5 +1,6 @@
 package com.quan.rocket.producer;
 
+import com.quan.rocket.RocketConstant;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.common.message.Message;
 
@@ -14,6 +15,8 @@ public class ScheduledMessageProducer {
     public static void main(String[] args) throws Exception {
         // 实例化一个生产者来产生延时消息
         DefaultMQProducer producer = new DefaultMQProducer("scheduled_producer_group");
+        producer.setNamesrvAddr(RocketConstant.NAME_SRV_ADDR);
+        producer.setVipChannelEnabled(false);
         // 启动生产者
         producer.start();
         int totalMessagesToSend = 100;

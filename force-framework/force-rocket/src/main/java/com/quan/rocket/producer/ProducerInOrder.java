@@ -1,5 +1,6 @@
 package com.quan.rocket.producer;
 
+import com.quan.rocket.RocketConstant;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.MessageQueueSelector;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -21,16 +22,14 @@ public class ProducerInOrder {
 
     public static void main(String[] args) throws Exception {
         DefaultMQProducer producer = new DefaultMQProducer("order_producer_group");
-
-        producer.setNamesrvAddr("127.0.0.1:9876");
-
+        producer.setNamesrvAddr(RocketConstant.NAME_SRV_ADDR);
+        producer.setVipChannelEnabled(false);
         producer.start();
 
         String[] tags = new String[]{"TagA", "TagC", "TagD"};
 
         // 订单列表
         List<OrderStep> orderList = new ProducerInOrder().buildOrders();
-
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateStr = sdf.format(date);
