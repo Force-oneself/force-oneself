@@ -1,6 +1,6 @@
 package com.quan.rocket.producer;
 
-import com.quan.rocket.RocketConstant;
+import com.quan.rocket.constant.RocketConstant;
 import com.quan.rocket.listener.TransactionListenerImpl;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.SendResult;

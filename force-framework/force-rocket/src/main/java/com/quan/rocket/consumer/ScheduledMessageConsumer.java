@@ -1,5 +1,6 @@
 package com.quan.rocket.consumer;
 
+import com.quan.rocket.constant.RocketConstant;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -19,6 +20,8 @@ public class ScheduledMessageConsumer {
     public static void main(String[] args) throws Exception {
         // 实例化消费者
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("scheduled_consumer_group");
+        // 设置NameServer的地址
+        consumer.setNamesrvAddr(RocketConstant.NAME_SRV_ADDR);
         // 订阅Topics
         consumer.subscribe("TestTopic", "*");
         // 注册消息监听者

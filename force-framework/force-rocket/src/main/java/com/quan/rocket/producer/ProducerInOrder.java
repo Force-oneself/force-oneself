@@ -1,6 +1,6 @@
 package com.quan.rocket.producer;
 
-import com.quan.rocket.RocketConstant;
+import com.quan.rocket.constant.RocketConstant;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.MessageQueueSelector;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -47,10 +47,10 @@ public class ProducerInOrder {
                 }
             }, orderList.get(i).getOrderId());//订单id
 
-            System.out.println(String.format("SendResult status:%s, queueId:%d, body:%s",
+            System.out.printf("SendResult status:%s, queueId:%d, body:%s%n",
                     sendResult.getSendStatus(),
                     sendResult.getMessageQueue().getQueueId(),
-                    body));
+                    body);
         }
 
         producer.shutdown();

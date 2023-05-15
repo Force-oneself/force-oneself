@@ -1,6 +1,6 @@
 package com.quan.rocket.producer;
 
-import com.quan.rocket.RocketConstant;
+import com.quan.rocket.constant.RocketConstant;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.common.message.Message;
 

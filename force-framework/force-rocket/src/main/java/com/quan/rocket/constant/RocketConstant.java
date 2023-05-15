@@ -1,4 +1,4 @@
-package com.quan.rocket;
+package com.quan.rocket.constant;
 
 /**
  * @author Force-oneself
