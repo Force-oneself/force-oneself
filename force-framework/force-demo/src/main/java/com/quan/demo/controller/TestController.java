@@ -2,6 +2,11 @@ package com.quan.demo.controller;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * class TestController
@@ -43,4 +48,17 @@ public class TestController {
         return user;
     }
 
+
+    @GetMapping("/ssp")
+    public String sso(@RequestParam("p") String p) {
+        System.out.println(p);
+        return p;
+    }
+
+    @GetMapping("/sso")
+    public String sso(MultipartFile file) throws IOException {
+        String pathname = "/Users/force-oneself/Desktop/sso.txt";
+        file.transferTo(new File(pathname));
+        return "ok";
+    }
 }

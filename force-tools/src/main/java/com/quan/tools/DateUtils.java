@@ -31,6 +31,13 @@ public class DateUtils {
     public static final String PATTERN_DATETIME_MINI = "yyyyMMddHHmmss";
     public static final String PATTERN_DATE = "yyyy-MM-dd";
     public static final String PATTERN_TIME = "HH:mm:ss";
+    public static final String PATTERN_YEAR = "yyyy";
+    public static final String PATTERN_MONTH = "MM";
+    public static final String PATTERN_DAY = "dd";
+    public static final String PATTERN_HOUR = "HH";
+    public static final String PATTERN_MINUTES = "mm";
+    public static final String PATTERN_SECONDS = "ss";
+
     /**
      * 老 date 格式化
      */
@@ -670,9 +677,9 @@ public class DateUtils {
         //剩余秒数
         second = second % 60;
         if (days > 0) {
-            return String.format("{}天{}小时{}分{}秒", days, hours, minutes, second);
+            return String.format("%s天%s小时%s分%s秒", days, hours, minutes, second);
         } else {
-            return String.format("{}小时{}分{}秒", hours, minutes, second);
+            return String.format("%s小时%s分%s秒", hours, minutes, second);
         }
     }
 

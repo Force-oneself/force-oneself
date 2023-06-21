@@ -1,5 +1,10 @@
 package com.quan.framework.document.excel;
 
+import com.alibaba.excel.EasyExcelFactory;
+import com.alibaba.excel.read.listener.ReadListener;
+import com.alibaba.excel.support.ExcelTypeEnum;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,5 +26,10 @@ public class ExcelDemo {
         }
 
         EasyExcelUtil.write("C:\\Users\\Administrator\\Desktop\\demo.xlsx", Entity.class, "sheet", data);
+
+        EasyExcelFactory.read((InputStream) null, null, null)
+                .excelType(ExcelTypeEnum.XLSX)
+                .sheet()
+                .doRead();
     }
 }
