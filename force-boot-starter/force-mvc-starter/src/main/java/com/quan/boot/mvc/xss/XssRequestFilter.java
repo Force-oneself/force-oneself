@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.xss;
+package com.quan.boot.mvc.xss;
 
 import org.springframework.util.AntPathMatcher;
 
@@ -35,6 +35,6 @@ public class XssRequestFilter implements Filter {
         boolean skip = properties.getSkipUrls()
                 .stream()
                 .anyMatch(pattern -> antPathMatcher.match(pattern, servletRequest.getServletPath()));
-        return skip ? request : new XssHttpServletRequestWrapper(servletRequest);
+        return skip ? request : new XssRequestWrapper(servletRequest);
     }
 }

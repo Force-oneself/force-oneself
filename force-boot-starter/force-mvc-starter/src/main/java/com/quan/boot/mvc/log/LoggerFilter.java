@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.log;
+package com.quan.boot.mvc.log;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -11,15 +11,14 @@ import java.io.IOException;
  */
 public class LoggerFilter implements Filter {
 
-    private final ServletLoggerProperties properties;
+    private final LoggerProperties properties;
 
-    public LoggerFilter(ServletLoggerProperties properties) {
+    public LoggerFilter(LoggerProperties properties) {
         this.properties = properties;
     }
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws
-            IOException, ServletException {
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         if (!(req instanceof HttpServletRequest) || !(resp instanceof HttpServletResponse)) {
             chain.doFilter(req, resp);
             return;

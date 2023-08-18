@@ -1,6 +1,6 @@
-package com.quan.framework.spring.mvc.xss;
+package com.quan.boot.mvc.xss;
 
-import com.quan.framework.spring.mvc.wrapper.RepeatableHttpServletRequestWrapper;
+import com.quan.boot.mvc.repeat.RepeatableRequestWrapper;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Force-oneself
  * @date 2023-03-02
  */
-public class XssHttpServletRequestWrapper extends RepeatableHttpServletRequestWrapper {
+public class XssRequestWrapper extends RepeatableRequestWrapper {
 
     /**
      * 没被包装过的HttpServletRequest（特殊场景,需要自己过滤）
@@ -25,7 +25,7 @@ public class XssHttpServletRequestWrapper extends RepeatableHttpServletRequestWr
      */
     private final static XssHtmlFilter HTML_FILTER = new XssHtmlFilter();
 
-    public XssHttpServletRequestWrapper(HttpServletRequest request) {
+    public XssRequestWrapper(HttpServletRequest request) {
         super(request);
         orgRequest = request;
     }
@@ -113,8 +113,8 @@ public class XssHttpServletRequestWrapper extends RepeatableHttpServletRequestWr
      * @return HttpServletRequest
      */
     public static HttpServletRequest getOrgRequest(HttpServletRequest request) {
-        if (request instanceof XssHttpServletRequestWrapper) {
-            return ((XssHttpServletRequestWrapper) request).getOrgRequest();
+        if (request instanceof XssRequestWrapper) {
+            return ((XssRequestWrapper) request).getOrgRequest();
         }
         return request;
     }

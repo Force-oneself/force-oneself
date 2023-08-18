@@ -1,6 +1,6 @@
-package com.quan.framework.spring.mvc.log;
+package com.quan.boot.mvc.log;
 
-import com.quan.framework.spring.mvc.wrapper.HttpServletResponseRepeatable;
+import com.quan.boot.mvc.repeat.ResponseRepeatable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -24,7 +24,7 @@ public final class ServletLoggerRecorder {
     private ServletLoggerRecorder() {
     }
 
-    public static String preRecord(ServletLoggerProperties properties, HttpServletRequest request) {
+    public static String preRecord(LoggerProperties properties, HttpServletRequest request) {
         final StringBuilder logRecord = new StringBuilder(256);
         int level = properties.getLevel();
         // basic
@@ -72,7 +72,7 @@ public final class ServletLoggerRecorder {
         return body.toString();
     }
 
-    public static String postRecord(ServletLoggerProperties properties,
+    public static String postRecord(LoggerProperties properties,
                                     HttpServletRequest request,
                                     HttpServletResponse response,
                                     Exception ex) {
@@ -101,10 +101,10 @@ public final class ServletLoggerRecorder {
         // body
         if (ex == null) {
             if (LoggerLevel.enable(level, LoggerLevel.RESPONSE_BODY)) {
-                if (response instanceof HttpServletResponseRepeatable) {
+                if (response instanceof ResponseRepeatable) {
                     logRecord.append("\n\n")
                             .append(String.copyValueOf(
-                                    new String(((HttpServletResponseRepeatable) response).responseBody()).toCharArray()));
+                                    new String(((ResponseRepeatable) response).responseBody()).toCharArray()));
                 }
             }
             // error
@@ -118,7 +118,7 @@ public final class ServletLoggerRecorder {
         return logRecord.toString();
     }
 
-    public static void stepRecords(ServletLoggerProperties properties, HttpServletRequest request,
+    public static void stepRecords(LoggerProperties properties, HttpServletRequest request,
                                    HttpServletResponse response, FilterRunnable run)
             throws IOException, ServletException {
         String requestLog = "\n<================  Request Start  ================>\n"
@@ -142,7 +142,7 @@ public final class ServletLoggerRecorder {
         }
     }
 
-    public static void mergeRecords(ServletLoggerProperties properties, HttpServletRequest request,
+    public static void mergeRecords(LoggerProperties properties, HttpServletRequest request,
                                     HttpServletResponse response, FilterRunnable run)
             throws IOException, ServletException {
         StringBuilder logFormat = new StringBuilder()

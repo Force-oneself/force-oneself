@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.wrapper;
+package com.quan.boot.mvc.repeat;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.WriteListener;
@@ -10,13 +10,13 @@ import java.io.*;
  * @author Force-oneself
  * @date 2023-03-01
  */
-public class RepeatableHttpServletResponseWrapper extends HttpServletResponseWrapper implements HttpServletResponseRepeatable {
+public class RepeatableResponseWrapper extends HttpServletResponseWrapper implements ResponseRepeatable {
 
     private final ByteArrayOutputStream byteArrayOutputStream;
 
     private final ServletOutputStream servletOutputStream;
 
-    public RepeatableHttpServletResponseWrapper(HttpServletResponse response) {
+    public RepeatableResponseWrapper(HttpServletResponse response) {
         super(response);
         byteArrayOutputStream = new ByteArrayOutputStream();
         servletOutputStream = new ServletOutputStream() {

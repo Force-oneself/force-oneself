@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.wrapper;
+package com.quan.boot.mvc.repeat;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,11 +13,11 @@ import java.io.*;
  * @author Force-oneself
  * @date 2021-08-24
  */
-public class RepeatableHttpServletRequestWrapper extends HttpServletRequestWrapper implements HttpServletRequestRepeatable {
+public class RepeatableRequestWrapper extends HttpServletRequestWrapper implements RequestRepeatable {
 
     protected byte[] body;
 
-    public RepeatableHttpServletRequestWrapper(HttpServletRequest request) {
+    public RepeatableRequestWrapper(HttpServletRequest request) {
         super(request);
     }
 

@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.xss;
+package com.quan.boot.mvc.xss;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

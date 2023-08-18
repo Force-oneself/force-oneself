@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.exception;
+package com.quan.boot.mvc.exception;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;

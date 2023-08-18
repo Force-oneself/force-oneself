@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.log;
+package com.quan.boot.mvc.log;
 
 import javax.servlet.ServletException;
 import java.io.IOException;

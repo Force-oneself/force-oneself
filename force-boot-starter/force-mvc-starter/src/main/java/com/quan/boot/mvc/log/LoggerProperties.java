@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.log;
+package com.quan.boot.mvc.log;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -6,8 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author Force-oneself
  * @date 2023-03-01
  */
-@ConfigurationProperties(prefix = ServletLoggerProperties.PREFIX)
-public class ServletLoggerProperties {
+@ConfigurationProperties(prefix = LoggerProperties.PREFIX)
+public class LoggerProperties {
 
     public static final String PREFIX = "force.servlet.logger";
 

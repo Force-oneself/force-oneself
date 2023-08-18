@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.exception;
+package com.quan.boot.mvc.exception;
 
 import com.quan.common.bean.R;
 import org.slf4j.Logger;

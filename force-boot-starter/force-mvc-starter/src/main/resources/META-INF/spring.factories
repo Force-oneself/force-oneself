@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration= \
+  com.quan.boot.mvc.config.ExceptionAutoConfig \
+  com.quan.boot.mvc.config.LoggerAutoConfig \
+  com.quan.boot.mvc.config.RepeatableAutoConfig \
+  com.quan.boot.mvc.config.XssAutoConfig 

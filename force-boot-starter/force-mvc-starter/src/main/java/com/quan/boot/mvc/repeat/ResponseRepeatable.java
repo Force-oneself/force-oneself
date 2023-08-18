@@ -1,11 +1,11 @@
-package com.quan.framework.spring.mvc.wrapper;
+package com.quan.boot.mvc.repeat;
 
 /**
  * @author Force-oneself
  * @date 2023-03-02
  */
 @FunctionalInterface
-public interface HttpServletResponseRepeatable {
+public interface ResponseRepeatable {
 
     byte[] responseBody();
 }

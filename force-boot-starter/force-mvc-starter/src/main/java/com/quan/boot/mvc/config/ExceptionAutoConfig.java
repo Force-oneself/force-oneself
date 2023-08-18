@@ -1,6 +1,9 @@
-package com.quan.framework.spring.mvc.exception;
+package com.quan.boot.mvc.config;
 
+import com.quan.boot.mvc.exception.ExceptionFilter;
+import com.quan.boot.mvc.exception.ExceptionHandlerAdvice;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,16 +19,12 @@ import javax.servlet.DispatcherType;
  */
 @Configuration(proxyBeanMethods = false)
 @Import(ExceptionHandlerAdvice.class)
-public class ServletExceptionAutoConfig {
-
-    private final HandlerExceptionResolver handlerExceptionResolver;
-
-    public ServletExceptionAutoConfig(@Qualifier("handlerExceptionResolver") HandlerExceptionResolver handlerExceptionResolver) {
-        this.handlerExceptionResolver = handlerExceptionResolver;
-    }
+@ConditionalOnProperty(prefix = "force.servlet.exception", name = "enable", matchIfMissing = true)
+public class ExceptionAutoConfig {
 
     @Bean
-    public FilterRegistrationBean<ExceptionFilter> exceptionFilter() {
+    public FilterRegistrationBean<ExceptionFilter> exceptionFilter(
+            @Qualifier("handlerExceptionResolver") HandlerExceptionResolver handlerExceptionResolver) {
         FilterRegistrationBean<ExceptionFilter> registration = new FilterRegistrationBean<>();
         registration.setDispatcherTypes(DispatcherType.REQUEST);
         registration.setFilter(new ExceptionFilter(handlerExceptionResolver));
