@@ -22,18 +22,10 @@ public @interface RateLimit {
     String key() default "";
 
     /**
-     * 限流时间单位
-     *
-     * @return TimeUnit
+     * 单位时间(单位：ms)
+     * @return 限流单位时间
      */
-    TimeUnit unit() default TimeUnit.SECONDS;
-
-    /**
-     * 限流时间
-     *
-     * @return 时间
-     */
-    long duration() default 1;
+    long time() default 1000;
 
     /**
      * 单位时间内允许通过的数量

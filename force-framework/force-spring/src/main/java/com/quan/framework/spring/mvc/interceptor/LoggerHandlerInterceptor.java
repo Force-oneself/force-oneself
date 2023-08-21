@@ -1,9 +1,7 @@
 package com.quan.framework.spring.mvc.interceptor;
 
-import com.quan.framework.spring.mvc.wrapper.RepeatableHttpServletResponseWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,10 +10,7 @@ import javax.servlet.DispatcherType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /***
@@ -101,10 +96,7 @@ public class LoggerHandlerInterceptor implements HandlerInterceptor {
             logRecord.append(header);
         }
         if (ex == null) {
-            logRecord.append("\n\n")
-                    .append(response instanceof RepeatableHttpServletResponseWrapper
-                            ? ((RepeatableHttpServletResponseWrapper) response).byteOutputStream()
-                            : "");
+            logRecord.append("\n\n");
         } else {
             logRecord.append("\n\n")
                     .append("发生异常: ")
