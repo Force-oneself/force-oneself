@@ -2,6 +2,7 @@ package com.quan.framework.spring.controller;
 
 import com.quan.framework.spring.mvc.crypto.Decrypt;
 import com.quan.framework.spring.mvc.crypto.Encrypt;
+import com.quan.framework.spring.mvc.crypto.RSA;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,8 +32,25 @@ public class DemoController {
     }
 
     @GetMapping("/decrypt")
+    @Encrypt
     public String get(@Decrypt String name) {
         return name;
+    }
+
+
+    @GetMapping("/decryptBody")
+    @Encrypt
+    @Decrypt
+    public Demo decryptBody(@RequestBody Demo demo) {
+        demo.setSay(demo.getSay() + " 加密测试");
+        return demo;
+    }
+
+    @GetMapping("/decrypt/rsa")
+    @RSA
+    public Demo rsa(@RequestBody Demo demo) {
+        demo.setSay(demo.getSay() + " 加密测试");
+        return demo;
     }
 
     @GetMapping("/decrypt/param/entity")

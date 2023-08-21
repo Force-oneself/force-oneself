@@ -1,6 +1,7 @@
 package com.quan.framework.spring.mvc.crypto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -13,6 +14,7 @@ import java.util.List;
  * @date 2023-03-03
  */
 @Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties(CryptoProperties.class)
 @Import({DecryptRequestBodyAdvice.class, EncryptResponseBodyAdvice.class})
 public class CryptoAutoConfig implements WebMvcConfigurer {
 
@@ -24,6 +26,6 @@ public class CryptoAutoConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new DecryptParamResolver(objectMapper));
+        resolvers.add(new DecryptArgumentResolver(objectMapper));
     }
 }

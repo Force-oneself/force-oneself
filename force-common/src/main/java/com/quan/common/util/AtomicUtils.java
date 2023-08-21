@@ -1,6 +1,9 @@
 package com.quan.common.util;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * @Description:
@@ -10,8 +13,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AtomicUtils {
 
     public static AtomicInteger atomic = new AtomicInteger(1);
+    public static Map<Integer, String> step = new LinkedHashMap<>(32);
 
     public static void print(String message) {
-        System.err.println(atomic.getAndIncrement() + " ===> " + message);
+        step.put(atomic.getAndIncrement(), message);
+    }
+
+    public static void stop() {
+        System.err.println(step.entrySet().stream()
+                .map(entry -> String.format("%d : %s", entry.getKey(), entry.getValue()))
+                .collect(Collectors.joining("\n"))
+        );
     }
 }

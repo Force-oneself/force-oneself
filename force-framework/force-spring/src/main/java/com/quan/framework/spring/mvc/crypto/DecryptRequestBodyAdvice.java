@@ -1,7 +1,7 @@
 package com.quan.framework.spring.mvc.crypto;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.MethodParameter;
-import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.util.List;
 
 /**
  * @author Force-oneself
@@ -22,23 +23,18 @@ import java.lang.reflect.Type;
  */
 @ControllerAdvice
 public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
-    // private final ApiCryptoProperties properties;
+
+     private final List<BodyAdviceDecryptorHandler> handlers;
+
+    public DecryptRequestBodyAdvice(List<BodyAdviceDecryptorHandler> handlers) {
+        this.handlers = handlers;
+    }
 
     @Override
     public boolean supports(@NonNull MethodParameter methodParameter,
                             @NonNull Type targetType,
                             @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
-        // 先找方法，再找方法上的类
-        Method method = methodParameter.getMethod();
-        if (method == null) {
-            return false;
-        }
-        boolean isMethodAnnotated = AnnotatedElementUtils.isAnnotated(method, Decrypt.class);
-        if (isMethodAnnotated) {
-            return true;
-        }
-        // 获取类上面的Annotation，可能包含组合注解，故采用spring的工具类
-        return AnnotatedElementUtils.isAnnotated(methodParameter.getDeclaringClass(), Decrypt.class);
+        return CryptoHelper.isAnnotated(methodParameter, Decrypt.class);
     }
 
     @Override
@@ -66,16 +62,16 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
         if (messageBody.available() <= 0) {
             return inputMessage;
         }
-
-        Decrypt decrypt = AnnotatedElementUtils.getMergedAnnotation(method, Decrypt.class);
-
-        // base64 byte array
-        byte[] bodyByteArray = StreamUtils.copyToByteArray(messageBody);
-        // TODO 解密
-        byte[] decryptedBody = bodyByteArray;
+        byte[] ciphertext = StreamUtils.copyToByteArray(messageBody);
+        final DecryptAdviceHolder holder = DecryptAdviceHolder.of(inputMessage, parameter, targetType, converterType);
+        byte[] decryptedBody = handlers.stream()
+                .filter(h -> h.support(holder))
+                .findFirst()
+                .map(h -> h.decryptor(holder))
+                .map(decryptor -> decryptor.decrypt(ciphertext))
+                .orElse(ciphertext);
 
         ByteArrayInputStream inputStream = new ByteArrayInputStream(decryptedBody);
-
         return new HttpInputMessage() {
             @Override
             @NonNull
@@ -100,5 +96,4 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
                                 @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
         return body;
     }
-
 }

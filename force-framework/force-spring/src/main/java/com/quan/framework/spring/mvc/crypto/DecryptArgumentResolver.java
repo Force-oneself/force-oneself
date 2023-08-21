@@ -19,11 +19,11 @@ import java.util.Map;
  * @author Force-oneself
  * @date 2023-03-03
  */
-public class DecryptParamResolver implements HandlerMethodArgumentResolver {
+public class DecryptArgumentResolver implements HandlerMethodArgumentResolver {
 
     private final ObjectMapper objectMapper;
 
-    public DecryptParamResolver(ObjectMapper objectMapper) {
+    public DecryptArgumentResolver(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
@@ -42,12 +42,13 @@ public class DecryptParamResolver implements HandlerMethodArgumentResolver {
         if (parameterName == null) {
             return null;
         }
-        Decrypt decrypt = AnnotatedElementUtils.getMergedAnnotation(parameter, Decrypt.class);
         String text = webRequest.getParameter(parameterName);
         if (StringUtils.isEmpty(text)) {
             return null;
         }
         // TODO 解密
+        Decrypt decrypt = AnnotatedElementUtils.getMergedAnnotation(parameter, Decrypt.class);
+        text += "：已加密";
         byte[] textBytes = text.getBytes(StandardCharsets.UTF_8);
         Class<?> parameterType = parameter.getType();
         if (parameterType == String.class) {
