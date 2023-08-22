@@ -7,7 +7,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.annotation.Order;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -21,7 +20,7 @@ import java.util.List;
 @EnableConfigurationProperties(CryptoProperties.class)
 public class CryptoAutoConfig {
 
-    /***
+    /**
      * 加密自动配置
      *
      * @author Force-oneself
@@ -29,22 +28,13 @@ public class CryptoAutoConfig {
      */
     @Configuration(proxyBeanMethods = false)
     @Import({DecryptRequestBodyAdvice.class})
-    public static class DecryptAutoConfig implements WebMvcConfigurer {
-
-        private final ObjectMapper objectMapper;
-
-        public DecryptAutoConfig(ObjectMapper objectMapper) {
-            this.objectMapper = objectMapper;
-        }
-
-        @Override
-        public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-            resolvers.add(new DecryptArgumentResolver(objectMapper));
-        }
+    public static class DecryptAutoConfig {
 
         @Bean
-        public DecryptHandler decryptHandler(List<AdviceDecryptor> decryptorList, CryptoProperties properties) {
-            return new DefaultDecryptHandler(decryptorList, properties);
+        public DecryptHandler decryptHandler(List<CustomizableAdviceDecryptor> customizableAdviceDecryptors,
+                                             List<SwitchableAdviceDecryptor> switchableAdviceDecryptors,
+                                             CryptoProperties properties) {
+            return new DefaultDecryptHandler(customizableAdviceDecryptors, switchableAdviceDecryptors, properties);
         }
 
         @Bean
@@ -53,13 +43,13 @@ public class CryptoAutoConfig {
         }
 
         @Bean
-        public AdviceDecryptor rsa() {
+        public CustomizableAdviceDecryptor rsa() {
             return new RSADecryptor();
         }
     }
 
 
-    /***
+    /**
      * 解密自动配置
      *
      * @author Force-oneself
