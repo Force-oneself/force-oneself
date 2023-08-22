@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.crypto;
+package com.quan.framework.spring.mvc.crypto.annotation;
 
 import java.lang.annotation.*;
 
@@ -10,6 +10,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Decrypt
-public @interface RSA {
+public @interface RSADecrypt {
 
 }

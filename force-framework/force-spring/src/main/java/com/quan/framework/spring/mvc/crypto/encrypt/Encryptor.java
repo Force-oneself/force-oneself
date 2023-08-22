@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.crypto;
+package com.quan.framework.spring.mvc.crypto.encrypt;
 
 /**
  * @author Force-oneself

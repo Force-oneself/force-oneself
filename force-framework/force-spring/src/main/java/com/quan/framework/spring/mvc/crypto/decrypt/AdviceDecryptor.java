@@ -1,10 +1,10 @@
-package com.quan.framework.spring.mvc.crypto;
+package com.quan.framework.spring.mvc.crypto.decrypt;
 
 /**
  * @author Force-oneself
  * @date 2023-08-21
  */
-public interface AdviceDecryptor extends Decryptor {
+public interface AdviceDecryptor {
 
     /**
      * 对解密请求是否支持解密处理
@@ -18,4 +18,6 @@ public interface AdviceDecryptor extends Decryptor {
     default boolean support(DecryptAdviceHolder holder) {
         return false;
     }
+
+    byte[] decryptor(DecryptAdviceHolder holder, byte[] ciphertext);
 }

@@ -1,4 +1,4 @@
-package com.quan.framework.spring.mvc.crypto;
+package com.quan.framework.spring.mvc.crypto.decrypt;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpInputMessage;

@@ -1,18 +1,16 @@
-package com.quan.framework.spring.mvc.crypto;
+package com.quan.framework.spring.mvc.crypto.decrypt;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.quan.framework.spring.mvc.crypto.exception.DecryptException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * JSON 类型请求解密处理器
@@ -20,15 +18,14 @@ import java.util.concurrent.atomic.AtomicReference;
  * @author Force-oneself
  * @date 2023-08-21
  */
-@Component
 public class ApplicationJsonBodyAdviceDecryptorHandler implements BodyAdviceDecryptorHandler {
 
     private final ObjectMapper objectMapper;
-    private final List<AdviceDecryptor> decryptorList;
+    private final DecryptHandler decryptHandler;
 
-    public ApplicationJsonBodyAdviceDecryptorHandler(ObjectMapper objectMapper, List<AdviceDecryptor> decryptorList) {
+    public ApplicationJsonBodyAdviceDecryptorHandler(ObjectMapper objectMapper, DecryptHandler decryptHandler) {
         this.objectMapper = objectMapper;
-        this.decryptorList = decryptorList;
+        this.decryptHandler = decryptHandler;
     }
 
     @Override
@@ -46,17 +43,14 @@ public class ApplicationJsonBodyAdviceDecryptorHandler implements BodyAdviceDecr
                 dataMap = objectMapper.readValue(ciphertext, new TypeReference<LinkedHashMap<String, Object>>() {
                 });
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new DecryptException("解析异常", e);
             }
             Map.Entry<String, Object> msgEncrypt = dataMap.entrySet().stream().iterator().next();
-            if (msgEncrypt != null) {
-                AtomicReference<byte[]> decryptBytes = new AtomicReference<>(String.valueOf(msgEncrypt.getValue()).getBytes(StandardCharsets.UTF_8));
-                decryptorList.stream()
-                        .filter(d -> d.support(holder))
-                        .forEach(d -> decryptBytes.getAndUpdate(d::decrypt));
-                return decryptBytes.get();
+            if (msgEncrypt == null) {
+                return ciphertext;
             }
-            return ciphertext;
+            byte[] c = String.valueOf(msgEncrypt.getValue()).getBytes(StandardCharsets.UTF_8);
+            return decryptHandler.decrypt(holder, c);
         };
     }
 }

@@ -1,8 +1,8 @@
 package com.quan.framework.spring.controller;
 
-import com.quan.framework.spring.mvc.crypto.Decrypt;
-import com.quan.framework.spring.mvc.crypto.Encrypt;
-import com.quan.framework.spring.mvc.crypto.RSA;
+import com.quan.framework.spring.mvc.crypto.annotation.Decrypt;
+import com.quan.framework.spring.mvc.crypto.annotation.Encrypt;
+import com.quan.framework.spring.mvc.crypto.annotation.RSADecrypt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,7 +47,7 @@ public class DemoController {
     }
 
     @GetMapping("/decrypt/rsa")
-    @RSA
+    @RSADecrypt
     public Demo rsa(@RequestBody Demo demo) {
         demo.setSay(demo.getSay() + " 加密测试");
         return demo;

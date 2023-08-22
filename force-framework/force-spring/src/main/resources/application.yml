@@ -1,3 +1,10 @@
 spring:
   application:
     name: force-spring
+server:
+  port: 8888
+
+force:
+  servlet:
+    crypto:
+      default-decryptor: com.quan.framework.spring.mvc.crypto.decrypt.RSADecryptor
