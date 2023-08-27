@@ -2,7 +2,7 @@ package com.quan.framework.spring.mvc.crypto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quan.framework.spring.mvc.crypto.decrypt.*;
-import com.quan.framework.spring.mvc.crypto.encrypt.EncryptResponseBodyAdvice;
+import com.quan.framework.spring.mvc.crypto.encrypt.*;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,6 +46,22 @@ public class CryptoAutoConfig {
         public CustomizableAdviceDecryptor rsa() {
             return new RSADecryptor();
         }
+
+        @Bean
+        public SwitchableAdviceDecryptor undecryptAdviceDecryptor() {
+            return new SwitchableAdviceDecryptor() {
+
+                @Override
+                public boolean support(DecryptAdviceHolder holder) {
+                    return true;
+                }
+
+                @Override
+                public byte[] decryptor(DecryptAdviceHolder holder, byte[] ciphertext) {
+                    return ciphertext;
+                }
+            };
+        }
     }
 
 
@@ -59,5 +75,26 @@ public class CryptoAutoConfig {
     @Import({EncryptResponseBodyAdvice.class})
     public static class EncryptAutoConfig {
 
+        @Bean
+        public EncryptHandler encryptHandler(List<CustomizableAdviceEncryptor> customizableAdviceEncryptors,
+                                             List<SwitchableAdviceEncryptor> switchableAdviceEncryptors,
+                                             CryptoProperties properties) {
+            return new DefaultEncryptHandler(customizableAdviceEncryptors, switchableAdviceEncryptors, properties);
+        }
+
+        @Bean
+        public SwitchableAdviceEncryptor unencryptAdviceEncryptor() {
+            return new SwitchableAdviceEncryptor() {
+                @Override
+                public boolean support(EncryptAdviceHolder holder) {
+                    return true;
+                }
+
+                @Override
+                public byte[] decryptor(EncryptAdviceHolder holder, byte[] ciphertext) {
+                    return ciphertext;
+                }
+            };
+        }
     }
 }

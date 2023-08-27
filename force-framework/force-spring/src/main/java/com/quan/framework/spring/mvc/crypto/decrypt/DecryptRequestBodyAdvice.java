@@ -5,6 +5,7 @@ import com.quan.framework.spring.mvc.crypto.annotation.Decrypt;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.lang.NonNull;
 import org.springframework.util.StreamUtils;
@@ -63,8 +64,8 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
         if (messageBody.available() <= 0) {
             return inputMessage;
         }
-        byte[] ciphertext = StreamUtils.copyToByteArray(messageBody);
         final DecryptAdviceHolder holder = DecryptAdviceHolder.of(inputMessage, parameter, targetType, converterType);
+        byte[] ciphertext = StreamUtils.copyToByteArray(messageBody);
         byte[] decryptedBody = handlers.stream()
                 .filter(h -> h.support(holder))
                 .findFirst()

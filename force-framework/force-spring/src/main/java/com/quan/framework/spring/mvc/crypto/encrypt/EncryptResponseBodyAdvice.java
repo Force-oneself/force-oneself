@@ -2,6 +2,7 @@ package com.quan.framework.spring.mvc.crypto.encrypt;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.quan.common.bean.R;
 import com.quan.framework.spring.mvc.crypto.CryptoHelper;
 import com.quan.framework.spring.mvc.crypto.annotation.Encrypt;
 import org.springframework.core.MethodParameter;
@@ -23,15 +24,17 @@ import java.nio.charset.StandardCharsets;
 @ControllerAdvice
 public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
+    private final EncryptHandler handler;
     private final ObjectMapper objectMapper;
 
-    public EncryptResponseBodyAdvice(ObjectMapper objectMapper) {
+    public EncryptResponseBodyAdvice(EncryptHandler handler, ObjectMapper objectMapper) {
+        this.handler = handler;
         this.objectMapper = objectMapper;
     }
 
     @Override
     public boolean supports(@NonNull MethodParameter methodParameter, @NonNull Class<? extends HttpMessageConverter<?>> converterType) {
-        return CryptoHelper.isAnnotated(methodParameter, Encrypt.class);
+        return CryptoHelper.isAnnotated(methodParameter,  Encrypt.class);
     }
 
     @Nullable
@@ -39,27 +42,33 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
     public Object beforeBodyWrite(Object body,
                                   @NonNull MethodParameter returnType,
                                   @NonNull MediaType selectedContentType,
-                                  @NonNull Class selectedConverterType,
+                                  @NonNull Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   @NonNull ServerHttpRequest request,
                                   @NonNull ServerHttpResponse response) {
         if (body == null) {
             return null;
         }
+        EncryptAdviceHolder holder = EncryptAdviceHolder.beforeOf(body, returnType, selectedContentType, selectedConverterType, request, response);
         Class<?> realReturnClass = body.getClass();
-        if (String.class.isAssignableFrom(realReturnClass)) {
-            return body;
+        if (R.class.isAssignableFrom(realReturnClass)) {
+            R<Object> realBody = (R<Object>) body;
+            Object data = realBody.getData();
+            if (data != null) {
+                try {
+                    byte[] encrypt = handler.encrypt(holder, objectMapper.writeValueAsBytes(data));
+                    realBody.setData(new String(encrypt, StandardCharsets.UTF_8));
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return realBody;
         }
-        // TODO 加密
-        byte[] bodyJsonBytes = null;
         try {
-            bodyJsonBytes = objectMapper.writeValueAsBytes(body);
-        } catch (JsonProcessingException ignore) {
-            // throw new RuntimeException(e);
+            byte[] encrypt = handler.encrypt(holder, objectMapper.writeValueAsBytes(body));
+            return new String(encrypt, StandardCharsets.UTF_8);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
-        if (bodyJsonBytes == null) {
-            return body;
-        }
-        return new String(bodyJsonBytes, StandardCharsets.UTF_8);
     }
 
 }

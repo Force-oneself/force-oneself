@@ -4,6 +4,7 @@ import com.quan.framework.spring.mvc.crypto.CryptoProperties;
 import com.quan.framework.spring.mvc.crypto.exception.DecryptException;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Force-oneself
@@ -34,20 +35,18 @@ public class DefaultDecryptHandler implements DecryptHandler {
     @Override
     public byte[] decrypt(DecryptAdviceHolder holder, byte[] ciphertext) {
         // 自定义解密器
-        byte[] decrypt = customizableAdviceDecryptors.stream()
+        return customizableAdviceDecryptors.stream()
                 .filter(d -> d.support(holder))
                 .findFirst()
                 .map(d -> d.decryptor(holder, ciphertext))
-                .orElse(null);
-        if (decrypt == null) {
-            // 可自动切换解密器
-            decrypt = switchableAdviceDecryptors.stream()
-                    .filter(d -> d.getClass().getName().equals(properties.getDefaultDecryptor()) && d.support(holder))
-                    .findFirst()
-                    .map(d -> d.decryptor(holder, ciphertext))
-                    .orElseThrow(() -> new DecryptException("not found Decryptor"));
-        }
-        return decrypt;
+                .orElseGet(() -> switchableAdviceDecryptors.stream()
+                        .filter(d -> d.getClass().getName().equals(properties.getDefaultDecryptor()))
+                        .findFirst()
+                        .map(d -> d.decryptor(holder, ciphertext))
+                        .orElseGet(() -> switchableAdviceDecryptors.stream()
+                                .findFirst()
+                                .map(d -> d.decryptor(holder, ciphertext))
+                                .orElseThrow(() -> new DecryptException("not found Decryptor"))));
     }
 
 }
