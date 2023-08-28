@@ -1,10 +1,9 @@
 package com.quan.framework.spring.mvc.crypto.decrypt;
 
 import com.quan.framework.spring.mvc.crypto.CryptoProperties;
-import com.quan.framework.spring.mvc.crypto.exception.DecryptException;
+import com.quan.framework.spring.mvc.crypto.exception.CryptoException;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Force-oneself
@@ -46,7 +45,7 @@ public class DefaultDecryptHandler implements DecryptHandler {
                         .orElseGet(() -> switchableAdviceDecryptors.stream()
                                 .findFirst()
                                 .map(d -> d.decryptor(holder, ciphertext))
-                                .orElseThrow(() -> new DecryptException("not found Decryptor"))));
+                                .orElseThrow(() -> new CryptoException("not found Decryptor"))));
     }
 
 }

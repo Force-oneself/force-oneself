@@ -1,6 +1,8 @@
 package com.quan.framework.spring.mvc.crypto.decrypt;
 
-import org.springframework.lang.Nullable;
+import org.springframework.http.HttpInputMessage;
+
+import java.io.IOException;
 
 /**
  * @author Force-oneself
@@ -19,10 +21,10 @@ public interface BodyAdviceDecryptorHandler {
     }
 
     /**
-     * 返回支持处理的解密器
+     * 解密成消息
      *
      * @param holder 上下文
+     * @return 输入消息
      */
-    @Nullable
-    Decryptor decryptor(DecryptAdviceHolder holder);
+    HttpInputMessage decrypt(DecryptAdviceHolder holder) throws IOException;
 }

@@ -3,9 +3,11 @@ package com.quan.framework.spring.mvc.crypto.decrypt;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quan.framework.spring.mvc.crypto.exception.DecryptException;
+import com.quan.framework.spring.mvc.crypto.exception.CryptoException;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpInputMessage;
 import org.springframework.http.MediaType;
+import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -36,21 +38,20 @@ public class ApplicationJsonBodyAdviceDecryptorHandler implements BodyAdviceDecr
     }
 
     @Override
-    public Decryptor decryptor(DecryptAdviceHolder holder) {
-        return ciphertext -> {
-            Map<String, Object> dataMap;
-            try {
-                dataMap = objectMapper.readValue(ciphertext, new TypeReference<LinkedHashMap<String, Object>>() {
-                });
-            } catch (IOException e) {
-                throw new DecryptException("解析异常", e);
-            }
-            Map.Entry<String, Object> msgEncrypt = dataMap.entrySet().stream().iterator().next();
-            if (msgEncrypt == null) {
-                return ciphertext;
-            }
-            byte[] c = String.valueOf(msgEncrypt.getValue()).getBytes(StandardCharsets.UTF_8);
-            return decryptHandler.decrypt(holder, c);
-        };
+    public HttpInputMessage decrypt(DecryptAdviceHolder holder) throws IOException {
+        byte[] ciphertext = StreamUtils.copyToByteArray(holder.getInputMessage().getBody());
+        Map<String, Object> dataMap;
+        try {
+            dataMap = objectMapper.readValue(ciphertext, new TypeReference<LinkedHashMap<String, Object>>() {
+            });
+        } catch (IOException e) {
+            throw new CryptoException("解析异常", e);
+        }
+        Map.Entry<String, Object> msgEncrypt = dataMap.entrySet().stream().iterator().next();
+        if (msgEncrypt == null) {
+            return holder.getInputMessage();
+        }
+        byte[] c = String.valueOf(msgEncrypt.getValue()).getBytes(StandardCharsets.UTF_8);
+        return new DecryptHttpInputMessage(decryptHandler.decrypt(holder, c), holder.getInputMessage());
     }
 }

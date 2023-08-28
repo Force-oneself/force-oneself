@@ -38,12 +38,13 @@ public class CryptoAutoConfig {
         }
 
         @Bean
-        public BodyAdviceDecryptorHandler json(ObjectMapper objectMapper, DecryptHandler decryptHandler) {
+        public ApplicationJsonBodyAdviceDecryptorHandler applicationJsonBodyAdviceDecryptorHandler(
+                ObjectMapper objectMapper, DecryptHandler decryptHandler) {
             return new ApplicationJsonBodyAdviceDecryptorHandler(objectMapper, decryptHandler);
         }
 
         @Bean
-        public CustomizableAdviceDecryptor rsa() {
+        public RSADecryptor rsaDecryptor() {
             return new RSADecryptor();
         }
 

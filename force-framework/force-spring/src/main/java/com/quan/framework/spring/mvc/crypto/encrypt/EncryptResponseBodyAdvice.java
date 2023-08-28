@@ -1,10 +1,8 @@
 package com.quan.framework.spring.mvc.crypto.encrypt;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quan.common.bean.R;
 import com.quan.framework.spring.mvc.crypto.CryptoHelper;
 import com.quan.framework.spring.mvc.crypto.annotation.Encrypt;
+import com.quan.framework.spring.mvc.crypto.exception.CryptoException;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -15,7 +13,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * @author Force-oneself
@@ -24,12 +22,10 @@ import java.nio.charset.StandardCharsets;
 @ControllerAdvice
 public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
-    private final EncryptHandler handler;
-    private final ObjectMapper objectMapper;
+    private final List<BodyAdviceEncryptorHandler> handlers;
 
-    public EncryptResponseBodyAdvice(EncryptHandler handler, ObjectMapper objectMapper) {
-        this.handler = handler;
-        this.objectMapper = objectMapper;
+    public EncryptResponseBodyAdvice(List<BodyAdviceEncryptorHandler> handlers) {
+        this.handlers = handlers;
     }
 
     @Override
@@ -49,26 +45,11 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             return null;
         }
         EncryptAdviceHolder holder = EncryptAdviceHolder.beforeOf(body, returnType, selectedContentType, selectedConverterType, request, response);
-        Class<?> realReturnClass = body.getClass();
-        if (R.class.isAssignableFrom(realReturnClass)) {
-            R<Object> realBody = (R<Object>) body;
-            Object data = realBody.getData();
-            if (data != null) {
-                try {
-                    byte[] encrypt = handler.encrypt(holder, objectMapper.writeValueAsBytes(data));
-                    realBody.setData(new String(encrypt, StandardCharsets.UTF_8));
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            return realBody;
-        }
-        try {
-            byte[] encrypt = handler.encrypt(holder, objectMapper.writeValueAsBytes(body));
-            return new String(encrypt, StandardCharsets.UTF_8);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        return handlers.stream()
+                .filter(h -> h.support(holder))
+                .findFirst()
+                .map(h -> h.encrypt(holder))
+                .orElseThrow(()-> new CryptoException("not found BodyAdviceDecryptorHandler"));
     }
 
 }

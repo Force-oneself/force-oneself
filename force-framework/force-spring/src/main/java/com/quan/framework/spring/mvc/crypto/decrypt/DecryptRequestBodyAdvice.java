@@ -2,17 +2,15 @@ package com.quan.framework.spring.mvc.crypto.decrypt;
 
 import com.quan.framework.spring.mvc.crypto.CryptoHelper;
 import com.quan.framework.spring.mvc.crypto.annotation.Decrypt;
+import com.quan.framework.spring.mvc.crypto.exception.CryptoException;
 import org.springframework.core.MethodParameter;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.lang.NonNull;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
@@ -26,7 +24,7 @@ import java.util.List;
 @ControllerAdvice
 public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 
-     private final List<BodyAdviceDecryptorHandler> handlers;
+    private final List<BodyAdviceDecryptorHandler> handlers;
 
     public DecryptRequestBodyAdvice(List<BodyAdviceDecryptorHandler> handlers) {
         this.handlers = handlers;
@@ -65,28 +63,12 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
             return inputMessage;
         }
         final DecryptAdviceHolder holder = DecryptAdviceHolder.of(inputMessage, parameter, targetType, converterType);
-        byte[] ciphertext = StreamUtils.copyToByteArray(messageBody);
-        byte[] decryptedBody = handlers.stream()
-                .filter(h -> h.support(holder))
-                .findFirst()
-                .map(h -> h.decryptor(holder))
-                .map(decryptor -> decryptor.decrypt(ciphertext))
-                .orElse(ciphertext);
-
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(decryptedBody);
-        return new HttpInputMessage() {
-            @Override
-            @NonNull
-            public InputStream getBody() {
-                return inputStream;
+        for (BodyAdviceDecryptorHandler handler : handlers) {
+            if (handler.support(holder)) {
+                return handler.decrypt(holder);
             }
-
-            @Override
-            @NonNull
-            public HttpHeaders getHeaders() {
-                return inputMessage.getHeaders();
-            }
-        };
+        }
+        throw new CryptoException("not found BodyAdviceDecryptorHandler");
     }
 
     @NonNull
