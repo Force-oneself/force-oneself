@@ -4,6 +4,7 @@ import com.quan.framework.spring.mvc.crypto.CryptoProperties;
 import com.quan.framework.spring.mvc.crypto.exception.CryptoException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Force-oneself
@@ -14,20 +15,23 @@ public class DefaultDecryptHandler implements DecryptHandler {
     /**
      * 可定义解密器
      */
-    private final List<CustomizableAdviceDecryptor> customizableAdviceDecryptors;
+    private final List<AdviceDecryptorSupport> customizableAdviceDecryptors;
     /**
      * 可自由切换默认实现解密器,可通过@Decrypt注解实现
      *
      * @see com.quan.framework.spring.mvc.crypto.annotation.Decrypt
      */
-    private final List<SwitchableAdviceDecryptor> switchableAdviceDecryptors;
+    private final List<AdviceDecryptor> switchableAdviceDecryptors;
     private final CryptoProperties properties;
 
-    public DefaultDecryptHandler(List<CustomizableAdviceDecryptor> customizableAdviceDecryptors,
-                                 List<SwitchableAdviceDecryptor> switchableAdviceDecryptors,
-                                 CryptoProperties properties) {
-        this.customizableAdviceDecryptors = customizableAdviceDecryptors;
-        this.switchableAdviceDecryptors = switchableAdviceDecryptors;
+    public DefaultDecryptHandler(List<AdviceDecryptor> decryptors, CryptoProperties properties) {
+        this.customizableAdviceDecryptors = decryptors.stream()
+                .filter(obj -> obj instanceof AdviceDecryptorSupport)
+                .map(obj -> ((AdviceDecryptorSupport) obj))
+                .collect(Collectors.toList());
+        this.switchableAdviceDecryptors = decryptors.stream()
+                .filter(obj -> !(obj instanceof AdviceDecryptorSupport))
+                .collect(Collectors.toList());
         this.properties = properties;
     }
 

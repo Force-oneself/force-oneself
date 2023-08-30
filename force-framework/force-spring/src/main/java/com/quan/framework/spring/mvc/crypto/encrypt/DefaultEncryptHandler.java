@@ -1,9 +1,11 @@
 package com.quan.framework.spring.mvc.crypto.encrypt;
 
 import com.quan.framework.spring.mvc.crypto.CryptoProperties;
+import com.quan.framework.spring.mvc.crypto.decrypt.AdviceDecryptorSupport;
 import com.quan.framework.spring.mvc.crypto.exception.CryptoException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Force-oneself
@@ -11,20 +13,23 @@ import java.util.List;
  */
 public class DefaultEncryptHandler implements EncryptHandler {
 
-    private final List<CustomizableAdviceEncryptor> customizableList;
+    private final List<AdviceEncryptorSupport> customizableList;
     /**
      * 可自由切换默认实现解密器,可通过@Encrypt注解实现
      *
      * @see com.quan.framework.spring.mvc.crypto.annotation.Encrypt
      */
-    private final List<SwitchableAdviceEncryptor> switchableList;
+    private final List<AdviceEncryptor> switchableList;
     private final CryptoProperties properties;
 
-    public DefaultEncryptHandler(List<CustomizableAdviceEncryptor> customizableList,
-                                 List<SwitchableAdviceEncryptor> switchableList,
-                                 CryptoProperties properties) {
-        this.customizableList = customizableList;
-        this.switchableList = switchableList;
+    public DefaultEncryptHandler(List<AdviceEncryptor> encryptors, CryptoProperties properties) {
+        this.customizableList = encryptors.stream()
+                .filter(obj -> obj instanceof AdviceEncryptorSupport)
+                .map(obj -> ((AdviceEncryptorSupport) obj))
+                .collect(Collectors.toList());
+        this.switchableList = encryptors.stream()
+                .filter(obj -> !(obj instanceof AdviceEncryptorSupport))
+                .collect(Collectors.toList());
         this.properties = properties;
     }
 

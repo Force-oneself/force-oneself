@@ -18,8 +18,12 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 /**
+ * <span>@RequestBody</span> 切面实现解密
+ *
  * @author Force-oneself
  * @date 2023-03-03
+ * @see org.springframework.web.bind.annotation.ResponseBody
+ * @see BodyAdviceDecryptorHandler
  */
 @ControllerAdvice
 public class DecryptRequestBodyAdvice implements RequestBodyAdvice {

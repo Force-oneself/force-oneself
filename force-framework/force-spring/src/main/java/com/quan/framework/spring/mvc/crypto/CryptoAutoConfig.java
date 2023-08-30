@@ -7,8 +7,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
@@ -31,16 +29,14 @@ public class CryptoAutoConfig {
     public static class DecryptAutoConfig {
 
         @Bean
-        public DecryptHandler decryptHandler(List<CustomizableAdviceDecryptor> customizableAdviceDecryptors,
-                                             List<SwitchableAdviceDecryptor> switchableAdviceDecryptors,
-                                             CryptoProperties properties) {
-            return new DefaultDecryptHandler(customizableAdviceDecryptors, switchableAdviceDecryptors, properties);
+        public DecryptHandler decryptHandler(List<AdviceDecryptor> decryptors, CryptoProperties properties) {
+            return new DefaultDecryptHandler(decryptors, properties);
         }
 
         @Bean
-        public ApplicationJsonBodyAdviceDecryptorHandler applicationJsonBodyAdviceDecryptorHandler(
+        public JsonBodyAdviceDecryptorHandler applicationJsonBodyAdviceDecryptorHandler(
                 ObjectMapper objectMapper, DecryptHandler decryptHandler) {
-            return new ApplicationJsonBodyAdviceDecryptorHandler(objectMapper, decryptHandler);
+            return new JsonBodyAdviceDecryptorHandler(objectMapper, decryptHandler);
         }
 
         @Bean
@@ -49,19 +45,8 @@ public class CryptoAutoConfig {
         }
 
         @Bean
-        public SwitchableAdviceDecryptor undecryptAdviceDecryptor() {
-            return new SwitchableAdviceDecryptor() {
-
-                @Override
-                public boolean support(DecryptAdviceHolder holder) {
-                    return true;
-                }
-
-                @Override
-                public byte[] decryptor(DecryptAdviceHolder holder, byte[] ciphertext) {
-                    return ciphertext;
-                }
-            };
+        public AdviceDecryptor undecryptAdviceDecryptor() {
+            return (holder, ciphertext) -> ciphertext;
         }
     }
 
@@ -77,25 +62,23 @@ public class CryptoAutoConfig {
     public static class EncryptAutoConfig {
 
         @Bean
-        public EncryptHandler encryptHandler(List<CustomizableAdviceEncryptor> customizableAdviceEncryptors,
-                                             List<SwitchableAdviceEncryptor> switchableAdviceEncryptors,
-                                             CryptoProperties properties) {
-            return new DefaultEncryptHandler(customizableAdviceEncryptors, switchableAdviceEncryptors, properties);
+        public EncryptHandler encryptHandler(List<AdviceEncryptor> encryptors, CryptoProperties properties) {
+            return new DefaultEncryptHandler(encryptors, properties);
         }
 
         @Bean
-        public SwitchableAdviceEncryptor unencryptAdviceEncryptor() {
-            return new SwitchableAdviceEncryptor() {
-                @Override
-                public boolean support(EncryptAdviceHolder holder) {
-                    return true;
-                }
+        public CommonReturnBodyAdviceEncryptorHandler commonReturnBodyAdviceEncryptorHandler(ObjectMapper objectMapper, EncryptHandler encryptHandler) {
+            return new CommonReturnBodyAdviceEncryptorHandler(objectMapper, encryptHandler);
+        }
 
-                @Override
-                public byte[] decryptor(EncryptAdviceHolder holder, byte[] ciphertext) {
-                    return ciphertext;
-                }
-            };
+        @Bean
+        public JsonBodyAdviceEncryptorHandler jsonBodyAdviceEncryptorHandler(ObjectMapper objectMapper, EncryptHandler encryptHandler) {
+            return new JsonBodyAdviceEncryptorHandler(objectMapper, encryptHandler);
+        }
+
+        @Bean
+        public AdviceEncryptor unencryptAdviceEncryptor() {
+            return (holder, ciphertext) -> ciphertext;
         }
     }
 }

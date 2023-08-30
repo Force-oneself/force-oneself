@@ -15,17 +15,19 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * JSON 类型请求解密处理器
+ * JSON格式请求解密处理器
+ * <p>application/json</p>
+ * <p>application/json;charset=UTF-8</p>
  *
  * @author Force-oneself
  * @date 2023-08-21
  */
-public class ApplicationJsonBodyAdviceDecryptorHandler implements BodyAdviceDecryptorHandler {
+public class JsonBodyAdviceDecryptorHandler implements BodyAdviceDecryptorHandler {
 
     private final ObjectMapper objectMapper;
     private final DecryptHandler decryptHandler;
 
-    public ApplicationJsonBodyAdviceDecryptorHandler(ObjectMapper objectMapper, DecryptHandler decryptHandler) {
+    public JsonBodyAdviceDecryptorHandler(ObjectMapper objectMapper, DecryptHandler decryptHandler) {
         this.objectMapper = objectMapper;
         this.decryptHandler = decryptHandler;
     }

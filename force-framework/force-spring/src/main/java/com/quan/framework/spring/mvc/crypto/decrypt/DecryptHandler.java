@@ -1,7 +1,7 @@
 package com.quan.framework.spring.mvc.crypto.decrypt;
 
 /**
- * 解密算法簇处理器
+ * 解密算法簇处理器,该接口完成对密文解密对对外实现
  *
  * @author Force-oneself
  * @date 2023-08-21
