@@ -1,6 +1,7 @@
 package com.quan.framework.spring.valid.impl;
 
 
+import cn.hutool.core.net.Ipv4Util;
 import com.quan.framework.spring.valid.annotation.Ip;
 
 import javax.validation.ConstraintValidator;
@@ -13,15 +14,10 @@ import javax.validation.ConstraintValidatorContext;
  * @date 2020/12/29 2:20 下午
  */
 public class IpValidator implements ConstraintValidator<Ip, String> {
-    @Override
-    public void initialize(Ip constraintAnnotation) {
-
-    }
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-//        return IpUtils.isIp(value);
-        return true;
+        return Ipv4Util.isMaskValid(value);
     }
 
 }

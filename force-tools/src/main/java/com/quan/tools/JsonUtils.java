@@ -53,7 +53,7 @@ public class JsonUtils {
      * @param object javaBean
      * @return jsonString json字符串
      */
-    public static byte[] toJsonAsBytes(Object object) {
+    public static <T> byte[] toJsonAsBytes(T object) {
         try {
             return getInstance().writeValueAsBytes(object);
         } catch (JsonProcessingException e) {
