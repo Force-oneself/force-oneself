@@ -1,5 +1,6 @@
 package com.quan.boot.mvc.config;
 
+import com.quan.boot.mvc.constant.PropConstant;
 import com.quan.boot.mvc.exception.ExceptionFilter;
 import com.quan.boot.mvc.exception.ExceptionHandlerAdvice;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +20,7 @@ import javax.servlet.DispatcherType;
  */
 @Configuration(proxyBeanMethods = false)
 @Import(ExceptionHandlerAdvice.class)
-@ConditionalOnProperty(prefix = "force.servlet.exception", name = "enable", matchIfMissing = true)
+@ConditionalOnProperty(prefix = PropConstant.EXCEPTION, name = "enable", matchIfMissing = true)
 public class ExceptionAutoConfig {
 
     @Bean

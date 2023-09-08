@@ -1,5 +1,6 @@
 package com.quan.boot.mvc.config;
 
+import com.quan.boot.mvc.constant.PropConstant;
 import com.quan.boot.mvc.repeat.RepeatableWrapperFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -14,7 +15,7 @@ import javax.servlet.DispatcherType;
  * @date 2023-08-17
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnProperty(prefix = "force.servlet.repeat", name = "enable", matchIfMissing = true)
+@ConditionalOnProperty(prefix = PropConstant.REPEAT, name = "enable", matchIfMissing = true)
 public class RepeatableAutoConfig {
 
     @Bean

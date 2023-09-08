@@ -1,5 +1,6 @@
 package com.quan.boot.mvc.config;
 
+import com.quan.boot.mvc.constant.PropConstant;
 import com.quan.boot.mvc.log.LoggerFilter;
 import com.quan.boot.mvc.log.LoggerProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,7 +18,7 @@ import javax.servlet.DispatcherType;
  */
 @Configuration
 @EnableConfigurationProperties(LoggerProperties.class)
-@ConditionalOnProperty(prefix = "force.servlet.logger", name = "enable", matchIfMissing = true)
+@ConditionalOnProperty(prefix = PropConstant.LOG, name = "enable", matchIfMissing = true)
 public class LoggerAutoConfig {
 
     @Bean

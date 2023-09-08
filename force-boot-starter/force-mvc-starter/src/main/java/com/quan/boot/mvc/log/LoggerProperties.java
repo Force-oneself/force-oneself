@@ -1,15 +1,14 @@
 package com.quan.boot.mvc.log;
 
+import com.quan.boot.mvc.constant.PropConstant;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author Force-oneself
  * @date 2023-03-01
  */
-@ConfigurationProperties(prefix = LoggerProperties.PREFIX)
+@ConfigurationProperties(prefix = PropConstant.LOG)
 public class LoggerProperties {
-
-    public static final String PREFIX = "force.servlet.logger";
 
     /**
      * 启用日志记录

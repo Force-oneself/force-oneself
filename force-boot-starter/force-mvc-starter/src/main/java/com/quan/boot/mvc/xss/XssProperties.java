@@ -1,5 +1,6 @@
 package com.quan.boot.mvc.xss;
 
+import com.quan.boot.mvc.constant.PropConstant;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.ArrayList;
@@ -9,10 +10,8 @@ import java.util.List;
  * @author Force-oneself
  * @date 2023-03-02
  */
-@ConfigurationProperties(prefix = XssProperties.PREFIX)
+@ConfigurationProperties(prefix = PropConstant.XSS)
 public class XssProperties {
-
-    public static final String PREFIX = "force.servlet.xss";
 
     private boolean enable = true;
 

@@ -1,8 +1,8 @@
 package com.quan.framework.spring.controller;
 
-import com.quan.framework.spring.mvc.crypto.annotation.Decrypt;
-import com.quan.framework.spring.mvc.crypto.annotation.Encrypt;
-import com.quan.framework.spring.mvc.crypto.annotation.RSADecrypt;
+import com.quan.boot.mvc.crypto.annotation.Decrypt;
+import com.quan.boot.mvc.crypto.annotation.Encrypt;
+import com.quan.boot.mvc.crypto.annotation.RSADecrypt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

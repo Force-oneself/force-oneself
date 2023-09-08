@@ -1,5 +1,6 @@
 package com.quan.boot.mvc.config;
 
+import com.quan.boot.mvc.constant.PropConstant;
 import com.quan.boot.mvc.xss.XssProperties;
 import com.quan.boot.mvc.xss.XssRequestFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -20,7 +21,7 @@ import javax.servlet.ServletRequest;
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(ServletRequest.class)
 @EnableConfigurationProperties(XssProperties.class)
-@ConditionalOnProperty(prefix = "force.servlet.xss", name = "enable", matchIfMissing = true)
+@ConditionalOnProperty(prefix = PropConstant.XSS, name = "enable", matchIfMissing = true)
 public class XssAutoConfig {
 
     @Bean
