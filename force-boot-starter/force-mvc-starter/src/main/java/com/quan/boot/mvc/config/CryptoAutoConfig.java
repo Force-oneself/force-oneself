@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quan.boot.mvc.crypto.CryptoProperties;
 import com.quan.boot.mvc.crypto.decrypt.*;
 import com.quan.boot.mvc.crypto.encrypt.*;
+import com.quan.boot.mvc.crypto.rsa.RSAProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,10 +41,6 @@ public class CryptoAutoConfig {
             return new JsonBodyAdviceDecryptorHandler(objectMapper, decryptHandler);
         }
 
-        @Bean
-        public AdviceDecryptor undecryptAdviceDecryptor() {
-            return (holder, ciphertext) -> ciphertext;
-        }
     }
 
 
@@ -70,11 +67,6 @@ public class CryptoAutoConfig {
         @Bean
         public JsonBodyAdviceEncryptorHandler jsonBodyAdviceEncryptorHandler(ObjectMapper objectMapper, EncryptHandler encryptHandler) {
             return new JsonBodyAdviceEncryptorHandler(objectMapper, encryptHandler);
-        }
-
-        @Bean
-        public AdviceEncryptor unencryptAdviceEncryptor() {
-            return (holder, ciphertext) -> ciphertext;
         }
     }
 }

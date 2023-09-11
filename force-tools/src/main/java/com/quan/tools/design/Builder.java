@@ -37,7 +37,7 @@ public class Builder<T> {
      * 静态方法提供构造器
      *
      * @param instance 实例
-     * @return  建造者
+     * @return 建造者
      */
     public static <T> Builder<T> of(T instance) {
         return of(() -> instance);
@@ -47,31 +47,23 @@ public class Builder<T> {
      * 静态方法提供构造器
      *
      * @param instanceFactory 实例工厂
-     * @return  建造者
+     * @return 建造者
      */
     public static <T> Builder<T> of(Supplier<T> instanceFactory) {
         return new Builder<>(instanceFactory);
     }
 
 
-    public <R> Builder<T> with(BiConsumer<T, R> setter, R setBy) {
-        return this.with(ins -> true, setter, setBy);
-    }
-
     public <R> Builder<T> with(boolean isBuild, BiConsumer<T, R> setter, R setBy) {
         return isBuild ? this.with(setter, setBy) : this;
     }
 
-    public <R> Builder<T> with(Predicate<T> insChecker, BiConsumer<T, R> setter, R setBy) {
-        return this.with(insChecker, ins -> setter.accept(ins, setBy));
+    public <R> Builder<T> with(BiConsumer<T, R> setter, R setBy) {
+        return this.with(ins -> setter.accept(ins, setBy));
     }
 
-    public Builder<T> with(Predicate<T> insChecker, Consumer<T> insConsumer) {
-        setters = setters.andThen(ins -> {
-            if (insChecker.test(ins)) {
-                insConsumer.accept(ins);
-            }
-        });
+    public Builder<T> with(Consumer<T> insConsumer) {
+        setters = setters.andThen(insConsumer);
         return this;
     }
 

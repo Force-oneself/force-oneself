@@ -24,6 +24,11 @@ public interface PropConstant {
     String CRYPTO = MVC + ".crypto";
 
     /**
+     * RSA加解密配置
+     */
+    String RSA = CRYPTO + ".rsa";
+
+    /**
      * XSS
      */
     String XSS = MVC + ".xss";
@@ -42,4 +47,5 @@ public interface PropConstant {
      * 异常
      */
     String EXCEPTION = MVC + ".exception";
+
 }
