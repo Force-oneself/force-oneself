@@ -1,48 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>force-oneself</artifactId>
         <groupId>com.quan</groupId>
         <version>${revision}</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-
-    <artifactId>force-cloud</artifactId>
-
-    <description>Spring Cloud demo</description>
 
     <modules>
-        <module>force-cloud-alibaba</module>
-        <module>force-cloud-openfeign</module>
-        <module>force-cloud-gateway</module>
-        <module>force-cloud-parent</module>
+        <module>force-sharding</module>
+        <module>force-elasticsearch</module>
+        <module>force-mongo</module>
+        <module>force-redis</module>
+        <module>force-spring</module>
+        <module>force-document</module>
+        <module>force-demo</module>
+        <module>force-security</module>
+        <module>force-amqp</module>
+        <module>force-rocket</module>
+        <module>force-producer-core</module>
+        <module>force-generate</module>
     </modules>
 
+    <artifactId>force-spring-framework</artifactId>
+    <name>force-framework</name>
+    <description>框架代码演示模块的内容放入此工程中</description>
+    <packaging>pom</packaging>
+
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <druid-boot.version>1.2.5</druid-boot.version>
         <jasypt-boot.version>3.0.1</jasypt-boot.version>
-        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
-        <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
-        <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
-        <maven-plugin.version>3.8.1</maven-plugin.version>
+        <spring-boot.version>2.2.13.RELEASE</spring-boot.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>com.quan</groupId>
+            <artifactId>force-common</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- 配置隐秘信息加密 -->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
         </dependency>
         <!-- Aop支持 -->
         <dependency>
@@ -53,36 +64,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- 配置隐秘信息加密 -->
-        <dependency>
-            <groupId>com.github.ulisesbocchio</groupId>
-            <artifactId>jasypt-spring-boot-starter</artifactId>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -94,6 +85,11 @@
                 <groupId>com.github.ulisesbocchio</groupId>
                 <artifactId>jasypt-spring-boot-starter</artifactId>
                 <version>${jasypt-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-boot.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -111,6 +107,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
             </plugin>
             <!-- java编译插件 -->
             <plugin>
@@ -125,4 +122,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
