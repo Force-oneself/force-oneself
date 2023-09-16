@@ -1,12 +1,12 @@
-package com.quan.demo.framework.desensitization;
+package com.quan.boot.mvc.desensitization;
 
 import com.fasterxml.jackson.databind.AnnotationIntrospector;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.lang.NonNull;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 /**
@@ -24,7 +24,7 @@ public class DesensitizationPostProcessor implements BeanPostProcessor {
     }
 
     @Override
-    public Object postProcessAfterInitialization(@Nonnull Object bean, @Nonnull String beanName) throws BeansException {
+    public Object postProcessAfterInitialization(@NonNull Object bean, @NonNull String beanName) throws BeansException {
         if (!(bean instanceof ObjectMapper)) {
             return bean;
         }

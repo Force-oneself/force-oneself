@@ -1,6 +1,4 @@
-package com.quan.demo.framework.desensitization.annotation;
-
-import com.quan.demo.framework.desensitization.Operation;
+package com.quan.boot.mvc.desensitization;
 
 import java.lang.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.quan.demo.framework.desensitization;
+package com.quan.boot.mvc.desensitization;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JavaType;
@@ -42,11 +42,9 @@ public class DesensitizationSerializer extends StdScalarSerializer<Object> {
 
     @Override
     public void serialize(Object value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        String content;
-        if (Objects.isNull(operation)) {
-            content = DesensitizationEnum.NO_MASK.operation().mask((String) value, null);
-        } else {
-            content = operation.mask((String) value, null);
+        String content = (String) value;
+        if (Objects.nonNull(operation)) {
+            content = operation.mask(content, null);
         }
         gen.writeString(content);
     }
@@ -61,8 +59,4 @@ public class DesensitizationSerializer extends StdScalarSerializer<Object> {
         return this.createSchemaNode("string", true);
     }
 
-    @Override
-    public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException {
-        this.visitStringFormat(visitor, typeHint);
-    }
 }

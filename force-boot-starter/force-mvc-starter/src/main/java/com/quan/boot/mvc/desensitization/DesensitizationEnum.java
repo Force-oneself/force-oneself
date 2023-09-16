@@ -1,4 +1,4 @@
-package com.quan.demo.framework.desensitization;
+package com.quan.boot.mvc.desensitization;
 
 import org.springframework.util.StringUtils;
 

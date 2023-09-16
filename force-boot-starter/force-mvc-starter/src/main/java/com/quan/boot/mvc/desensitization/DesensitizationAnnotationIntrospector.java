@@ -1,8 +1,7 @@
-package com.quan.demo.framework.desensitization;
+package com.quan.boot.mvc.desensitization;
 
 import com.fasterxml.jackson.databind.introspect.Annotated;
 import com.fasterxml.jackson.databind.introspect.NopAnnotationIntrospector;
-import com.quan.demo.framework.desensitization.annotation.Desensitization;
 
 import java.util.List;
 import java.util.Map;

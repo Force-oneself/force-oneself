@@ -1,8 +1,8 @@
-package com.quan.demo.framework.desensitization.config;
+package com.quan.boot.mvc.config;
 
-import com.quan.demo.framework.desensitization.DesensitizationPostProcessor;
-import com.quan.demo.framework.desensitization.Operation;
-import com.quan.demo.framework.desensitization.annotation.Desensitization;
+import com.quan.boot.mvc.desensitization.DesensitizationPostProcessor;
+import com.quan.boot.mvc.desensitization.Operation;
+import com.quan.boot.mvc.desensitization.Desensitization;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass({Jackson2ObjectMapperBuilder.class})
-public class DesensitizationAutoConfiguration {
+public class DesensitizationAutoConfig {
 
     @Bean
     @ConditionalOnMissingBean
