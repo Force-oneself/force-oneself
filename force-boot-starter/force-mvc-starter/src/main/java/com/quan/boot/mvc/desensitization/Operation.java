@@ -16,6 +16,6 @@ public interface Operation {
      * @param maskChar maskChar
      * @return  /
      */
-    String mask(String content, String maskChar);
+    String mask(String content);
 
 }

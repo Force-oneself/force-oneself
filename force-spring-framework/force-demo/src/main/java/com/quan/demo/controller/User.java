@@ -1,7 +1,5 @@
 package com.quan.demo.controller;
 
-import com.quan.demo.framework.desensitization.annotation.Desensitization;
-import com.quan.demo.framework.desensitization.config.DesensitizationAutoConfiguration;
 import com.quan.demo.jackson.BigDecimalFormat;
 
 import javax.validation.constraints.NotBlank;
@@ -19,7 +17,6 @@ public class User {
     private Long id;
 
     @NotBlank(message = "ddd")
-    @Desensitization(ops = DesensitizationAutoConfiguration.SimpleOperation.class)
     private String username;
 
     @BigDecimalFormat(value = "#0.0")

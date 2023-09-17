@@ -18,7 +18,7 @@ public @interface Desensitization {
     class NoOperation implements Operation {
 
         @Override
-        public String mask(String content, String maskChar) {
+        public String mask(String content) {
             return content;
         }
     }

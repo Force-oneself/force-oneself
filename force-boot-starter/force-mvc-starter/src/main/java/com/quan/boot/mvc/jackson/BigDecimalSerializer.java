@@ -1,4 +1,4 @@
-package com.quan.demo.jackson;
+package com.quan.boot.mvc.jackson;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanProperty;

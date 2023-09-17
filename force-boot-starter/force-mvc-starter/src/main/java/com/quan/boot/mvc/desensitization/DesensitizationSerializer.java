@@ -44,7 +44,7 @@ public class DesensitizationSerializer extends StdScalarSerializer<Object> {
     public void serialize(Object value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         String content = (String) value;
         if (Objects.nonNull(operation)) {
-            content = operation.mask(content, null);
+            content = operation.mask(content);
         }
         gen.writeString(content);
     }
