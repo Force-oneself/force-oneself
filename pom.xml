@@ -13,13 +13,10 @@
         <module>force-common</module>
         <module>force-spring-framework</module>
         <module>force-ordinary</module>
-        <module>force-wx</module>
-        <module>force-reactive</module>
-<!--        <module>force-jdk</module>-->
         <module>force-leetcode</module>
         <module>force-cloud</module>
         <module>force-boot-starter</module>
-        <module>force-tools</module>
+        <module>force-core</module>
     </modules>
 
     <properties>

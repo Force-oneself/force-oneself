@@ -1,12 +1,10 @@
 package com.quan.reactive.reactor.demo;
 
-import reactor.core.CoreSubscriber;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * ProjectReactor

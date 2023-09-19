@@ -11,14 +11,12 @@
     <packaging>pom</packaging>
 
     <artifactId>force-cloud</artifactId>
-
     <description>Spring Cloud demo</description>
 
     <modules>
         <module>force-cloud-alibaba</module>
         <module>force-cloud-openfeign</module>
         <module>force-cloud-gateway</module>
-        <module>force-cloud-parent</module>
     </modules>
 
     <properties>
@@ -111,6 +109,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
             </plugin>
             <!-- java编译插件 -->
             <plugin>
