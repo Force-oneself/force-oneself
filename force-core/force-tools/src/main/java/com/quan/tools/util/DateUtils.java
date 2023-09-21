@@ -1,7 +1,8 @@
-package com.quan.tools;
+package com.quan.tools.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.quan.tools.log.Logger;
+import com.quan.tools.log.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,6 +30,7 @@ public class DateUtils {
 
     public static final String PATTERN_DATETIME = "yyyy-MM-dd HH:mm:ss";
     public static final String PATTERN_DATETIME_MINI = "yyyyMMddHHmmss";
+    public static final String PATTERN_DATE_MINI = "yyyyMMdd";
     public static final String PATTERN_DATE = "yyyy-MM-dd";
     public static final String PATTERN_TIME = "HH:mm:ss";
     public static final String PATTERN_YEAR = "yyyy";
@@ -373,38 +375,8 @@ public class DateUtils {
      * @param date 时间
      * @return 格式化后的时间
      */
-    public static String formatDateTime(Date date) {
+    public static String format(Date date) {
         return DATETIME_FORMAT.format(date);
-    }
-
-    /**
-     * 日期时间格式化
-     *
-     * @param date 时间
-     * @return 格式化后的时间
-     */
-    public static String formatDateTimeMini(Date date) {
-        return DATETIME_MINI_FORMAT.format(date);
-    }
-
-    /**
-     * 日期格式化
-     *
-     * @param date 时间
-     * @return 格式化后的时间
-     */
-    public static String formatDate(Date date) {
-        return DATE_FORMAT.format(date);
-    }
-
-    /**
-     * 时间格式化
-     *
-     * @param date 时间
-     * @return 格式化后的时间
-     */
-    public static String formatTime(Date date) {
-        return TIME_FORMAT.format(date);
     }
 
     /**
@@ -424,38 +396,8 @@ public class DateUtils {
      * @param temporal 时间
      * @return 格式化后的时间
      */
-    public static String formatDateTime(TemporalAccessor temporal) {
+    public static String format(TemporalAccessor temporal) {
         return DATETIME_FORMATTER.format(temporal);
-    }
-
-    /**
-     * java8 日期时间格式化
-     *
-     * @param temporal 时间
-     * @return 格式化后的时间
-     */
-    public static String formatDateTimeMini(TemporalAccessor temporal) {
-        return DATETIME_MINI_FORMATTER.format(temporal);
-    }
-
-    /**
-     * java8 日期时间格式化
-     *
-     * @param temporal 时间
-     * @return 格式化后的时间
-     */
-    public static String formatDate(TemporalAccessor temporal) {
-        return DATE_FORMATTER.format(temporal);
-    }
-
-    /**
-     * java8 时间格式化
-     *
-     * @param temporal 时间
-     * @return 格式化后的时间
-     */
-    public static String formatTime(TemporalAccessor temporal) {
-        return TIME_FORMATTER.format(temporal);
     }
 
     /**
@@ -680,41 +622,6 @@ public class DateUtils {
             return String.format("%s天%s小时%s分%s秒", days, hours, minutes, second);
         } else {
             return String.format("%s小时%s分%s秒", hours, minutes, second);
-        }
-    }
-
-    /**
-     * 获取今天的日期
-     *
-     * @return 时间
-     */
-    public static String today() {
-        return format(new Date(), "yyyyMMdd");
-    }
-
-    /**
-     * 获取今天的时间
-     *
-     * @return 时间
-     */
-    public static String time() {
-        return format(new Date(), PATTERN_DATETIME_MINI);
-    }
-
-    /**
-     * 获取今天的小时数
-     *
-     * @return 时间
-     */
-    public static Integer hour() {
-        String str = format(now(), "HH");
-        if (str == null) {
-            return -1;
-        }
-        try {
-            return Integer.valueOf(str);
-        } catch (final NumberFormatException nfe) {
-            return -1;
         }
     }
 

@@ -5,8 +5,7 @@ import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.quan.tools.DateUtils;
-import com.quan.tools.JsonUtils;
+import com.quan.tools.util.DateUtils;
 
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -44,7 +43,6 @@ public class JacksonObjectMapper extends ObjectMapper {
         // 允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）
         super.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true);
         super.configure(JsonReadFeature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature(), true);
-        super.findAndRegisterModules();
         //失败处理
         super.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         super.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

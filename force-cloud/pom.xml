@@ -14,6 +14,7 @@
     <description>Spring Cloud demo</description>
 
     <modules>
+        <module>force-cloud-commons</module>
         <module>force-cloud-alibaba</module>
         <module>force-cloud-openfeign</module>
         <module>force-cloud-gateway</module>

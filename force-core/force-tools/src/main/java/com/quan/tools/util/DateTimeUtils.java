@@ -1,4 +1,6 @@
-package com.quan.tools;
+package com.quan.tools.util;
+
+import com.quan.tools.util.DateUtils;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;

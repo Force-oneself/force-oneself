@@ -1,7 +1,7 @@
-package com.quan.tools;
+package com.quan.tools.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.quan.tools.log.Logger;
+import com.quan.tools.log.LoggerFactory;
 
 /**
  * StringUtils
@@ -91,18 +91,15 @@ public class StringUtils {
         if (!hasLength(str)) {
             return str;
         }
-
         int beginIndex = 0;
         int endIndex = str.length() - 1;
 
         while (beginIndex <= endIndex && Character.isWhitespace(str.charAt(beginIndex))) {
             beginIndex++;
         }
-
         while (endIndex > beginIndex && Character.isWhitespace(str.charAt(endIndex))) {
             endIndex--;
         }
-
         return str.substring(beginIndex, endIndex + 1);
     }
 

@@ -20,15 +20,19 @@ public class Exceptions {
     public static RuntimeException unchecked(Throwable e) {
         if (e instanceof Error) {
             throw (Error) e;
-        } else if (e instanceof IllegalAccessException ||
-                e instanceof IllegalArgumentException ||
-                e instanceof NoSuchMethodException) {
+        }
+        if (e instanceof IllegalAccessException
+                || e instanceof IllegalArgumentException
+                || e instanceof NoSuchMethodException) {
             return new IllegalArgumentException(e);
-        } else if (e instanceof InvocationTargetException) {
+        }
+        if (e instanceof InvocationTargetException) {
             return new RuntimeException(((InvocationTargetException) e).getTargetException());
-        } else if (e instanceof RuntimeException) {
+        }
+        if (e instanceof RuntimeException) {
             return (RuntimeException) e;
-        } else if (e instanceof InterruptedException) {
+        }
+        if (e instanceof InterruptedException) {
             Thread.currentThread().interrupt();
         }
         return Exceptions.runtime(e);

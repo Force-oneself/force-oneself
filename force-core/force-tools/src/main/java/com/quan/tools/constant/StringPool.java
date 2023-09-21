@@ -8,6 +8,7 @@ package com.quan.tools.constant;
  */
 public interface StringPool {
 
+    String EMPTY = "";
     String AMPERSAND = "&";
     String AND = "and";
     String AT = "@";
@@ -19,19 +20,23 @@ public interface StringPool {
     String DASH = "-";
     String DOLLAR = "$";
     String DOT = ".";
-    String DOTDOT = "..";
+    String DOT_DOT = "..";
     String DOT_CLASS = ".class";
     String DOT_JAVA = ".java";
     String DOT_XML = ".xml";
-    String EMPTY = "";
     String EQUALS = "=";
     String FALSE = "false";
     String SLASH = "/";
     String HASH = "#";
     String HAT = "^";
     String LEFT_BRACE = "{";
+    String RIGHT_BRACE = "}";
     String LEFT_BRACKET = "(";
+    String RIGHT_BRACKET = ")";
     String LEFT_CHEV = "<";
+    String GREATER_THAN = ">";
+    String LEFT_SQ_BRACKET = "[";
+    String RIGHT_SQ_BRACKET = "]";
     String DOT_NEWLINE = ",\n";
     String NEWLINE = "\n";
     String N = "n";
@@ -47,16 +52,12 @@ public interface StringPool {
     String QUOTE = "\"";
     String RETURN = "\r";
     String TAB = "\t";
-    String RIGHT_BRACE = "}";
-    String RIGHT_BRACKET = ")";
-    String RIGHT_CHEV = ">";
+
     String SEMICOLON = ";";
     String SINGLE_QUOTE = "'";
     String BACKTICK = "`";
     String SPACE = " ";
     String TILDA = "~";
-    String LEFT_SQ_BRACKET = "[";
-    String RIGHT_SQ_BRACKET = "]";
     String TRUE = "true";
     String UNDERSCORE = "_";
     String UTF_8 = "UTF-8";
