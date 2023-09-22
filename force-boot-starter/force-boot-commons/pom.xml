@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.quan</groupId>
-        <artifactId>force-cloud</artifactId>
+        <artifactId>force-boot-starter</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>force-cloud-commons</artifactId>
-    <description>Spring Cloud 通用依赖</description>
+    <artifactId>force-boot-commons</artifactId>
+    <description>Spring Boot 通用依赖</description>
 
     <dependencies>
         <!-- 自动配置  -->
@@ -33,16 +33,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <scope>compile</scope>
-        </dependency>
-        <!-- Alibaba配置中心  -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-        <!-- Alibaba注册中心  -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
         <!-- 测试  -->
         <dependency>

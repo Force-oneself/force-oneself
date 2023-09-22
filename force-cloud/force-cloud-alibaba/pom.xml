@@ -17,9 +17,11 @@
         <module>force-cloud-sentinel</module>
     </modules>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.quan</groupId>
+            <artifactId>force-cloud-commons</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
