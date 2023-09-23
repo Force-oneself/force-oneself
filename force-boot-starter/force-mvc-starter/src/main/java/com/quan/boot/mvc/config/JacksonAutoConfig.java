@@ -1,10 +1,9 @@
-package com.quan.boot.mvc.jackson;
+package com.quan.boot.mvc.config;
 
 import com.fasterxml.jackson.core.json.JsonReadFeature;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.*;
+import com.quan.boot.mvc.jackson.BigDecimalModule;
+import com.quan.boot.mvc.jackson.Java8TimeModule;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +21,7 @@ import java.util.TimeZone;
  * @author Force-oneself
  * @date 2023-01-31
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class JacksonAutoConfig {
 
     @Bean
@@ -39,8 +38,6 @@ public class JacksonAutoConfig {
         ObjectMapper objectMapper = builder.createXmlMapper(false).build();
         //设置地点为中国
         objectMapper.setLocale(Locale.CHINA);
-        //去掉默认的时间戳格式
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         //设置为中国上海时区
         objectMapper.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
         //序列化时，日期的统一格式

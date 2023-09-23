@@ -1,4 +1,4 @@
-package com.quan.tools;
+package com.quan.tools.exception;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;

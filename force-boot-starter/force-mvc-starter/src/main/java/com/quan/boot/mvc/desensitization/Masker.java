@@ -7,7 +7,7 @@ package com.quan.boot.mvc.desensitization;
  * @date 2022-07-03
  */
 @FunctionalInterface
-public interface Operation {
+public interface Masker {
 
     /**
      * 脱敏

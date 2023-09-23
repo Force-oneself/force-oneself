@@ -13,13 +13,18 @@ import java.lang.annotation.*;
 @Documented
 public @interface Desensitization {
 
-    Class<? extends Operation> ops() default NoOperation.class;
+    /**
+     * 脱敏类型
+     * @see DesensitizationType
+     * @return /
+     */
+    String type();
 
-    class NoOperation implements Operation {
+    /**
+     * 是否内置类型
+     *
+     * @return /
+     */
+    boolean inner() default true;
 
-        @Override
-        public String mask(String content) {
-            return content;
-        }
-    }
 }

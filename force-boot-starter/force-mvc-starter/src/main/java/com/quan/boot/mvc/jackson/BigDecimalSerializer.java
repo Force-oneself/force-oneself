@@ -45,11 +45,8 @@ public class BigDecimalSerializer extends JsonSerializer<BigDecimal> implements 
         if (bigDecimalFormat == null) {
             return INSTANCE;
         }
-        BigDecimalSerializer bigDecimalSerializer = new BigDecimalSerializer();
-        bigDecimalSerializer.setFormat(bigDecimalFormat.value());
-        return bigDecimalSerializer;
-
-
+        this.format = bigDecimalFormat.value();
+        return this;
     }
 
     @Override
