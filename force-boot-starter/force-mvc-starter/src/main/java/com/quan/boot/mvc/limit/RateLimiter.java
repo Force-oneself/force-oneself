@@ -1,4 +1,4 @@
-package com.quan.demo.limit;
+package com.quan.boot.mvc.limit;
 
 /**
  * 限流器

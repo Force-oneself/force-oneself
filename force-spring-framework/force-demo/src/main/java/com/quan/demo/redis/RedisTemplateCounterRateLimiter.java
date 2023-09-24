@@ -1,4 +1,4 @@
-package com.quan.demo.limit.redis;
+package com.quan.demo.redis;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;

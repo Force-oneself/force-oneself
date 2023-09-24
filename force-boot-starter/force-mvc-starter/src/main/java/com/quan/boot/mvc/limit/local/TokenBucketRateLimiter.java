@@ -1,4 +1,4 @@
-package com.quan.demo.limit.local;
+package com.quan.boot.mvc.limit.local;
 
 import com.google.common.util.concurrent.RateLimiter;
 
@@ -9,7 +9,7 @@ import com.google.common.util.concurrent.RateLimiter;
  * @date 2023-01-08
  */
 @SuppressWarnings(value = "all")
-public class TokenBucketRateLimiter implements com.quan.demo.limit.RateLimiter {
+public class TokenBucketRateLimiter implements com.quan.boot.mvc.limit.RateLimiter {
 
     private final RateLimiter rateLimiter;
 

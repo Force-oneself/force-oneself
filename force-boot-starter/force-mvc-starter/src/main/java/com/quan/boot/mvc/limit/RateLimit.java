@@ -1,4 +1,4 @@
-package com.quan.demo.limit;
+package com.quan.boot.mvc.limit;
 
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;

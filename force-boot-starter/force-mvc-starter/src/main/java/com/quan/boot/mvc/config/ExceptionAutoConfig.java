@@ -35,7 +35,7 @@ public class ExceptionAutoConfig {
         registration.setFilter(new ExceptionFilter(handlerExceptionResolver));
         registration.addUrlPatterns("/*");
         registration.setName("exceptionFilter");
-        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 10);
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 50);
         return registration;
     }
 }

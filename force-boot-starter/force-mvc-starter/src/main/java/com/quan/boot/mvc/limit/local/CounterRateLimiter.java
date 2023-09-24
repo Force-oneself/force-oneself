@@ -1,6 +1,7 @@
-package com.quan.demo.limit.local;
+package com.quan.boot.mvc.limit.local;
 
-import com.quan.demo.limit.RateLimiter;
+import com.quan.boot.mvc.limit.RateLimiter;
+import jdk.internal.util.xml.impl.Pair;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -20,7 +21,7 @@ public class CounterRateLimiter implements RateLimiter {
     /**
      * 计数器
      */
-    private final AtomicInteger counter = new AtomicInteger();
+    private final AtomicInteger counter = new AtomicInteger(0);
 
     /**
      * 统计窗口时间(毫秒)
@@ -30,20 +31,20 @@ public class CounterRateLimiter implements RateLimiter {
     /**
      * 阈值
      */
-    private final int capacity;
+    private final long capacity;
 
 
-    public CounterRateLimiter(long time, int capacity) {
+    public CounterRateLimiter(long time, long capacity) {
         this.time = time;
         this.capacity = capacity;
     }
 
     @Override
     public synchronized boolean rateLimit() {
-        if (System.currentTimeMillis() - start > time) {
+        if (System.currentTimeMillis() - start >= time) {
             start = System.currentTimeMillis();
             counter.set(0);
         }
-        return counter.getAndIncrement() <= capacity;
+        return counter.incrementAndGet() <= capacity;
     }
 }

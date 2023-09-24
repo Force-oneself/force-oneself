@@ -9,6 +9,10 @@
     </parent>
     <artifactId>force-mvc-starter</artifactId>
 
+    <properties>
+        <guava.version>30.1.1-jre</guava.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.quan</groupId>
@@ -23,6 +27,13 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.7.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

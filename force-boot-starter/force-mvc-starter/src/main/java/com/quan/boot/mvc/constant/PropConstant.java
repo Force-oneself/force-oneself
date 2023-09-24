@@ -48,4 +48,9 @@ public interface PropConstant {
      */
     String EXCEPTION = MVC + ".exception";
 
+    /**
+     * 限流
+     */
+    String LIMIT = MVC + ".limit";
+
 }

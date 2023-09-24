@@ -1,6 +1,6 @@
-package com.quan.demo.limit.redis;
+package com.quan.demo.redis;
 
-import com.quan.demo.limit.RateLimiter;
+import com.quan.boot.mvc.limit.RateLimiter;
 
 /**
  * RedisCounterRateLimiter

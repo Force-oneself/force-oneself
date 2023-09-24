@@ -31,7 +31,7 @@ public class XssAutoConfig {
         registration.setFilter(new XssRequestFilter(properties));
         registration.addUrlPatterns("/*");
         registration.setName("xssRequestFilter");
-        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 50);
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 150);
         return registration;
     }
 }

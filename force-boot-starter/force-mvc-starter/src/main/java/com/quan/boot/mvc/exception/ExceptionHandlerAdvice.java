@@ -26,8 +26,8 @@ public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public Object throwable(HttpServletRequest request, HttpServletResponse response, Throwable throwable, HandlerMethod handlerMethod) {
+    public Object throwable(HttpServletRequest request, HttpServletResponse response, Throwable throwable) {
         log.error("服务异常", throwable);
-        return R.fail("请求错误");
+        return R.fail(throwable.getMessage());
     }
 }

@@ -5,4 +5,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration= \
   com.quan.boot.mvc.config.CryptoAutoConfig, \
   com.quan.boot.mvc.config.DesensitizationAutoConfig, \
   com.quan.boot.mvc.config.JacksonAutoConfig, \
+  com.quan.boot.mvc.config.RateLimitAutoConfig, \
   com.quan.boot.mvc.config.XssAutoConfig

@@ -1,6 +1,5 @@
 package com.quan.demo.controller;
 
-import com.quan.boot.mvc.config.DesensitizationAutoConfig;
 import com.quan.boot.mvc.desensitization.Desensitization;
 import com.quan.boot.mvc.desensitization.DesensitizationType;
 import com.quan.boot.mvc.jackson.BigDecimalFormat;
