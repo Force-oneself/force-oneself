@@ -1,5 +1,7 @@
 package com.quan.boot.mvc.limit;
 
+import com.google.common.base.Objects;
+
 /**
  * @author Force-oneself
  * @date 2023-09-24
@@ -56,5 +58,18 @@ public class RateLimitPath {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RateLimitPath that = (RateLimitPath) o;
+        return time == that.time && flow == that.flow && Objects.equal(path, that.path) && Objects.equal(key, that.key);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(path, key, time, flow);
     }
 }

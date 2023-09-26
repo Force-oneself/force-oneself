@@ -1,0 +1,12 @@
+force:
+  mvc:
+    limit:
+      paths:
+        - path: /limit
+          key: limit
+          time: 1000
+          flow: 1
+        - path: /limit/2
+          key: limit/2
+          time: 2000
+          flow: 10

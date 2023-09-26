@@ -54,12 +54,3 @@ jasypt:
     # 加密算法设置 3.0.0 以后
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
-
-force:
-  mvc:
-    limit:
-      paths:
-        'limit':
-          key: limit
-          time: 1000
-          flow: 1

@@ -1,4 +1,4 @@
-package com.quan.demo.redis;
+package com.quan.boot.mvc.limit.redis;
 
 import com.quan.boot.mvc.limit.RateLimiter;
 

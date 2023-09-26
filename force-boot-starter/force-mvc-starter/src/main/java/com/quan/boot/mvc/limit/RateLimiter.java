@@ -12,7 +12,7 @@ public interface RateLimiter {
     /**
      * 限流控制
      *
-     * @return 是否被限制
+     * @return 是否通过
      */
     boolean rateLimit();
 }

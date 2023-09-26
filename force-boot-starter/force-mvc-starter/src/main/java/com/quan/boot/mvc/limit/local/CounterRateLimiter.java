@@ -41,8 +41,9 @@ public class CounterRateLimiter implements RateLimiter {
 
     @Override
     public synchronized boolean rateLimit() {
-        if (System.currentTimeMillis() - start >= time) {
-            start = System.currentTimeMillis();
+        long current = System.currentTimeMillis();
+        if (current - start >= time) {
+            start = current;
             counter.set(0);
         }
         return counter.incrementAndGet() <= capacity;
