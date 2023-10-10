@@ -21,12 +21,12 @@ public class RateLimitPath {
     /**
      * 限流时间段，单位ms
      */
-    private long time;
+    private long time =  1000;
 
     /**
      * 单位限流数量
      */
-    private long flow;
+    private int capacity;
 
     public String getPath() {
         return path;
@@ -44,12 +44,12 @@ public class RateLimitPath {
         this.time = time;
     }
 
-    public long getFlow() {
-        return flow;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setFlow(long flow) {
-        this.flow = flow;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public String getKey() {
@@ -65,11 +65,11 @@ public class RateLimitPath {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RateLimitPath that = (RateLimitPath) o;
-        return time == that.time && flow == that.flow && Objects.equal(path, that.path) && Objects.equal(key, that.key);
+        return time == that.time && capacity == that.capacity && Objects.equal(path, that.path) && Objects.equal(key, that.key);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(path, key, time, flow);
+        return Objects.hashCode(path, key, time, capacity);
     }
 }

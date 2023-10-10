@@ -33,9 +33,9 @@ public class LeakyBucketRateLimiter implements RateLimiter {
      */
     private long receivedTime;
 
-    public LeakyBucketRateLimiter(int capacity, int outRate) {
-        this.capacity = capacity;
+    public LeakyBucketRateLimiter(int outRate, int capacity) {
         this.outRate = outRate;
+        this.capacity = capacity;
     }
 
     @Override

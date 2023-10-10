@@ -1,6 +1,10 @@
 package com.quan.boot.mvc.limit;
 
 import com.quan.boot.mvc.config.RateLimitAutoConfig;
+import com.quan.boot.mvc.limit.local.CounterRateLimiter;
+import com.quan.boot.mvc.limit.local.LeakyBucketRateLimiter;
+import com.quan.boot.mvc.limit.local.SlidingWindowRateLimiter;
+import com.quan.boot.mvc.limit.local.TokenBucketRateLimiter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +30,42 @@ public class RateLimitTest {
     private MockMvc mvc;
 
     @Test
-    public void rateLimit() throws Exception {
+    public void mvcLimit() throws Exception {
+        start("/limit/lsw");
+        start("/limit/lc");
+        start("/limit/llb");
+        start("/limit/ltb");
+    }
+
+    @Test
+    public void limit() throws InterruptedException {
+//        start(new TokenBucketRateLimiter(2));
+        start(new LeakyBucketRateLimiter(5, 1));
+//        start(new SlidingWindowRateLimiter(1000, 100));
+//        start(new CounterRateLimiter(1000, 100));
+    }
+
+    private static void start(RateLimiter r) throws InterruptedException {
+        for (int i = 0; i < 20; i++) {
+            new Thread(() -> {
+                for (int j = 0; j < 10; j++) {
+//                        Thread.sleep(200);
+                    if (r.rateLimit()) {
+                        System.out.println("成功");
+                    }
+                }
+            }).start();
+        }
+        Thread.currentThread().join();
+    }
+
+    private void start(String path) throws InterruptedException {
         for (int i = 0; i < 20; i++) {
             new Thread(() -> {
                 for (int j = 0; j < 10; j++) {
                     try {
                         Thread.sleep(200);
-                        mvc.perform(get("/limit").accept(MediaType.APPLICATION_JSON))
+                        mvc.perform(get(path).accept(MediaType.APPLICATION_JSON))
                                 .andExpect(result -> System.out.println(result.getResponse().getContentAsString()));
                     } catch (Exception ignore) {
                         System.err.println("限流");

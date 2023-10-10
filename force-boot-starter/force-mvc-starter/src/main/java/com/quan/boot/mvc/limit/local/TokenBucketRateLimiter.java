@@ -13,7 +13,7 @@ public class TokenBucketRateLimiter implements com.quan.boot.mvc.limit.RateLimit
 
     private final RateLimiter rateLimiter;
 
-    public TokenBucketRateLimiter(int capacity) {
+    public TokenBucketRateLimiter(double capacity) {
         this.rateLimiter = RateLimiter.create(capacity);
     }
 

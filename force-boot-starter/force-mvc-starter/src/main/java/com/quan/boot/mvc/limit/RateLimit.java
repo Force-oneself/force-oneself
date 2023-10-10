@@ -32,6 +32,6 @@ public @interface RateLimit {
      *
      * @return 流量
      */
-    long flow() default 100;
+    long capacity() default 100;
 
 }

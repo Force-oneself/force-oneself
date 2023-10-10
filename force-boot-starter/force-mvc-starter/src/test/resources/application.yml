@@ -2,11 +2,23 @@ force:
   mvc:
     limit:
       paths:
-        - path: /limit
-          key: limit
+        # 计数统计
+        - path: /limit/lc
+          key: local-counter
           time: 1000
-          flow: 1
-        - path: /limit/2
-          key: limit/2
-          time: 2000
-          flow: 10
+          capacity: 2
+        # 滑动窗口
+        - path: /limit/lsw
+          key: local-sliding-window
+          time: 1000
+          capacity: 2
+        # 漏桶
+        - path: /limit/llb
+          key: local-leaky-bucket
+          time: 1000
+          capacity: 2
+        # 令牌桶
+        - path: /limit/ltb
+          key: local-token-bucket
+          time: 1000
+          capacity: 2
