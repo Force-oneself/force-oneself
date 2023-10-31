@@ -53,16 +53,16 @@ public class DefaultRateLimitManager implements RateLimitManager {
         // 滑动窗口
         rateLimiterFactoryRoute.put(RateLimiterConstant.LOCAL_SLIDING_WINDOW, p -> new SlidingWindowRateLimiter(p.getTime(), p.getCapacity()));
         // 默认实现
-        rateLimiterFactoryRoute.put(RateLimiterConstant.LIMIT_DEFAULT, p -> new SlidingWindowRateLimiter(p.getTime(), p.getCapacity()));
+        rateLimiterFactoryRoute.put(RateLimiterConstant.DEFAULT_LIMIT, p -> new SlidingWindowRateLimiter(p.getTime(), p.getCapacity()));
     }
 
     @Override
     public boolean limit(String url) {
         return properties.getPaths()
                 .stream()
-                .filter(obj -> this.realPath(obj, url))
+                .filter(path -> this.realPath(path, url))
                 // 设置默认限流器
-                .peek(path -> path.setKey(StringUtils.hasText(path.getKey()) ? path.getKey() : RateLimiterConstant.LIMIT_DEFAULT))
+                .peek(path -> path.setKey(StringUtils.hasText(path.getKey()) ? path.getKey() : RateLimiterConstant.DEFAULT_LIMIT))
                 .map(path -> rateLimiters.computeIfAbsent(path, p -> {
                     Function<RateLimitPath, RateLimiter> routeLimiter = rateLimiterFactoryRoute.get(p.getKey());
                     return routeLimiter != null ? routeLimiter.apply(p) : null;

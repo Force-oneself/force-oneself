@@ -1,8 +1,6 @@
 package com.quan.framework.redis.redisson.lock;
 
-import javax.validation.constraints.NotNull;
 import java.util.concurrent.locks.Lock;
-import java.util.function.Consumer;
 
 /**
  * LockUtils

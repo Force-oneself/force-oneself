@@ -8,25 +8,15 @@ public class BusinessException extends RuntimeException {
 
     static final long serialVersionUID = -7034897190745766919L;
 
-    private String code;
+    protected int code;
 
-    private String msg;
-
-    public BusinessException() {
-        super();
+    public BusinessException(int code, String message) {
+        this(code, message, null);
     }
 
-    public BusinessException(String message) {
-        super(message);
-        this.msg = message;
-    }
-
-    public BusinessException(String message, Throwable cause) {
+    public BusinessException(int code, String message, Throwable cause) {
         super(message, cause);
-        this.msg = message;
+        this.code = code;
     }
 
-    public BusinessException(Throwable cause) {
-        super(cause);
-    }
 }

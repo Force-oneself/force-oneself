@@ -29,6 +29,6 @@ public interface RateLimiterConstant {
     /**
      * 默认
      */
-    String LIMIT_DEFAULT = "default";
+    String DEFAULT_LIMIT = "default";
 
 }
