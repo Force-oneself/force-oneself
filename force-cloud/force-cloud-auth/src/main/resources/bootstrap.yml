@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      server-addr: 172.20.10.7:8848
+      discovery:
+        namespace: public
+      config:
+        file-extension: yml

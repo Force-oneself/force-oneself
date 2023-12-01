@@ -18,6 +18,7 @@
         <module>force-cloud-alibaba</module>
         <module>force-cloud-openfeign</module>
         <module>force-cloud-gateway</module>
+        <module>force-cloud-auth</module>
     </modules>
 
     <properties>
