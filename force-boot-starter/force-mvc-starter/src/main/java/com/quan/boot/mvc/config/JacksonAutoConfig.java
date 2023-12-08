@@ -2,6 +2,7 @@ package com.quan.boot.mvc.config;
 
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.Module;
 import com.quan.boot.mvc.jackson.BigDecimalModule;
 import com.quan.boot.mvc.jackson.Java8TimeModule;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

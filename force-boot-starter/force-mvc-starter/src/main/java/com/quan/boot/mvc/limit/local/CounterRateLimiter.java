@@ -1,7 +1,6 @@
 package com.quan.boot.mvc.limit.local;
 
 import com.quan.boot.mvc.limit.RateLimiter;
-import jdk.internal.util.xml.impl.Pair;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

@@ -3,7 +3,6 @@ package com.quan.tools;
 
 import com.quan.tools.log.Logger;
 import com.quan.tools.log.LoggerFactory;
-import com.sun.istack.internal.Nullable;
 
 import java.io.*;
 import java.lang.reflect.Array;
@@ -457,7 +456,7 @@ public class Toolkit {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the object is not {@code null}
      */
-    public static void assertIsNull(@Nullable Object object, String message) {
+    public static void assertIsNull(Object object, String message) {
         if (object != null) {
             throw new IllegalArgumentException(message);
         }
@@ -475,7 +474,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the object is not {@code null}
      * @since 5.0
      */
-    public static void assertIsNull(@Nullable Object object, Supplier<String> messageSupplier) {
+    public static void assertIsNull(Object object, Supplier<String> messageSupplier) {
         if (object != null) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -489,7 +488,7 @@ public class Toolkit {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the object is {@code null}
      */
-    public static void assertNotNull(@Nullable Object object, String message) {
+    public static void assertNotNull(Object object, String message) {
         if (object == null) {
             throw new IllegalArgumentException(message);
         }
@@ -508,7 +507,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the object is {@code null}
      * @since 5.0
      */
-    public static void assertNotNull(@Nullable Object object, Supplier<String> messageSupplier) {
+    public static void assertNotNull(Object object, Supplier<String> messageSupplier) {
         if (object == null) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -523,7 +522,7 @@ public class Toolkit {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the text is empty
      */
-    public static void assertHasLength(@Nullable String text, String message) {
+    public static void assertHasLength(String text, String message) {
         if (!hasLength(text)) {
             throw new IllegalArgumentException(message);
         }
@@ -543,7 +542,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the text is empty
      * @since 5.0
      */
-    public static void assertHasLength(@Nullable String text, Supplier<String> messageSupplier) {
+    public static void assertHasLength(String text, Supplier<String> messageSupplier) {
         if (!hasLength(text)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -559,7 +558,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the text does not contain valid text content
      * @see #hasText
      */
-    public static void assertHasText(@Nullable String text, String message) {
+    public static void assertHasText(String text, String message) {
         if (!hasText(text)) {
             throw new IllegalArgumentException(message);
         }
@@ -580,7 +579,7 @@ public class Toolkit {
      * @see #hasText
      * @since 5.0
      */
-    public static void assertHasText(@Nullable String text, Supplier<String> messageSupplier) {
+    public static void assertHasText(String text, Supplier<String> messageSupplier) {
         if (!hasText(text)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -595,7 +594,7 @@ public class Toolkit {
      * @param message      the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the text contains the substring
      */
-    public static void assertDoesNotContain(@Nullable String textToSearch, String substring, String message) {
+    public static void assertDoesNotContain(String textToSearch, String substring, String message) {
         if (hasLength(textToSearch) && hasLength(substring) &&
                 textToSearch.contains(substring)) {
             throw new IllegalArgumentException(message);
@@ -615,7 +614,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the text contains the substring
      * @since 5.0
      */
-    public static void assertDoesNotContain(@Nullable String textToSearch, String substring, Supplier<String> messageSupplier) {
+    public static void assertDoesNotContain(String textToSearch, String substring, Supplier<String> messageSupplier) {
         if (hasLength(textToSearch) && hasLength(substring) &&
                 textToSearch.contains(substring)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
@@ -631,7 +630,7 @@ public class Toolkit {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the object array is {@code null} or contains no elements
      */
-    public static void assertNotEmpty(@Nullable Object[] array, String message) {
+    public static void assertNotEmpty(Object[] array, String message) {
         if (isEmpty(array)) {
             throw new IllegalArgumentException(message);
         }
@@ -650,7 +649,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the object array is {@code null} or contains no elements
      * @since 5.0
      */
-    public static void assertNotEmpty(@Nullable Object[] array, Supplier<String> messageSupplier) {
+    public static void assertNotEmpty(Object[] array, Supplier<String> messageSupplier) {
         if (isEmpty(array)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -665,7 +664,7 @@ public class Toolkit {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the object array contains a {@code null} element
      */
-    public static void assertNoNullElements(@Nullable Object[] array, String message) {
+    public static void assertNoNullElements(Object[] array, String message) {
         if (array != null) {
             for (Object element : array) {
                 if (element == null) {
@@ -688,7 +687,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the object array contains a {@code null} element
      * @since 5.0
      */
-    public static void assertNoNullElements(@Nullable Object[] array, Supplier<String> messageSupplier) {
+    public static void assertNoNullElements(Object[] array, Supplier<String> messageSupplier) {
         if (array != null) {
             for (Object element : array) {
                 if (element == null) {
@@ -708,7 +707,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the collection is {@code null} or
      *                                  contains no elements
      */
-    public static void assertNotEmpty(@Nullable Collection<?> collection, String message) {
+    public static void assertNotEmpty(Collection<?> collection, String message) {
         if (isEmpty(collection)) {
             throw new IllegalArgumentException(message);
         }
@@ -728,7 +727,7 @@ public class Toolkit {
      *                                  contains no elements
      * @since 5.0
      */
-    public static void assertNotEmpty(@Nullable Collection<?> collection, Supplier<String> messageSupplier) {
+    public static void assertNotEmpty(Collection<?> collection, Supplier<String> messageSupplier) {
         if (isEmpty(collection)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -744,7 +743,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the collection contains a {@code null} element
      * @since 5.2
      */
-    public static void assertNoNullElements(@Nullable Collection<?> collection, String message) {
+    public static void assertNoNullElements(Collection<?> collection, String message) {
         if (notNull(collection)) {
             for (Object element : collection) {
                 if (element == null) {
@@ -767,7 +766,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the collection contains a {@code null} element
      * @since 5.2
      */
-    public static void assertNoNullElements(@Nullable Collection<?> collection, Supplier<String> messageSupplier) {
+    public static void assertNoNullElements(Collection<?> collection, Supplier<String> messageSupplier) {
         if (collection != null) {
             for (Object element : collection) {
                 if (element == null) {
@@ -786,7 +785,7 @@ public class Toolkit {
      * @param message the exception message to use if the assertion fails
      * @throws IllegalArgumentException if the map is {@code null} or contains no entries
      */
-    public static void assertNotEmpty(@Nullable Map<?, ?> map, String message) {
+    public static void assertNotEmpty(Map<?, ?> map, String message) {
         if (isEmpty(map)) {
             throw new IllegalArgumentException(message);
         }
@@ -805,7 +804,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the map is {@code null} or contains no entries
      * @since 5.0
      */
-    public static void assertNotEmpty(@Nullable Map<?, ?> map, Supplier<String> messageSupplier) {
+    public static void assertNotEmpty(Map<?, ?> map, Supplier<String> messageSupplier) {
         if (isEmpty(map)) {
             throw new IllegalArgumentException(nullSafeGet(messageSupplier));
         }
@@ -824,7 +823,7 @@ public class Toolkit {
      *                of the offending object's type will be appended.
      * @throws IllegalArgumentException if the object is not an instance of type
      */
-    public static void assertIsInstanceOf(Class<?> type, @Nullable Object obj, String message) {
+    public static void assertIsInstanceOf(Class<?> type, Object obj, String message) {
         assertNotNull(type, "Type to check against must not be null");
         if (!type.isInstance(obj)) {
             instanceCheckFailed(type, obj, message);
@@ -844,7 +843,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the object is not an instance of type
      * @since 5.0
      */
-    public static void assertIsInstanceOf(Class<?> type, @Nullable Object obj, Supplier<String> messageSupplier) {
+    public static void assertIsInstanceOf(Class<?> type, Object obj, Supplier<String> messageSupplier) {
         assertNotNull(type, "Type to check against must not be null");
         if (!type.isInstance(obj)) {
             instanceCheckFailed(type, obj, nullSafeGet(messageSupplier));
@@ -859,7 +858,7 @@ public class Toolkit {
      * @param obj  the object to check
      * @throws IllegalArgumentException if the object is not an instance of type
      */
-    public static void assertIsInstanceOf(Class<?> type, @Nullable Object obj) {
+    public static void assertIsInstanceOf(Class<?> type, Object obj) {
         assertIsInstanceOf(type, obj, "");
     }
 
@@ -876,7 +875,7 @@ public class Toolkit {
      *                  offending sub type will be appended.
      * @throws IllegalArgumentException if the classes are not assignable
      */
-    public static void assertIsAssignable(Class<?> superType, @Nullable Class<?> subType, String message) {
+    public static void assertIsAssignable(Class<?> superType, Class<?> subType, String message) {
         assertNotNull(superType, "Super type to check against must not be null");
         if (subType == null || !superType.isAssignableFrom(subType)) {
             assignableCheckFailed(superType, subType, message);
@@ -896,7 +895,7 @@ public class Toolkit {
      * @throws IllegalArgumentException if the classes are not assignable
      * @since 5.0
      */
-    public static void assertIsAssignable(Class<?> superType, @Nullable Class<?> subType, Supplier<String> messageSupplier) {
+    public static void assertIsAssignable(Class<?> superType, Class<?> subType, Supplier<String> messageSupplier) {
         assertNotNull(superType, "Super type to check against must not be null");
         if (subType == null || !superType.isAssignableFrom(subType)) {
             assignableCheckFailed(superType, subType, nullSafeGet(messageSupplier));
@@ -916,7 +915,7 @@ public class Toolkit {
     }
 
 
-    private static void instanceCheckFailed(Class<?> type, @Nullable Object obj, @Nullable String msg) {
+    private static void instanceCheckFailed(Class<?> type, Object obj, String msg) {
         String className = (obj != null ? obj.getClass().getName() : "null");
         String result = "";
         boolean defaultMessage = true;
@@ -934,7 +933,7 @@ public class Toolkit {
         throw new IllegalArgumentException(result);
     }
 
-    private static void assignableCheckFailed(Class<?> superType, @Nullable Class<?> subType, @Nullable String msg) {
+    private static void assignableCheckFailed(Class<?> superType, Class<?> subType, String msg) {
         String result = "";
         boolean defaultMessage = true;
         if (hasLength(msg)) {
@@ -955,15 +954,14 @@ public class Toolkit {
         return (msg.endsWith(":") || msg.endsWith(";") || msg.endsWith(",") || msg.endsWith("."));
     }
 
-    private static String messageWithTypeName(String msg, @Nullable Object typeName) {
+    private static String messageWithTypeName(String msg, Object typeName) {
         return msg + (msg.endsWith(" ") ? "" : ": ") + typeName;
     }
 
-    @Nullable
-    private static String nullSafeGet(@Nullable Supplier<String> messageSupplier) {
+
+    private static String nullSafeGet(Supplier<String> messageSupplier) {
         return (messageSupplier != null ? messageSupplier.get() : null);
     }
-
 
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -979,7 +977,7 @@ public class Toolkit {
      * @return the new byte array that has been copied to (possibly empty)
      * @throws IOException in case of I/O errors
      */
-    public static byte[] copyToByteArray(@Nullable InputStream in) throws IOException {
+    public static byte[] copyToByteArray(InputStream in) throws IOException {
         if (in == null) {
             return new byte[0];
         }
@@ -998,7 +996,7 @@ public class Toolkit {
      * @return the String that has been copied to (possibly empty)
      * @throws IOException in case of I/O errors
      */
-    public static String copyToString(@Nullable InputStream in, Charset charset) throws IOException {
+    public static String copyToString(InputStream in, Charset charset) throws IOException {
         if (in == null) {
             return "";
         }
