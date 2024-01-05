@@ -29,11 +29,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.quan</groupId>
-            <artifactId>force-mvc-starter</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>${netty.version}</version>

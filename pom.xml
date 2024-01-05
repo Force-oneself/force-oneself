@@ -34,6 +34,11 @@
                 <artifactId>force-common</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.quan</groupId>
+                <artifactId>force-tools</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

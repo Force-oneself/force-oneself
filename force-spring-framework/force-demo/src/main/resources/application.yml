@@ -11,7 +11,7 @@ logging:
 ################### Mybatis config ###################
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: com.quan.*.entity
+#  type-aliases-package: com.quan.*.entity
 
 ################### Spring config begin ###################
 spring:

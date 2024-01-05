@@ -2,8 +2,8 @@ package com.quan.boot.mvc.crypto.encrypt;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quan.common.bean.R;
 import com.quan.boot.mvc.crypto.exception.CryptoException;
+import com.quan.tools.R;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;

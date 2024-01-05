@@ -11,7 +11,7 @@ import java.util.Properties;
  * @author Force-oneself
  * @date 2023-04-12
  */
-@Component
+//@Component
 public class SystemPrintApplicationRunner implements ApplicationRunner {
 
     private final ConfigurableEnvironment environment;

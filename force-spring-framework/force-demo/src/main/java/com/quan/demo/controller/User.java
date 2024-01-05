@@ -1,8 +1,5 @@
 package com.quan.demo.controller;
 
-import com.quan.boot.mvc.desensitization.Desensitization;
-import com.quan.boot.mvc.desensitization.DesensitizationType;
-import com.quan.boot.mvc.jackson.BigDecimalFormat;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
@@ -19,13 +16,10 @@ public class User {
     private Long id;
 
     @NotBlank(message = "ddd")
-    @Desensitization(type = DesensitizationType.MOBILE_PHONE)
     private String username;
 
-    @BigDecimalFormat(value = "#0.0")
     private BigDecimal price;
 
-    @BigDecimalFormat(value = "#0.0000")
     private BigDecimal height;
 
     private BigDecimal weight;

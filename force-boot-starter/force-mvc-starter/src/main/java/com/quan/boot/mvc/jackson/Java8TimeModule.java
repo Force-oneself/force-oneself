@@ -8,7 +8,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
-import com.quan.common.util.DateUtils;
+import com.quan.tools.util.DateUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
