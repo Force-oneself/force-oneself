@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.quan</groupId>
         <artifactId>force-cloud</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>force-cloud-gateway</artifactId>
