@@ -1,0 +1,9 @@
+rocketmq:
+  name-server: 192.168.1.8:9876
+  producer:
+    group: producer-test-group
+    retry-times-when-send-failed: 2
+    retry-times-when-send-async-failed: 0
+    send-message-timeout: 300000
+    compress-message-body-threshold: 4096
+    max-message-size: 4194304

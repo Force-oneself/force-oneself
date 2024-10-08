@@ -31,9 +31,9 @@ public class RateLimitTest {
 
     @Test
     public void mvcLimit() throws Exception {
-        start("/limit/lsw");
-        start("/limit/lc");
-        start("/limit/llb");
+//        start("/limit/lsw");
+//        start("/limit/lc");
+//        start("/limit/llb");
         start("/limit/ltb");
     }
 
@@ -62,19 +62,20 @@ public class RateLimitTest {
     private void start(String path) throws InterruptedException {
         for (int i = 0; i < 20; i++) {
             new Thread(() -> {
-                for (int j = 0; j < 10; j++) {
+                while (true) {
                     try {
                         Thread.sleep(200);
                         mvc.perform(get(path).accept(MediaType.APPLICATION_JSON))
-                                .andExpect(result -> System.out.println(result.getResponse().getContentAsString()));
+                                .andExpect(result -> System.out.println(System.currentTimeMillis() + ": " + result.getResponse().getContentAsString()));
                     } catch (Exception ignore) {
-                        System.err.println("限流");
+//                        System.err.println("限流");
                     }
                 }
             }).start();
         }
         Thread.currentThread().join();
     }
+
 
 }
 

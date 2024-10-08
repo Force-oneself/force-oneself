@@ -1,0 +1,9 @@
+spring:
+  kafka:
+    bootstrap-servers: 192.168.1.7:9094
+    consumer:
+      group-id: kafka-consumer-group
+
+logging:
+  level:
+    org.apache.kafka: error

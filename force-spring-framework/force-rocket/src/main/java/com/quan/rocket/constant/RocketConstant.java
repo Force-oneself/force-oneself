@@ -6,5 +6,5 @@ package com.quan.rocket.constant;
  */
 public interface RocketConstant {
 
-    String NAME_SRV_ADDR = "192.168.3.18:9876";
+    String NAME_SRV_ADDR = "192.168.1.8:9876";
 }

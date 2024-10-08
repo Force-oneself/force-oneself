@@ -1,5 +1,7 @@
 force:
   mvc:
+    log:
+      enable: true
     limit:
       paths:
         # 计数统计

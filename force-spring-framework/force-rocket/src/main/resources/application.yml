@@ -1,9 +1,14 @@
 rocketmq:
-  name-server: 192.168.3.18:9876
+  name-server: 192.168.1.8:9876
   producer:
     group: producer-group
+    # 同步发送失败重试次数 默认2
     retry-times-when-send-failed: 2
-    retry-times-when-send-async-failed: 0
-    send-message-timeout: 300000
+    # 异步发送失败重试次数 默认2
+    retry-times-when-send-async-failed: 2
+    # 发送消息超时时间 默认3000
+    send-message-timeout: 3000
+    # 压缩消息的阈值 默认4k
     compress-message-body-threshold: 4096
+    # 单条消息最大4M
     max-message-size: 4194304
