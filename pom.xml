@@ -16,7 +16,6 @@
         <module>force-cloud</module>
         <module>force-boot-starter</module>
         <module>force-core</module>
-        <module>force-spring-framework/force-kafka</module>
     </modules>
 
     <properties>
