@@ -64,6 +64,23 @@ public class EnvSpringApplicationRunListener implements SpringApplicationRunList
         String activePros = StringUtils.arrayToCommaDelimitedString(activeProfileList.toArray());
         System.out.printf("----启动中，读取到的环境变量:[%s]，jar地址:[%s]----%n", activePros, startJarPath);
 
+        Properties defaultProperties = getDefaultProperties(appName, profile);
+        application.setDefaultProperties(defaultProperties);
+        MutablePropertySources sources = environment.getPropertySources();
+        Map<String, Object> defaultPropertiesMap = new HashMap<>();
+        for (Object key : Collections.list(defaultProperties.propertyNames())) {
+            defaultPropertiesMap.put((String) key, defaultProperties.get(key));
+        }
+        sources.addLast(new MapPropertySource("defaultProperties", defaultPropertiesMap));
+
+        Properties props = getProperties(profile, appName);
+        // Seata注册group格式
+        setProperty(props, "seata.tx-service-group", appName.concat("-group"));
+        setProperty(props, "seata.application-id", appName);
+        setProperty(props, "seata.enabled", "true");
+    }
+
+    private static Properties getDefaultProperties(String appName, String profile) {
         Properties defaultProperties = new Properties();
         defaultProperties.setProperty("spring.main.allow-bean-definition-overriding", "true");
         defaultProperties.setProperty("spring.sleuth.sampler.percentage", "1.0");
@@ -77,14 +94,10 @@ public class EnvSpringApplicationRunListener implements SpringApplicationRunList
         defaultProperties.setProperty("spring.cloud.nacos.config.shared-configs[1].group", "DEFAULT_GROUP");
         defaultProperties.setProperty("spring.cloud.nacos.config.shared-configs[1].refresh", "true");
         defaultProperties.setProperty("spring.application.name", appName);
-        application.setDefaultProperties(defaultProperties);
-        MutablePropertySources sources = environment.getPropertySources();
-        Map<String, Object> defaultPropertiesMap = new HashMap<>();
-        for (Object key : Collections.list(defaultProperties.propertyNames())) {
-            defaultPropertiesMap.put((String) key, defaultProperties.get(key));
-        }
-        sources.addLast(new MapPropertySource("defaultProperties", defaultPropertiesMap));
+        return defaultProperties;
+    }
 
+    private static Properties getProperties(String profile, String appName) {
         Properties props = System.getProperties();
         // 基础配置
         // props.setProperty("spring.application.name", appName);
@@ -115,10 +128,7 @@ public class EnvSpringApplicationRunListener implements SpringApplicationRunList
         props.setProperty("seata.config.nacos.server-addr", nacosAddr);
         props.setProperty("seata.config.nacos.namespace", nacosNameSpace);
         props.setProperty("seata.config.nacos.group", seataNacosGroup);
-        // seata注册group格式
-        setProperty(props, "seata.tx-service-group", appName.concat("-group"));
-        setProperty(props, "seata.application-id", appName);
-        setProperty(props, "seata.enabled", "true");
+        return props;
     }
 
     public static void setProperty(Properties props, String key, String value) {
