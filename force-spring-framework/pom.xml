@@ -23,6 +23,7 @@
         <module>force-producer-core</module>
         <module>force-generate</module>
         <module>force-wx</module>
+        <module>force-clickhouse</module>
     </modules>
 
     <artifactId>force-spring-framework</artifactId>

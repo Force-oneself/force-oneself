@@ -1,0 +1,7 @@
+server:
+  port: 8080
+
+force:
+  clickhouse:
+    url: jdbc:clickhouse://10.0.0.129:8123/demo?compress=0
+    user: default
