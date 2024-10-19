@@ -1,9 +1,10 @@
 package com.quan.clickhouse.enums;
 
 public enum Duration {
+    UNKNOWN(0),
     FREEHOLD(1),
     LEASEHOLD(2),
-    UNKNOWN(0);
+    ;
 
     private final int value;
 
@@ -23,4 +24,9 @@ public enum Duration {
         }
         return UNKNOWN;
     }
+
+    public int getCode() {
+        return this.ordinal();
+    }
+
 }

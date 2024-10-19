@@ -1,14 +1,12 @@
 package com.quan.clickhouse.enums;
 
-import com.quan.clickhouse.entity.PricePaid;
-
-// 枚举类型
 public enum Type {
+    OTHER(0),
     TERRACED(1),
     SEMI_DETACHED(2),
     DETACHED(3),
     FLAT(4),
-    OTHER(0);
+    ;
 
     private final int value;
 
@@ -27,5 +25,9 @@ public enum Type {
             }
         }
         return OTHER;
+    }
+
+    public int getCode() {
+        return this.ordinal();
     }
 }

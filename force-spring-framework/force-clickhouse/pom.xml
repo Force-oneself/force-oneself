@@ -7,18 +7,23 @@
         <version>${revision}</version>
     </parent>
     <artifactId>force-clickhouse</artifactId>
+    <properties>
+        <mybatis.version>2.2.2</mybatis.version>
+        <clickhouse.version>0.6.5</clickhouse.version>
+        <httpclient5.version>5.2.1</httpclient5.version>
+    </properties>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.clickhouse/clickhouse-jdbc -->
         <dependency>
             <groupId>com.clickhouse</groupId>
             <artifactId>clickhouse-jdbc</artifactId>
-            <version>0.6.5</version>
+            <version>${clickhouse.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5</artifactId>
-            <version>5.2.1</version>
+            <version>${httpclient5.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -33,6 +38,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis.version}</version>
         </dependency>
 
     </dependencies>

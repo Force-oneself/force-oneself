@@ -1,4 +1,4 @@
-package com.quan.clickhouse;
+package com.quan.clickhouse.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

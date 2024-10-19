@@ -11,6 +11,7 @@ public class PricePaid {
     private Date date;
     private String postcode1;
     private String postcode2;
+
     private Type type;
     private boolean isNew;
     private Duration duration;
