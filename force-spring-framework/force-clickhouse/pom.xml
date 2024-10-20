@@ -10,6 +10,7 @@
     <properties>
         <mybatis.version>2.2.2</mybatis.version>
         <clickhouse.version>0.6.5</clickhouse.version>
+        <clickhouse-jdbc.version>0.3.2</clickhouse-jdbc.version>
         <httpclient5.version>5.2.1</httpclient5.version>
     </properties>
 
@@ -20,6 +21,13 @@
             <artifactId>clickhouse-jdbc</artifactId>
             <version>${clickhouse.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/ru.yandex.clickhouse/clickhouse-jdbc -->
+        <dependency>
+            <groupId>ru.yandex.clickhouse</groupId>
+            <artifactId>clickhouse-jdbc</artifactId>
+            <version>${clickhouse-jdbc.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5</artifactId>

@@ -5,7 +5,6 @@ import com.clickhouse.client.config.ClickHouseDefaults;
 import com.clickhouse.data.ClickHouseFormat;
 import com.clickhouse.jdbc.ClickHouseDataSource;
 import com.quan.clickhouse.properties.ClickHouseProperties;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 @Configuration
-@MapperScan(basePackages = "com.quan.clickhouse.mapper")
 @EnableConfigurationProperties(ClickHouseProperties.class)
 public class ClickHouseConfig {
 
