@@ -24,6 +24,8 @@
         <module>force-generate</module>
         <module>force-wx</module>
         <module>force-clickhouse</module>
+        <module>force-etcd</module>
+        <module>force-flink</module>
     </modules>
 
     <artifactId>force-spring-framework</artifactId>
@@ -67,6 +69,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.etcd</groupId>
+            <artifactId>jetcd-core</artifactId>
+            <version>0.7.7</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxnetty</artifactId>
+            <version>0.4.9</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
