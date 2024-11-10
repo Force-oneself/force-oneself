@@ -1,7 +1,5 @@
 package com.quan.tools.log;
 
-import org.slf4j.Marker;
-
 /**
  * @author Force-oneself
  * @date 2023-09-21

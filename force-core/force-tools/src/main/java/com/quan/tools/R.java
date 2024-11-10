@@ -39,11 +39,11 @@ public class R<T> implements Serializable {
     }
 
     public static <T> R<T> ok() {
-        return new R<T>();
+        return new R<>();
     }
 
     public static <T> R<T> ok(T data) {
-        return new R<T>(data);
+        return new R<>(data);
     }
 
     public static R<?> fail() {
