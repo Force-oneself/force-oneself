@@ -1,11 +1,10 @@
 package com.force.log.datasource;
 
 
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
-import com.quan.log.conf.ForceLogConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,7 +16,6 @@ import java.sql.Statement;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Import({DruidDataSourceAutoConfigure.class, ForceLogConfiguration.class})
 public class DataSourceTest {
 
 
