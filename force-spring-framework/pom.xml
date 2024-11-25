@@ -47,10 +47,12 @@
             <groupId>com.quan</groupId>
             <artifactId>force-common</artifactId>
         </dependency>
+        <!-- 自动装配 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
+        <!-- Web服务 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

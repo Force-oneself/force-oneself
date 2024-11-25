@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * 自动填充
@@ -34,8 +33,6 @@ public class AutoFillSerializer extends JsonSerializer<Object> implements Contex
             // 填写原来的值
             jsonGenerator.writeNumber((Long) fillOrigin);
             // 填充自定义值
-            jsonGenerator.writeFieldName("productVo");
-            jsonGenerator.writeObject(new Demo.User());
         }
 
     }
