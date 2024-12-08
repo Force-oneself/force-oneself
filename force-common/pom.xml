@@ -10,7 +10,7 @@
 
     <artifactId>force-common</artifactId>
 
-    <name>force-common</name>
+    <name>${project.artifactId}</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

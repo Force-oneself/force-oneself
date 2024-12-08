@@ -7,7 +7,9 @@
         <groupId>com.quan</groupId>
         <version>${revision}</version>
     </parent>
+
     <artifactId>force-mvc-starter</artifactId>
+    <name>${project.artifactId}</name>
 
     <dependencies>
         <!-- Boot 通用 -->

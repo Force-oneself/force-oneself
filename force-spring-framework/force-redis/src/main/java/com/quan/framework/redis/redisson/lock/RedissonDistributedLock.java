@@ -7,7 +7,7 @@ import org.springframework.lang.NonNull;
 import java.util.concurrent.TimeUnit;
 
 /**
- * RedissonDistributedLock
+ * 使用Redisson实现的分布式锁
  *
  * @author Force-oneself
  * @date 2022-08-10

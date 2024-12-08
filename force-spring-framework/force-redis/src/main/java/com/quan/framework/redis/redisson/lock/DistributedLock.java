@@ -1,5 +1,8 @@
 package com.quan.framework.redis.redisson.lock;
 
+
+import org.springframework.lang.NonNull;
+
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
@@ -17,7 +20,8 @@ public interface DistributedLock extends Lock {
      * @return 不支持
      */
     @Override
+    @NonNull
     default Condition newCondition() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 }

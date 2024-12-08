@@ -9,24 +9,12 @@
     <version>${revision}</version>
 
     <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>Spring Boot Starter 开发环境</description>
 
     <properties>
         <!-- 项目版本 -->
         <revision>1.0.0-SNAPSHOT</revision>
-
-        <!-- Spring Boot 版本管理 -->
-        <spring-boot.version>2.2.13.RELEASE</spring-boot.version>
-
-        <!-- 第三方框架 -->
-        <druid-boot.version>1.2.5</druid-boot.version>
-
-        <!-- 第三方工具版本管理 -->
-        <hutool.version>5.7.3</hutool.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-        <guava.version>33.0.0-jre</guava.version>
-
-        <!-- 插件版本管理 -->
-        <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
     </properties>
 
     <modules>
@@ -37,49 +25,17 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Force Boot 公用模块 -->
             <dependency>
                 <groupId>com.quan</groupId>
-                <artifactId>force-boot-commons</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <!-- Force Tools 工具模块 -->
-            <dependency>
-                <groupId>com.quan</groupId>
-                <artifactId>force-tools</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <!-- Spring Boot 版本依赖 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
+                <artifactId>force-dependencies</artifactId>
+                <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- HuTool工具 -->
             <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
-            <!-- Apache 工具 -->
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${commons-lang3.version}</version>
-            </dependency>
-            <!-- Google guava 工具 -->
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
-            </dependency>
-            <!-- Druid 数据库连接池 -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid-boot.version}</version>
+                <groupId>com.quan</groupId>
+                <artifactId>force-boot-commons</artifactId>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -90,34 +46,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-            </plugin>
-            <!-- 版本统一管理插件 -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>${flatten-maven-plugin.version}</version>
-                <configuration>
-                    <!-- 更新父占位符 -->
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

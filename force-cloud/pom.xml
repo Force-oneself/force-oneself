@@ -10,6 +10,8 @@
 
     <packaging>pom</packaging>
 
+    <name>${project.artifactId}</name>
+
     <description>Spring Cloud Micro Service</description>
 
     <modules>
@@ -23,65 +25,17 @@
     <properties>
         <!-- 项目版本 -->
         <revision>1.0.0-SNAPSHOT</revision>
-
-        <!-- Jasypt 版本 -->
-        <jasypt-boot.version>3.0.1</jasypt-boot.version>
-
-        <!-- Spring Boot & Spring Cloud & Spring Cloud Alibaba -->
-        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
-        <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
-        <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
-
-        <!-- Plugin Version -->
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <maven-plugin.version>3.8.1</maven-plugin.version>
-        <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!-- Force Cloud Commons 依赖 -->
+            <!-- Force Dependencies 依赖 -->
             <dependency>
                 <groupId>com.quan</groupId>
-                <artifactId>force-cloud-commons</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <!-- Force Tool 依赖 -->
-            <dependency>
-                <groupId>com.quan</groupId>
-                <artifactId>force-tools</artifactId>
+                <artifactId>force-dependencies</artifactId>
                 <version>${revision}</version>
-            </dependency>
-            <!-- Spring Cloud 版本依赖 -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <!-- Spring Cloud Alibaba 版本依赖 -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- Spring Boot 版本依赖 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- Jasypt 版本依赖 -->
-            <dependency>
-                <groupId>com.github.ulisesbocchio</groupId>
-                <artifactId>jasypt-spring-boot-starter</artifactId>
-                <version>${jasypt-boot.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -93,51 +47,16 @@
             <plugin>
                 <groupId>com.github.ulisesbocchio</groupId>
                 <artifactId>jasypt-maven-plugin</artifactId>
-                <version>${jasypt-boot.version}</version>
             </plugin>
             <!-- Spring Boot Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
             </plugin>
             <!-- Java 编译插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-plugin.version}</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <!-- ${revision} 占位符多模块版本控制插件 -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>${flatten-maven-plugin.version}</version>
-                <configuration>
-                    <!-- 更新父占位符 -->
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

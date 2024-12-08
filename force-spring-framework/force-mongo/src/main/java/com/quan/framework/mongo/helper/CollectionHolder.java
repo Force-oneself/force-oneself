@@ -15,7 +15,7 @@ public interface CollectionHolder<T> {
      *
      * @return java.lang.String
      */
-    String getCollectionName();
+    String collectionName();
 
     /**
      * 转换后的文档类型
