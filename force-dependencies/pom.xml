@@ -22,7 +22,8 @@
         <!-- Plugin 管理 -->
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <maven-plugin.version>3.8.1</maven-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
 
         <!-- 第三方依赖版本 -->
@@ -275,18 +276,59 @@
     </dependencyManagement>
 
     <build>
+        <!-- 资源文件配置 -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- 启用筛选功能 -->
+                <filtering>true</filtering>
+                <includes>
+                    <include>application*.yml</include>
+                    <include>application*.yaml</include>
+                    <include>**/application*.yml</include>
+                    <include>**/application*.yaml</include>
+                    <include>bootstrap*.yml</include>
+                    <include>bootstrap*.yaml</include>
+                    <include>**/bootstrap*.yml</include>
+                    <include>**/bootstrap*.yaml</include>
+                </includes>
+            </resource>
+            <!-- 配置不需要的占位符替换的文件,需要配置才能被Copy到target中 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- 关闭筛选功能 -->
+                <filtering>false</filtering>
+                <includes>
+                    <include>META-INF/*</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
         <!-- 插件版本控制 -->
         <pluginManagement>
             <plugins>
-                <!-- Java 编译插件 -->
+                <!-- Maven 编译插件 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-plugin.version}</version>
+                    <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <source>${maven.compiler.source}</source>
                         <target>${maven.compiler.target}</target>
                         <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+                <!-- Maven 资源插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                    <configuration>
+                        <propertiesEncoding>UTF-8</propertiesEncoding>
+                        <encoding>UTF-8</encoding>
+                        <!-- 使用默认@*@或者${*} 替换,仅支持读取系统或者环境变量  -->
+                        <useDefaultDelimiters>true</useDefaultDelimiters>
                     </configuration>
                 </plugin>
                 <!-- Spring Boot Maven插件 -->
@@ -309,7 +351,20 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <!-- 插件配置 -->
         <plugins>
+            <!-- Maven 资源插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <configuration>
+                    <propertiesEncoding>UTF-8</propertiesEncoding>
+                    <encoding>UTF-8</encoding>
+                    <!-- 使用默认@*@或者${*} 替换,仅支持读取系统或者环境变量  -->
+                    <useDefaultDelimiters>true</useDefaultDelimiters>
+                </configuration>
+            </plugin>
             <!-- ${revision} 占位符多模块版本控制插件 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

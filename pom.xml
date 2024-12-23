@@ -24,6 +24,7 @@
         <module>force-boot-starter</module>
         <module>force-core</module>
         <module>force-dependencies</module>
+        <module>force-boot-starter/force-boot-application</module>
     </modules>
 
     <properties>

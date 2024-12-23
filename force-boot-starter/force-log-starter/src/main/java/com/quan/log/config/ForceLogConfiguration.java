@@ -1,4 +1,4 @@
-package com.quan.log.conf;
+package com.quan.log.config;
 
 
 import com.quan.log.data.datasource.DataSourceBeanPostProcessor;
