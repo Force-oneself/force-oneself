@@ -21,6 +21,8 @@
         <module>force-mvc-starter</module>
         <module>force-boot-commons</module>
         <module>force-log-starter</module>
+        <module>force-boot-application</module>
+        <module>force-lock-starter</module>
     </modules>
 
     <dependencyManagement>

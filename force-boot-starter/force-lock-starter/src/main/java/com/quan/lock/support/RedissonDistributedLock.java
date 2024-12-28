@@ -1,5 +1,6 @@
-package com.quan.framework.redis.redisson.lock;
+package com.quan.lock.support;
 
+import com.quan.lock.DistributedLock;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.lang.NonNull;

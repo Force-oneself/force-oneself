@@ -12,12 +12,13 @@
     <artifactId>force-log-starter</artifactId>
 
     <dependencies>
+        <!-- JDBC 自动装配 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
             <scope>provided</scope>
         </dependency>
-
+        <!-- Spring 测试自动装配 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -36,7 +37,7 @@
             <version>2.2.2</version>
             <scope>test</scope>
         </dependency>
-
+        <!-- MySQL 驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

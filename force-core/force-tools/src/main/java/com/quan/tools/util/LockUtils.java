@@ -1,4 +1,4 @@
-package com.quan.framework.redis.redisson.lock;
+package com.quan.tools.util;
 
 import java.util.concurrent.locks.Lock;
 import java.util.function.Supplier;

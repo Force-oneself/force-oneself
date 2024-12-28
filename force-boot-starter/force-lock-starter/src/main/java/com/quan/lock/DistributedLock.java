@@ -1,4 +1,4 @@
-package com.quan.framework.redis.redisson.lock;
+package com.quan.lock;
 
 
 import org.springframework.lang.NonNull;
@@ -7,7 +7,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
 /**
- * DistributedLock
+ * 分布式锁接口封装
  *
  * @author Force-oneself
  * @date 2022-08-10
