@@ -23,6 +23,7 @@
         <module>force-log-starter</module>
         <module>force-boot-application</module>
         <module>force-lock-starter</module>
+        <module>force-oss-starter</module>
     </modules>
 
     <dependencyManagement>
