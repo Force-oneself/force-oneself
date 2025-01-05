@@ -5,6 +5,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>force-boot-starter</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.36.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
     <groupId>com.quan</groupId>
     <version>${revision}</version>
 
@@ -18,12 +43,13 @@
     </properties>
 
     <modules>
-        <module>force-mvc-starter</module>
         <module>force-boot-commons</module>
-        <module>force-log-starter</module>
         <module>force-boot-application</module>
+        <module>force-mvc-starter</module>
+        <module>force-log-starter</module>
         <module>force-lock-starter</module>
         <module>force-oss-starter</module>
+        <module>force-cache-starter</module>
     </modules>
 
     <dependencyManagement>
@@ -49,6 +75,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <basedir/>
+                    <buildDirectory/>
+                    <mainOutputDirectory/>
+                    <outputDirectory/>
+                    <projectArtifact/>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
