@@ -1,6 +1,6 @@
 package com.quan.tools;
 
-import com.quan.tools.constant.Code;
+import com.quan.tools.constant.StringPool;
 
 import java.io.Serializable;
 
@@ -13,6 +13,16 @@ import java.io.Serializable;
 public class R<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 成功码
+     */
+    private static final int OK = 200;
+
+    /**
+     * 失败码
+     */
+    private static final int FAIL = 200;
 
     /**
      * 是否成功
@@ -40,19 +50,13 @@ public class R<T> implements Serializable {
     private Long timestamp = System.currentTimeMillis();
 
     private R() {
-        this.code = Code.OK.getCode();
-        this.msg = Code.OK.getMsg();
+        this.code = OK;
+        this.msg = StringPool.SUCCESS;
     }
 
     private R(T data) {
         this();
         this.data = data;
-    }
-
-    private R(Throwable e) {
-        this.success = false;
-        this.code = Code.ERROR.getCode();
-        this.msg = e.getMessage();
     }
 
     public static <T> R<T> ok() {
@@ -64,11 +68,11 @@ public class R<T> implements Serializable {
     }
 
     public static <T> R<T> fail() {
-        return fail(null, Code.ERROR.getCode(), Code.ERROR.getMsg());
+        return fail(null);
     }
 
     public static <T> R<T> fail(T data) {
-        return fail(data, Code.ERROR.getCode(), Code.ERROR.getMsg());
+        return fail(data, FAIL, StringPool.FAIL);
     }
 
     public static <T> R<T> fail(int code, String msg) {

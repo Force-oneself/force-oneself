@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.quan.tools.util.DateUtils;
 
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -20,9 +19,12 @@ import java.util.TimeZone;
  */
 public class JacksonObjectMapper extends ObjectMapper {
 
+    public static final String PATTERN_DATETIME = "yyyy-MM-dd HH:mm:ss";
+
     private static final long serialVersionUID = 4288193147502386170L;
 
     private static final Locale CHINA = Locale.CHINA;
+
 
     public JacksonObjectMapper(ObjectMapper src) {
         super(src);
@@ -37,7 +39,7 @@ public class JacksonObjectMapper extends ObjectMapper {
         // 设置为中国上海时区
         super.setTimeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
         // 序列化时，日期的统一格式
-        super.setDateFormat(new SimpleDateFormat(DateUtils.PATTERN_DATETIME, Locale.CHINA));
+        super.setDateFormat(new SimpleDateFormat(PATTERN_DATETIME, CHINA));
         // 单引号
         super.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
         // 允许JSON字符串包含非引号控制字符（值小于32的ASCII字符，包含制表符和换行符）

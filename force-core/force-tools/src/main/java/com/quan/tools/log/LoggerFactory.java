@@ -1,5 +1,7 @@
 package com.quan.tools.log;
 
+import java.util.ServiceLoader;
+
 /**
  * 日志工具类
  *
@@ -25,6 +27,12 @@ public class LoggerFactory {
      * @return /
      */
     public static Logger getLogger(String name) {
+        // 尝试加载 SPI 提供的 Logger 实现
+        ServiceLoader<Logger> serviceLoader = ServiceLoader.load(Logger.class);
+        for (Logger logger : serviceLoader) {
+            // 返回第一个找到的实现
+            return logger;
+        }
         return new Slf4jLogger(org.slf4j.LoggerFactory.getLogger(name));
     }
 }

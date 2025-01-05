@@ -13,6 +13,7 @@ public class JsonUtils {
 
     private static final ObjectMapper INSTANCE = new JacksonObjectMapper();
 
+
     private JsonUtils() {
     }
 

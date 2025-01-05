@@ -25,27 +25,6 @@ public class Slf4jLogger implements Logger {
     }
 
     @Override
-    public void trace(String msg) {
-        if (isTraceEnabled()) {
-            logger.trace(msg);
-        }
-    }
-
-    @Override
-    public void trace(String format, Object arg) {
-        if (isTraceEnabled()) {
-            logger.trace(format, arg);
-        }
-    }
-
-    @Override
-    public void trace(String format, Object arg1, Object arg2) {
-        if (isTraceEnabled()) {
-            logger.trace(format, arg1, arg2);
-        }
-    }
-
-    @Override
     public void trace(String format, Object... arguments) {
         if (isTraceEnabled()) {
             logger.trace(format, arguments);
@@ -62,27 +41,6 @@ public class Slf4jLogger implements Logger {
     @Override
     public boolean isDebugEnabled() {
         return logger.isDebugEnabled();
-    }
-
-    @Override
-    public void debug(String msg) {
-        if (isDebugEnabled()) {
-            logger.debug(msg);
-        }
-    }
-
-    @Override
-    public void debug(String format, Object arg) {
-        if (isDebugEnabled()) {
-            logger.debug(format, arg);
-        }
-    }
-
-    @Override
-    public void debug(String format, Object arg1, Object arg2) {
-        if (isDebugEnabled()) {
-            logger.debug(format, arg1, arg2);
-        }
     }
 
     @Override
@@ -105,27 +63,6 @@ public class Slf4jLogger implements Logger {
     }
 
     @Override
-    public void info(String msg) {
-        if (isInfoEnabled()) {
-            logger.info(msg);
-        }
-    }
-
-    @Override
-    public void info(String format, Object arg) {
-        if (isInfoEnabled()) {
-            logger.info(format, arg);
-        }
-    }
-
-    @Override
-    public void info(String format, Object arg1, Object arg2) {
-        if (isInfoEnabled()) {
-            logger.info(format, arg1, arg2);
-        }
-    }
-
-    @Override
     public void info(String format, Object... arguments) {
         if (isInfoEnabled()) {
             logger.info(format, arguments);
@@ -145,31 +82,9 @@ public class Slf4jLogger implements Logger {
     }
 
     @Override
-    public void warn(String msg) {
-        if (isWarnEnabled()) {
-            logger.warn(msg);
-        }
-    }
-
-    @Override
-    public void warn(String format, Object arg) {
-
-        if (isWarnEnabled()) {
-            logger.warn(format, arg);
-        }
-    }
-
-    @Override
     public void warn(String format, Object... arguments) {
         if (isWarnEnabled()) {
             logger.warn(format, arguments);
-        }
-    }
-
-    @Override
-    public void warn(String format, Object arg1, Object arg2) {
-        if (isWarnEnabled()) {
-            logger.warn(format, arg1, arg2);
         }
     }
 
@@ -183,27 +98,6 @@ public class Slf4jLogger implements Logger {
     @Override
     public boolean isErrorEnabled() {
         return logger.isErrorEnabled();
-    }
-
-    @Override
-    public void error(String msg) {
-        if (isErrorEnabled()) {
-            logger.error(msg);
-        }
-    }
-
-    @Override
-    public void error(String format, Object arg) {
-        if (isErrorEnabled()) {
-            logger.error(format, arg);
-        }
-    }
-
-    @Override
-    public void error(String format, Object arg1, Object arg2) {
-        if (isErrorEnabled()) {
-            logger.error(format, arg1, arg2);
-        }
     }
 
     @Override
