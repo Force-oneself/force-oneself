@@ -39,13 +39,13 @@ public class ThreadPoolManager implements InitializingBean {
     private final ConfigurableApplicationContext applicationContext;
 
     /**
-     * 所有被Spring管理的线程池
+     * 告警管理类
      */
-    private final Map<String, ThreadPoolExecutor> threadPoolExecutors;
+    private final AlarmManager alarmManager;
 
-    public ThreadPoolManager(ConfigurableApplicationContext applicationContext, Map<String, ThreadPoolExecutor> threadPoolExecutors) {
+    public ThreadPoolManager(ConfigurableApplicationContext applicationContext, AlarmManager alarmManager) {
         this.applicationContext = applicationContext;
-        this.threadPoolExecutors = threadPoolExecutors;
+        this.alarmManager = alarmManager;
     }
 
     @Override
@@ -57,12 +57,13 @@ public class ThreadPoolManager implements InitializingBean {
      * 初始化
      */
     private void init() {
-        changeProcessors.put("corePoolSize", (tpe, value) -> tpe.setCorePoolSize(Integer.parseInt(value)));
-        changeProcessors.put("maximumPoolSize", (tpe, value) -> tpe.setMaximumPoolSize(Integer.parseInt(value)));
-        changeProcessors.put("keepAliveTime", (tpe, value) -> tpe.setKeepAliveTime(Long.parseLong(value), TimeUnit.MILLISECONDS));
+        // 线程数配置相关
+        changeProcessors.put("core-pool-size", (tpe, value) -> tpe.setCorePoolSize(Integer.parseInt(value)));
+        changeProcessors.put("maximum-pool-size", (tpe, value) -> tpe.setMaximumPoolSize(Integer.parseInt(value)));
+        changeProcessors.put("keep-alive-time", (tpe, value) -> tpe.setKeepAliveTime(Long.parseLong(value), TimeUnit.MILLISECONDS));
 
         // 拒绝策略
-        changeProcessors.put("rejectedExecutionHandler", (tpe, value) -> {
+        changeProcessors.put("rejected-execution-handler", (tpe, value) -> {
             Map<String, RejectedExecutionHandler> rejectedBeanMap = Arrays.stream(this.applicationContext.getBeanNamesForType(RejectedExecutionHandler.class))
                     .collect(Collectors.toMap(Function.identity(), name -> applicationContext.getBean(name, RejectedExecutionHandler.class)));
             RejectedExecutionHandler rejected = rejectedBeanMap.getOrDefault(value, this.defaultRejectedHandlers().get(value));
@@ -72,7 +73,7 @@ public class ThreadPoolManager implements InitializingBean {
         });
 
         // 线程池工厂
-        changeProcessors.put("threadFactory", (tpe, value) -> {
+        changeProcessors.put("thread-factory", (tpe, value) -> {
             Map<String, ThreadFactory> threadFactoryMap = Arrays.stream(this.applicationContext.getBeanNamesForType(ThreadFactory.class))
                     .collect(Collectors.toMap(Function.identity(), name -> applicationContext.getBean(name, ThreadFactory.class)));
             ThreadFactory threadFactory = threadFactoryMap.get(value);
@@ -81,10 +82,17 @@ public class ThreadPoolManager implements InitializingBean {
             }
         });
 
-        // TODO \告警通知\队列大小 后续处理
+        // TODO 队列大小 后续补充
 
         // 注册已经被Spring管理的线程池
-        threadPoolExecutors.forEach(this::register);
+        Arrays.stream(this.applicationContext.getBeanNamesForType(ThreadPoolExecutor.class))
+                .forEach(name -> this.register(name, applicationContext.getBean(name, ThreadPoolExecutor.class)));
+
+        // 注册告警
+        threadPoolMap.forEach(alarmManager::register);
+
+        // 启动告警
+        alarmManager.start();
     }
 
     /**
