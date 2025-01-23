@@ -30,7 +30,8 @@ public class DefaultAlarmNotifier implements AlarmNotifier {
 
     @Override
     public boolean trigger(ThreadPoolMetrics metrics) {
-        return Optional.ofNullable(dynamicThreadPoolProperties.getThreadPools().get(metrics.getName()))
+        return Optional.ofNullable(dynamicThreadPoolProperties.getThreadPools())
+                .map(map -> map.get(metrics.getName()))
                 .map(ThreadPoolProperties::getTriggerExpression)
                 .filter(StringUtils::hasText)
                 .map(el -> this.evaluateExpression(el, metrics))
