@@ -20,7 +20,7 @@ import java.util.List;
 public class CryptoAutoConfig {
 
     /**
-     * 加密自动配置
+     * 解密自动配置
      *
      * @author Force-oneself
      * @date 2023-08-22
@@ -44,7 +44,7 @@ public class CryptoAutoConfig {
 
 
     /**
-     * 解密自动配置
+     * 加密自动配置
      *
      * @author Force-oneself
      * @date 2023-08-22

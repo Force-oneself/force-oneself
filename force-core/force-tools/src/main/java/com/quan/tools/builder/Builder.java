@@ -76,44 +76,4 @@ public class Builder<T> {
         setters.accept(t);
         return t;
     }
-
-
-    public static void main(String[] args) {
-        String arg = args[0];
-        User user = Builder.of(User::new)
-                .with(Objects.isNull(arg), User::setName, arg)
-                .with(User::setAge, 11)
-                .build();
-        System.out.println(user);
-    }
-
-    public static class User {
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
-
-        private int age;
-
-        @Override
-        public String toString() {
-            return "User{" +
-                    "name='" + name + '\'' +
-                    ", age=" + age +
-                    '}';
-        }
-    }
 }

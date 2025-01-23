@@ -1,10 +1,7 @@
 package com.quan.boot.mvc.limit;
 
 import com.quan.boot.mvc.config.RateLimitAutoConfig;
-import com.quan.boot.mvc.limit.local.CounterRateLimiter;
 import com.quan.boot.mvc.limit.local.LeakyBucketRateLimiter;
-import com.quan.boot.mvc.limit.local.SlidingWindowRateLimiter;
-import com.quan.boot.mvc.limit.local.TokenBucketRateLimiter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +20,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @RunWith(SpringRunner.class)
 @WebMvcTest
 @Import({RateLimitAutoConfig.class})
-//@EnableWebMvc
 public class RateLimitTest {
 
     @Autowired

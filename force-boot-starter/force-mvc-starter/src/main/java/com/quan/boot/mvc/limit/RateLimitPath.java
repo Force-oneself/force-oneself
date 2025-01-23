@@ -1,6 +1,6 @@
 package com.quan.boot.mvc.limit;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 
 /**
  * @author Force-oneself
@@ -64,12 +64,21 @@ public class RateLimitPath {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         RateLimitPath that = (RateLimitPath) o;
-        return time == that.time && capacity == that.capacity && Objects.equal(path, that.path) && Objects.equal(key, that.key);
+
+        if (time != that.time) return false;
+        if (capacity != that.capacity) return false;
+        if (!Objects.equals(path, that.path)) return false;
+        return Objects.equals(key, that.key);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(path, key, time, capacity);
+        int result = path != null ? path.hashCode() : 0;
+        result = 31 * result + (key != null ? key.hashCode() : 0);
+        result = 31 * result + (int) (time ^ (time >>> 32));
+        result = 31 * result + capacity;
+        return result;
     }
 }

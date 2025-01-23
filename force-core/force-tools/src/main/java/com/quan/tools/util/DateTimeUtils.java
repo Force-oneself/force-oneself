@@ -1,7 +1,5 @@
 package com.quan.tools.util;
 
-import com.quan.tools.util.DateUtils;
-
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
@@ -16,9 +14,12 @@ import java.util.Date;
  */
 public class DateTimeUtils {
 
-    public static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern(DateUtils.PATTERN_DATETIME);
-    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern(DateUtils.PATTERN_DATE);
-    public static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern(DateUtils.PATTERN_TIME);
+    public static final String PATTERN_DATETIME = "yyyy-MM-dd HH:mm:ss";
+    public static final String PATTERN_DATE = "yyyy-MM-dd";
+    public static final String PATTERN_TIME = "HH:mm:ss";
+    public static final DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern(PATTERN_DATETIME);
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern(PATTERN_DATE);
+    public static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern(PATTERN_TIME);
 
     private DateTimeUtils() {
     }

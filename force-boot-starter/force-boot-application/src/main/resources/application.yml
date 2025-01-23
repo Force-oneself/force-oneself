@@ -1,0 +1,5 @@
+force:
+  mvc:
+    log:
+      enable: true
+      level: 127

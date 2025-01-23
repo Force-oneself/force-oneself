@@ -9,6 +9,13 @@
     <version>${revision}</version>
     <packaging>pom</packaging>
 
+    <developers>
+        <developer>
+            <name>Force-oneself</name>
+            <email>1044749290@qq.com</email>
+        </developer>
+    </developers>
+
     <modules>
         <module>force-common</module>
         <module>force-spring-framework</module>
@@ -16,6 +23,7 @@
         <module>force-cloud</module>
         <module>force-boot-starter</module>
         <module>force-core</module>
+        <module>force-dependencies</module>
     </modules>
 
     <properties>
@@ -25,6 +33,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven-plugin.version>3.8.1</maven-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
+
     </properties>
 
     <dependencyManagement>
@@ -71,7 +81,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.2.7</version>
+                <version>${flatten-maven-plugin.version}</version>
                 <configuration>
                     <!-- 更新父占位符 -->
                     <updatePomFile>true</updatePomFile>

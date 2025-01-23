@@ -77,6 +77,15 @@ public interface StringPool {
     String HTML_LT = "&lt;";
     String HTML_GT = "&gt;";
 
+    /**
+     * 成功
+     */
+    String SUCCESS = "success";
+    /**
+     * 失败
+     */
+    String FAIL = "fail";
+
     // ---------------------------------------------------------------- array
 
     String[] EMPTY_ARRAY = new String[0];

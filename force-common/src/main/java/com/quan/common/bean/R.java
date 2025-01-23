@@ -5,9 +5,9 @@ import com.quan.common.constant.Code;
 import java.io.Serializable;
 
 /**
- * @Description: 统一返回实体
- * @Author force-oneself
- * @Date 2021-01-09
+ *  统一返回实体
+ * @author force-oneself
+ * @date 2021-01-09
  **/
 public class R<T> implements Serializable {
 

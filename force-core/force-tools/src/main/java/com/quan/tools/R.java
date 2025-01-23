@@ -1,10 +1,12 @@
 package com.quan.tools;
 
-import com.quan.tools.constant.Code;
+import com.quan.tools.constant.StringPool;
 
 import java.io.Serializable;
 
 /**
+ * Controller 统一返回结果对象
+ *
  * @author Force-oneself
  * @date 2023-09-25
  */
@@ -12,58 +14,69 @@ public class R<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 成功码
+     */
+    private static final int OK = 200;
+
+    /**
+     * 失败码
+     */
+    private static final int FAIL = 200;
+
+    /**
+     * 是否成功
+     */
     private boolean success = true;
 
+    /**
+     * 状态码
+     */
     private int code;
 
+    /**
+     * 数据
+     */
     private T data;
 
+    /**
+     * 消息
+     */
     private String msg;
 
+    /**
+     * 时间戳
+     */
     private Long timestamp = System.currentTimeMillis();
 
-    public R() {
-        this.code = Code.OK.getCode();
-        this.msg = Code.OK.getMsg();
+    private R() {
+        this.code = OK;
+        this.msg = StringPool.SUCCESS;
     }
 
-    public R(T data) {
+    private R(T data) {
         this();
         this.data = data;
     }
 
-    public R(Throwable e) {
-        this.success = false;
-        this.code = Code.ERROR.getCode();
-        this.msg = e.getMessage();
-    }
-
     public static <T> R<T> ok() {
-        return new R<T>();
+        return new R<>();
     }
 
     public static <T> R<T> ok(T data) {
-        return new R<T>(data);
+        return new R<>(data);
     }
 
-    public static R<?> fail() {
-        return fail(null, Code.ERROR.getCode(), Code.ERROR.getMsg());
-    }
-
-    public static R<?> fail(int code, String msg) {
-        return fail(null, code, msg);
+    public static <T> R<T> fail() {
+        return fail(null);
     }
 
     public static <T> R<T> fail(T data) {
-        return fail(data, Code.ERROR);
+        return fail(data, FAIL, StringPool.FAIL);
     }
 
-    public static <T> R<T> fail(T data, Code failCode) {
-        return fail(data, failCode.getCode(), failCode.getMsg());
-    }
-
-    public static R<?> fail(Code failCode) {
-        return fail(null, failCode);
+    public static <T> R<T> fail(int code, String msg) {
+        return fail(null, code, msg);
     }
 
     public static <T> R<T> fail(T data, int code, String msg) {

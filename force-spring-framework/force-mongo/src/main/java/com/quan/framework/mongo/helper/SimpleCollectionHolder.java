@@ -23,7 +23,7 @@ public class SimpleCollectionHolder<T> implements CollectionHolder<T> {
     }
 
     @Override
-    public String getCollectionName() {
+    public String collectionName() {
         return this.collectionName;
     }
 

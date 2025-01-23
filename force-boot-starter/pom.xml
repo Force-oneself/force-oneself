@@ -2,39 +2,69 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>force-oneself</artifactId>
-        <groupId>com.quan</groupId>
-        <version>${revision}</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
 
     <artifactId>force-boot-starter</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.36.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <groupId>com.quan</groupId>
+    <version>${revision}</version>
+
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>Spring Boot Starter 开发环境</description>
 
     <properties>
-        <spring-boot.version>2.2.13.RELEASE</spring-boot.version>
+        <!-- 项目版本 -->
+        <revision>1.0.0-SNAPSHOT</revision>
     </properties>
 
     <modules>
-        <module>force-mvc-starter</module>
         <module>force-boot-commons</module>
+        <module>force-boot-application</module>
+        <module>force-mvc-starter</module>
+        <module>force-log-starter</module>
+        <module>force-lock-starter</module>
+        <module>force-oss-starter</module>
+        <module>force-cache-starter</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.quan</groupId>
-                <artifactId>force-boot-commons</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <!-- Spring Boot 版本依赖 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
+                <artifactId>force-dependencies</artifactId>
+                <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.quan</groupId>
+                <artifactId>force-boot-commons</artifactId>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -45,7 +75,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <basedir/>
+                    <buildDirectory/>
+                    <mainOutputDirectory/>
+                    <outputDirectory/>
+                    <projectArtifact/>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

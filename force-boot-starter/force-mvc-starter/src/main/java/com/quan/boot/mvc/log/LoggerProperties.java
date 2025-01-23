@@ -20,11 +20,6 @@ public class LoggerProperties {
      */
     private int level = (1 << 7) - 1;
 
-    /**
-     * 是否请求和响应分步返回
-     */
-    private boolean step = false;
-
     public boolean isEnabled() {
         return enabled;
     }
@@ -39,13 +34,5 @@ public class LoggerProperties {
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public boolean isStep() {
-        return step;
-    }
-
-    public void setStep(boolean step) {
-        this.step = step;
     }
 }
