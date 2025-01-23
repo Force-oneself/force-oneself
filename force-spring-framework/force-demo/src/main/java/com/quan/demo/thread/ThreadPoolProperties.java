@@ -52,5 +52,11 @@ public class ThreadPoolProperties {
     /**
      * 告警通知
      */
-    private String alarmNotify;
+    private String alarmNotifier;
+
+    /**
+     * 触发表达式
+     */
+    private String triggerExpression;
+
 }

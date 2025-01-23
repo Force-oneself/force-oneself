@@ -30,17 +30,11 @@ public class AlarmManager {
     private final ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(1);
 
     /**
-     * 动态线程池配置属性
-     */
-    private final DynamicThreadPoolProperties properties;
-
-    /**
      * 告警通知器
      */
     private final AlarmNotifier alarmNotifier;
 
-    public AlarmManager(DynamicThreadPoolProperties properties, AlarmNotifier alarmNotifier) {
-        this.properties = properties;
+    public AlarmManager(AlarmNotifier alarmNotifier) {
         this.alarmNotifier = alarmNotifier;
     }
 
@@ -55,52 +49,17 @@ public class AlarmManager {
     }
 
     /**
-     * 发送告警通知
-     *
-     * @param metrics 线程池监控指标
+     * 启动告警监控
      */
-    public void sendAlarm(ThreadPoolMetrics metrics) {
-        String name = metrics.getName();
-        Map<String, ThreadPoolProperties> threadPools = properties.getThreadPools();
-        if (threadPools == null || !threadPools.containsKey(name)) {
-            log.info("Thread pool " + name + " not found in properties, skipping alarm.");
-            return;
-        }
-        // 使用告警通知器发送告警
-        alarmNotifier.send(metrics);
-    }
-
-    /**
-     * 监控线程池状态
-     */
-    private void monitorThreadPools() {
-        for (Map.Entry<String, ThreadPoolExecutor> entry : monitoredThreadPools.entrySet()) {
-            String name = entry.getKey();
-            ThreadPoolExecutor tpe = entry.getValue();
-            // 创建新的ThreadPoolMetrics实例
-            ThreadPoolMetrics metrics = new ThreadPoolMetrics(name, tpe);
-            this.sendAlarm(metrics);
-
-            // 监控线程活跃数量与核心线程数的比值
-            // int activeCount = metrics.getActiveCount();
-            // int corePoolSize = metrics.getCorePoolSize();
-            // double threadRatio = (double) activeCount / corePoolSize;
-            // if (threadRatio > 1.5) { // 假设阈值为1.5
-            //     sendAlarm(metrics);
-            // }
-            //
-            // // 监控队列大小与阻塞任务数量的比值
-            // int queueSize = metrics.getQueueSize();
-            // int blockingTaskCount = (int) (metrics.getTaskCount() - metrics.getCompletedTaskCount());
-            // double queueRatio = (double) queueSize / blockingTaskCount;
-            // if (queueRatio > 0.5) { // 假设阈值为0.5
-            //     sendAlarm(metrics);
-            // }
-        }
-    }
-
     public void start() {
         // 启动定时监控任务
-        scheduledExecutorService.scheduleAtFixedRate(this::monitorThreadPools, 0, 1, TimeUnit.MINUTES);
+        scheduledExecutorService.scheduleAtFixedRate(() -> monitoredThreadPools.entrySet()
+                .stream()
+                // 创建新的ThreadPoolMetrics实例
+                .map(entry -> new ThreadPoolMetrics(entry.getKey(), entry.getValue()))
+                // 记录日志
+                .peek(metrics -> log.info("Thread pool metrics: {}", metrics))
+                // 通知
+                .forEach(alarmNotifier::notify), 0, 1, TimeUnit.MINUTES);
     }
 }
