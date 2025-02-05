@@ -1,6 +1,7 @@
 package com.quan.boot.mvc.config;
 
 import com.quan.boot.mvc.constant.PropConstant;
+import com.quan.boot.mvc.repeat.ContentCachingWrapperFilter;
 import com.quan.boot.mvc.repeat.RepeatableWrapperFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -28,8 +29,19 @@ public class RepeatableAutoConfig {
         registration.setDispatcherTypes(DispatcherType.REQUEST);
         registration.setFilter(new RepeatableWrapperFilter());
         registration.addUrlPatterns("/*");
-        registration.setName("repeatableWrapperFilter");
+        registration.setName(RepeatableWrapperFilter.class.getSimpleName());
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 100);
+        return registration;
+    }
+
+    @Bean
+    public FilterRegistrationBean<ContentCachingWrapperFilter> contentCachingWrapperFilter() {
+        FilterRegistrationBean<ContentCachingWrapperFilter> registration = new FilterRegistrationBean<>();
+        registration.setDispatcherTypes(DispatcherType.REQUEST);
+        registration.setFilter(new ContentCachingWrapperFilter());
+        registration.addUrlPatterns("/*");
+        registration.setName(ContentCachingWrapperFilter.class.getSimpleName());
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 99);
         return registration;
     }
 }

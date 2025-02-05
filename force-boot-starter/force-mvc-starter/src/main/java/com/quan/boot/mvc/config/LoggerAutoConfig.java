@@ -11,6 +11,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.ServletRequest;
@@ -31,7 +32,24 @@ public class LoggerAutoConfig {
         registration.setDispatcherTypes(DispatcherType.REQUEST);
         registration.setFilter(new LoggerFilter(properties));
         registration.addUrlPatterns("/*");
-        registration.setName("loggerFilter");
+        registration.setName(LoggerFilter.class.getSimpleName());
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 200);
+        return registration;
+    }
+
+    @Bean
+    public FilterRegistrationBean<CommonsRequestLoggingFilter> commonsRequestLoggingFilter(LoggerProperties properties) {
+        FilterRegistrationBean<CommonsRequestLoggingFilter> registration = new FilterRegistrationBean<>();
+        registration.setDispatcherTypes(DispatcherType.REQUEST);
+        CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
+        loggingFilter.setIncludeClientInfo(true);
+        loggingFilter.setIncludeHeaders(true);
+        loggingFilter.setIncludePayload(true);
+        loggingFilter.setIncludeQueryString(true);
+
+        registration.setFilter(loggingFilter);
+        registration.addUrlPatterns("/*");
+        registration.setName(CommonsRequestLoggingFilter.class.getSimpleName());
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 200);
         return registration;
     }
