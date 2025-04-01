@@ -1,6 +1,7 @@
 package com.quan.boot.mvc.config;
 
 import com.quan.boot.mvc.constant.PropConstant;
+import com.quan.boot.mvc.log.LogTraceFilter;
 import com.quan.boot.mvc.log.LoggerFilter;
 import com.quan.boot.mvc.log.LoggerProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -50,6 +51,17 @@ public class LoggerAutoConfig {
         registration.setFilter(loggingFilter);
         registration.addUrlPatterns("/*");
         registration.setName(CommonsRequestLoggingFilter.class.getSimpleName());
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 200);
+        return registration;
+    }
+
+    @Bean
+    public FilterRegistrationBean<LogTraceFilter> logTraceFilter() {
+        FilterRegistrationBean<LogTraceFilter> registration = new FilterRegistrationBean<>();
+        registration.setDispatcherTypes(DispatcherType.REQUEST);
+        registration.setFilter(new LogTraceFilter());
+        registration.addUrlPatterns("/*");
+        registration.setName("logTraceFilter");
         registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 200);
         return registration;
     }
