@@ -26,6 +26,7 @@
         <module>force-clickhouse</module>
         <module>force-etcd</module>
         <module>force-flink</module>
+        <module>force-auth</module>
     </modules>
 
     <artifactId>force-spring-framework</artifactId>

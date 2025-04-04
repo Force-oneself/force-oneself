@@ -47,6 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 跨域预检请求
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/custom/authorize").permitAll() // 允许访问自定义授权端点
+                .antMatchers("/custom/token").authenticated() // 需要认证才能访问自定义令牌端点
                 // 登录URL
                 .antMatchers("/login").permitAll()
                 .antMatchers("/hello").permitAll()
