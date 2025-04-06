@@ -43,21 +43,12 @@ public interface TokenService {
     void revokeToken(String token) throws TokenException;
 
     /**
-     * 获取令牌中的用户信息
-     *
-     * @param accessToken 访问令牌
-     * @return 用户主体信息
-     * @throws TokenException 令牌解析异常
-     */
-    UserPrincipal getUserFromToken(String accessToken) throws TokenException;
-
-    /**
      * 检查令牌是否过期
      *
      * @param token 要检查的令牌
      * @return true表示已过期，false表示未过期
      */
-    boolean isTokenExpired(String token);
+    boolean isExpired(String token);
 
     /**
      * 检查令牌是否已被撤销
@@ -65,5 +56,5 @@ public interface TokenService {
      * @param token 要检查的令牌
      * @return true表示已被撤销，false表示未被撤销
      */
-    boolean isTokenRevoked(String token);
+    boolean isRevoked(String token);
 }

@@ -8,7 +8,6 @@ import com.quan.auth.endpoint.dto.TokenDTO;
 import com.quan.auth.endpoint.dto.TokenInfoDTO;
 import com.quan.auth.endpoint.dto.UserInfoDTO;
 import com.quan.auth.token.Token;
-import com.quan.auth.token.TokenException;
 import com.quan.auth.token.TokenService;
 import lombok.RequiredArgsConstructor;
 
@@ -24,88 +23,76 @@ public class AuthEndpoint {
     /**
      * 认证接口
      */
-    public AuthResponse<TokenDTO> authenticate(CredentialRequest request) {
+    public R<TokenDTO> authenticate(CredentialRequest request) {
         try {
             // 执行认证
             UserPrincipal principal = authenticationService.authenticate(request);
 
             // 生成令牌
             Token token = tokenService.createAccessToken(principal);
-            return AuthResponse.success(convertToTokenDTO(token));
-        } catch (AuthenticationException | TokenException e) {
-            return AuthResponse.error(e.getMessage());
+            return R.success(convertToTokenDTO(token));
+        } catch (AuthenticationException | com.quan.auth.token.TokenException e) {
+            return R.error(e.getMessage());
         }
     }
 
     /**
      * 刷新令牌
      */
-    public AuthResponse<TokenDTO> refreshToken(String refreshToken) {
+    public R<TokenDTO> refreshToken(String refreshToken) {
         try {
             Token token = tokenService.refreshAccessToken(refreshToken);
-            return AuthResponse.success(convertToTokenDTO(token));
-        } catch (TokenException e) {
-            return AuthResponse.error(e.getMessage());
+            return R.success(convertToTokenDTO(token));
+        } catch (com.quan.auth.token.TokenException e) {
+            return R.error(e.getMessage());
         }
     }
 
     /**
      * 验证令牌
      */
-    public AuthResponse<TokenInfoDTO> verifyToken(String accessToken) {
+    public R<TokenInfoDTO> verifyToken(String accessToken) {
         try {
             Token token = tokenService.verifyToken(accessToken);
-            return AuthResponse.success(convertToTokenInfoDTO(token));
-        } catch (TokenException e) {
-            return AuthResponse.error(e.getMessage());
-        }
-    }
-
-    /**
-     * 获取令牌中的用户信息
-     */
-    public AuthResponse<UserInfoDTO> getTokenUser(String accessToken) {
-        try {
-            UserPrincipal principal = tokenService.getUserFromToken(accessToken);
-            return AuthResponse.success(convertToUserInfoDTO(principal));
-        } catch (TokenException e) {
-            return AuthResponse.error(e.getMessage());
+            return R.success(convertToTokenInfoDTO(token));
+        } catch (com.quan.auth.token.TokenException e) {
+            return R.error(e.getMessage());
         }
     }
 
     /**
      * 注销令牌
      */
-    public AuthResponse<Void> revokeToken(String token) {
+    public R<Void> revokeToken(String token) {
         try {
-            if (tokenService.isTokenRevoked(token)) {
-                return AuthResponse.error("Token already revoked");
+            if (tokenService.isRevoked(token)) {
+                return R.error("Token already revoked");
             }
             tokenService.revokeToken(token);
-            return AuthResponse.success(null);
-        } catch (TokenException e) {
-            return AuthResponse.error(e.getMessage());
+            return R.success(null);
+        } catch (com.quan.auth.token.TokenException e) {
+            return R.error(e.getMessage());
         }
     }
 
     /**
      * 获取当前认证用户信息
      */
-    public AuthResponse<UserInfoDTO> getCurrentUser() {
+    public R<UserInfoDTO> getCurrentUser() {
         try {
             UserPrincipal principal = authenticationService.getCurrentUser();
-            return AuthResponse.success(convertToUserInfoDTO(principal));
+            return R.success(convertToUserInfoDTO(principal));
         } catch (AuthenticationException e) {
-            return AuthResponse.error(e.getMessage());
+            return R.error(e.getMessage());
         }
     }
 
     /**
      * 登出
      */
-    public AuthResponse<Void> logout() {
+    public R<Void> logout() {
         authenticationService.logout();
-        return AuthResponse.success(null);
+        return R.success(null);
     }
 
     /**
@@ -126,7 +113,7 @@ public class AuthEndpoint {
     private TokenInfoDTO convertToTokenInfoDTO(Token token) {
         TokenInfoDTO dto = new TokenInfoDTO();
         dto.setSubject(token.getSubject());
-        dto.setActive(!tokenService.isTokenExpired(token.getAccessToken()));
+        dto.setActive(!tokenService.isExpired(token.getAccessToken()));
         dto.setExpiresIn(token.getExpiresIn());
         return dto;
     }

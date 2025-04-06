@@ -1,6 +1,6 @@
-package com.quan.auth.authentication.support;
+package com.quan.auth.authentication;
 
-import com.quan.auth.authentication.AuthenticationStrategy;
+import com.quan.auth.authentication.strategy.AuthenticationStrategy;
 import com.quan.auth.authentication.request.CredentialRequest;
 
 import java.util.List;

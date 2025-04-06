@@ -10,7 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class AuthResponse<T> {
+public class R<T> {
 
     /**
      * 响应码
@@ -35,8 +35,8 @@ public class AuthResponse<T> {
     /**
      * 创建成功响应
      */
-    public static <T> AuthResponse<T> success(T data) {
-        AuthResponse<T> response = new AuthResponse<>();
+    public static <T> R<T> success(T data) {
+        R<T> response = new R<>();
         response.setCode(200);
         response.setMessage("Success");
         response.setData(data);
@@ -47,15 +47,15 @@ public class AuthResponse<T> {
     /**
      * 创建错误响应
      */
-    public static <T> AuthResponse<T> error(String message) {
+    public static <T> R<T> error(String message) {
         return error(500, message);
     }
 
     /**
      * 创建错误响应
      */
-    public static <T> AuthResponse<T> error(int code, String message) {
-        AuthResponse<T> response = new AuthResponse<>();
+    public static <T> R<T> error(int code, String message) {
+        R<T> response = new R<>();
         response.setCode(code);
         response.setMessage(message);
         response.setSuccess(false);

@@ -1,4 +1,4 @@
-package com.quan.auth.authentication;
+package com.quan.auth.authentication.strategy;
 
 import com.quan.auth.UserPrincipal;
 import com.quan.auth.authentication.request.CredentialRequest;
@@ -21,11 +21,10 @@ public interface AuthenticationStrategy {
     boolean supports(CredentialRequest request);
 
     /**
-     * 认证处理
+     * 授权处理
      *
      * @param request 认证请求
-     * @return 认证用户信息
-     * @throws AuthenticationException 认证异常
+     * @return 认证令牌
      */
-    UserPrincipal authenticate(CredentialRequest request) throws AuthenticationException;
+    UserPrincipal authenticate(CredentialRequest request);
 }

@@ -1,7 +1,9 @@
 package com.quan.auth.client;
 
+import java.util.List;
+
 /**
- * Description
+ * 客户端管理服务接口，用于管理第三方客户端的身份信息。
  *
  * @author Force-oneself
  * @date 2025-04-03
@@ -9,19 +11,39 @@ package com.quan.auth.client;
 public interface ClientService {
 
     /**
-     * 注册新客户端
+     * 添加新的客户端凭证
      *
-     * @param client 客户端信息
-     * @return 客户端凭证
+     * @param clientCredentials 客户端凭证
      */
-    ClientCredentials registerClient(ClientRegistration client);
+    void addClient(ClientCredentials clientCredentials);
 
     /**
-     * 验证客户端身份
+     * 更新现有客户端凭证
      *
-     * @param credentials 客户端凭证
-     * @return 验证通过的客户端信息
-     * @throws ClientRegistrationException 客户端验证异常
+     * @param clientId 客户端的唯一标识符
+     * @param clientCredentials 更新后的客户端凭证
      */
-    RegisteredClient validateClient(ClientCredentials credentials) throws ClientRegistrationException;
+    void updateClient(String clientId, ClientCredentials clientCredentials);
+
+    /**
+     * 删除客户端凭证
+     *
+     * @param clientId 客户端的唯一标识符
+     */
+    void removeClient(String clientId);
+
+    /**
+     * 获取所有客户端凭证
+     *
+     * @return 客户端凭证列表
+     */
+    List<ClientCredentials> getAllClients();
+
+    /**
+     * 根据客户端ID获取客户端凭证
+     *
+     * @param clientId 客户端的唯一标识符
+     * @return 客户端凭证
+     */
+    ClientCredentials getClientById(String clientId);
 }

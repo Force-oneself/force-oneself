@@ -2,7 +2,6 @@ package com.quan.auth.authentication.strategy;
 
 import com.quan.auth.UserPrincipal;
 import com.quan.auth.authentication.AuthenticationException;
-import com.quan.auth.authentication.AuthenticationStrategy;
 import com.quan.auth.authentication.request.CredentialRequest;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class ChainAuthenticationStrategy implements AuthenticationStrategy {
     }
 
     @Override
-    public UserPrincipal authenticate(CredentialRequest request) throws AuthenticationException {
+    public UserPrincipal authenticate(CredentialRequest request) {
         for (AuthenticationStrategy strategy : strategies) {
             if (strategy.supports(request)) {
                 return strategy.authenticate(request);

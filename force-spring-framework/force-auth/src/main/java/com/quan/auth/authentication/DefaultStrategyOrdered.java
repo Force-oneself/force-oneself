@@ -1,6 +1,6 @@
-package com.quan.auth.authentication.support;
+package com.quan.auth.authentication;
 
-import com.quan.auth.authentication.AuthenticationStrategy;
+import com.quan.auth.authentication.strategy.AuthenticationStrategy;
 import com.quan.auth.authentication.request.CredentialRequest;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.stereotype.Component;

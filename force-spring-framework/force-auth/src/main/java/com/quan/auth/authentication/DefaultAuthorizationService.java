@@ -2,7 +2,7 @@ package com.quan.auth.authentication;
 
 import com.quan.auth.UserPrincipal;
 import com.quan.auth.authentication.request.CredentialRequest;
-import com.quan.auth.authentication.support.StrategyOrdered;
+import com.quan.auth.authentication.strategy.AuthenticationStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DefaultAuthenticationService implements AuthenticationService {
+public class DefaultAuthorizationService implements AuthenticationService {
 
     /**
      * 认证策略排序器
@@ -33,7 +33,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
     private final List<AuthenticationListener> listeners;
 
     @Override
-    public UserPrincipal authenticate(CredentialRequest request) throws AuthenticationException {
+    public UserPrincipal authenticate(CredentialRequest request) {
         // 获取排序后的策略列表
         List<AuthenticationStrategy> sortedStrategies = strategyOrdered.order(strategies, request);
 
@@ -44,26 +44,28 @@ public class DefaultAuthenticationService implements AuthenticationService {
         try {
             for (AuthenticationStrategy strategy : sortedStrategies) {
                 if (strategy.supports(request)) {
-                    return strategy.authenticate(request);
+                    UserPrincipal authorize = strategy.authenticate(request);
+                    listeners.forEach(listener -> listener.onAuthenticationSuccess(request, authorize));
+                    return authorize;
                 }
             }
-        } catch (AuthenticationException e) {
+        } catch (Exception e) {
             // 通知认证失败
             for (AuthenticationListener listener : listeners) {
                 listener.onAuthenticationFailure(request, e);
             }
+            throw e;
         }
         throw new AuthenticationException("Authentication failed");
     }
 
     @Override
     public void logout() {
-        // 实现登出逻辑
+
     }
 
     @Override
     public UserPrincipal getCurrentUser() throws AuthenticationException {
-        // 实现获取当前用户逻辑
         return null;
     }
 } 

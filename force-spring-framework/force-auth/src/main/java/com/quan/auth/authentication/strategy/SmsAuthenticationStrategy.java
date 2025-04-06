@@ -2,7 +2,6 @@ package com.quan.auth.authentication.strategy;
 
 import com.quan.auth.UserPrincipal;
 import com.quan.auth.authentication.AuthenticationException;
-import com.quan.auth.authentication.AuthenticationStrategy;
 import com.quan.auth.authentication.request.CredentialRequest;
 import com.quan.auth.authentication.request.SmsCredentialRequest;
 

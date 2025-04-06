@@ -2,6 +2,7 @@ package com.quan.auth.authentication;
 
 import com.quan.auth.UserPrincipal;
 import com.quan.auth.authentication.request.CredentialRequest;
+import com.quan.auth.token.Token;
 
 /**
  * 认证监听器接口，用于监听认证过程中的相关事件。
@@ -28,6 +29,6 @@ public interface AuthenticationListener {
      * @param request   认证请求
      * @param exception 认证异常
      */
-    void onAuthenticationFailure(CredentialRequest request, AuthenticationException exception);
+    void onAuthenticationFailure(CredentialRequest request, Exception exception);
 
 }

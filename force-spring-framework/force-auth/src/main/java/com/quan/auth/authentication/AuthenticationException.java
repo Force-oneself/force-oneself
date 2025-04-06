@@ -8,7 +8,7 @@ package com.quan.auth.authentication;
  * @author Force-oneself
  * @date 2025-04-03
  */
-public class AuthenticationException extends Exception {
+public class AuthenticationException extends RuntimeException {
 
     /**
      * 无参构造函数，创建一个默认的 AuthenticationException 实例。
